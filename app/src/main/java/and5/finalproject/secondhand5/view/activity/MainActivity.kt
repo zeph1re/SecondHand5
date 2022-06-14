@@ -1,5 +1,6 @@
-package and5.finalproject.secondhand5
+package and5.finalproject.secondhand5.view.activity
 
+import and5.finalproject.secondhand5.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
