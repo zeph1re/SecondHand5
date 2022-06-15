@@ -12,8 +12,14 @@
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/rectangleedittext.xml" value="0.1855" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
+<<<<<<< HEAD
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+=======
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18854166666666666" />
+>>>>>>> 31f0b2eeeb0297c5bf903203f3a257c5b7b2d756
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
       </map>
