@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     >
 
-
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -18,5 +16,6 @@
         app:navGraph="@navigation/navigation_component"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="376dp" />
+
 
 </RelativeLayout>
