@@ -31,6 +31,7 @@
         android:layout_gravity="center_horizontal"
         android:text="Lengkapi Info Akun"
         android:textSize="25sp"
+        android:layout_marginBottom="30dp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -45,8 +46,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pp"
             android:layout_marginTop="20dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/pp"
             android:layout_gravity="center_horizontal"
             app:civ_border_width="2dp"
@@ -56,8 +57,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pp2"
             android:layout_marginTop="20dp"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/pp"
             android:layout_gravity="center_horizontal"
             app:civ_border_width="2dp"
@@ -67,8 +68,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/addpp"
-            android:layout_marginTop="90dp"
-            android:layout_marginLeft="35dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="45dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/addpp"
@@ -205,29 +206,22 @@
         </EditText>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnupdate"
-        android:text="Update"
-        android:textColor="@color/black"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnsimpan"
+        android:text="Simpan"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
         android:backgroundTint="@color/blue_300"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    </androidx.appcompat.widget.AppCompatButton>
 
-    </Button>
 
-    <Button
-        android:id="@+id/btnlogout"
-        android:text="Logout"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/blue_300"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Button>
 
     </LinearLayout>
     </ScrollView>
