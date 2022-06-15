@@ -160,17 +160,18 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:focusableInTouchMode="false"
+
+
             android:textSize="20sp"
-            android:hint="Masukkan Alamat"
+            android:hint="Contoh : Jalan Kaliraya 2"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
+
             android:id="@+id/update3"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:background="@drawable/rectangleedittext"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="wrap_content">
 
         </EditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -193,7 +194,7 @@
 
         <EditText
             android:textSize="20sp"
-            android:hint="Konfirmasi Alamat"
+            android:hint="Contoh : +6282104564123"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/update4"
