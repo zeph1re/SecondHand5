@@ -7,58 +7,91 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     >
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/btn_backlogin"
+        android:src="@drawable/ic_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 
     <TextView
         android:id="@+id/p"
-        android:layout_marginTop="60dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Login"
-
-        android:textSize="25sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="60dp"
+        android:text="Masuk"
+        android:textStyle="bold"
+        android:textSize="35sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
 
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_gravity="left"
+        android:text="Email"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
 
             android:hint="Masukkan Email"
             android:textSize="20sp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/loginemail"
             android:background="@drawable/rectangleedittext"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp">
 
         </EditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:text="Password"
 
+        android:layout_gravity="left"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:padding="10dp"
+
         android:layout_gravity="center_horizontal"
         app:passwordToggleEnabled="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
             android:hint="Masukkan Password"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/loginpassword"
             android:inputType="textPassword"
             app:passwordToggleEnabled="true"
             android:background="@drawable/rectangleedittext"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp">
 
         </EditText>
@@ -66,13 +99,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:id="@+id/btnlogin"
-        android:text="Login"
+        android:text="Masuk"
         android:textColor="@color/white"
         android:backgroundTint="@color/blue_300"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </Button>
