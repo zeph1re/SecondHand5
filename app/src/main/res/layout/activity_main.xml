@@ -17,5 +17,14 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="376dp" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:menu="@menu/bottom_navigation" />
+
 
 </RelativeLayout>
