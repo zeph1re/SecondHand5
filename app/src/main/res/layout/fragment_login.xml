@@ -98,19 +98,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:id="@+id/btnlogin"
         android:text="Masuk"
+        android:background="@drawable/rounded_button"
         android:textColor="@color/white"
-        android:backgroundTint="@color/blue_300"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/blue_300"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-    </Button>
+    </androidx.appcompat.widget.AppCompatButton>
 
     <RelativeLayout
         android:layout_gravity="center_horizontal"
