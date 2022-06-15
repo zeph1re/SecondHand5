@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 
 class Profile : Fragment() {
-
+    //a
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
