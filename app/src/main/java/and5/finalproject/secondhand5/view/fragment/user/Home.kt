@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.view.fragment
+package and5.finalproject.secondhand5.view.fragment.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 
-class Profile : Fragment() {
-    //a
+
+class Home : Fragment() {
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 }
