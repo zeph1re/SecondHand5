@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_component"
-    app:startDestination="@id/profile">
+    app:startDestination="@id/home2">
 
     <fragment
         android:id="@+id/splashScreen"
@@ -16,7 +16,14 @@
     <fragment
         android:id="@+id/login"
         android:name="and5.finalproject.secondhand5.view.fragment.Login"
-        android:label="Login" />
+        android:label="Login" >
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/register" />
+        <action
+            android:id="@+id/action_login_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="and5.finalproject.secondhand5.view.fragment.Profile"
@@ -25,5 +32,14 @@
         android:id="@+id/register"
         android:name="and5.finalproject.secondhand5.view.fragment.Register"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/home2"
+        android:name="and5.finalproject.secondhand5.view.fragment.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
