@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.view.fragment
+package and5.finalproject.secondhand5.view.fragment.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 
 
-class Login : Fragment() {
+class Account : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 }

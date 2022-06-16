@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/login"
-        android:name="and5.finalproject.secondhand5.view.fragment.Login"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Login"
         android:label="Login" >
         <action
             android:id="@+id/action_login_to_register"
@@ -26,11 +26,11 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="and5.finalproject.secondhand5.view.fragment.Profile"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Profile"
         android:label="Profile" />
     <fragment
         android:id="@+id/register"
-        android:name="and5.finalproject.secondhand5.view.fragment.Register"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/home2"
-        android:name="and5.finalproject.secondhand5.view.fragment.Home"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
