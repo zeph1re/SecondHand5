@@ -3,22 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_back.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_dropdown.xml" value="0.1345" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_email.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_keypassword.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_person.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/rectangleedittext.xml" value="0.1855" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.18854166666666666" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18854166666666666" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.18854166666666666" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.1015" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.184375" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/component_example.xml" value="0.3614583333333333" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.22" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.18541666666666667" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18541666666666667" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
 </project>
