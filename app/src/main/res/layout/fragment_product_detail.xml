@@ -16,17 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_margin="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_back" />
+
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/btn_back"
-                    android:layout_margin="25dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_back" />
+
 
                 <ImageView
                     android:layout_width="match_parent"
