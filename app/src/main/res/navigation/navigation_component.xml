@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/productDetail"
-        android:name="and5.finalproject.secondhand5.view.fragment.ProductDetail"
+        android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
 </navigation>

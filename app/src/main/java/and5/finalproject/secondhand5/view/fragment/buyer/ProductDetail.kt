@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.view.fragment
+package and5.finalproject.secondhand5.view.fragment.buyer
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
