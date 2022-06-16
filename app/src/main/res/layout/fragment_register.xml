@@ -96,6 +96,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:text="Daftar"
+                android:textAllCaps="false"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/custom_button"
                 android:backgroundTint="#3A5BA0"
