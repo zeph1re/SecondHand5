@@ -41,9 +41,18 @@
         android:id="@+id/home"
         android:name="and5.finalproject.secondhand5.view.fragment.user.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_account"
+            app:destination="@id/account" />
+    </fragment>
     <fragment
         android:id="@+id/detailTambahProduk"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailTambahProduk"
         android:label="DetailTambahProduk" />
+    <fragment
+        android:id="@+id/account"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Account"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>
