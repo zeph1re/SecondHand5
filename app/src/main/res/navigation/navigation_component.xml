@@ -21,8 +21,8 @@
             android:id="@+id/action_login_to_register"
             app:destination="@id/register" />
         <action
-            android:id="@+id/action_login_to_home2"
-            app:destination="@id/home2" />
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -38,7 +38,7 @@
             app:destination="@id/login" />
     </fragment>
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/home"
         android:name="and5.finalproject.secondhand5.view.fragment.user.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
