@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.view.fragment
+package and5.finalproject.secondhand5.view.fragment.seller
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 
 
-class Register : Fragment() {
+class DetailTambahProduk : Fragment() {
 
 
     override fun onCreateView(
@@ -16,8 +16,7 @@ class Register : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        return inflater.inflate(R.layout.fragment_detail_tambah_produk, container, false)
     }
-
 
 }

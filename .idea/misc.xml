@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/custom_button.xml" value="0.1345" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/custom_edittext.xml" value="0.1345" />
@@ -15,6 +16,24 @@
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/ic_search.xml" value="0.1345" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/progress.xml" value="0.1345" />
+=======
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/custom_button.xml" value="0.2275" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/custom_edittext.xml" value="0.1675" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.168" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/gradient_background.xml" value="0.1675" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/ic_dropdown.xml" value="0.1815" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/ic_home.xml" value="0.1815" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.2984375" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.28802083333333334" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_card_buyer_offer.xml" value="0.33" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.22" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/menu/bottom_menu.xml" value="0.30885416666666665" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/menu/bottom_navigation.xml" value="0.25625" />
+>>>>>>> dfa32b7ed63b202b075566629452dd294a29d526
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/rectangleedittext.xml" value="0.1855" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/rounded_button.xml" value="0.1355" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/shadow_card.xml" value="0.113" />

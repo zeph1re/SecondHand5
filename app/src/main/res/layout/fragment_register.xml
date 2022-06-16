@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragment.Register">
+    tools:context=".view.fragment.user.Register">
 
     <RelativeLayout
         android:padding="20dp"
@@ -96,6 +96,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:text="Daftar"
+                android:textAllCaps="false"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/custom_button"
                 android:backgroundTint="#3A5BA0"
