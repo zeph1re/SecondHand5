@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_component"
-<<<<<<< HEAD
     app:startDestination="@id/detailTambahProduk">
-=======
-    app:startDestination="@id/productDetail">
->>>>>>> dfa32b7ed63b202b075566629452dd294a29d526
-
-    <fragment
+<fragment
         android:id="@+id/splashScreen"
         android:name="and5.finalproject.secondhand5.view.fragment.SplashScreen"
         android:label="SplashScreen" >
@@ -47,14 +42,7 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-<<<<<<< HEAD
         android:id="@+id/detailTambahProduk"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailTambahProduk"
         android:label="DetailTambahProduk" />
-=======
-        android:id="@+id/productDetail"
-        android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
-        android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
->>>>>>> dfa32b7ed63b202b075566629452dd294a29d526
 </navigation>
