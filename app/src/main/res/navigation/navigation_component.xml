@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_component"
-    app:startDestination="@id/home2">
+    app:startDestination="@id/detailTambahProduk">
 
     <fragment
         android:id="@+id/splashScreen"
@@ -42,4 +42,8 @@
         android:name="and5.finalproject.secondhand5.view.fragment.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/detailTambahProduk"
+        android:name="and5.finalproject.secondhand5.view.fragment.DetailTambahProduk"
+        android:label="DetailTambahProduk" />
 </navigation>

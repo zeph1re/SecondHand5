@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="-20dp"
+                    android:id="@+id/gambar0"
+                    android:src="@drawable/jam"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp">
+                </ImageView>
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="-80dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    card_view:cardCornerRadius="15dp"
+                    card_view:cardElevation="30dp"
+                    card_view:cardBackgroundColor="@color/white"
+                    android:layout_height="120dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/namadetailtambahproduk"
+                            android:text="Nama"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <TextView
+
+                            android:text="Kategori"
+                            android:textSize="12sp"
+                            android:layout_margin="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <TextView
+                            android:text="Harga"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    card_view:cardCornerRadius="15dp"
+                    card_view:cardElevation="30dp"
+                    card_view:cardBackgroundColor="@color/white"
+                    android:layout_height="90dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/gambar1"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/ic_launcher"
+                            android:layout_width="60dp"
+                            android:layout_height="170dp">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_toRightOf="@+id/gambar1"
+                            android:layout_marginTop="17dp"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Nama Penjual"
+                            android:id="@+id/text1"
+                            android:textSize="16sp"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_toRightOf="@+id/gambar1"
+                            android:layout_below="@+id/text1"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Kota"
+                            android:id="@+id/text2"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+
+                    card_view:cardCornerRadius="15dp"
+                    card_view:cardElevation="30dp"
+                    card_view:cardBackgroundColor="@color/white"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_margin="10dp"
+                            android:text="Deskripsi"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+
+                        <TextView
+                            android:layout_margin="10dp"
+                            android:text="isi\n\n\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n\n\n\n\n\n\n  aaaaaaaaaaaaaaaaaaaaa"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnlogin"
+            android:text="Terbitkan"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/blue_300"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatButton>
+    </FrameLayout>
+
