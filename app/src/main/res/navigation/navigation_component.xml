@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailTambahProduk"
-        android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailTambahProduk"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.ProductPreview"
         android:label="DetailTambahProduk" />
     <fragment
         android:id="@+id/account"
