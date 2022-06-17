@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -73,8 +74,8 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.2.0-alpha04'
 
-    //    libarary DI Hilt
+    //libarary DI Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.40.1"
 
 }
