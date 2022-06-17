@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_buyer_offer_notification.xml" value="0.27807971014492755" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_buyer_offer_price.xml" value="0.334375" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_seller_whasapp.xml" value="0.2838541666666667" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.27395833333333336" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.27395833333333336" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_notification.xml" value="0.27395833333333336" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/item_seller_notification.xml" value="0.3333333333333333" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/item_seller_notification_offer.xml" value="0.27807971014492755" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.334375" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_notification_offer_adapter.xml" value="0.28489583333333335" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.334375" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_sold_adapter.xml" value="0.28489583333333335" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.296" />
