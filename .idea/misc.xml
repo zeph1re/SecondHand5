@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.296" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.1015" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_list_bulleted.xml" value="0.1755" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.184375" />
@@ -11,10 +12,15 @@
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_card_buyer_offer.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_tambah_produk.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.18541666666666667" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_product_preview.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18541666666666667" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.18541666666666667" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.3614583333333333" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.3625" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_sold_adapter.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/menu/bottom_navigation.xml" value="0.18541666666666667" />
       </map>
     </option>
