@@ -10,6 +10,7 @@ import and5.finalproject.secondhand5.R
 
 class ProductPreview : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -17,6 +18,5 @@ class ProductPreview : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_product_preview, container, false)
     }
-
 
 }
