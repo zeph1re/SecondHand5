@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomnav)
         bottomNavigationView.setupWithNavController(navController)
-        //a
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
                 if (destination.id == R.id.home) {
                     bottomnav.visibility = View.VISIBLE
