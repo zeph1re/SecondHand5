@@ -96,9 +96,9 @@
                         <ImageView
                             android:id="@+id/gambar1"
                             android:layout_marginLeft="10dp"
-                            android:src="@mipmap/ic_launcher"
+                            android:src="@drawable/ei"
                             android:layout_width="60dp"
-                            android:layout_height="170dp">
+                            android:layout_height="70dp">
                         </ImageView>
 
                         <TextView
