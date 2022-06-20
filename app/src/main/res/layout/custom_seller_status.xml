@@ -1,47 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/blue_100"
+    app:cardCornerRadius="30dp">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_title"
-        android:text="Perbaharui status penjualan produkmu"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_margin="10dp"/>
+        android:layout_margin="15dp">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkbox_sold"
-        android:text="Berhasil Terjual"
-        android:layout_below="@+id/tv_title"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:text="Perbaharui status penjualan produkmu"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@id/tv_sold"
-        android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
-        android:layout_marginStart="30dp"
-        android:layout_below="@id/checkbox_sold"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_sold"
+            android:text="Berhasil Terjual"
+            android:layout_below="@+id/tv_title"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkbox_failed"
-        android:text="Batalkan Transaksi"
-        android:layout_below="@id/tv_sold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/tv_sold"
+            android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
+            android:layout_marginStart="30dp"
+            android:layout_below="@id/checkbox_sold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@id/tv_failed"
-        android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
-        android:layout_marginStart="30dp"
-        android:layout_below="@id/checkbox_failed"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkbox_failed"
+            android:text="Batalkan Transaksi"
+            android:layout_below="@id/tv_sold"/>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/tv_failed"
+            android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
+            android:layout_marginStart="30dp"
+            android:layout_below="@id/checkbox_failed"/>
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

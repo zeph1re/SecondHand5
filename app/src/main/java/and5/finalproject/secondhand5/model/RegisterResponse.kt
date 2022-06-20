@@ -1,14 +1,29 @@
 package and5.finalproject.secondhand5.model
 
+
+import com.google.gson.annotations.SerializedName
+
+
+
 data class RegisterResponse(
-    val id: Int,
-    val full_name: String,
+    @SerializedName("address")
+    val address: String,
+    @SerializedName("createdAt")
+    val createdAt: String,
+    @SerializedName("email")
     val email: String,
-    val password : String,
-    val phone_number : Int,
-    val address : String,
-    val image_url : String,
-    val createAt : String,
-    val updatedAt : String,
-    val message: String
+    @SerializedName("full_name")
+    val fullName: String,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("image_url")
+    val imageUrl: String,
+    @SerializedName("password")
+    val password: String,
+    @SerializedName("phone_number")
+    val phoneNumber: Long,
+    @SerializedName("updatedAt")
+    val updatedAt: String,
+    @SerializedName("city")
+    val city: String,
 )

@@ -14,7 +14,6 @@ import androidx.navigation.findNavController
 
 class SplashScreen : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +28,7 @@ class SplashScreen : Fragment() {
                         R.id.splashScreen,
                         true
                     ).build())
-        },2000)
+        },3000)
         return view
 
     }

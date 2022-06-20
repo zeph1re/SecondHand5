@@ -2,29 +2,30 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
+import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
 
     @POST ("auth/login")
     @FormUrlEncoded
-    suspend fun loginUser(
+    fun loginUser(
         @Field ("email") email : String,
         @Field ("password") password : String
-    ) : LoginResponse
+    ) : Call<LoginResponse>
 
     @POST ("auth/register")
     @FormUrlEncoded
-    suspend fun registerUser(
+    fun registerUser(
         @Field ("full_name") full_name : String,
         @Field ("email") email : String,
         @Field ("password") password : String,
-        @Field ("phone_number") phone_number : String,
+        @Field ("phone_number") phone_number : Int,
         @Field ("address") address : String,
-        @Field ("image_url") image : String,
-    ) : RegisterResponse
-
+        @Field ("city") city : String,
+    ) : Call<RegisterResponse>
 
 }
