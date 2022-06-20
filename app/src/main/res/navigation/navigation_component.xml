@@ -2,4 +2,117 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_component" />
+    android:id="@+id/navigation_component"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="and5.finalproject.secondhand5.view.fragment.SplashScreen"
+        android:label="SplashScreen"
+        tools:layout="@layout/fragment_splash_screen">
+        <action
+            android:id="@+id/action_splashScreen_to_home"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Login"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/register" />
+        <action
+            android:id="@+id/action_login_to_account"
+            app:destination="@id/account" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Profile"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/register"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/home"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_home_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_home_to_addProduct"
+            app:destination="@id/addProduct" />
+        <action
+            android:id="@+id/action_home_to_myListProduct"
+            app:destination="@id/myListProduct" />
+        <action
+            android:id="@+id/action_home_to_productDetail"
+            app:destination="@id/productDetail" />
+        <action
+            android:id="@+id/action_home_to_notification"
+            app:destination="@id/notification" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTambahProduk"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.ProductPreview"
+        android:label="DetailTambahProduk"
+        tools:layout="@layout/fragment_product_preview"/>
+    <fragment
+        android:id="@+id/account"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Account"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_account_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_account_to_home"
+            app:destination="@id/home" />
+        <action
+            android:id="@+id/action_account_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProduct"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.AddProduct"
+        android:label="AddProduct"
+        tools:layout="@layout/fragment_add_product2">
+        <action
+            android:id="@+id/action_addProduct_to_detailTambahProduk"
+            app:destination="@id/detailTambahProduk" />
+    </fragment>
+    <fragment
+        android:id="@+id/myListProduct"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.MyListProduct"
+        android:label="fragment_my_list_product"
+        tools:layout="@layout/fragment_my_list_product" >
+        <action
+            android:id="@+id/action_myListProduct_to_detailPenawar"
+            app:destination="@id/detailPenawar" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetail"
+        android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/detailPenawar"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailPenawar"
+        android:label="fragment_detail_penawar"
+        tools:layout="@layout/fragment_detail_penawar" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.Notification"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+</navigation>
