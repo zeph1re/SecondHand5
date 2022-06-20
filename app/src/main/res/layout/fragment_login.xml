@@ -19,72 +19,62 @@
         android:id="@+id/p"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="60dp"
-        android:text="Masuk"
+        android:text="Login"
         android:textStyle="bold"
         android:textSize="35sp"
+        android:layout_marginBottom="70dp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
 
-    <TextView
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="60dp"
-        android:layout_gravity="left"
-        android:text="Email"
-        android:textSize="22sp"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
+
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/field_login_email"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_gravity="center_horizontal"
+        app:helperTextTextColor="@color/red"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
 
-            android:hint="Masukkan Email"
+        <EditText
+            android:hint="Email"
             android:textSize="20sp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/loginemail"
             android:background="@drawable/rectangleedittext"
             android:layout_width="match_parent"
             android:layout_height="60dp">
-
         </EditText>
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
-        android:text="Password"
 
-        android:layout_gravity="left"
-        android:textSize="22sp"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:layout_marginBottom="20dp"
+        android:id="@+id/field_login_password"
+        app:helperTextTextColor="@color/red"
         android:layout_gravity="center_horizontal"
         app:passwordToggleEnabled="true"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:hint="Masukkan Password"
+            android:hint="Password"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/loginpassword"
@@ -102,7 +92,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:id="@+id/btnlogin"
-        android:text="Masuk"
+        android:text="Login"
         android:background="@drawable/rounded_button"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
@@ -119,11 +109,10 @@
 
         <TextView
 
-
             android:id="@+id/daftar"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginTop="20dp"
-            android:text="Belum punya akun ?"
+            android:text="Dont have an account?"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -135,10 +124,10 @@
             android:layout_toRightOf="@id/daftar"
             android:layout_marginLeft="5dp"
             android:id="@+id/daftar2"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginTop="20dp"
-            android:text="@string/daftar"
-            android:textColor="@color/blue_300"
+            android:text="Register here"
+            android:textColor="@color/purple_200"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

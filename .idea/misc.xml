@@ -36,20 +36,24 @@
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/shadow_card.xml" value="0.113" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_buyer_offer_price.xml" value="0.2046875" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_progress_dialog.xml" value="0.18645833333333334" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/error_toast.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_add_product.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.2046875" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_detail_penawar.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_detail_tambah_produk.xml" value="0.264" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.536" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.47833935018050544" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_product_preview.xml" value="0.4" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
-        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/seller_sold_adapter.xml" value="0.2046875" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/success_toast.xml" value="0.2046875" />
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
       </map>
     </option>
