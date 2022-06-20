@@ -2,9 +2,8 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -16,15 +15,14 @@ interface ApiService {
     ) : LoginResponse
 
     @POST ("auth/register")
-    @FormUrlEncoded
+    @Multipart
     suspend fun registerUser(
-        @Field ("full_name") full_name : String,
-        @Field ("email") email : String,
-        @Field ("password") password : String,
-        @Field ("phone_number") phone_number : String,
-        @Field ("address") address : String,
-        @Field ("image_url") image : String,
+        @Part ("full_name") full_name : String,
+        @Part ("email") email : String,
+        @Part  image_url : MultipartBody.Part,
     ) : RegisterResponse
+
+
 
 
 }
