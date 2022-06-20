@@ -6,8 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.user.Register">
 
-    <RelativeLayout
+    <LinearLayout
         android:padding="20dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,9 +19,9 @@
             android:layout_height="30dp"/>
 
         <TextView
-            android:layout_marginVertical="30dp"
+            android:layout_marginVertical="70dp"
             android:layout_below="@id/btn_back"
-            android:text="Daftar"
+            android:text="Register"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="30sp"
@@ -28,22 +29,25 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:layout_centerInParent="true"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/field_name"
+                app:helperTextTextColor="@color/red"
+                android:layout_marginVertical="5dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
-                    android:hint="Nama Lengkap"
-                    android:layout_marginVertical="10dp"
+                    android:id="@+id/regis_nama_lengkap"
+                    android:hint="Full Name"
                     android:background="@drawable/custom_edittext"
                     android:drawableStart="@drawable/ic_person"
                     android:drawableTint="@color/cardview_dark_background"
@@ -55,14 +59,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/field_email"
                 android:layout_gravity="center_horizontal"
                 app:boxStrokeWidth="0dp"
+                app:helperTextTextColor="@color/red"
                 app:boxStrokeWidthFocused="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:id="@+id/regis_email"
                     android:hint="Email (Ex: johndee@gmail.com)"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="5dp"
                     android:background="@drawable/custom_edittext"
                     android:drawableStart="@drawable/ic_email"
                     android:drawableTint="@color/cardview_dark_background"
@@ -74,16 +81,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/field_pass"
                 android:layout_gravity="center_horizontal"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
+                app:helperTextTextColor="@color/red"
                 app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
-                    android:hint="Buat Password"
+                    android:id="@+id/regis_password"
+                    android:hint="Password"
                     app:passwordToggleEnabled="true"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="5dp"
                     android:background="@drawable/custom_edittext"
                     android:drawableStart="@drawable/ic_keypassword"
                     android:drawableTint="@color/cardview_dark_background"
@@ -95,7 +106,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:text="Daftar"
+                android:id="@+id/btndaftar"
+                android:text="Register"
                 android:textAllCaps="false"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/custom_button"
@@ -105,34 +117,82 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:gravity="center"
+            android:layout_margin="25dp"
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Already have an account?"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btntologin"
+                android:layout_marginStart="10dp"
+                android:text="Login"
+                android:textStyle="bold"
+                android:textColor="@color/purple_200"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/loading_register"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:visibility="gone"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B2000000"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:background="#00000000"
+            android:gravity="center_horizontal">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/loading_progress"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please Wait.."
+                android:background="#00000000"
+                android:textSize="20sp"
+                android:textColor="@color/purple_200">
+
+            </TextView>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_margin="25dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:text="Sudah Punya akun?"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_marginStart="10dp"
-            android:text="Masuk di sini"
-            android:textStyle="bold"
-            android:textColor="@color/purple_200"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
 
 
 </RelativeLayout>
