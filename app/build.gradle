@@ -78,4 +78,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.40.1"
 
+    //library gift
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
 }

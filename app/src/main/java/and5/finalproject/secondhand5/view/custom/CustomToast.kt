@@ -46,5 +46,6 @@ class CustomToast {
         layout.setBackgroundColor(Color.DKGRAY)
         toast.view = layout
         toast.show()
+
     }
 }

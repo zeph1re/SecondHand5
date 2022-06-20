@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.view.custom.CustomProgressDialog
 import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.os.Handler
@@ -26,7 +25,7 @@ class Register : Fragment () {
     private lateinit var inputfullname:String
     lateinit var toast: String
     private var customToast : CustomToast = CustomToast()
-    private var customDialog : CustomProgressDialog = CustomProgressDialog()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +43,11 @@ class Register : Fragment () {
 
             check()
             if (inputfullname.isNotEmpty() && inputemail.isNotEmpty() && inputpassword.isNotEmpty() && inputpassword.length > 5 && validateEmail(inputemail)){
-                customDialog.showProgressDialog(requireActivity())
-                customDialog.dismissProgressDialog()
+                view.loading_register.visibility = View.VISIBLE
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    view?.loading_register?.visibility = View.GONE
+                },2000)
                 registerUser(inputfullname, inputemail, inputpassword, 0, "default", "default")
             }
 
@@ -108,7 +110,6 @@ class Register : Fragment () {
                 Log.d("abc", it)
                 if (it == "201"){
                     toast = "Registration Succes"
-                    customDialog.dismissProgressDialog()
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.successToast(requireContext(), toast)
                     },2000)
@@ -117,21 +118,18 @@ class Register : Fragment () {
 
                 } else if (it == "400"){
                     toast = "Email Already Exist"
-                    customDialog.dismissProgressDialog()
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.failureToast(requireContext(), toast)
                     },2000)
 
                 } else if (it == "500"){
                     toast = "Internal Service Error"
-                    customDialog.dismissProgressDialog()
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.failureToast(requireContext(), toast)
                     },2000)
 
                 } else {
                     toast = "No Internet Connection"
-                    customDialog.dismissProgressDialog()
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.failureToast(requireContext(), toast)
                     },2000)

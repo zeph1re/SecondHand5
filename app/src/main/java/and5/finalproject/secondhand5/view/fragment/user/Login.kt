@@ -1,10 +1,8 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.view.custom.CustomProgressDialog
 import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -25,7 +23,7 @@ class Login : Fragment() {
     lateinit var inputLoginPassword: String
     lateinit var text: String
     private var customToast : CustomToast = CustomToast()
-    private lateinit var customDialog : CustomProgressDialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +31,8 @@ class Login : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        customDialog = CustomProgressDialog()
+
+
         view.btnlogin.setOnClickListener{
             inputLoginEmail = view.loginemail.text.toString()
             inputLoginPassword = view.loginpassword.text.toString()
@@ -41,8 +40,13 @@ class Login : Fragment() {
 
             check()
             if (inputLoginEmail.isNotEmpty() && inputLoginPassword.isNotEmpty() ){
-                customDialog.showProgressDialog(requireActivity())
-                customDialog.dismissProgressDialog()
+
+                view.loading.visibility = View.VISIBLE
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    view?.loading?.visibility = View.GONE
+                },2000)
+
                 loginUser(inputLoginEmail, inputLoginPassword)
             }
         }
@@ -80,7 +84,7 @@ class Login : Fragment() {
                 view?.findNavController()
                     ?.navigate(R.id.action_login_to_account)
                 text = "Login Success"
-                customDialog.dismissProgressDialog()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     customToast.successToast(requireContext(), text)
                 },2000)
@@ -88,22 +92,23 @@ class Login : Fragment() {
 
             } else if (it == "401"){
                 text = "Email or Password are Wrong"
-                customDialog.dismissProgressDialog()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     customToast.failureToast(requireContext(), text)
                 },2000)
 
             } else if (it == "500"){
                 text = "Internal Service Error"
-                customDialog.dismissProgressDialog()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     customToast.failureToast(requireContext(), text)
                 },2000)
 
             } else {
                 text = "No Internet Connection"
-                customDialog.dismissProgressDialog()
+
                 Handler(Looper.getMainLooper()).postDelayed({
+
                     customToast.failureToast(requireContext(), text)
                 },2000)
 

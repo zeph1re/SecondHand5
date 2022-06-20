@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@drawable/rectangleedittext"
-    android:layout_width="350dp"
-    android:layout_height="230dp">
+    android:id="@+id/loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
 
-    <ProgressBar
+    >
 
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/white"
-        android:layout_marginTop="60dp"
-        android:layout_gravity="center"
-        android:layout_width="70dp"
-        android:layout_height="70dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B2000000"/>
 
-    </ProgressBar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="#00000000"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/errortext"
-        android:text="Please wait..."
-        android:textColor="@color/white"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:textSize="22sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/loading_progress"/>
 
-    </TextView>
+        <TextView
 
-</LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please Wait.."
+            android:background="#00000000"
+            android:textSize="20sp"
+            android:textColor="@color/purple_200">
+
+        </TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>
