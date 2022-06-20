@@ -45,7 +45,7 @@ class Register : Fragment () {
             check()
             if (inputfullname.isNotEmpty() && inputemail.isNotEmpty() && inputpassword.isNotEmpty() && inputpassword.length > 5 && validateEmail(inputemail)){
                 customDialog.showProgressDialog(requireActivity())
-                registerUser(inputfullname, inputemail, inputpassword, 0, "default")
+                registerUser(inputfullname, inputemail, inputpassword, 0, "default", "default")
             }
 
             }
@@ -100,7 +100,7 @@ class Register : Fragment () {
         return match.matcher(email).matches()
     }
 
-    fun registerUser(full_name: String, email: String, password: String, phone_number: Int, address: String){
+    fun registerUser(full_name: String, email: String, password: String, phone_number: Int, address: String, city:String){
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
             viewModel.registerLiveData.observe(requireActivity()) {
@@ -137,7 +137,7 @@ class Register : Fragment () {
 
                 }
             }
-        viewModel.registerLiveData(full_name, email, password, phone_number, address)
+        viewModel.registerLiveData(full_name, email, password, phone_number, address, city)
     }
 
 }

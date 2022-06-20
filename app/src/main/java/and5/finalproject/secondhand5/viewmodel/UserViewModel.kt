@@ -21,9 +21,9 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var registerLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
 
-    fun registerLiveData(full_name: String, email : String, password: String, phone_number : Int, address: String){
+    fun registerLiveData(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
         viewModelScope.launch {
-            userRepo.regisUser( full_name, email, password, phone_number, address, registerLiveData )
+            userRepo.regisUser( full_name, email, password, phone_number, address, city, registerLiveData )
         }
 
     }

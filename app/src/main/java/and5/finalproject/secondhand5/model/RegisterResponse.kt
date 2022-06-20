@@ -23,5 +23,7 @@ data class RegisterResponse(
     @SerializedName("phone_number")
     val phoneNumber: Long,
     @SerializedName("updatedAt")
-    val updatedAt: String
+    val updatedAt: String,
+    @SerializedName("city")
+    val city: String,
 )

@@ -25,6 +25,7 @@ interface ApiService {
         @Field ("password") password : String,
         @Field ("phone_number") phone_number : Int,
         @Field ("address") address : String,
+        @Field ("city") city : String,
     ) : Call<RegisterResponse>
 
 }
