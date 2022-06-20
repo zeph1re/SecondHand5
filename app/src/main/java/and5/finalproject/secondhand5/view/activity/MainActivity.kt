@@ -25,12 +25,14 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomnav)
         bottomNavigationView.setupWithNavController(navController)
 
+
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
                 if (destination.id == R.id.home) {
                     bottomnav.visibility = View.VISIBLE
                 } else {
                     bottomnav.visibility = View.GONE
                 }
-    }
+        }
     }
 }
