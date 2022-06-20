@@ -17,4 +17,10 @@ class AddProduct : Fragment() {
         return inflater.inflate(R.layout.fragment_add_product2, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+
 }

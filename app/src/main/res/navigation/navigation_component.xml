@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_home_to_notification"
             app:destination="@id/notification" />
+        <action
+            android:id="@+id/action_home_to_account"
+            app:destination="@id/account" />
     </fragment>
     <fragment
         android:id="@+id/detailTambahProduk"
@@ -72,9 +75,7 @@
         android:name="and5.finalproject.secondhand5.view.fragment.user.Account"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
-        <action
-            android:id="@+id/action_account_to_login"
-            app:destination="@id/login" />
+
         <action
             android:id="@+id/action_account_to_home"
             app:destination="@id/home" />
