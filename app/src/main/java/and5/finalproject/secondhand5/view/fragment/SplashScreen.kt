@@ -22,7 +22,7 @@ class SplashScreen : Fragment() {
         val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
         Handler(Looper.getMainLooper()).postDelayed({
             view.findNavController().navigate(
-                R.id.action_splashScreen_to_login, null,
+                R.id.action_splashScreen_to_home, null,
                 NavOptions.Builder()
                     .setPopUpTo(
                         R.id.splashScreen,

@@ -31,4 +31,7 @@ interface ApiService {
 
     @GET("buyer/product")
     suspend fun getAllProduct() : List<getProductItem>
+
+    @GET("buyer/product/{id}")
+    suspend fun getProductId(id:String) : List<getProductItem>
 }

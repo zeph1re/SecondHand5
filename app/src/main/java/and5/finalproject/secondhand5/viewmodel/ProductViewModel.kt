@@ -17,6 +17,7 @@ class ProductViewModel @Inject constructor(api : ApiService) : ViewModel(){
     private var productLivedata = MutableLiveData<List<getProductItem>>()
     val product : LiveData<List<getProductItem>> = productLivedata
 
+
     init{
         viewModelScope.launch {
             val dataproduct = api.getAllProduct()
@@ -26,4 +27,5 @@ class ProductViewModel @Inject constructor(api : ApiService) : ViewModel(){
             productLivedata.value = dataproduct
         }
     }
+
 }
