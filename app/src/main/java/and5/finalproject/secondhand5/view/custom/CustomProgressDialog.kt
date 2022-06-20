@@ -14,17 +14,19 @@ import android.view.Window
 class CustomProgressDialog {
     lateinit var dialog: Dialog
 
-    fun showProgressDialog(context: Context?){
-        dialog = Dialog(context!!)
-        dialog.window?.setBackgroundDrawableResource(R.color.blue_300);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.custom_progress_dialog);
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
+    fun showProgressDialog(
+        context: Context?,
+        ){
+            dialog = Dialog(context!!)
+            dialog.window?.setBackgroundDrawableResource(R.color.blue_300);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.custom_progress_dialog);
+            dialog.setCancelable(false)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.show()
     }
 
-    fun dismissProgressDialog(context: Context?){
+    fun dismissProgressDialog(){
         Handler(Looper.getMainLooper()).postDelayed({
             dialog.dismiss()
         },2000)
