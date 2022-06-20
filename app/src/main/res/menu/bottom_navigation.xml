@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/home_menu"
         android:title="Home"
         android:icon="@drawable/ic_home">
     </item>
 
-    <item android:title="Notifikasi"
+    <item
+        android:id="@+id/notification_menu"
+        android:title="Notifikasi"
         android:icon="@drawable/ic_notifications"/>
-    <item android:title="Jual"
+
+    <item
+        android:id="@+id/add_menu"
+        android:title="Jual"
         android:icon="@drawable/plus"/>
 
-    <item android:title="Daftar Jual"
+    <item
+        android:id="@+id/list_product_menu"
+        android:title="Daftar Jual"
         android:icon="@drawable/ic_list_bulleted"/>
 
     <item
-        android:id="@+id/accountFragment"
+        android:id="@+id/account_menu"
         android:title="Account"
         android:icon="@drawable/ic_person">
     </item>
