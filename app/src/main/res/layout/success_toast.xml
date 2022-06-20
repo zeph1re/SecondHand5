@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/successtext"
         android:text="aaaaaa"
-
+        android:textColor="@color/green"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"

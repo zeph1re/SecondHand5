@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/errortext"
         android:text="aaaaaa"
-
+        android:textColor="@color/red"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
