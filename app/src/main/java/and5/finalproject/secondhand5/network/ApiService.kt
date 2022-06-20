@@ -2,6 +2,7 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
+import and5.finalproject.secondhand5.model.getProductItem
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -28,4 +29,6 @@ interface ApiService {
         @Field ("city") city : String,
     ) : Call<RegisterResponse>
 
+    @GET("buyer/product")
+    suspend fun getAllProduct() : List<getProductItem>
 }
