@@ -4,7 +4,6 @@ package and5.finalproject.secondhand5.model
 import com.google.gson.annotations.SerializedName
 
 
-
 data class RegisterResponse(
     @SerializedName("address")
     val address: String,
