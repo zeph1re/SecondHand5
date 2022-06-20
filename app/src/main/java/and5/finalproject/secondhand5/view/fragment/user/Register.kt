@@ -78,7 +78,7 @@ class Register : Fragment () {
             regis_password.error = "Password cannot be empty"
         }
 
-        if (inputpassword.isNotEmpty() && regis_password.text.toString().trim().length < 5){
+        if (inputpassword.isNotEmpty() && regis_password.text.toString().trim().length <= 5){
             field_pass.helperText = "Minimum 6 characters "
             regis_password.error = "Password must have 6 characters atleast"
         } else if ( regis_password.text.toString().trim().length > 5){
@@ -113,7 +113,7 @@ class Register : Fragment () {
                     },2000)
                     view?.findNavController()
                         ?.navigate(R.id.action_register_to_login)
-                    
+
                 } else if (it == "400"){
                     toast = "Email Already Exist"
                     customDialog.dismissProgressDialog(requireActivity())
