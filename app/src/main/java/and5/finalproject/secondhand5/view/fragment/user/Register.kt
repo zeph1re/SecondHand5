@@ -44,7 +44,6 @@ class Register : Fragment () {
             check()
             if (inputfullname.isNotEmpty() && inputemail.isNotEmpty() && inputpassword.isNotEmpty() && inputpassword.length > 5 && validateEmail(inputemail)){
                 view.loading_register.visibility = View.VISIBLE
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading_register?.visibility = View.GONE
                 },2000)
@@ -112,9 +111,10 @@ class Register : Fragment () {
                     toast = "Registration Succes"
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.successToast(requireContext(), toast)
+                        view?.findNavController()
+                            ?.navigate(R.id.action_register_to_login)
                     },2000)
-                    view?.findNavController()
-                        ?.navigate(R.id.action_register_to_login)
+
 
                 } else if (it == "400"){
                     toast = "Email Already Exist"

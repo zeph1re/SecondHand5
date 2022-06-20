@@ -39,9 +39,9 @@ class CustomToast {
         text?.text = msg
         text?.setPadding(20, 0, 20, 0)
         text?.textSize = 22f
-        text?.setTextColor(Color.WHITE)
+
         val toast = Toast(context)
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 400)
         toast.duration = Toast.LENGTH_SHORT
         toast.view = layout
         toast.show()

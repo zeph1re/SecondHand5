@@ -81,12 +81,13 @@ class Login : Fragment() {
         viewModel.loginLiveData.observe(requireActivity()) {
             Log.d("abc", it)
             if (it == "201"){
-                view?.findNavController()
-                    ?.navigate(R.id.action_login_to_account)
+
                 text = "Login Success"
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     customToast.successToast(requireContext(), text)
+                    view?.findNavController()
+                        ?.navigate(R.id.action_login_to_account)
                 },2000)
 
 

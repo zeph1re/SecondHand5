@@ -28,7 +28,7 @@ class SplashScreen : Fragment() {
                         R.id.splashScreen,
                         true
                     ).build())
-        },2000)
+        },3000)
         return view
 
     }
