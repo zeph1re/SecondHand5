@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.model
+package and5.finalproject.secondhand5.model.auth
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

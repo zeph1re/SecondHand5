@@ -1,13 +1,11 @@
 package and5.finalproject.secondhand5.repository
 
-import and5.finalproject.secondhand5.model.LoginResponse
-import and5.finalproject.secondhand5.model.RegisterResponse
+import and5.finalproject.secondhand5.model.auth.GetAllUser
+import and5.finalproject.secondhand5.model.auth.LoginResponse
+import and5.finalproject.secondhand5.model.auth.RegisterResponse
+import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.network.ApiService
-import android.content.Context
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +49,10 @@ class UserRepository @Inject constructor(private val service: ApiService){
             }
             }
         )
+    }
+
+    suspend fun getUserItem(): GetAllUser{
+        return service.getUserItem()
     }
 
 }

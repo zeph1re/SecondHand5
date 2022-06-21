@@ -9,9 +9,9 @@ import kotlinx.android.parcel.Parcelize
 data class GetProductItem(
     @SerializedName("base_price")
     val basePrice: Int,
-    @SerializedName("categories")
+    @SerializedName("Categories")
     val categories: List<Category>,
-    @SerializedName("created_at")
+    @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("id")
     val id: Int,
@@ -23,7 +23,7 @@ data class GetProductItem(
     val location: String,
     @SerializedName("name")
     val name: String,
-    @SerializedName("updated_at")
+    @SerializedName("updatedAt")
     val updatedAt: String,
     @SerializedName("user_id")
     val userId: Int

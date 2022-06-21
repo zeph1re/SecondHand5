@@ -1,17 +1,13 @@
 package and5.finalproject.secondhand5.viewmodel
 
-import and5.finalproject.secondhand5.model.LoginResponse
-import and5.finalproject.secondhand5.model.RegisterResponse
+import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.repository.UserRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +17,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
 
     var registerLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
+    var getUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
 
     fun registerLiveData(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
         viewModelScope.launch {
@@ -33,6 +30,10 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         viewModelScope.launch  {
             userRepo.loginUser(email, password, loginLiveData)
         }
+    }
+
+    fun getUserData(): MutableLiveData<GetAllUser>{
+        return getUserData
     }
 
 
