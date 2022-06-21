@@ -21,6 +21,8 @@ class AddProduct : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
+
     }
 
 }

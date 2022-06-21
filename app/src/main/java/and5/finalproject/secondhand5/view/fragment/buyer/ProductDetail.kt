@@ -42,6 +42,8 @@ class ProductDetail : Fragment() {
 
         init(id!!.toInt())
 
+        buyProduct(id)
+
     }
 
     fun init(id:Int){
@@ -60,6 +62,12 @@ class ProductDetail : Fragment() {
 
         })
 
+    }
+
+    fun buyProduct(id: Int) {
+        buy_btn.setOnClickListener{
+
+        }
     }
 
 }
