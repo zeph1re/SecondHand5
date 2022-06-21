@@ -6,10 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.view.adapter.ProductAdapter
+import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.util.Log
+import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class Home : Fragment() {
 
+    lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,6 +26,45 @@ class Home : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        productAdapter = ProductAdapter {
+//            val data = bundleOf("data" to it)
+            val data = Bundle()
+            data.putInt("id", it.id)
+
+            Log.d("testes id", it.id.toString())
+//            Log.d("testes imageName", it.imageName.toString())
+//            Log.d("testes basePrice", it.basePrice.toString())
+//            Log.d("testes imageUrl", it.imageUrl.toString())
+////            Log.d("testes createdAt", it.createdAt.toString())
+//            Log.d("testes name", it.name.toString())
+//            Log.d("testes location", it.location.toString())
+////            Log.d("testes categories", it.categories.toString())
+//            Log.d("testes userId", it.userId.toString())
+
+            view.findNavController().navigate(R.id.action_home_to_productDetail, data)
+        }
+        initProduct()
+    }
+
+    fun initProduct(){
+        val productAdapter = productAdapter
+
+        rv_list_item.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        rv_list_item.adapter = productAdapter
+
+        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewmodelproduct.product.observe(requireActivity(),{
+            if(it!=null){
+                productAdapter.setProductList(it)
+                productAdapter.notifyDataSetChanged()
+            }
+        })
+        viewmodelproduct.getAllProduct()
     }
 
 }
