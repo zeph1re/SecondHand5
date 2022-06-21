@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Suppress("DEPRECATION")
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -37,16 +37,6 @@ class MainActivity : AppCompatActivity() {
             //check fragment name is "home" or not
             if (destination.id == R.id.home) {
                 bottomnav.visibility = View.VISIBLE
-                bottomnav.setOnNavigationItemSelectedListener {
-                    when (it.itemId){
-                        R.id.home_menu -> setCurrentFragment(Home())
-                        R.id.notification_menu -> setCurrentFragment(Notification())
-                        R.id.add_menu -> setCurrentFragment(AddProduct())
-                        R.id.list_product_menu -> setCurrentFragment(MyListProduct())
-                        R.id.account_menu -> setCurrentFragment(Login())
-                    }
-                    true
-                }
             } else {
                 bottomnav.visibility = View.GONE
             }
