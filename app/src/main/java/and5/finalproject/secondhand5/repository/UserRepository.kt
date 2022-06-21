@@ -4,6 +4,7 @@ import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
 import and5.finalproject.secondhand5.network.ApiService
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+import kotlin.math.log
 
 class UserRepository @Inject constructor(private val service: ApiService){
 
@@ -34,14 +36,15 @@ class UserRepository @Inject constructor(private val service: ApiService){
         )
     }
 
-    fun loginUser(email : String, password: String,  liveData: MutableLiveData<String>) {
+    fun loginUser(email : String, password: String, liveData: MutableLiveData<String>) {
         val apiClient : Call<LoginResponse> = service.loginUser(email, password)
         apiClient.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
-
+                //manggil data store
+                Log.d("test", response.body()?.accessToken.toString())
                 liveData.postValue(response.code().toString())
             }
 

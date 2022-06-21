@@ -2,7 +2,10 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
+import and5.finalproject.secondhand5.model.buyerproduct.Category
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -33,4 +36,17 @@ interface ApiService {
     suspend fun getDetailProduct(
         @Path("id")id : Int
     ) : GetProductItem
+
+    //SELLER
+    @Multipart
+    @POST ("seller/product")
+    suspend fun postProduct(
+        @Part("name") name : String,
+        @Part("base_price") price : Int,
+        @Part("categories") categories : List<Category>,
+        @Part("desc") desc: RequestBody,
+        @Part image: MultipartBody.Part,
+    ) : Call<GetProductItem>
+
+
 }
