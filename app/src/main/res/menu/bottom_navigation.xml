@@ -22,7 +22,7 @@
         android:icon="@drawable/ic_list_bulleted"/>
 
     <item
-        android:id="@+id/account_menu"
+        android:id="@+id/login"
         android:title="Account"
         android:icon="@drawable/ic_person">
     </item>

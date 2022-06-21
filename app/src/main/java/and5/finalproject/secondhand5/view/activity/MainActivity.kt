@@ -37,18 +37,12 @@ class MainActivity : AppCompatActivity() {
             //check fragment name is "home" or not
             if (destination.id == R.id.home) {
                 bottomnav.visibility = View.VISIBLE
-                bottomnav.setOnNavigationItemSelectedListener {
-                    when (it.itemId){
-                        R.id.home_menu -> setCurrentFragment(Home())
-                        R.id.notification_menu -> setCurrentFragment(Notification())
-                        R.id.add_menu -> setCurrentFragment(AddProduct())
-                        R.id.list_product_menu -> setCurrentFragment(MyListProduct())
-                        R.id.account_menu -> setCurrentFragment(Login())
-                    }
-                    true
-                }
-            } else {
-                bottomnav.visibility = View.GONE
+
+            }else if (destination.id == R.id.login){
+            bottomnav.visibility = View.GONE
+            }
+            else {
+            bottomnav.visibility = View.GONE
             }
         }
     }
