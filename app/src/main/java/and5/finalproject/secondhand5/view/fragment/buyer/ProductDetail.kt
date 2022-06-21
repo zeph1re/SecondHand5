@@ -45,13 +45,19 @@ class ProductDetail : Fragment() {
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.getDetailProduct(id)
 
-        viewmodelproduct.detailProduct.observe(requireActivity(),{
+        viewmodelproduct.detailProduct.observe(viewLifecycleOwner,{
             product_name.setText(it.name)
             product_price.setText(it.basePrice.toString())
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
             Log.d("testes 2 id ", id.toString())
         })
 
+    }
+
+    fun buyProduct() {
+        buy_btn.setOnClickListener {
+
+        }
     }
 
 

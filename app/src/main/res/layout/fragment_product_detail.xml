@@ -177,6 +177,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_margin="15dp"
         android:layout_alignParentBottom="true"
+        android:id="@+id/buy_btn"
         android:text="Saya Tertarik dan Ingin Nego"
         android:layout_marginTop="15dp"
         android:background="@drawable/custom_button"

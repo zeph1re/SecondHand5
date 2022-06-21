@@ -58,7 +58,7 @@ class Home : Fragment() {
         rv_list_item.adapter = productAdapter
 
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.product.observe(requireActivity(),{
+        viewmodelproduct.product.observe(viewLifecycleOwner,{
             if(it!=null){
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
