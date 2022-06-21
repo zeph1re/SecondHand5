@@ -94,7 +94,7 @@ class Login : Fragment() {
     fun loginUser(email : String, password: String){
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
-        viewModel.loginLiveData.observe(requireActivity()) {
+        viewModel.loginLiveData.observe(viewLifecycleOwner) {
             Log.d("abc", it)
             if (it == "201"){
 
