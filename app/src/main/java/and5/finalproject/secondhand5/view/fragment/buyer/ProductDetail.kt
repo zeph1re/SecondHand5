@@ -62,4 +62,10 @@ class ProductDetail : Fragment() {
 
     }
 
+    fun buyProduct() {
+        buy_btn.setOnClickListener{
+
+        }
+    }
+
 }
