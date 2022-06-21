@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/productCard"
     android:backgroundTint="@android:color/transparent"
     android:layout_margin="10dp"
     app:strokeColor="@color/blue_100"
@@ -49,6 +50,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Rp 250.000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/product_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textSize="18sp" />
         </LinearLayout>
     </RelativeLayout>

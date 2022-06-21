@@ -2,12 +2,9 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.LoginResponse
 import and5.finalproject.secondhand5.model.RegisterResponse
-import and5.finalproject.secondhand5.model.getProductItem
+import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -30,8 +27,10 @@ interface ApiService {
     ) : Call<RegisterResponse>
 
     @GET("buyer/product")
-    suspend fun getAllProduct() : List<getProductItem>
+    suspend fun getAllProduct() : List<GetProductItem>
 
-    @GET("buyer/product/{id}")
-    suspend fun getProductId(id:String) : List<getProductItem>
+    @GET("buyer/product/{id}/")
+    suspend fun getDetailProduct(
+        @Path("id")id : Int
+    ) : GetProductItem
 }

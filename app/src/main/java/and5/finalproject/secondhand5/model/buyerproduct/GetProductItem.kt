@@ -1,9 +1,12 @@
-package and5.finalproject.secondhand5.model
+package and5.finalproject.secondhand5.model.buyerproduct
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class getProductItem(
+@Parcelize
+data class GetProductItem(
     @SerializedName("base_price")
     val basePrice: Int,
     @SerializedName("categories")
@@ -24,4 +27,4 @@ data class getProductItem(
     val updatedAt: String,
     @SerializedName("user_id")
     val userId: Int
-)
+) : Parcelable

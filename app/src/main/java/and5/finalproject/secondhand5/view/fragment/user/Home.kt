@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.util.Log
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -28,7 +31,23 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productAdapter = ProductAdapter()
+        productAdapter = ProductAdapter {
+//            val data = bundleOf("data" to it)
+            val data = Bundle()
+            data.putInt("id", it.id)
+
+            Log.d("testes id", it.id.toString())
+//            Log.d("testes imageName", it.imageName.toString())
+//            Log.d("testes basePrice", it.basePrice.toString())
+//            Log.d("testes imageUrl", it.imageUrl.toString())
+////            Log.d("testes createdAt", it.createdAt.toString())
+//            Log.d("testes name", it.name.toString())
+//            Log.d("testes location", it.location.toString())
+////            Log.d("testes categories", it.categories.toString())
+//            Log.d("testes userId", it.userId.toString())
+
+            view.findNavController().navigate(R.id.action_home_to_productDetail, data)
+        }
         initProduct()
     }
 
@@ -45,6 +64,7 @@ class Home : Fragment() {
                 productAdapter.notifyDataSetChanged()
             }
         })
+        viewmodelproduct.getAllProduct()
     }
 
 }
