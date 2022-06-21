@@ -30,13 +30,13 @@ class UserManager (context: Context) {
     }
 
     suspend fun saveDataLogin(login : String) {
-        userDataStore.edit {
+        loginDataStore.edit {
             it[LOGIN_STATE] = login
         }
     }
 
     suspend fun deleteDataLogin() {
-        userDataStore.edit{
+        loginDataStore.edit{
             it.clear()
         }
     }
@@ -45,7 +45,7 @@ class UserManager (context: Context) {
         it [ID] ?: ""
     }
 
-    val loginState : kotlinx.coroutines.flow.Flow<String> = userDataStore.data.map {
+    val loginState : kotlinx.coroutines.flow.Flow<String> = loginDataStore.data.map {
         it [LOGIN_STATE] ?: ""
     }
 }
