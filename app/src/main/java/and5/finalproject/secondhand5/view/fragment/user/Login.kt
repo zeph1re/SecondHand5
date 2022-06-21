@@ -1,7 +1,10 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.view.custom.CustomToast
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.os.Bundle
 import android.os.Handler
@@ -11,10 +14,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class Login : Fragment() {
@@ -23,6 +30,8 @@ class Login : Fragment() {
     lateinit var inputLoginPassword: String
     lateinit var text: String
     private var customToast : CustomToast = CustomToast()
+    lateinit var dataUser : List<GetAllUser>
+    lateinit var userManager : UserManager
 
 
     override fun onCreateView(
@@ -31,12 +40,19 @@ class Login : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+        userManager = UserManager(requireActivity())
+        val viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModelLogin.loginState(requireActivity()).observe(viewLifecycleOwner) {
+            if (it != ""){
+                    view.findNavController().navigate(
+                        R.id.action_login_to_account)
+            }
+        }
 
 
         view.btnlogin.setOnClickListener{
             inputLoginEmail = view.loginemail.text.toString()
             inputLoginPassword = view.loginpassword.text.toString()
-
 
             check()
             if (inputLoginEmail.isNotEmpty() && inputLoginPassword.isNotEmpty() ){
@@ -78,12 +94,14 @@ class Login : Fragment() {
     fun loginUser(email : String, password: String){
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
-        viewModel.loginLiveData.observe(requireActivity()) {
+        viewModel.loginLiveData.observe(viewLifecycleOwner) {
             Log.d("abc", it)
             if (it == "201"){
 
                 text = "Login Success"
-
+                GlobalScope.launch {
+                    userManager.saveDataLogin("true")
+                }
                 Handler(Looper.getMainLooper()).postDelayed({
                     customToast.successToast(requireContext(), text)
                     view?.findNavController()
@@ -115,7 +133,23 @@ class Login : Fragment() {
 
             }
         }
-        viewModel.loginLiveData(email, password)
+        viewModel.loginUser(email, password)
+
+        viewModel.userToken.observe(viewLifecycleOwner) {
+            Log.d("userToken", it)
+            GlobalScope.launch {
+                userManager.saveDataUser(it)
+            }
+        }
     }
+
+//    fun getDataUserItem(){
+//        val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+//        viewModel.getUserData().observe(viewLifecycleOwner, Observer {
+//
+//
+//        })
+//        viewModel.getUserData()
+//    }
 
 }

@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.datastore.UserManager
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_account.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class Account : Fragment() {
-
+    lateinit var userManager: UserManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,7 +25,7 @@ class Account : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        userManager = UserManager(requireActivity())
         ubah_akun_card.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_account_to_profile)
         }
@@ -33,6 +36,10 @@ class Account : Fragment() {
 
         logout_card.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_account_to_home)
+            GlobalScope.launch {
+                userManager.deleteDataUser()
+            }
+
         }
 
 
