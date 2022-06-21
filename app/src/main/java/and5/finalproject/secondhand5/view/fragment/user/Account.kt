@@ -37,7 +37,7 @@ class Account : Fragment() {
         logout_card.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_account_to_home)
             GlobalScope.launch {
-                userManager.deleteDataUser()
+                userManager.deleteDataLogin()
             }
 
         }
