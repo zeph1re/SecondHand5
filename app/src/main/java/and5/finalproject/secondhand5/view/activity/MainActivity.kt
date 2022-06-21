@@ -37,7 +37,16 @@ class MainActivity : AppCompatActivity() {
             //check fragment name is "home" or not
             if (destination.id == R.id.home) {
                 bottomnav.visibility = View.VISIBLE
-            } else {
+            } else if (destination.id == R.id.notification){
+                bottomnav.visibility = View.VISIBLE
+            } else if (destination.id == R.id.addProduct){
+                bottomnav.visibility = View.GONE
+            } else if (destination.id == R.id.myListProduct){
+                bottomnav.visibility = View.VISIBLE
+            } else if (destination.id == R.id.account){
+                bottomnav.visibility = View.VISIBLE
+            }
+            else {
                 bottomnav.visibility = View.GONE
             }
         }
