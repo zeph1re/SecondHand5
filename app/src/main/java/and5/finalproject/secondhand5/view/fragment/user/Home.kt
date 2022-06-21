@@ -36,16 +36,16 @@ class Home : Fragment() {
             val data = Bundle()
             data.putInt("id", it.id)
 
-            Log.d("testes id", it.id.toString())
+//            Log.d("testes id", it.id.toString())
 //            Log.d("testes imageName", it.imageName.toString())
 //            Log.d("testes basePrice", it.basePrice.toString())
 //            Log.d("testes imageUrl", it.imageUrl.toString())
-////            Log.d("testes createdAt", it.createdAt.toString())
 //            Log.d("testes name", it.name.toString())
 //            Log.d("testes location", it.location.toString())
-////            Log.d("testes categories", it.categories.toString())
 //            Log.d("testes userId", it.userId.toString())
-
+//            Log.d("testes createdAt", it.createdAt.toString())
+//            Log.d("testes updatedAt", it.updatedAt.toString())
+//            Log.d("testes categories", it.categories.toString())
             view.findNavController().navigate(R.id.action_home_to_productDetail, data)
         }
         initProduct()
@@ -54,14 +54,15 @@ class Home : Fragment() {
     fun initProduct(){
         val productAdapter = productAdapter
 
-        rv_list_item.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        rv_list_item.adapter = productAdapter
-
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.product.observe(viewLifecycleOwner,{
             if(it!=null){
+                rv_list_item.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+                rv_list_item.adapter = productAdapter
+
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
+
             }
         })
         viewmodelproduct.getAllProduct()
