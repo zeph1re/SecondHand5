@@ -189,7 +189,6 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnpreview"
                     android:text="Preview"
-
                     android:background="@drawable/rounded_button"
                     android:textColor="@color/white"
                     android:layout_marginRight="60dp"
