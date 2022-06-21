@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Suppress("DEPRECATION")
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -37,12 +37,8 @@ class MainActivity : AppCompatActivity() {
             //check fragment name is "home" or not
             if (destination.id == R.id.home) {
                 bottomnav.visibility = View.VISIBLE
-
-            }else if (destination.id == R.id.login){
-            bottomnav.visibility = View.GONE
-            }
-            else {
-            bottomnav.visibility = View.GONE
+            } else {
+                bottomnav.visibility = View.GONE
             }
         }
     }
