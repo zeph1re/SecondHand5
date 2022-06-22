@@ -33,8 +33,11 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         }
     }
 
-    fun getUserData(): MutableLiveData<GetAllUser>{
-        return getUserData
+    fun getUserData(token:String){
+        viewModelScope.launch  {
+            val dataUser = userRepo.getUserToken(token)
+            getUserData.value  =dataUser
+        }
     }
 
 
