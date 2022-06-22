@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_addProduct_to_productPreview"
             app:destination="@id/productPreview" />
+        <action
+            android:id="@+id/action_addProduct_to_home"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/myListProduct"

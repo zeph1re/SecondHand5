@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="20dp"
-                android:id="@+id/btn_backlogin"
+                android:id="@+id/btn_backtohome"
                 android:src="@drawable/ic_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
@@ -61,7 +61,7 @@
                     android:hint="Nama Produk"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/update1"
+                    android:id="@+id/add_product_name"
                     android:background="@drawable/rectangleedittext"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
@@ -92,7 +92,7 @@
                     android:hint="Rp 0,00"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/update2"
+                    android:id="@+id/add_product_price"
                     android:background="@drawable/rectangleedittext"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
@@ -123,7 +123,7 @@
                     android:textSize="20sp"
                     android:hint="Pilih Kategori"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/update3"
+                    android:id="@+id/add_product_category"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
                     android:background="@drawable/rectangleedittext"
@@ -154,7 +154,7 @@
                     android:hint="Produk ini dapat membantu mencari anggota yang hilang"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/update4"
+                    android:id="@+id/add_product_desc"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
                     android:background="@drawable/rectangleedittext"
@@ -175,9 +175,9 @@
             </TextView>
 
             <ImageView
-
                 android:layout_marginLeft="60dp"
                 android:src="@drawable/add_rectangle"
+                android:id="@+id/add_product_image"
                 android:layout_width="150dp"
                 android:layout_height="150dp">
 

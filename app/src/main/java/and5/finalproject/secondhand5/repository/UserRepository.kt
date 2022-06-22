@@ -25,7 +25,6 @@ class UserRepository @Inject constructor(private val service: ApiService){
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
-
                 liveData.postValue(response.code().toString())
             }
 
