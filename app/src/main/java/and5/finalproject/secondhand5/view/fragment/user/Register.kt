@@ -133,10 +133,9 @@ class Register : Fragment () {
                     Handler(Looper.getMainLooper()).postDelayed({
                         customToast.failureToast(requireContext(), toast)
                     },2000)
-
                 }
             }
-        viewModel.registerLiveData(full_name, email, password, phone_number, address, city)
+        viewModel.registerUser(full_name, email, password, phone_number, address, city)
     }
 
 }

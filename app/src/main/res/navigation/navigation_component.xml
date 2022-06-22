@@ -66,9 +66,9 @@
             app:destination="@id/account" />
     </fragment>
     <fragment
-        android:id="@+id/detailTambahProduk"
+        android:id="@+id/productPreview"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.ProductPreview"
-        android:label="DetailTambahProduk"
+        android:label="ProductPreview"
         tools:layout="@layout/fragment_product_preview"/>
     <fragment
         android:id="@+id/account"
@@ -89,8 +89,8 @@
         android:label="AddProduct"
         tools:layout="@layout/fragment_add_product2">
         <action
-            android:id="@+id/action_addProduct_to_detailTambahProduk"
-            app:destination="@id/detailTambahProduk" />
+            android:id="@+id/action_addProduct_to_productPreview"
+            app:destination="@id/productPreview" />
     </fragment>
     <fragment
         android:id="@+id/myListProduct"
