@@ -27,6 +27,7 @@ class ProductDetail : Fragment() {
 
     private var productName = "kosong"
     private var productPrice = 0
+    private var productImage = "zz"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +54,7 @@ class ProductDetail : Fragment() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            offerProduct(id, productName, productPrice)
+            offerProduct(id, productName, productPrice, productImage)
         }, 1000)
 
 
@@ -72,6 +73,8 @@ class ProductDetail : Fragment() {
             product_price.setText("Rp ${it.basePrice.toString()}")
             productName = it.name
             productPrice = it.basePrice
+            productImage = it.imageUrl
+
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
 //            Log.d("testes 4 id ", id.toString())
 
@@ -79,7 +82,7 @@ class ProductDetail : Fragment() {
 
     }
 
-    fun offerProduct(id: Int, productName:String, productPrice:Int ) {
+    fun offerProduct(id: Int, productName:String, productPrice:Int, productImage:String ) {
                     Log.d("testes 5 productName ", productName.toString())
                     Log.d("testes 6 productPrice ", productPrice.toString())
 
@@ -88,6 +91,7 @@ class ProductDetail : Fragment() {
 
             customOrderDialog.product_name.setText(productName.toString())
             customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
+            Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
 
             val ADBuilder = AlertDialog.Builder(requireContext())
                 .setView(customOrderDialog)
