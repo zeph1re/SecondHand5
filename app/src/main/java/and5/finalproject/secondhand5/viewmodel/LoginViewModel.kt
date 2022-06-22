@@ -10,8 +10,10 @@ class LoginViewModel : ViewModel(){
     lateinit var userManager: UserManager
 
 
-    fun loginState(context: Context): LiveData<String> {
+
+
+    fun userToken(context: Context): LiveData<String> {
         userManager = UserManager(context)
-        return userManager.loginState.asLiveData()
+        return userManager.userToken.asLiveData()
     }
 }

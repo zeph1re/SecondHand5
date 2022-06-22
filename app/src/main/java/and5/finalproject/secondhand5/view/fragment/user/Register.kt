@@ -104,7 +104,6 @@ class Register : Fragment () {
 
     fun registerUser(full_name: String, email: String, password: String, phone_number: Int, address: String, city:String){
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-
             viewModel.registerLiveData.observe(requireActivity()) {
                 Log.d("abc", it)
                 if (it == "201"){
