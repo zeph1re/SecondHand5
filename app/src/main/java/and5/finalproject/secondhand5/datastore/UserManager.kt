@@ -21,12 +21,6 @@ class UserManager (context: Context) {
         }
     }
 
-    suspend fun deleteDataUser() {
-        userDataStore.edit{
-            it.clear()
-        }
-    }
-
     suspend fun saveDataLogin(login : String) {
         userDataStore.edit {
             it[LOGIN_STATE] = login

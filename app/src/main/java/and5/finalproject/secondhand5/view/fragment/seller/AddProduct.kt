@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,11 +24,35 @@ class AddProduct : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         goToPreview()
         addProduct()
+        openImageChooser()
+        backToHome()
     }
+
+    private fun backToHome() {
+        btn_backtohome.setOnClickListener{
+            Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_home)
+        }
+    }
+
+    private fun openImageChooser() {
+        add_product_image.setOnClickListener{
+            Intent(Intent.ACTION_PICK).also {
+                it.type = "image/*"
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
+            }
+        }
+    }
+
+
 
     private fun goToPreview() {
         preview_btn.setOnClickListener(){
-
+            val productName = add_product_name.text.toString()
+            val productPrice = add_product_price.text.toString()
+            val productCategory = add_product_category.text.toString()
+            val productDesc = add_product_desc.text.toString()
 
             Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_productPreview)
         }
@@ -38,5 +63,7 @@ class AddProduct : Fragment() {
             Navigation.findNavController(requireView()).navigate(R.id.action_home_to_myListProduct)
         }
     }
+
+
 
 }
