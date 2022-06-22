@@ -7,6 +7,7 @@ import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import retrofit2.Call
 import retrofit2.http.*
 
+
 interface ApiService {
 
     @POST ("auth/login")
@@ -35,7 +36,11 @@ interface ApiService {
         @Path("id")id : Int
     ) : GetProductItem
 
+
     @GET("auth/user")
-    suspend fun getUserItem() : GetAllUser
+    suspend fun getUserItem(
+        @Header("access_token")token:String
+    ) : GetAllUser
+
 
 }

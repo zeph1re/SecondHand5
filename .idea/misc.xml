@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18854166666666666" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.296" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.1015" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_list_bulleted.xml" value="0.1755" />

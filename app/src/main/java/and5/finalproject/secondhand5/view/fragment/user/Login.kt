@@ -30,7 +30,6 @@ class Login : Fragment() {
     lateinit var inputLoginPassword: String
     lateinit var text: String
     private var customToast : CustomToast = CustomToast()
-    lateinit var dataUser : List<GetAllUser>
     lateinit var userManager : UserManager
 
 
@@ -42,7 +41,7 @@ class Login : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         userManager = UserManager(requireActivity())
         val viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
-        viewModelLogin.loginState(requireActivity()).observe(viewLifecycleOwner) {
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
             if (it != ""){
                     view.findNavController().navigate(
                         R.id.action_login_to_account)
@@ -58,10 +57,6 @@ class Login : Fragment() {
             if (inputLoginEmail.isNotEmpty() && inputLoginPassword.isNotEmpty() ){
 
                 view.loading.visibility = View.VISIBLE
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    view?.loading?.visibility = View.GONE
-                },2000)
 
                 loginUser(inputLoginEmail, inputLoginPassword)
             }
@@ -98,11 +93,16 @@ class Login : Fragment() {
             Log.d("abc", it)
             if (it == "201"){
 
-                text = "Login Success"
-                GlobalScope.launch {
-                    userManager.saveDataLogin("true")
+                viewModel.userToken.observe(viewLifecycleOwner) { token ->
+                    Log.d("userToken", token)
+                    GlobalScope.launch {
+                        userManager.saveDataUser(token)
+                    }
                 }
+
+                text = "Login Success"
                 Handler(Looper.getMainLooper()).postDelayed({
+                    view?.loading?.visibility = View.GONE
                     customToast.successToast(requireContext(), text)
                     view?.findNavController()
                         ?.navigate(R.id.action_login_to_account)
@@ -113,6 +113,7 @@ class Login : Fragment() {
                 text = "Email or Password are Wrong"
 
                 Handler(Looper.getMainLooper()).postDelayed({
+                    view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
                 },2000)
 
@@ -120,6 +121,7 @@ class Login : Fragment() {
                 text = "Internal Service Error"
 
                 Handler(Looper.getMainLooper()).postDelayed({
+                    view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
                 },2000)
 
@@ -127,29 +129,15 @@ class Login : Fragment() {
                 text = "No Internet Connection"
 
                 Handler(Looper.getMainLooper()).postDelayed({
-
+                    view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
                 },2000)
 
             }
         }
         viewModel.loginUser(email, password)
-
-        viewModel.userToken.observe(viewLifecycleOwner) {
-            Log.d("userToken", it)
-            GlobalScope.launch {
-                userManager.saveDataUser(it)
-            }
-        }
     }
 
-//    fun getDataUserItem(){
-//        val viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-//        viewModel.getUserData().observe(viewLifecycleOwner, Observer {
-//
-//
-//        })
-//        viewModel.getUserData()
-//    }
+
 
 }

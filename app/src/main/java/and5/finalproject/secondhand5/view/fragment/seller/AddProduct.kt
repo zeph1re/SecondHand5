@@ -36,12 +36,7 @@ class AddProduct : Fragment() {
 
     private fun openImageChooser() {
         add_product_image.setOnClickListener{
-            Intent(Intent.ACTION_PICK).also {
-                it.type = "image/*"
-                val mimeTypes = arrayOf("image/jpeg", "image/png")
-                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-                startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
-            }
+
         }
     }
 

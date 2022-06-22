@@ -25,7 +25,6 @@ class UserRepository @Inject constructor(private val service: ApiService){
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
-
                 liveData.postValue(response.code().toString())
             }
 
@@ -56,8 +55,8 @@ class UserRepository @Inject constructor(private val service: ApiService){
         )
     }
 
-    suspend fun getUserItem(): GetAllUser{
-        return service.getUserItem()
+    suspend fun getUserToken(token:String): GetAllUser{
+        return service.getUserItem(token)
     }
 
 }

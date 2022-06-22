@@ -12,6 +12,5 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getDetailProduct(id:Int): GetProductItem {
         return productApi.getDetailProduct(id)
-
     }
 }
