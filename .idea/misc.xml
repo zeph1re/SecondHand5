@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_buyer_offer_price.xml" value="0.33" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.30932971014492755" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.16160081053698075" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.16160081053698075" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_product_preview.xml" value="0.30932971014492755" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.296" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.1015" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_list_bulleted.xml" value="0.1755" />
@@ -13,7 +18,7 @@
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_seller_status.xml" value="0.27314814814814814" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_seller_whastapp.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.1" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.33" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_card_buyer_offer.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_penawar.xml" value="0.3484375" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_tambah_produk.xml" value="0.3625" />
