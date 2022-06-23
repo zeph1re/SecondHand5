@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragment.seller.MyListProduct">
+    tools:context=".view.fragment.seller.listproduct.MyListProduct">
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/seller_pofile"
+                android:id="@+id/seller_profile"
                 android:orientation="vertical"
                 android:layout_marginHorizontal="10dp"
                 android:layout_toEndOf="@id/seller_image">
@@ -76,54 +76,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/seller_product_category"
-        android:layout_below="@id/seller_information">
-
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/custom_rounded_textview"
-                android:drawableStart="@drawable/ic_search"
-                android:padding="15dp"
-                android:text="Semua" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/custom_rounded_textview"
-                android:drawableStart="@drawable/ic_search"
-                android:padding="15dp"
-                android:text="Hobi" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/custom_rounded_textview"
-                android:drawableStart="@drawable/ic_search"
-                android:padding="15dp"
-                android:text="Kendaraan" />
-        </LinearLayout>
-
-
-    </HorizontalScrollView>
+   <com.google.android.material.tabs.TabLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/seller_product_tablayout"
+       android:layout_below="@id/seller_information"
+       android:layout_margin="10dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_sellerproduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewpager_listproduct"
-        android:layout_below="@id/seller_product_category"/>
+        android:layout_below="@id/seller_product_tablayout"
+        android:layout_marginHorizontal="10dp"/>
 
 
 </RelativeLayout>
