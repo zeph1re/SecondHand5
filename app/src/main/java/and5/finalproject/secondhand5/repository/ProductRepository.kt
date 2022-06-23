@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
@@ -25,6 +26,29 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getSellerProduct(token:String) : List<GetSellerProductItem> {
         return productApi.getSellerProduct(token)
+    }
+
+    suspend fun addBuyerOrder(
+        access_token : String,
+        id: Int,
+        bid_price: Int,
+        liveCode: MutableLiveData<String>
+    ) {
+        val apiClient :Call<AddBuyerOrderResponse> = productApi.postBuyerOrder(access_token,id,bid_price)
+        apiClient.enqueue(object : Callback<AddBuyerOrderResponse> {
+            override fun onResponse(
+                call: Call<AddBuyerOrderResponse>,
+                response: Response<AddBuyerOrderResponse>
+            ) {
+                liveCode.postValue(response.code().toString())
+            }
+
+            override fun onFailure(call: Call<AddBuyerOrderResponse>, t: Throwable) {
+                liveCode.postValue(null)
+            }
+        })
+
+
     }
 
     suspend fun addProductSeller(

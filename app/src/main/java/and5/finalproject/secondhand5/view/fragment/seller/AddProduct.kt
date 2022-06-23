@@ -70,14 +70,11 @@ class AddProduct : Fragment() {
             val productPrice = add_product_price.text.toString().toInt()
             val productDesc = add_product_desc.text.toString()
 
-            val viewModelProduct = ViewModelProvider(this).get(ProductViewModel::class.java)
+            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
             userManager.userToken.asLiveData().observe(viewLifecycleOwner){
                 viewModelProduct.addSellerProduct(it,productName,productPrice,productDesc)
                 Navigation.findNavController(requireView()).navigate(R.id.action_home_to_myListProduct)
             }
-
-
-
 
 
         }
