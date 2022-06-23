@@ -3,6 +3,7 @@ package and5.finalproject.secondhand5.network
 import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
+import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
@@ -37,8 +38,16 @@ interface ApiService {
 
     @GET("auth/user")
     suspend fun getUserItem(
-        @Header("access_token")token:String
+        @Header("access_token")token:String,
     ) : GetAllUser
+
+    @PUT("auth/user")
+    suspend fun updateUser(
+        @Header("access_token")token:String,
+        @Body user : UpdateUserBody
+    ) : GetAllUser
+
+
 
 
     // BUYER
