@@ -32,9 +32,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
 }
-
 
 dependencies {
 
@@ -78,10 +76,11 @@ dependencies {
 
     //libarary DI Hilt
     implementation "com.google.dagger:hilt-android:2.42"
-    kapt "com.google.dagger:hilt-compiler:2.42"
+    kapt 'com.google.dagger:hilt-compiler:2.42'
 
     //library gift
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
-
-
 }
+
+
+
