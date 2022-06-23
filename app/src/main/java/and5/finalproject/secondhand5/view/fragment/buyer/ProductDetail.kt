@@ -108,8 +108,34 @@ class ProductDetail : Fragment() {
                         userManager.userToken.asLiveData().observe(viewLifecycleOwner){
                             if(it!=null){
                                 Log.d("testes token", it)
+                                viewModelProduct.addBuyerOrderLiveData.observe(viewLifecycleOwner,{
+                                    Log.d("tes response ", it.toString())
+                                    if(it == "201"){
+                                        Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "400"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "you has order for this product", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "403"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "You are not login/access_token is wrong", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "500"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "\t\n" +
+                                                "Internal Service Error", Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    else{
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "No Internet Connection", Toast.LENGTH_SHORT).show()
+
+                                    }
+                                })
+
                                 viewModelProduct.postBuyerOrder(it, productId, offerPrice)
-                                Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
+
                             }
 
                         }
