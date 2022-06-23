@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/myListProduct"
-        android:name="and5.finalproject.secondhand5.view.fragment.seller.MyListProduct"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.MyListProduct"
         android:label="fragment_my_list_product"
         tools:layout="@layout/fragment_my_list_product" >
         <action

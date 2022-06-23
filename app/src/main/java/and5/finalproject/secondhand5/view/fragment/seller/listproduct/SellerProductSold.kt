@@ -1,4 +1,4 @@
-package and5.finalproject.secondhand5.view.fragment.seller
+package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 
 
-class MyListProduct : Fragment() {
+class SellerProductSold : Fragment() {
 
 
     override fun onCreateView(
@@ -16,26 +16,10 @@ class MyListProduct : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_list_product, container, false)
+        return inflater.inflate(R.layout.fragment_seller_product_sold, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-
-    }
-
-    private fun initProductSeller() {
-
-    }
-
-    private fun initInterestProductSeller() {
-
-    }
-
-    private fun initSoldProductSeller() {
-
     }
 }

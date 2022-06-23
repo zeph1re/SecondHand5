@@ -5,6 +5,7 @@ import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
+import and5.finalproject.secondhand5.model.seller.Category
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -14,6 +15,7 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    //USER
     @POST ("auth/login")
     @FormUrlEncoded
     fun loginUser(
@@ -46,13 +48,15 @@ interface ApiService {
         @Header("access_token")token:String
     ) : GetAllUser
 
-    @Multipart
+
+    // SELLER
     @POST ("seller/product")
+    @FormUrlEncoded
     suspend fun postProduct(
         @Header("access_token") token: String,
-        @Part ("name") name : String,
-        @Part ("base_price") price : Int,
-        @Part ("description") desc : String
+        @Field ("name") name : String,
+        @Field ("base_price") price : Int,
+        @Field ("description") desc : String
     ) : Call<AddProductResponse>
 
     @GET ("seller/product")

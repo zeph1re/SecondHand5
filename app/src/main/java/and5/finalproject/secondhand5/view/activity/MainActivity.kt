@@ -1,12 +1,6 @@
 package and5.finalproject.secondhand5.view.activity
 
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.view.fragment.seller.AddProduct
-import and5.finalproject.secondhand5.view.fragment.seller.MyListProduct
-import and5.finalproject.secondhand5.view.fragment.seller.Notification
-import and5.finalproject.secondhand5.view.fragment.user.Account
-import and5.finalproject.secondhand5.view.fragment.user.Home
-import and5.finalproject.secondhand5.view.fragment.user.Login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
