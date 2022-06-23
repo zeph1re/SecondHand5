@@ -42,7 +42,7 @@ class MyListProduct : Fragment() {
     }
 
     private fun initLayout() {
-        val adapter = ViewPagerAdapter(parentFragmentManager, lifecycle)
+        val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         viewpager_sellerproduct.adapter = adapter
 
         TabLayoutMediator(seller_product_tablayout,viewpager_sellerproduct){tab,position ->
