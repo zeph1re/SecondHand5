@@ -20,6 +20,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
     private var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
     var addProductLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
+    var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
 
     val product : LiveData<List<GetProductItem>> = productLivedata
     val detailProduct : LiveData<GetProductItem> = detailProductLivedata
@@ -27,6 +28,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     var userToken : MutableLiveData<String> = MutableLiveData()
 
+    //  Buyer
     fun getAllProduct(){
         viewModelScope.launch {
             val dataproduct = productRepository.getAllProduct()
@@ -41,6 +43,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
+    fun postBuyerOrder(access_token:String, id: Int, bid_price:Int){
+        viewModelScope.launch {
+            productRepository.addBuyerOrder(access_token, id, bid_price, addBuyerOrderLiveData)
+        }
+    }
+
+    //  Seller
     fun getSellerProduct(token:String){
         viewModelScope.launch{
             val dataSellerProduct = productRepository.getSellerProduct(token)

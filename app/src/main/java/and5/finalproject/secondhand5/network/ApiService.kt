@@ -3,6 +3,7 @@ package and5.finalproject.secondhand5.network
 import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
+import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
 import and5.finalproject.secondhand5.model.seller.Category
@@ -34,6 +35,13 @@ interface ApiService {
         @Field ("city") city : String,
     ) : Call<RegisterResponse>
 
+    @GET("auth/user")
+    suspend fun getUserItem(
+        @Header("access_token")token:String
+    ) : GetAllUser
+
+
+    // BUYER
     @GET("buyer/product")
     suspend fun getAllProduct() : List<GetProductItem>
 
@@ -42,11 +50,13 @@ interface ApiService {
         @Path("id")id : Int
     ) : GetProductItem
 
-
-    @GET("auth/user")
-    suspend fun getUserItem(
-        @Header("access_token")token:String
-    ) : GetAllUser
+    @POST ("buyer/product")
+    @FormUrlEncoded
+    suspend fun postBuyerOrder(
+        @Header("access_token") token: String,
+        @Field("product_id") product_id: Int,
+        @Field("bid_price") bid_price: Int
+    ) : Call<AddBuyerOrderResponse>
 
 
     // SELLER
