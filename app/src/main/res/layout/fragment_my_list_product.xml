@@ -95,7 +95,7 @@
                 android:background="@drawable/custom_rounded_textview"
                 android:drawableStart="@drawable/ic_search"
                 android:padding="15dp"
-                android:text="Semua" />
+                android:text="Product" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                 android:background="@drawable/custom_rounded_textview"
                 android:drawableStart="@drawable/ic_search"
                 android:padding="15dp"
-                android:text="Hobi" />
+                android:text="Interest" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
                 android:background="@drawable/custom_rounded_textview"
                 android:drawableStart="@drawable/ic_search"
                 android:padding="15dp"
-                android:text="Kendaraan" />
+                android:text="Sold" />
         </LinearLayout>
 
 
@@ -122,7 +122,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewpager_listproduct"
+        android:id="@+id/viewpager_sellerproduct"
         android:layout_below="@id/seller_product_category"/>
 
 

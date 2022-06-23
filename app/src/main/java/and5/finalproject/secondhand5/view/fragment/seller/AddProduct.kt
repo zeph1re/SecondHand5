@@ -1,22 +1,30 @@
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
+import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 
 class AddProduct : Fragment() {
+
+    lateinit var userManager: UserManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        userManager = UserManager(requireActivity())
         return inflater.inflate(R.layout.fragment_add_product2, container, false)
     }
 
@@ -36,7 +44,6 @@ class AddProduct : Fragment() {
 
     private fun openImageChooser() {
         add_product_image.setOnClickListener{
-
         }
     }
 
@@ -45,9 +52,13 @@ class AddProduct : Fragment() {
     private fun goToPreview() {
         preview_btn.setOnClickListener(){
             val productName = add_product_name.text.toString()
-            val productPrice = add_product_price.text.toString()
-            val productCategory = add_product_category.text.toString()
+            val productPrice = add_product_price.text.toString().toInt()
             val productDesc = add_product_desc.text.toString()
+
+            val bundle = Bundle()
+            bundle.putString("PRODUCT_DATA", productName)
+            bundle.putInt("PRODUCT_DATA", productPrice)
+            bundle.putString("PRODUCT_DATA", productDesc)
 
             Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_productPreview)
         }
@@ -55,7 +66,20 @@ class AddProduct : Fragment() {
 
     private fun addProduct() {
         add_btn.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_home_to_myListProduct)
+            val productName = add_product_name.text.toString()
+            val productPrice = add_product_price.text.toString()
+            val productDesc = add_product_desc.text.toString()
+
+            val viewModelProduct = ViewModelProvider(this).get(ProductViewModel::class.java)
+            userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+                viewModelProduct.addSellerProduct(it,productName,productPrice.toInt(),productDesc)
+                Navigation.findNavController(requireView()).navigate(R.id.action_home_to_myListProduct)
+            }
+
+
+
+
+
         }
     }
 

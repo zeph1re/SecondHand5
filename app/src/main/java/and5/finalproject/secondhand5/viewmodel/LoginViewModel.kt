@@ -9,9 +9,6 @@ import androidx.lifecycle.asLiveData
 class LoginViewModel : ViewModel(){
     lateinit var userManager: UserManager
 
-
-
-
     fun userToken(context: Context): LiveData<String> {
         userManager = UserManager(context)
         return userManager.userToken.asLiveData()

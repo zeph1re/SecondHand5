@@ -19,5 +19,23 @@ class MyListProduct : Fragment() {
         return inflater.inflate(R.layout.fragment_my_list_product, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+
+
+
+    }
+
+    private fun initProductSeller() {
+
+    }
+
+    private fun initInterestProductSeller() {
+
+    }
+
+    private fun initSoldProductSeller() {
+
+    }
 }
