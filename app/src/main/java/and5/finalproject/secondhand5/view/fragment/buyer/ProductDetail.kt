@@ -31,7 +31,7 @@ class ProductDetail : Fragment() {
     lateinit var productName : String
     var productPrice by Delegates.notNull<Int>()
     lateinit var productImage : String
-    var product_id by Delegates.notNull<Int>()
+    var productId by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,15 +45,17 @@ class ProductDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        userManager = UserManager(requireActivity())
+
 //        product_name.setText("tes")
 //        product_price.setText("tes")
 
-        product_id = arguments?.getInt("id")!!
+        productId = arguments?.getInt("product_id") ?:
 //        val data = arguments?.getParcelable<GetProductItem>("data") as GetProductItem
 
 
 //        Toast.makeText( requireContext(), "$id" , Toast.LENGTH_SHORT).show()
-//        Log.d("testes 1 id ", id.toString())
+        Log.d("testes 1 id ", id.toString())
 
         init()
         offerProduct()
@@ -63,7 +65,7 @@ class ProductDetail : Fragment() {
     fun init(){
 //        Log.d("testes 2 id ", id.toString())
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.getDetailProduct(product_id)
+        viewmodelproduct.getDetailProduct(productId)
 
         viewmodelproduct.detailProduct.observe(viewLifecycleOwner,{
 //            Log.d("testes 3 id ", id.toString())
@@ -102,10 +104,11 @@ class ProductDetail : Fragment() {
                         Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        val viewModelProduct = ViewModelProvider(this).get(ProductViewModel::class.java)
+                        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
                         userManager.userToken.asLiveData().observe(viewLifecycleOwner){
                             if(it!=null){
-                                viewModelProduct.postBuyerOrder(it, product_id, offerPrice)
+                                Log.d("testes token", it)
+                                viewModelProduct.postBuyerOrder(it, productId, offerPrice)
                                 Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
                             }
 

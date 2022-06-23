@@ -34,9 +34,9 @@ class Home : Fragment() {
         productAdapter = ProductAdapter {
 //            val data = bundleOf("data" to it)
             val data = Bundle()
-            data.putInt("id", it.id)
+            data.putInt("product_id", it.id)
 
-//            Log.d("testes id", it.id.toString())
+            Log.d("testes id", it.id.toString())
 //            Log.d("testes imageName", it.imageName.toString())
 //            Log.d("testes basePrice", it.basePrice.toString())
 //            Log.d("testes imageUrl", it.imageUrl.toString())

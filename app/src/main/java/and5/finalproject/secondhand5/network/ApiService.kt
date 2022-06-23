@@ -50,9 +50,9 @@ interface ApiService {
         @Path("id")id : Int
     ) : GetProductItem
 
-    @POST ("buyer/product")
+    @POST ("buyer/order")
     @FormUrlEncoded
-    suspend fun postBuyerOrder(
+    fun postBuyerOrder(
         @Header("access_token") token: String,
         @Field("product_id") product_id: Int,
         @Field("bid_price") bid_price: Int
