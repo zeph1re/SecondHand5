@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
@@ -51,20 +52,22 @@ class Home : Fragment() {
         initProduct()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun initProduct(){
         val productAdapter = productAdapter
 
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.product.observe(viewLifecycleOwner,{
-            if(it!=null){
-                rv_list_item.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        viewmodelproduct.product.observe(viewLifecycleOwner) {
+            if (it != null) {
+                rv_list_item.layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
                 rv_list_item.adapter = productAdapter
 
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
 
             }
-        })
+        }
         viewmodelproduct.getAllProduct()
     }
 

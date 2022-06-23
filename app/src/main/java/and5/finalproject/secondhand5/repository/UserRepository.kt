@@ -4,6 +4,7 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
+import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
@@ -57,6 +58,10 @@ class UserRepository @Inject constructor(private val service: ApiService){
 
     suspend fun getUserToken(token:String): GetAllUser{
         return service.getUserItem(token)
+    }
+
+    suspend fun updateUser(token:String, user : UpdateUserBody): GetAllUser{
+        return service.updateUser(token, user)
     }
 
 }

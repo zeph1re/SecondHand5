@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.auth.GetAllUser
+import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.repository.UserRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import javax.inject.Inject
 
 
@@ -18,6 +20,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var registerLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
     var getUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
+    var updateUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
     var userToken : MutableLiveData<String> = MutableLiveData()
 
     fun registerUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
@@ -37,6 +40,13 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         viewModelScope.launch  {
             val dataUser = userRepo.getUserToken(token)
             getUserData.value  =dataUser
+        }
+    }
+
+    fun updateUserData(token:String, user : UpdateUserBody){
+        viewModelScope.launch  {
+            val updateUser = userRepo.updateUser(token, user)
+            updateUserData.value  = updateUser
         }
     }
 
