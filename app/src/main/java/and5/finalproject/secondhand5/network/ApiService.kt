@@ -36,11 +36,15 @@ interface ApiService {
         @Path("id")id : Int
     ) : GetProductItem
 
-
     @GET("auth/user")
     suspend fun getUserItem(
         @Header("access_token")token:String
     ) : GetAllUser
 
+    @Multipart
+    @PUT("auth/user")
+    suspend fun updateUser(
+        @Header("access_token")token:String,
+    ) : GetAllUser
 
 }

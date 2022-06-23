@@ -51,11 +51,11 @@ class ProductDetail : Fragment() {
 //        Log.d("testes 1 id ", id.toString())
 
         init(id!!.toInt())
+        offerProduct()
 
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            offerProduct(id, productName, productPrice, productImage)
-        }, 1000)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//
+//        }, 1000)
 
 
     }
@@ -82,7 +82,7 @@ class ProductDetail : Fragment() {
 
     }
 
-    fun offerProduct(id: Int, productName:String, productPrice:Int, productImage:String ) {
+    fun offerProduct( ) {
                     Log.d("testes 5 productName ", productName.toString())
                     Log.d("testes 6 productPrice ", productPrice.toString())
 
