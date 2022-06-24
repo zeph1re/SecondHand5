@@ -32,6 +32,7 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
         holder.itemView.product_name.text = "${productData!![position].name.toString()}"
         holder.itemView.product_price.text = "Rp ${productData!![position].basePrice.toString()}"
         holder.itemView.product_id.text = "${productData!![position].id.toString()}"
+        holder.itemView.product_category.text = "${productData!![position].categories[0].name.toString()}"
 
         this.let {
             Glide.with(holder.itemView.context).load(productData!![position].imageUrl).into(holder.itemView.product_image)
