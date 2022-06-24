@@ -12,6 +12,7 @@
         android:icon="@drawable/ic_notifications"/>
 
     <item
+
         android:id="@+id/addProduct"
         android:title="Jual"
         android:icon="@drawable/plus"/>
@@ -26,6 +27,8 @@
         android:title="Account"
         android:icon="@drawable/ic_person">
     </item>
+
+
 
 
 

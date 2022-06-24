@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.GlobalScope
@@ -40,9 +41,11 @@ class Login : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         userManager = UserManager(requireActivity())
-        val viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
+
             if (it != ""){
+                    parent_login.visibility = View.GONE
                     view.findNavController().navigate(
                         R.id.action_login_to_account)
             }

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+
 }
 
 android {
@@ -80,6 +81,11 @@ dependencies {
 
     //library gift
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+
+
 }
 
 

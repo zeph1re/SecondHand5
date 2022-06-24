@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_home"
-            app:destination="@id/home" />
+            app:destination="@id/home"
+            app:popEnterAnim="@anim/disable_animation"
+            app:popExitAnim="@anim/disable_animation" />
     </fragment>
     <fragment
         android:id="@+id/login"
@@ -21,10 +23,17 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_login_to_register"
-            app:destination="@id/register" />
+            app:destination="@id/register"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_login_to_account"
-            app:destination="@id/account" />
+            app:destination="@id/account"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/disable_animation"
+            app:popExitAnim="@anim/disable_animation"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/profile"
