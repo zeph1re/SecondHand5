@@ -8,6 +8,7 @@ import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
 import and5.finalproject.secondhand5.model.seller.Category
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,10 +48,6 @@ interface ApiService {
         @Body user : UpdateUserBody
     ) : GetAllUser
 
-    //
-
-
-
 
     // BUYER
     @GET("buyer/product")
@@ -84,6 +81,10 @@ interface ApiService {
     suspend fun getSellerProduct(
         @Header("access_token") token: String,
     ) : List<GetSellerProductItem>
+
+    @GET ("seller/category")
+    suspend fun getSellerCategory(
+    ) : List<GetSellerCategoryItem>
 
 
 }

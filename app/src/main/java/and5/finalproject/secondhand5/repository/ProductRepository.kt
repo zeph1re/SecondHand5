@@ -4,6 +4,7 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.AddProductResponse
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +27,10 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getSellerProduct(token:String) : List<GetSellerProductItem> {
         return productApi.getSellerProduct(token)
+    }
+
+    suspend fun getSellerCategory() : List<GetSellerCategoryItem> {
+        return productApi.getSellerCategory()
     }
 
     suspend fun addBuyerOrder(

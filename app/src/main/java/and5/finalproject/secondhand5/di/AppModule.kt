@@ -18,6 +18,7 @@ object AppModule {
 
     const val BASE_URL = "https://market-final-project.herokuapp.com/"
 
+
     private val logging : HttpLoggingInterceptor
         get(){
             val httpLoggingInterceptor = HttpLoggingInterceptor()

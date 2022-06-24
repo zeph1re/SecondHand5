@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import and5.finalproject.secondhand5.repository.ProductRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
@@ -19,6 +20,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
     private var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
+    var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
     var addProductLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
 
@@ -54,6 +56,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         viewModelScope.launch{
             val dataSellerProduct = productRepository.getSellerProduct(token)
             sellerProductLiveData.value = dataSellerProduct
+        }
+    }
+
+    fun getSellerCategory(){
+        viewModelScope.launch{
+            val category = productRepository.getSellerCategory()
+            sellerCategory.value = category
         }
     }
 
