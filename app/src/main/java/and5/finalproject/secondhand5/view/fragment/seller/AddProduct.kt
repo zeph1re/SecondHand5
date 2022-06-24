@@ -59,8 +59,7 @@ class AddProduct : Fragment() {
             bundle.putString("PRODUCT_DATA", productName)
             bundle.putInt("PRODUCT_DATA", productPrice)
             bundle.putString("PRODUCT_DATA", productDesc)
-
-            Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_productPreview)
+            Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_productPreview, bundle)
         }
     }
 
