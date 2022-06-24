@@ -74,6 +74,7 @@ class ProductDetail : Fragment() {
 
             product_name.setText(it.name)
             product_price.setText("Rp ${it.basePrice.toString()}")
+            product_category.setText("${it.categories[0].name}")
             productName = it.name
             productPrice = it.basePrice
             productImage = it.imageUrl
