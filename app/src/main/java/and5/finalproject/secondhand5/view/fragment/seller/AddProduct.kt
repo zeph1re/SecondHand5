@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
@@ -38,7 +40,7 @@ class AddProduct : Fragment() {
 
     private fun backToHome() {
         btn_backtohome.setOnClickListener{
-            Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_home)
+            activity?.onBackPressed()
         }
     }
 

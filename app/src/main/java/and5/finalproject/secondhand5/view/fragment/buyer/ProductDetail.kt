@@ -46,7 +46,9 @@ class ProductDetail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         userManager = UserManager(requireActivity())
-
+        btn_back_detail_product.setOnClickListener {
+            activity?.onBackPressed()
+        }
 //        product_name.setText("tes")
 //        product_price.setText("tes")
 

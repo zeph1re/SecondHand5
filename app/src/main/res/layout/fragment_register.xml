@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_back_register"
             android:src="@drawable/ic_back"
             android:layout_width="30dp"
             android:layout_height="30dp"/>

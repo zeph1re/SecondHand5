@@ -14,7 +14,7 @@
         <ImageView
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
-            android:id="@+id/btn_backlogin"
+            android:id="@+id/btn_back_login"
             android:src="@drawable/ic_back"
             android:layout_width="30dp"
             android:layout_height="30dp"/>

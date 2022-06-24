@@ -35,6 +35,9 @@ class Profile : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         userManager = UserManager(requireActivity())
 
+        view.btn_back_profile.setOnClickListener{
+            activity?.onBackPressed()
+        }
 
         val viewModelLogin = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {

@@ -41,9 +41,12 @@ class Login : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         userManager = UserManager(requireActivity())
+        view.btn_back_login.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
-
             if (it != ""){
                     parent_login.visibility = View.GONE
                     view.findNavController().navigate(
