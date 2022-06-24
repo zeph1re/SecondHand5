@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/productCard"
-    android:backgroundTint="@android:color/transparent"
+    android:backgroundTint="@android:color/white"
     android:layout_margin="10dp"
     app:strokeColor="@color/blue_100"
     app:strokeWidth="2dp"
@@ -15,17 +15,17 @@
 
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:padding="15dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <ImageView
-                android:layout_gravity="center"
                 android:id="@+id/product_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ei" />
 
@@ -34,7 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLines="1"
                 android:text="Raiden Shogun"
+                android:textColor="@color/blue_700"
                 android:textSize="18sp" />
 
             <TextView
@@ -42,23 +44,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Hobi" />
+                android:maxLines="1"
+                android:text="Hobi"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLines="1"
                 android:text="Rp 250.000"
+                android:textColor="@color/blue_700"
                 android:textSize="18sp" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/product_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 
