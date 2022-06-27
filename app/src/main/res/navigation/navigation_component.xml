@@ -137,7 +137,11 @@
         android:id="@+id/sellerProduct"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProduct"
         android:label="fragment_seller_product"
-        tools:layout="@layout/fragment_seller_product" />
+        tools:layout="@layout/fragment_seller_product" >
+        <action
+            android:id="@+id/action_sellerProduct_to_productDetail"
+            app:destination="@id/productDetail" />
+    </fragment>
     <fragment
         android:id="@+id/sellerProductSold"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProductSold"
