@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.annotation.SuppressLint
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class Home : Fragment() {
 
     lateinit var productAdapter: ProductAdapter
+    lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,7 @@ class Home : Fragment() {
 //            Log.d("testes categories", it.categories.toString())
             view.findNavController().navigate(R.id.action_home_to_productDetail, data)
         }
+        initCategory()
         initProduct()
     }
 
@@ -71,4 +74,22 @@ class Home : Fragment() {
         viewmodelproduct.getAllProduct()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun initCategory(){
+        val categoriesAdapter = CategoriesAdapter()
+
+        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewmodelproduct.category.observe(viewLifecycleOwner) {
+            if (it != null) {
+                rv_list_category.layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+                rv_list_category.adapter = categoriesAdapter
+
+                categoriesAdapter.setProductList(it)
+                categoriesAdapter.notifyDataSetChanged()
+
+            }
+        }
+        viewmodelproduct.getAllCategory()
+    }
 }
