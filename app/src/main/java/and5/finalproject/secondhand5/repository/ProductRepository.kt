@@ -53,9 +53,13 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
 
     }
+    suspend fun getAllCategory(): List<Category>{
+        return productApi.getAllCategory()
+    }
     suspend fun getSellerCategory(): List<GetSellerCategoryItem> {
         return productApi.getSellerCategory()
     }
+
     fun addProduct(token:String, name : RequestBody, desc: RequestBody, price: RequestBody, category: RequestBody, location : RequestBody, image : MultipartBody.Part){
 
         val apiClient : Call<PostResponse> = productApi.postProduct(token, name, desc, price, category, location, image)

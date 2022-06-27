@@ -2,6 +2,7 @@ package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.repository.UserRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +30,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         }
 
     }
+
 
     fun loginUser(email : String, password: String){
         viewModelScope.launch  {

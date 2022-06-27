@@ -83,7 +83,8 @@ interface ApiService {
     suspend fun getSellerProduct(
         @Header("access_token") token: String,
     ) : List<GetSellerProductItem>
-
+    @GET("seller/category")
+    suspend fun getAllCategory() : List<Category>
     @GET ("seller/category")
     suspend fun getSellerCategory(
     ) : List<GetSellerCategoryItem>
