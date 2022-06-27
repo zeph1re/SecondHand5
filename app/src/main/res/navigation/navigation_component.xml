@@ -128,4 +128,19 @@
         android:name="and5.finalproject.secondhand5.view.fragment.seller.Notification"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/sellerProductInterest"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProductInterest"
+        android:label="fragment_seller_interest"
+        tools:layout="@layout/fragment_seller_interest" />
+    <fragment
+        android:id="@+id/sellerProduct"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProduct"
+        android:label="fragment_seller_product"
+        tools:layout="@layout/fragment_seller_product" />
+    <fragment
+        android:id="@+id/sellerProductSold"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProductSold"
+        android:label="fragment_seller_product_sold"
+        tools:layout="@layout/fragment_seller_product_sold" />
 </navigation>
