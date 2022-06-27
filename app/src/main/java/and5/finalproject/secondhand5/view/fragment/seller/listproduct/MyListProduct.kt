@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.ViewPagerAdapter
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
@@ -28,11 +29,15 @@ class MyListProduct : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initLayout()
-        detailUser()
+        val viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewModel.userToken(requireActivity()).observe(viewLifecycleOwner){
+            detailUser(it)
+        }
     }
 
-    private fun detailUser() {
+    private fun detailUser(token:String) {
         val viewModelUser = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        viewModelUser.getUserData(token)
         viewModelUser.getUserData.observe(viewLifecycleOwner){
             Log.d("namaaaa", it.fullName)
             Log.d("cityyyy", it.city)

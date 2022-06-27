@@ -3,6 +3,7 @@ package and5.finalproject.secondhand5.viewmodel
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
+import and5.finalproject.secondhand5.model.seller.PostResponse
 import and5.finalproject.secondhand5.repository.ProductRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.LiveData
@@ -10,8 +11,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.internal.immutableListOf
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,9 +23,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
-    private var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
+    var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
     var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
-    var addProductLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
+    var addProductLiveData : MutableLiveData<PostResponse> = MutableLiveData()
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
 
     val product : LiveData<List<GetProductItem>> = productLivedata
@@ -66,15 +70,17 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun addSellerProduct(
-        access_token:String,
-        product_name: String,
-        product_price: Int,
-        product_desc: String
-    ){
-      viewModelScope.launch {
-          productRepository.addProductSeller(access_token,product_name,product_price,product_desc,addProductLiveData)
-      }
+    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part){
+        viewModelScope.launch  {
+            val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
+            val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
+            val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
+            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "31")
+            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Bandung")
+
+            productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
+        }
     }
+
 
 }

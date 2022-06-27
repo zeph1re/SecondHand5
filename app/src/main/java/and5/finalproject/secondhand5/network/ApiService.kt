@@ -6,12 +6,11 @@ import and5.finalproject.secondhand5.model.auth.RegisterResponse
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
-import and5.finalproject.secondhand5.model.seller.AddProductResponse
-import and5.finalproject.secondhand5.model.seller.Category
-import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
-import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
+import and5.finalproject.secondhand5.model.seller.*
+import android.app.Application
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -68,14 +67,17 @@ interface ApiService {
 
 
     // SELLER
+    @Multipart
     @POST ("seller/product")
-    @FormUrlEncoded
-    suspend fun postProduct(
+    fun postProduct(
         @Header("access_token") token: String,
-        @Field ("name") name : String,
-        @Field ("base_price") price : Int,
-        @Field ("description") desc : String
-    ) : Call<AddProductResponse>
+        @Part  ("name") name : RequestBody,
+        @Part  ("description") description : RequestBody,
+        @Part  ("base_price") base_price : RequestBody,
+        @Part  ("category_ids") category_ids: RequestBody,
+        @Part  ("location") location: RequestBody,
+        @Part image : MultipartBody.Part
+    ) : Call<PostResponse>
 
     @GET ("seller/product")
     suspend fun getSellerProduct(

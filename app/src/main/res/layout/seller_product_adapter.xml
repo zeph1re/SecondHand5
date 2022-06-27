@@ -38,14 +38,14 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/product_category"
+                android:id="@+id/seller_product_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Hobi" />
 
             <TextView
-                android:id="@+id/product_price"
+                android:id="@+id/seller_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

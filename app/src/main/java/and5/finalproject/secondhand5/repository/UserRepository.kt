@@ -37,7 +37,6 @@ class UserRepository @Inject constructor(private val service: ApiService){
     }
 
     fun loginUser(email : String, password: String, liveToken: MutableLiveData<String>,  liveCode: MutableLiveData<String>) {
-
         val apiClient : Call<LoginResponse> = service.loginUser(email, password)
         apiClient.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(

@@ -1,11 +1,15 @@
 package and5.finalproject.secondhand5.model.seller
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Category(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String
-)
+    val name: String,
+
+):Parcelable
