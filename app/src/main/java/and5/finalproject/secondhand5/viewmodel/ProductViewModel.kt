@@ -79,13 +79,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part){
+    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image:  MultipartBody.Part){
         viewModelScope.launch  {
             val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
             val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
             val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
-            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "31")
-            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Bandung")
+            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), category)
+            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Jakarta")
 
             productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
         }

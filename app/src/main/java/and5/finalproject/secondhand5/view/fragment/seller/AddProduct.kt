@@ -36,8 +36,10 @@ class AddProduct : Fragment() {
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
-    var categoryName = mutableListOf<String>()
+    lateinit var getCategory : List<String>
+    lateinit var postCategory : String
     var categoryID = mutableListOf<Int>()
+    var categoryName = mutableListOf<String>()
     lateinit var image : MultipartBody.Part
     lateinit var uri : Uri
 
@@ -69,6 +71,9 @@ class AddProduct : Fragment() {
 
             selectedName.add(categoryAdapter.getItem(position))
             selectedID.add(categoryID[position])
+            val getID = selectedID.toString()
+            postCategory = getID.replace("[","").replace("]", "")
+            Log.d("cateeee", postCategory)
             Log.d("asdd", selectedID.toString())
 
             categoryName.remove(selectedValue)
@@ -97,7 +102,13 @@ class AddProduct : Fragment() {
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
                 if (it != ""){
                     Log.d("newtoken", it)
-                    postProduct(it, productName, productDesc, productPrice, "31", "Jakarta", image)
+                    selectedID.forEach {
+
+
+//
+                    }
+
+                    postProduct(it, productName, productDesc, productPrice, postCategory, "Jakarta", image)
                 }
             }
         }
@@ -106,7 +117,7 @@ class AddProduct : Fragment() {
 
     }
 
-    fun postProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part){
+    fun postProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part,){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
     }
@@ -120,13 +131,14 @@ class AddProduct : Fragment() {
             inputStream?.copyTo(it)
         }
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
-        image =
-            MultipartBody.Part.createFormData("Image", tempFile.name, requestBody)
-        Log.d("aset", image.toString())
+//        image =  tempFile.asRequestBody(type?.toMediaType())
+//        val requestFile = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), tempFile)
+
+        image  =    MultipartBody.Part.createFormData("image", tempFile.name, requestBody)
+//        = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), multipart.toString())
+
     }
 
-    fun dropdownAdapter(){
-    }
 
 
     fun isPermissionsAllowed(): Boolean {

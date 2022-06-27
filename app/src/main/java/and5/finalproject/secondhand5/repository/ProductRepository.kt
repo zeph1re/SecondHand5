@@ -60,7 +60,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getSellerCategory()
     }
 
-    fun addProduct(token:String, name : RequestBody, desc: RequestBody, price: RequestBody, category: RequestBody, location : RequestBody, image : MultipartBody.Part){
+    fun addProduct(token:String, name : RequestBody, desc: RequestBody, price: RequestBody, category: RequestBody, location : RequestBody, image :  MultipartBody.Part){
 
         val apiClient : Call<PostResponse> = productApi.postProduct(token, name, desc, price, category, location, image)
         apiClient.enqueue(object : Callback<PostResponse> {
