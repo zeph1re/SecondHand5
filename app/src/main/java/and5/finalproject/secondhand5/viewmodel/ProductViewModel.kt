@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.seller.Category
 import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import and5.finalproject.secondhand5.model.seller.PostResponse
@@ -26,7 +27,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
     var addProductLiveData : MutableLiveData<PostResponse> = MutableLiveData()
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
-
+    private var categoryLivedata = MutableLiveData<List<Category>>()
+    val category : LiveData<List<Category>> = categoryLivedata
     val product : LiveData<List<GetProductItem>> = productLivedata
     val detailProduct : LiveData<GetProductItem> = detailProductLivedata
     val sellerProduct : LiveData<List<GetSellerProductItem>> = sellerProductLiveData
@@ -54,6 +56,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
+    fun getAllCategory(){
+        viewModelScope.launch {
+            val datacategory = productRepository.getAllCategory()
+            categoryLivedata.value = datacategory
+        }
+    }
+
     //  Seller
     fun getSellerProduct(token:String){
         viewModelScope.launch{
@@ -69,13 +78,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part){
+    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image:  MultipartBody.Part){
         viewModelScope.launch  {
             val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
             val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
             val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
-            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "31")
-            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Bandung")
+            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), category)
+            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Jakarta")
 
             productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
         }

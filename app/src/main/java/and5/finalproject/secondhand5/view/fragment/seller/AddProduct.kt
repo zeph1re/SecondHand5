@@ -36,8 +36,10 @@ class AddProduct : Fragment() {
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
-    var categoryName = mutableListOf<String>()
+    lateinit var getCategory : List<String>
+    lateinit var postCategory : String
     var categoryID = mutableListOf<Int>()
+    var categoryName = mutableListOf<String>()
     lateinit var image : MultipartBody.Part
     lateinit var uri : Uri
 
@@ -50,7 +52,33 @@ class AddProduct : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_add_product2, container, false)
 
-        dropdownAdapter()
+        view?.dropdown_category?.hint = "Pilih Kategori"
+        view?.dropdown_category?.inputType=NULL
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
+            it.forEach {
+                categoryName.add(it.name)
+                categoryID.add(it.id)
+            }
+        }
+        viewModelProduct.getSellerCategory()
+        val categoryAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
+        view?.dropdown_category?.setAdapter(categoryAdapter)
+
+        view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+        view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
+            val selectedValue: String? = categoryAdapter.getItem(position)
+
+            selectedName.add(categoryAdapter.getItem(position))
+            selectedID.add(categoryID[position])
+            val getID = selectedID.toString()
+            postCategory = getID.replace("[","").replace("]", "")
+            Log.d("cateeee", postCategory)
+            Log.d("asdd", selectedID.toString())
+
+            categoryName.remove(selectedValue)
+            categoryID.remove(categoryID[position])
+        }
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
             view.add_product_image.setImageURI(it)
@@ -74,7 +102,13 @@ class AddProduct : Fragment() {
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
                 if (it != ""){
                     Log.d("newtoken", it)
-                    postProduct(it, productName, productDesc, productPrice, "31", "Jakarta", image)
+                    selectedID.forEach {
+
+
+//
+                    }
+
+                    postProduct(it, productName, productDesc, productPrice, postCategory, "Jakarta", image)
                 }
             }
         }
@@ -83,7 +117,7 @@ class AddProduct : Fragment() {
 
     }
 
-    fun postProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part){
+    fun postProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part,){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
     }
@@ -97,37 +131,14 @@ class AddProduct : Fragment() {
             inputStream?.copyTo(it)
         }
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
-        image =
-            MultipartBody.Part.createFormData("Image", tempFile.name, requestBody)
-        Log.d("aset", image.toString())
+//        image =  tempFile.asRequestBody(type?.toMediaType())
+//        val requestFile = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), tempFile)
+
+        image  =    MultipartBody.Part.createFormData("image", tempFile.name, requestBody)
+//        = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), multipart.toString())
+
     }
 
-    fun dropdownAdapter(){
-        view?.dropdown_category?.hint = "Pilih Kategori"
-        view?.dropdown_category?.inputType=NULL
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
-            it.forEach {
-                categoryName.add(it.name)
-                categoryID.add(it.id)
-            }
-        }
-        viewModelProduct.getSellerCategory()
-        val categoryAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
-        view?.dropdown_category?.setAdapter(categoryAdapter)
-
-        view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-        view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
-            val selectedValue: String? = categoryAdapter.getItem(position)
-
-            selectedName.add(categoryAdapter.getItem(position))
-            selectedID.add(categoryID[position])
-            Log.d("asdd", selectedID.toString())
-
-            categoryName.remove(selectedValue)
-            categoryID.remove(categoryID[position])
-        }
-    }
 
 
     fun isPermissionsAllowed(): Boolean {

@@ -65,8 +65,9 @@ interface ApiService {
 
 
     // SELLER
+    @Headers("Accept: application/json")
     @Multipart
-    @POST ("seller/product")
+    @POST ("/seller/product")
     fun postProduct(
         @Header("access_token") token: String,
         @Part  ("name") name : RequestBody,
@@ -74,14 +75,15 @@ interface ApiService {
         @Part  ("base_price") base_price : RequestBody,
         @Part  ("category_ids") category_ids: RequestBody,
         @Part  ("location") location: RequestBody,
-        @Part image : MultipartBody.Part
+        @Part image : MultipartBody.Part,
     ) : Call<PostResponse>
 
     @GET ("seller/product")
     suspend fun getSellerProduct(
         @Header("access_token") token: String,
     ) : List<GetSellerProductItem>
-
+    @GET("seller/category")
+    suspend fun getAllCategory() : List<Category>
     @GET ("seller/category")
     suspend fun getSellerCategory(
     ) : List<GetSellerCategoryItem>
