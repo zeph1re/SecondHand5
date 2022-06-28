@@ -2,6 +2,7 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.seller.Category
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,9 @@ import kotlinx.android.synthetic.main.home_categories_adapter.view.*
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
-    private var category : List<Category>? = null
+    private var category : List<GetSellerCategoryItem>? = null
 
-    fun setProductList(categoryList: List<Category>){
+    fun setProductList(categoryList: List<GetSellerCategoryItem>){
         this.category = categoryList
     }
 

@@ -1,7 +1,6 @@
 package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.*
@@ -12,7 +11,6 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Multipart
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(private val productApi : ApiService) {
@@ -22,6 +20,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
     suspend fun getAllProduct(): List<GetProductItem>{
         return productApi.getAllProduct()
     }
+
 
     suspend fun getDetailProduct(id:Int): GetProductItem {
         return productApi.getDetailProduct(id)

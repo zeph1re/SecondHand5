@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -63,7 +64,10 @@ class Home : Fragment() {
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
                 rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+                    LinearLayoutManager(requireActivity(),  LinearLayoutManager.HORIZONTAL, false)
+
+//                rv_list_item.layoutManager =
+//                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
                 rv_list_item.adapter = productAdapter
 
                 productAdapter.setProductList(it)
@@ -79,7 +83,7 @@ class Home : Fragment() {
         val categoriesAdapter = CategoriesAdapter()
 
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.category.observe(viewLifecycleOwner) {
+        viewmodelproduct.sellerCategory.observe(viewLifecycleOwner) {
             if (it != null) {
                 rv_list_category.layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -90,6 +94,6 @@ class Home : Fragment() {
 
             }
         }
-        viewmodelproduct.getAllCategory()
+        viewmodelproduct.getSellerCategory()
     }
 }
