@@ -36,6 +36,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     var userToken : MutableLiveData<String> = MutableLiveData()
 
+
+
+
     //  Buyer
     fun getAllProduct(){
         viewModelScope.launch {
@@ -90,6 +93,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
             productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
         }
     }
+
+
 
 
 }

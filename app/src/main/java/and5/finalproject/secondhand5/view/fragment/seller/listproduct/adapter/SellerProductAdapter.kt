@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.seller_product_adapter.view.*
 
 class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : RecyclerView.Adapter<SellerProductAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view)
+
     var sellerProduct : List<GetSellerProductItem>? = null
     fun setListProduct(product  : List<GetSellerProductItem>){
         this.sellerProduct= product
