@@ -1,10 +1,7 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
-import and5.finalproject.secondhand5.model.seller.Category
-import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
-import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
-import and5.finalproject.secondhand5.model.seller.PostResponse
+import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.repository.ProductRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.LiveData
@@ -23,15 +20,21 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
-    var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
-    var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
     var addProductLiveData : MutableLiveData<PostResponse> = MutableLiveData()
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
+    var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
+    var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
     private var categoryLivedata = MutableLiveData<List<Category>>()
     val category : LiveData<List<Category>> = categoryLivedata
     val product : LiveData<List<GetProductItem>> = productLivedata
     val detailProduct : LiveData<GetProductItem> = detailProductLivedata
     val sellerProduct : LiveData<List<GetSellerProductItem>> = sellerProductLiveData
+
+    var sellerOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
+    var sellerOrder : LiveData<List<GetSellerOrderItem>> = sellerOrderLiveData
+
+    var patchSellerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
+
 
     var userToken : MutableLiveData<String> = MutableLiveData()
 
@@ -64,6 +67,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     }
 
     //  Seller
+
+    fun patchSellerOrder(access_token:String, id: Int, status:String){
+        viewModelScope.launch {
+            productRepository.patchSellerOrder(access_token, id, status, patchSellerOrderLiveData)
+        }
+    }
+
     fun getSellerProduct(token:String){
         viewModelScope.launch{
             val dataSellerProduct = productRepository.getSellerProduct(token)
@@ -87,6 +97,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
             val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Jakarta")
 
             productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
+        }
+    }
+
+    fun getSellerOrder(token:String){
+        viewModelScope.launch{
+            val dataSellerOrder = productRepository.getSellerOrder(token)
+            sellerOrderLiveData.value = dataSellerOrder
         }
     }
 

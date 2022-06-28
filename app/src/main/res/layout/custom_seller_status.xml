@@ -23,11 +23,11 @@
             android:layout_margin="10dp"/>
 
         <CheckBox
+            android:id="@+id/checkbox_sold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkbox_sold"
-            android:text="Berhasil Terjual"
-            android:layout_below="@+id/tv_title"/>
+            android:layout_below="@+id/tv_title"
+            android:text="Berhasil Terjual" />
 
         <TextView
             android:layout_width="wrap_content"

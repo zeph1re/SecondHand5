@@ -17,20 +17,17 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     lateinit var userManager: UserManager
 
+
+    //Buyer
     suspend fun getAllProduct(): List<GetProductItem>{
         return productApi.getAllProduct()
     }
-
 
     suspend fun getDetailProduct(id:Int): GetProductItem {
         return productApi.getDetailProduct(id)
     }
 
-    suspend fun getSellerProduct(token:String) : List<GetSellerProductItem> {
-        return productApi.getSellerProduct(token)
-    }
-
-    suspend fun addBuyerOrder(
+    fun addBuyerOrder(
         access_token : String,
         id: Int,
         bid_price: Int,
@@ -49,9 +46,39 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
                 liveCode.postValue(null)
             }
         })
-
-
     }
+
+
+//Seller
+
+    fun patchSellerOrder(
+        access_token : String,
+        id: Int,
+        status: String,
+        liveCode: MutableLiveData<String>
+    ) {
+        val apiClient :Call<PatchOrderResponse> = productApi.responseSellerOrder(access_token,id, status)
+        apiClient.enqueue(object : Callback<PatchOrderResponse> {
+            override fun onResponse(
+                call: Call<PatchOrderResponse>,
+                response: Response<PatchOrderResponse>
+            ) {
+                liveCode.postValue(response.code().toString())
+            }
+
+            override fun onFailure(call: Call<PatchOrderResponse>, t: Throwable) {
+                liveCode.postValue(null)
+            }
+        })
+    }
+
+    suspend fun getSellerProduct(token:String) : List<GetSellerProductItem> {
+        return productApi.getSellerProduct(token)
+    }
+    suspend fun getSellerOrder(token:String) : List<GetSellerOrderItem> {
+        return productApi.getSellerOrder(token)
+    }
+
     suspend fun getAllCategory(): List<Category>{
         return productApi.getAllCategory()
     }
@@ -75,5 +102,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
             }
         })
 
-}
+    }
+
+
 }

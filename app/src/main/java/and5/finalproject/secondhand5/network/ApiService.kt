@@ -88,5 +88,18 @@ interface ApiService {
     suspend fun getSellerCategory(
     ) : List<GetSellerCategoryItem>
 
+    @GET("seller/order")
+    suspend fun getSellerOrder(
+        @Header("access_token") token : String
+    ) : List<GetSellerOrderItem>
+
+    @PATCH("seller/order/{id}")
+    @FormUrlEncoded
+    fun responseSellerOrder(
+        @Header("access_token") token : String,
+        @Path("id")id : Int,
+        @Field("status") status: String
+    ) : Call<PatchOrderResponse>
+
 
 }
