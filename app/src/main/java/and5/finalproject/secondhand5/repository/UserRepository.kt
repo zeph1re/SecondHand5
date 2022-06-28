@@ -5,14 +5,12 @@ import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 class UserRepository @Inject constructor(private val service: ApiService){
 

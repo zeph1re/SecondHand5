@@ -21,9 +21,12 @@ object AppModule {
 
     private val logging : HttpLoggingInterceptor
         get(){
+
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             return httpLoggingInterceptor.apply {
+
                 httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
             }
 
         }

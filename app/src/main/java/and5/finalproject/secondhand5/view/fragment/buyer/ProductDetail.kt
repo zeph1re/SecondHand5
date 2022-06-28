@@ -2,26 +2,21 @@ package and5.finalproject.secondhand5.view.fragment.buyer
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
+import kotlinx.android.synthetic.main.fragment_product_detail.seller_address
 import kotlin.properties.Delegates
 
 
@@ -32,6 +27,8 @@ class ProductDetail : Fragment() {
     var productPrice by Delegates.notNull<Int>()
     lateinit var productImage : String
     var productId by Delegates.notNull<Int>()
+    lateinit var productDescription : String
+    lateinit var sellerLocation : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +57,6 @@ class ProductDetail : Fragment() {
         Log.d("testes 1 id ", id.toString())
 
         init()
-        offerProduct()
 
     }
 
@@ -75,18 +71,34 @@ class ProductDetail : Fragment() {
             product_name.setText(it.name)
             product_price.setText("Rp ${it.basePrice.toString()}")
             product_category.setText("${it.categories[0].name}")
+
+            seller_name.setText("${it.user.fullName}")
+            seller_address.setText("${it.user.city}")
+            Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+            product_description.setText("${it.description}")
+
             productName = it.name
             productPrice = it.basePrice
             productImage = it.imageUrl
+            productDescription = it.description
+            sellerLocation = it.location
 
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
-//            Log.d("testes 4 id ", id.toString())
+
+
+            if (it.status!="available"){
+                buy_btn.setClickable(false);
+                buy_btn.setText("Barang sudah terjual")
+            }else{
+                buy_btn.setText("Saya Tertarik dan Ingin Nego")
+                bidProduct()
+            }
 
         })
 
     }
 
-    fun offerProduct() {
+    fun bidProduct() {
 
         buy_btn.setOnClickListener{
             val customOrderDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_buyer_offer_price, null, false)
