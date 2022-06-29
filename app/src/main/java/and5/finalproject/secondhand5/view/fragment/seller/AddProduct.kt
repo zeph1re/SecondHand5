@@ -103,8 +103,6 @@ class AddProduct : Fragment() {
                 if (it != ""){
                     Log.d("newtoken", it)
                     selectedID.forEach {
-
-
 //
                     }
 
@@ -136,7 +134,6 @@ class AddProduct : Fragment() {
 
         image  =    MultipartBody.Part.createFormData("image", tempFile.name, requestBody)
 //        = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), multipart.toString())
-
     }
 
 
