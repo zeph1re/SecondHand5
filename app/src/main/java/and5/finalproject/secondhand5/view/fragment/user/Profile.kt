@@ -63,15 +63,6 @@ class Profile : Fragment() {
         return view
     }
 
-//    @SerializedName("address")
-//    @SerializedName("city")
-//    @SerializedName("createdAt")
-//    @SerializedName("email")
-//    @SerializedName("full_name")
-//    @SerializedName("image_url")
-//    @SerializedName("password")
-//    @SerializedName("phone_number")
-//    @SerializedName("updatedAt")
 
     fun getUserData(token:String){
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
@@ -84,7 +75,6 @@ class Profile : Fragment() {
                 update_nomor.setText(it.phoneNumber.toString())
                 email = it.email
                 password = it.password
-
 
         }
     }

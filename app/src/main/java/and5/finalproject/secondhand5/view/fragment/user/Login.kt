@@ -89,7 +89,6 @@ class Login : Fragment() {
         } else {
             field_login_password.helperText = ""
         }
-
     }
 
     fun loginUser(email : String, password: String){

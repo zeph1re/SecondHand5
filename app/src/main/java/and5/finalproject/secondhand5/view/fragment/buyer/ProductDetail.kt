@@ -50,10 +50,6 @@ class ProductDetail : Fragment() {
 //        product_price.setText("tes")
 
         productId = arguments?.getInt("product_id") ?:
-//        val data = arguments?.getParcelable<GetProductItem>("data") as GetProductItem
-
-
-//        Toast.makeText( requireContext(), "$id" , Toast.LENGTH_SHORT).show()
         Log.d("testes 1 id ", id.toString())
 
         init()
