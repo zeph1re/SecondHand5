@@ -108,11 +108,7 @@
         android:id="@+id/myListProduct"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.MyListProduct"
         android:label="fragment_my_list_product"
-        tools:layout="@layout/fragment_my_list_product" >
-        <action
-            android:id="@+id/action_myListProduct_to_detailPenawar"
-            app:destination="@id/detailPenawar" />
-    </fragment>
+        tools:layout="@layout/fragment_my_list_product" />
     <fragment
         android:id="@+id/productDetail"
         android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
@@ -127,5 +123,37 @@
         android:id="@+id/notification"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.Notification"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notification_to_myListProduct"
+            app:destination="@id/myListProduct" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProductInterest"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProductInterest"
+        android:label="fragment_seller_interest"
+        tools:layout="@layout/fragment_seller_interest" >
+        <action
+            android:id="@+id/action_sellerProductInterest_to_detailPenawar"
+            app:destination="@id/detailPenawar" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProduct"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProduct"
+        android:label="fragment_seller_product"
+        tools:layout="@layout/fragment_seller_product" />
+    <fragment
+        android:id="@+id/sellerProductSold"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.listproduct.SellerProductSold"
+        android:label="fragment_seller_product_sold"
+        tools:layout="@layout/fragment_seller_product_sold" />
+    <fragment
+        android:id="@+id/userNotLogin"
+        android:name="and5.finalproject.secondhand5.view.fragment.UserNotLogin"
+        android:label="fragment_user_not_login"
+        tools:layout="@layout/fragment_user_not_login" >
+        <action
+            android:id="@+id/action_userNotLogin_to_account"
+            app:destination="@id/account" />
+    </fragment>
 </navigation>

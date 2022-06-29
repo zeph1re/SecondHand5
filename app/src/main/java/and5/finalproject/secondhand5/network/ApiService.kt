@@ -1,11 +1,9 @@
 package and5.finalproject.secondhand5.network
 
-import and5.finalproject.secondhand5.model.auth.GetAllUser
-import and5.finalproject.secondhand5.model.auth.LoginResponse
-import and5.finalproject.secondhand5.model.auth.RegisterResponse
-import and5.finalproject.secondhand5.model.auth.UpdateUserBody
+import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.model.seller.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,6 +42,11 @@ interface ApiService {
         @Header("access_token")token:String,
         @Body user : UpdateUserBody
     ) : GetAllUser
+
+    @GET ("/notification")
+    suspend fun getNotification(
+        @Header("access_token") token: String
+    ) : List<GetNotificationItem>
 
 
     // BUYER

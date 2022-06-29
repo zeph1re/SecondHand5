@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/successtext"
-        android:text="aaaaaa"
+        android:text="accepted"
         android:textColor="@color/green"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
