@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.ViewPagerAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
@@ -17,16 +18,19 @@ import kotlinx.android.synthetic.main.fragment_my_list_product.*
 
 class MyListProduct : Fragment() {
 
-    lateinit var userToken : String
+    lateinit var userManager: UserManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-
-        return inflater.inflate(R.layout.fragment_my_list_product, container, false)
+        userManager = UserManager(requireActivity())
+        return if (userManager.userToken.toString() != "") {
+            inflater.inflate(R.layout.fragment_my_list_product, container, false)
+        } else {
+            inflater.inflate(R.layout.fragment_user_not_login, container, false)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

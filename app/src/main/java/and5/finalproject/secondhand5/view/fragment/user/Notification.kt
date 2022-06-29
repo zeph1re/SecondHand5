@@ -12,6 +12,7 @@ import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_notification.*
@@ -26,13 +27,16 @@ class Notification : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         userManager = UserManager(requireActivity())
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        return if (userManager.userToken.toString() != "") {
+            inflater.inflate(R.layout.fragment_notification, container, false)
+        } else {
+            inflater.inflate(R.layout.fragment_user_not_login, container, false)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+            initNotification()
     }
 
     private fun initNotification() {
@@ -42,11 +46,10 @@ class Notification : Fragment() {
         userManager.userToken.asLiveData().observe(viewLifecycleOwner){
             viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    rv_list_offered.layoutManager =
-                        LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-                    rv_list_offered.adapter = notificationAdapter()
+                    rv_list_offered.layoutManager = GridLayoutManager(requireActivity(), 2)
+                    rv_list_offered.adapter = notificationAdapter
 
-                    notificationAdapter.setProductList(it)
+                    notificationAdapter.setNotificationList(it)
                     notificationAdapter.notifyDataSetChanged()
 
                 }
