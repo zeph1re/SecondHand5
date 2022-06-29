@@ -20,7 +20,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     //Buyer
     suspend fun getAllProduct(): List<GetProductItem>{
-        return productApi.getAllProduct()
+        return productApi.getAllProduct("available")
     }
 
     suspend fun getDetailProduct(id:Int): GetProductItem {
@@ -76,7 +76,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getSellerProduct(token)
     }
     suspend fun getSellerOrder(token:String) : List<GetSellerOrderItem> {
-        return productApi.getSellerOrder(token)
+        return productApi.getSellerOrder(token, "pending")
     }
 
     suspend fun getAllCategory(): List<Category>{
