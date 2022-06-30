@@ -51,7 +51,9 @@ interface ApiService {
 
     // BUYER
     @GET("buyer/product")
-    suspend fun getAllProduct() : List<GetProductItem>
+    suspend fun getAllProduct(
+        @Query("status") status : String
+    ) : List<GetProductItem>
 
     @GET("buyer/product/{id}/")
     suspend fun getDetailProduct(
@@ -93,7 +95,8 @@ interface ApiService {
 
     @GET("seller/order")
     suspend fun getSellerOrder(
-        @Header("access_token") token : String
+        @Header("access_token") token : String,
+        @Query("status") status : String
     ) : List<GetSellerOrderItem>
 
     @PATCH("seller/order/{id}")
