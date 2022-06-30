@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,7 +21,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
-    var addProductLiveData : MutableLiveData<PostResponse> = MutableLiveData()
+    var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
+
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
     var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
@@ -58,7 +60,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     fun postBuyerOrder(access_token:String, id: Int, bid_price:Int){
         viewModelScope.launch {
-            productRepository.addBuyerOrder(access_token, id, bid_price, addBuyerOrderLiveData)
+            val postProduct = productRepository.addBuyerOrder(access_token, id, bid_price, addBuyerOrderLiveData)
         }
     }
 
@@ -97,9 +99,10 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
             val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
             val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
             val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), category)
-            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "Jakarta")
+            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), location)
 
-            productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image)
+            productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image, responseCodeAddProduct)
+
         }
     }
 

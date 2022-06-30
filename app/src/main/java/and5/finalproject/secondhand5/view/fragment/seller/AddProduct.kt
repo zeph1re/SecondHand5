@@ -2,14 +2,18 @@ package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,39 +25,143 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.postDelayed
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.sql.Types.NULL
+
 
 class AddProduct : Fragment() {
 
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
-    lateinit var getCategory : List<String>
     lateinit var postCategory : String
     var categoryID = mutableListOf<Int>()
     var categoryName = mutableListOf<String>()
     lateinit var image : MultipartBody.Part
-    lateinit var uri : Uri
+    lateinit var productName : String
+    lateinit var productPrice : String
+    lateinit var productDesc  : String
+    lateinit var imageCheck : String
+    lateinit var arrayAdapter: ArrayAdapter<String>
+    var typeCheck : String? = null
+    private var customToast : CustomToast = CustomToast()
+    lateinit var text : String
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        userManager = UserManager(requireActivity())
+
 
         val view = inflater.inflate(R.layout.fragment_add_product2, container, false)
+        userManager = UserManager(requireActivity())
+        imageCheck = ""
 
-        view?.dropdown_category?.hint = "Pilih Kategori"
-        view?.dropdown_category?.inputType=NULL
+        view?.dropdown_category?.hint = "Select Category"
+        getCategory()
+        arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
+        view?.dropdown_category?.setAdapter(arrayAdapter)
+        view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+        arrayAdapter.notifyDataSetChanged()
+        view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
+            val selectedValue: String? = arrayAdapter.getItem(position)
+            selectedName.add(arrayAdapter.getItem(position))
+            selectedID.add(categoryID[position])
+            categoryName.remove(selectedValue)
+            categoryID.remove(categoryID[position])
+            val getID = selectedID.toString()
+            postCategory = getID.replace("[","").replace("]", "")
+            Log.d("cateeee", postCategory)
+            Log.d("asdd", selectedID.toString())
+        }
+
+        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            warning_image.text = ""
+            it?.let {
+                getContent(it)
+            }
+            if (typeCheck !=null){
+                view.add_product_image.setImageURI(it)
+            }
+
+            if (typeCheck == null){
+                imageCheck = "false"
+                warning_image.visibility = View.VISIBLE
+                Handler(Looper.getMainLooper()).postDelayed({
+                    warning_image.visibility = View.GONE
+                }, 2000)
+                warning_image.text = "File format not supported"
+            }
+        }
+
+        view.add_product_image.setOnClickListener {
+            if (askForPermissions()) {
+                getContent.launch("image/*")
+            }
+
+        }
+
+        view.reset_category.setOnClickListener {
+            view.dropdown_category.setText("")
+            selectedID.clear()
+            categoryName.clear()
+            getCategory()
+            arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
+            view?.dropdown_category?.setAdapter(arrayAdapter)
+            view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+            view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
+                val selectedValue: String? = arrayAdapter.getItem(position)
+                selectedName.add(arrayAdapter.getItem(position))
+                selectedID.add(categoryID[position])
+                categoryName.remove(selectedValue)
+                categoryID.remove(categoryID[position])
+                val getID = selectedID.toString()
+                postCategory = getID.replace("[","").replace("]", "")
+                Log.d("cateeee", postCategory)
+                Log.d("asdd", selectedID.toString())
+            }
+
+        }
+
+
+        view.add_btn.setOnClickListener {
+            productName = view.add_product_name.text.toString()
+            productPrice = view.add_product_price.text.toString()
+            productDesc = view.add_product_desc.text.toString()
+            check()
+
+            if (productName.isNotEmpty() && productPrice.isNotEmpty() && productDesc.isNotEmpty()
+                && text_field_category.isNotEmpty() && imageCheck == "true") {
+                view?.post_loading?.visibility = View.VISIBLE
+                Handler(Looper.getMainLooper()).postDelayed({
+                    view?.post_loading?.visibility = View.GONE
+                }, 1500)
+
+                observe()
+
+            }
+        }
+
+    return view
+
+    }
+
+    fun getCategory(){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
             it.forEach {
@@ -62,60 +170,108 @@ class AddProduct : Fragment() {
             }
         }
         viewModelProduct.getSellerCategory()
-        val categoryAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
-        view?.dropdown_category?.setAdapter(categoryAdapter)
+    }
+    fun observe(){
 
-        view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-        view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
-            val selectedValue: String? = categoryAdapter.getItem(position)
+        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+            if (token!= ""){
+                val userViewModel =ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                    userViewModel.getUserData(token)
+                    userViewModel.getUserData.observe(viewLifecycleOwner) {  loc ->
 
-            selectedName.add(categoryAdapter.getItem(position))
-            selectedID.add(categoryID[position])
-            val getID = selectedID.toString()
-            postCategory = getID.replace("[","").replace("]", "")
-            Log.d("cateeee", postCategory)
-            Log.d("asdd", selectedID.toString())
+                        postProduct(
+                            token,
+                            productName,
+                            productDesc,
+                            productPrice.toInt(),
+                            postCategory,
+                            loc.city,
+                            image
+                        )
 
-            categoryName.remove(selectedValue)
-            categoryID.remove(categoryID[position])
-        }
+                        val productViewModel =ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                        productViewModel.responseCodeAddProduct.observe(viewLifecycleOwner){ code->
+                            Log.d("codex", code)
+                            if (code == "201"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Success"
+                                    customToast.successPostToast(requireActivity(), text)
+                                    view?.findNavController()?.navigate(R.id.sellerProduct)
+                                },2000)
 
-        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            view.add_product_image.setImageURI(it)
-            it?.let {
-                getContent(it)
-            }
-        }
 
-        view.add_product_image.setOnClickListener {
-            if (askForPermissions()) {
-                getContent.launch("image/*")
-            }
-        }
+                            }else if ( code == "400"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Cant Post, Max 5 Product"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                },2000)
+                            }else if ( code == "403"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "You Are Not Login or Access Token is Wrong"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                },2000)
 
-        view.add_btn.setOnClickListener {
-            val productName = view.add_product_name.text.toString()
-            val productPrice = view.add_product_price.text.toString().toInt()
-            val productDesc = view.add_product_desc.text.toString()
+                            }else if ( code == "500"){
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Internal Service Error"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                },2000)
 
-            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
-                if (it != ""){
-                    Log.d("newtoken", it)
-                    selectedID.forEach {
-//
+                            }
+                        }
                     }
-
-                    postProduct(it, productName, productDesc, productPrice, postCategory, "Jakarta", image)
-                }
             }
         }
+    }
 
-    return view
+    fun check(){
+        if (productName.isEmpty()){
+            field_product_name.helperText = "Required"
+            add_product_name.error = "Product name cannot be empty"
+        } else{
+            field_product_name.helperText = ""
+        }
+
+        if (productPrice.isEmpty()){
+            field_product_price.helperText = "Required"
+            add_product_price.error = "Product price cannot be empty"
+        } else {
+            field_product_price.helperText = ""
+        }
+
+        val category = dropdown_category.text.toString()
+        if (category.isEmpty()){
+            text_field_category.helperText = "Required"
+            dropdown_category.error = "Product category cannot be empty"
+        } else {
+            text_field_category.helperText = ""
+        }
+
+
+        if (productDesc.isEmpty()){
+            field_product_desc.helperText = "Required"
+            add_product_desc.error = "Product description cannot be empty"
+        } else {
+            field_product_desc.helperText = ""
+        }
+
+        if (imageCheck != "true"){
+            warning_image.visibility = View.VISIBLE
+            warning_image.text = "Please add the image!"
+        }
 
     }
 
-    fun postProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image: MultipartBody.Part,){
+    fun postProduct(
+        token: String,
+        name: String,
+        desc: String,
+        price: Int,
+        category: String,
+        location: String,
+        image: MultipartBody.Part
+    ){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
     }
@@ -123,17 +279,32 @@ class AddProduct : Fragment() {
     fun getContent(it : Uri){
         val contentResolver = requireActivity().contentResolver
         val type = contentResolver.getType(it)
-        val tempFile = File.createTempFile("temp-", null, null)
+        val getType = type.toString()
+        if (getType == "image/png"){
+            typeCheck = ".png"
+        }else if (getType == "image/jpg"){
+            typeCheck = ".jpg"
+        }else if (getType == "image/jpeg"){
+            typeCheck = ".jpeg"
+        }else {
+            typeCheck = null
+        }
+        val outputDir = context!!.cacheDir // context being the Activity pointer
+        val tempFile = File.createTempFile("temp-", typeCheck, outputDir)
+        var customName = tempFile.name.toString()
+        val regex = Regex("[0-9]")
+        var removeTempName = customName.replace("temp-", "Product Image")
+        var postCustomName = regex.replace(removeTempName, "")
+        Log.d("logdir", postCustomName.toString())
         val inputStream = contentResolver.openInputStream(it)
         tempFile.outputStream().use {
             inputStream?.copyTo(it)
         }
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
-//        image =  tempFile.asRequestBody(type?.toMediaType())
-//        val requestFile = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), tempFile)
+        image  =    MultipartBody.Part.createFormData("image", postCustomName, requestBody)
+        imageCheck = "true"
+        Log.d("cekk", imageCheck)
 
-        image  =    MultipartBody.Part.createFormData("image", tempFile.name, requestBody)
-//        = RequestBody.create("multipart/from-data".toMediaTypeOrNull(), multipart.toString())
     }
 
 
@@ -178,7 +349,7 @@ class AddProduct : Fragment() {
                     // send to app settings if permission is denied permanently
                     val intent = Intent()
                     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    val uri = Uri.fromParts("package", "com.binar.challengechapterenam", null)
+                    val uri = Uri.fromParts("package", "and5.finalproject.secondhand5", null)
                     intent.data = uri
                     startActivity(intent)
                 })

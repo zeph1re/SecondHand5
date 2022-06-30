@@ -44,7 +44,6 @@ class SellerProductInterest : Fragment() {
         }
 
         var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
         rv_seller_order.adapter = sellerOrderAdapter
         rv_seller_order.layoutManager = layoutManager
 
@@ -61,7 +60,6 @@ class SellerProductInterest : Fragment() {
             if(it != null){
                 sellerOrderAdapter.setListProduct(it)
                 sellerOrderAdapter.notifyDataSetChanged()
-
             }
         }
     }

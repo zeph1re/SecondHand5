@@ -86,7 +86,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getSellerCategory()
     }
 
-    fun addProduct(token:String, name : RequestBody, desc: RequestBody, price: RequestBody, category: RequestBody, location : RequestBody, image :  MultipartBody.Part){
+    fun addProduct(token:String, name : RequestBody, desc: RequestBody, price: RequestBody, category: RequestBody, location : RequestBody, image :  MultipartBody.Part, liveCode: MutableLiveData<String>){
 
         val apiClient : Call<PostResponse> = productApi.postProduct(token, name, desc, price, category, location, image)
         apiClient.enqueue(object : Callback<PostResponse> {
@@ -94,11 +94,11 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
                 call: Call<PostResponse>,
                 response: Response<PostResponse>
             ) {
-
+                liveCode.postValue(response.code().toString())
             }
 
             override fun onFailure(call: Call<PostResponse>, t: Throwable) {
-
+                liveCode.postValue(null)
             }
         })
 

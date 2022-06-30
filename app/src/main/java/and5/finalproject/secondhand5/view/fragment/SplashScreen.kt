@@ -23,8 +23,6 @@ class SplashScreen : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
 
-
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     view.findNavController().navigate(
                         R.id.action_splashScreen_to_home, null,
@@ -34,7 +32,6 @@ class SplashScreen : Fragment() {
                                 true
                             ).build())
                 },3000)
-
 
 
         return view
