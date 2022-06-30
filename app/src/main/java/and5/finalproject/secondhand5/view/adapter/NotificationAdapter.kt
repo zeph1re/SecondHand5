@@ -2,6 +2,7 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,8 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolde
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        Log.d("notif", notification!![position].imageUrl)
         holder.itemView.notification_product_name.text = "${notification!![position].productId.toString()}"
         holder.itemView.notification_created_at.text = "${notification!![position].transactionDate.toString()}"
         holder.itemView.notifiation_product_price.text = "Rp. ${notification!![position].bidPrice.toString()}"

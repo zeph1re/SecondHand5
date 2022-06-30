@@ -15,7 +15,7 @@
         android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_offered"
+        android:id="@+id/rv_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/notification_tv"

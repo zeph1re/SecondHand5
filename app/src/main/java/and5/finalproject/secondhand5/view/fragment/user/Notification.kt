@@ -10,6 +10,7 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
 import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -46,8 +47,9 @@ class Notification : Fragment() {
         userManager.userToken.asLiveData().observe(viewLifecycleOwner){
             viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    rv_list_offered.layoutManager = GridLayoutManager(requireActivity(), 2)
-                    rv_list_offered.adapter = notificationAdapter
+
+                    rv_notification.layoutManager = GridLayoutManager(requireActivity(), 2)
+                    rv_notification.adapter = notificationAdapter
 
                     notificationAdapter.setNotificationList(it)
                     notificationAdapter.notifyDataSetChanged()
