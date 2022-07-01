@@ -22,7 +22,6 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
     var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
-
     var addBuyerOrderLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
     var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()

@@ -30,6 +30,7 @@ import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -38,6 +39,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import kotlin.properties.Delegates
 
 
 class AddProduct : Fragment() {
@@ -57,8 +59,7 @@ class AddProduct : Fragment() {
     var typeCheck : String? = null
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
-
-
+    var post by Delegates.notNull<Boolean>()
 
 
     override fun onCreateView(
@@ -101,11 +102,9 @@ class AddProduct : Fragment() {
 
             if (typeCheck == null){
                 imageCheck = "false"
-                warning_image.visibility = View.VISIBLE
-                Handler(Looper.getMainLooper()).postDelayed({
-                    warning_image.visibility = View.GONE
-                }, 2000)
-                warning_image.text = "File format not supported"
+                view.warning_image.visibility = View.VISIBLE
+
+                view.warning_image.text = "File format not supported"
             }
         }
 
@@ -151,7 +150,7 @@ class AddProduct : Fragment() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.post_loading?.visibility = View.GONE
                 }, 1500)
-
+                post = true
                 observe()
 
             }
@@ -179,25 +178,30 @@ class AddProduct : Fragment() {
                 val userViewModel =ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
                     userViewModel.getUserData(token)
                     userViewModel.getUserData.observe(viewLifecycleOwner) {  loc ->
-
-                        postProduct(
-                            token,
-                            productName,
-                            productDesc,
-                            productPrice.toInt(),
-                            postCategory,
-                            loc.city,
-                            image
-                        )
-
                         val productViewModel =ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                        if (post) {
+                            postProduct(
+                                token,
+                                productName,
+                                productDesc,
+                                productPrice.toInt(),
+                                postCategory,
+                                loc.city,
+                                image
+                            )
+                            post = false
+                        }
+
+
+
+
                         productViewModel.responseCodeAddProduct.observe(viewLifecycleOwner){ code->
                             Log.d("codex", code)
                             if (code == "201"){
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     text = "Success"
                                     customToast.successPostToast(requireActivity(), text)
-                                    view?.findNavController()?.navigate(R.id.sellerProduct)
+                                    view?.findNavController()?.navigate(R.id.myListProduct)
                                 },2000)
 
 

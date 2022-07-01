@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class Home : Fragment() {
 
     lateinit var productAdapter: ProductAdapter
-    lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

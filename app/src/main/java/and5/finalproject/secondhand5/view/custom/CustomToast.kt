@@ -70,8 +70,8 @@ class CustomToast {
 
     fun successPostToast(context: Context?, msg: String?) {
         val inflater = LayoutInflater.from(context)
-        val layout: View = inflater.inflate(R.layout.error_toast, null)
-        val text = layout.findViewById<View>(R.id.errortext) as? TextView
+        val layout: View = inflater.inflate(R.layout.success_toast, null)
+        val text = layout.findViewById<View>(R.id.successtext) as? TextView
         text?.text = msg
         text?.setPadding(20, 0, 20, 0)
         text?.textSize = 22f
@@ -79,7 +79,7 @@ class CustomToast {
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 470)
         toast.duration = Toast.LENGTH_SHORT
         layout.setBackgroundColor(Color.DKGRAY)
-        val image = layout.findViewById<ImageView>(R.id.fail_image)
+        val image = layout.findViewById<ImageView>(R.id.success_image)
         val imageChange =image.layoutParams
         imageChange.height = 250
         imageChange.width = 220
