@@ -19,7 +19,7 @@
             android:text="Perbaharui status penjualan produkmu"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
             android:layout_margin="10dp"/>
 
         <CheckBox
@@ -27,14 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
-            android:text="Berhasil Terjual" />
+            android:text="Berhasil Terjual"
+            android:fontFamily="@font/poppins"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@id/tv_sold"
             android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_light"
             android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_below="@id/checkbox_sold"/>
 
         <CheckBox
@@ -42,6 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/checkbox_failed"
             android:text="Batalkan Transaksi"
+            android:fontFamily="@font/poppins"
             android:layout_below="@id/tv_sold"/>
 
         <TextView
@@ -49,7 +54,10 @@
             android:layout_height="wrap_content"
             android:id="@id/tv_failed"
             android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_light"
             android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_below="@id/checkbox_failed"/>
     </RelativeLayout>
 

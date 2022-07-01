@@ -16,16 +16,21 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Yeay kamu berhasil mendapat harga yang sesuai"
+            android:text="Yeay!! kamu berhasil mendapat harga yang sesuai"
             android:layout_marginVertical="10dp"
-            android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textColor="@color/blue_700"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:text="Segera hubungi pembeli melalui whatsapp untuk transaksi selanjutnya"
-            android:textSize="18sp"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_light"
+            android:layout_marginHorizontal="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -34,15 +39,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Match"
-            android:textSize="18sp" />
+            android:text="Product Match!!"
+            android:textSize="16sp"
+            android:textColor="@color/blue_700"
+            android:fontFamily="@font/poppins_extrabold"/>
 
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginVertical="15dp"
+            android:layout_marginBottom="15dp"
             app:cardCornerRadius="10dp"
             app:strokeWidth="2dp"
             app:strokeColor="@color/blue_100"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -51,17 +59,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_margin="5dp"
                 android:padding="10dp">
 
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
+                    android:layout_marginStart="30dp"
                     android:src="@drawable/ei" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center_vertical"
                     android:orientation="vertical">
 
 
@@ -70,14 +81,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama Pembeli"
-                        android:textSize="24sp" />
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/poppins_bold"/>
 
                     <TextView
                         android:id="@+id/buyer_address_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kota"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"/>
 
 
                 </LinearLayout>
@@ -88,30 +102,33 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginVertical="15dp"
+            android:layout_marginBottom="15dp"
             app:cardCornerRadius="10dp"
             app:strokeWidth="2dp"
             app:strokeColor="@color/blue_100"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_marginVertical="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
                 <ImageView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/ei" />
+                    android:src="@drawable/ei"
+                    android:layout_marginStart="30dp"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="20dp">
 
 
                     <TextView
@@ -119,21 +136,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama Barang"
-                        android:textSize="24sp" />
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:maxLines="1" />
 
                     <TextView
                         android:id="@+id/product_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp 250.000"
-                        android:textSize="16sp" />
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins"
+                        android:layout_marginBottom="10dp"/>
 
                     <TextView
                         android:id="@+id/product_offered_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp 200.000"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins"/>
 
 
                 </LinearLayout>
@@ -146,9 +168,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_call_whatsapp"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
             android:layout_alignParentBottom="true"
             android:text="Hubungi Via Whatsapp"
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins_extrabold"
             android:layout_marginTop="15dp"
             android:background="@drawable/custom_button"
             android:textColor="@color/blue_100"

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/nama_kategori"
-        android:text="Nama Kategori"
-        android:padding="20dp"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nama_kategori"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </TextView>
+    android:fontFamily="@font/poppins"
+    android:padding="20dp"
+    android:text="Nama Kategori"
+    android:textSize="24sp"></TextView>
 
 

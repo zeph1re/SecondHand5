@@ -22,7 +22,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/blue_100"
             android:textSize="17sp"
+            android:fontFamily="@font/poppins"
             android:text="Harga tawarmu berhasil dikirim ke penjual" />
+
 
         <ImageView
             android:id="@+id/btn_dismiss"
