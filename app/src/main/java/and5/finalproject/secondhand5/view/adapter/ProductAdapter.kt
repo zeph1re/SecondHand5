@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
-import kotlin.math.log
 
 class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
@@ -31,7 +30,7 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+      
         if(productData!![position].name != null){
             holder.itemView.product_name.text = "${productData!![position].name.toString()}"
         }else{

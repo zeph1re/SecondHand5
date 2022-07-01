@@ -201,6 +201,7 @@
                         android:textSize="18sp" />
 
 
+
                     <ImageView
                         android:id="@+id/add_product_image"
                         android:layout_width="150dp"

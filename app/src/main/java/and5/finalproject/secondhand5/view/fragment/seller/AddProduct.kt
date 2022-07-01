@@ -60,6 +60,7 @@ class AddProduct : Fragment() {
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
     var post by Delegates.notNull<Boolean>()
+    lateinit var sizeCheck: String
 
 
     override fun onCreateView(
@@ -93,17 +94,23 @@ class AddProduct : Fragment() {
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
             warning_image.text = ""
+
             it?.let {
+
                 getContent(it)
             }
-            if (typeCheck !=null){
+            if (typeCheck !=null && sizeCheck=="<1mb"){
                 view.add_product_image.setImageURI(it)
             }
 
+            if (sizeCheck==">1mb"){
+                imageCheck = "false"
+                view.warning_image.visibility = View.VISIBLE
+                view.warning_image.text = "Image cannot be bigger than 1MB"
+            }
             if (typeCheck == null){
                 imageCheck = "false"
                 view.warning_image.visibility = View.VISIBLE
-
                 view.warning_image.text = "File format not supported"
             }
         }
@@ -281,6 +288,7 @@ class AddProduct : Fragment() {
     }
 
     fun getContent(it : Uri){
+
         val contentResolver = requireActivity().contentResolver
         val type = contentResolver.getType(it)
         val getType = type.toString()
@@ -303,13 +311,25 @@ class AddProduct : Fragment() {
         val inputStream = contentResolver.openInputStream(it)
         tempFile.outputStream().use {
             inputStream?.copyTo(it)
+
         }
+
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
+        val getImageSize = requestBody.contentLength().toDouble()
+        val convertToMB = getImageSize/1000000
+        if (convertToMB > 1 ){
+            sizeCheck = ">1mb"
+        }else{
+            sizeCheck = "<1mb"
+        }
+        Log.d("imagesize", convertToMB.toString())
         image  =    MultipartBody.Part.createFormData("image", postCustomName, requestBody)
         imageCheck = "true"
         Log.d("cekk", imageCheck)
 
     }
+
+
 
 
 
