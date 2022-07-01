@@ -164,6 +164,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/rectangleedittext"
                     android:hint="Produk ini dapat membantu mencari anggota yang hilang"
+                    android:fontFamily="@font/poppins"
                     android:textSize="16sp">
 
                 </EditText>
@@ -240,6 +241,7 @@
                     android:backgroundTint="@color/blue_300"
                     android:layout_marginEnd="10dp"
                     android:text="Preview"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/white"/>
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -250,6 +252,7 @@
                     android:background="@drawable/rounded_button"
                     android:backgroundTint="@color/blue_300"
                     android:text="Post"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/white"/>
             </LinearLayout>
 
