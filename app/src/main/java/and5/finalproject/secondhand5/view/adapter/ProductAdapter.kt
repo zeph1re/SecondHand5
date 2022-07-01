@@ -52,12 +52,10 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
             holder.itemView.product_category.text = "null"
         }
 
-        if(productData!![position].categories[0].name.isNotEmpty()){
-//            Log.d("testes", productData!![position].categories[0].name.toString())
-            holder.itemView.product_category.text = "${productData!![position].categories[0].name.toString()}"
-        }else{
-            holder.itemView.product_category.text = "null"
-
+        for(i in productData!!.indices){
+            for(j in productData!![i].categories.indices){
+                holder.itemView.product_category.text = "${productData!![i].categories[j].name.toString()}"
+            }
         }
 
         if(productData!![position].imageUrl != null){

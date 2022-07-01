@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -64,7 +65,7 @@ class Home : Fragment() {
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
                 rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(),  LinearLayoutManager.HORIZONTAL, false)
+                    GridLayoutManager(requireActivity(),  2, RecyclerView.VERTICAL, false)
 
 //                rv_list_item.layoutManager =
 //                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
