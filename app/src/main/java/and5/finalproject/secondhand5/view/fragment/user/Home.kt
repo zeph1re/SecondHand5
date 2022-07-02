@@ -63,6 +63,7 @@ class Home : Fragment() {
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
+
                 rv_list_item.layoutManager =
                     GridLayoutManager(requireActivity(),  2, RecyclerView.VERTICAL, false)
 

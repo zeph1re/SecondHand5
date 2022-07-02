@@ -51,6 +51,47 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
 //Seller
 
+    suspend fun sellerDeleteProduct(
+        access_token : String,
+        id: Int,
+        liveCode: MutableLiveData<String>
+    ) : GetSellerProductItem{
+        return productApi.deleteProduct(access_token, id)
+    }
+
+    suspend fun getSellerDetailProduct(
+        access_token : String,
+        id: Int,
+    ) : GetSellerProductItem{
+        return productApi.getSellerDetailProduct(access_token, id)
+    }
+
+    fun updateSellerProduct(
+        access_token : String,
+        id : Int,
+        name : RequestBody,
+        desc: RequestBody,
+        price: RequestBody,
+        category: RequestBody,
+        location : RequestBody,
+        liveCode: MutableLiveData<String>
+    ){
+        val apiClient : Call<UpdateProductResponse> = productApi.updateProduct(access_token,id, name, desc, price, category, location)
+        apiClient.enqueue(object :Callback<UpdateProductResponse>{
+            override fun onResponse(
+                call: Call<UpdateProductResponse>,
+                response: Response<UpdateProductResponse>
+            ) {
+                liveCode.postValue(response.code().toString())
+            }
+
+            override fun onFailure(call: Call<UpdateProductResponse>, t: Throwable) {
+                liveCode.postValue(null)
+            }
+
+        })
+    }
+
     fun patchSellerOrder(
         access_token : String,
         id: Int,

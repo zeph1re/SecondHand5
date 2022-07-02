@@ -32,6 +32,8 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
+
         if(productData!![position].name != null){
             holder.itemView.product_name.text = "${productData!![position].name.toString()}"
         }else{
