@@ -5,8 +5,11 @@ import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.model.auth.LoginResponse
 import and5.finalproject.secondhand5.model.auth.RegisterResponse
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
+import and5.finalproject.secondhand5.model.seller.PostResponse
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,8 +60,22 @@ class UserRepository @Inject constructor(private val service: ApiService){
         return service.getUserItem(token)
     }
 
-    suspend fun updateUser(token:String, user : UpdateUserBody): GetAllUser{
-        return service.updateUser(token, user)
-    }
+    fun updateUser(token:String, fullName : RequestBody, email : RequestBody, password: RequestBody,  number: RequestBody, address : RequestBody, image :  MultipartBody.Part, city: RequestBody, code : MutableLiveData<String> ) {
+        val apiClient : Call<GetAllUser> = service.updateUser(token, fullName, email, password, number, address, image, city)
+        apiClient.enqueue(object : Callback<GetAllUser> {
+            override fun onResponse(
+                call: Call<GetAllUser>,
+                response: Response<GetAllUser>
+            ) {
+                code.postValue(response.code().toString())
+            }
 
+            override fun onFailure(call: Call<GetAllUser>, t: Throwable) {
+                code.postValue(null)
+            }
+        })
+    }
 }
+
+
+

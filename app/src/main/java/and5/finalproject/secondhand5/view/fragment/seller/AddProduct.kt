@@ -54,13 +54,13 @@ class AddProduct : Fragment() {
     lateinit var productName : String
     lateinit var productPrice : String
     lateinit var productDesc  : String
-    lateinit var imageCheck : String
     lateinit var arrayAdapter: ArrayAdapter<String>
-    var typeCheck : String? = null
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
     var post by Delegates.notNull<Boolean>()
     lateinit var sizeCheck: String
+    var typeCheck : String? = null
+    lateinit var imageCheck : String
 
 
     override fun onCreateView(
@@ -92,6 +92,10 @@ class AddProduct : Fragment() {
             Log.d("asdd", selectedID.toString())
         }
 
+        view.btn_backtohome.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
             warning_image.text = ""
 
@@ -114,6 +118,7 @@ class AddProduct : Fragment() {
                 view.warning_image.text = "File format not supported"
             }
         }
+
 
         view.add_product_image.setOnClickListener {
             if (askForPermissions()) {

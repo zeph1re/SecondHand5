@@ -11,6 +11,9 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import javax.inject.Inject
 
@@ -21,7 +24,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var registerLiveData : SingeLiveEvent<String> = SingeLiveEvent ()
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
     var getUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
-    var updateUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
+    var updateUserData :  SingeLiveEvent<String>  = SingeLiveEvent ()
     var userToken : MutableLiveData<String> = MutableLiveData()
 
     fun registerUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
@@ -45,10 +48,16 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         }
     }
 
-    fun updateUserData(token:String, user : UpdateUserBody){
+    fun updateUserData(token:String, fullName : String, email : String, password: String, number: Int, address : String, image :  MultipartBody.Part, city: String ){
         viewModelScope.launch  {
-            val updateUser = userRepo.updateUser(token, user)
-            updateUserData.value  = updateUser
+            val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fullName)
+            val partEmail= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
+            val partPassword= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), password)
+            val partNumber = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), number.toString())
+            val partAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), address)
+            val partCity = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), city)
+
+            userRepo.updateUser(token, partName, partEmail, partPassword, partNumber, partAddress, image, partCity, updateUserData )
         }
     }
 
