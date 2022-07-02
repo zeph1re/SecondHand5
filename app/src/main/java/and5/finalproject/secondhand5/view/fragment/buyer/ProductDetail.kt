@@ -119,7 +119,7 @@ class ProductDetail : Fragment() {
                         userManager.userToken.asLiveData().observe(viewLifecycleOwner){
                             if(it!=null){
                                 Log.d("testes token", it)
-                                viewModelProduct.addBuyerOrderLiveData.observe(viewLifecycleOwner,{
+                                viewModelProduct.responseCodeAddBuyerOrder.observe(viewLifecycleOwner,{
                                     Log.d("tes response ", it.toString())
                                     if(it == "201"){
                                         Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()

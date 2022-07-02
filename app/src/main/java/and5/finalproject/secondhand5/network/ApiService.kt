@@ -128,5 +128,35 @@ interface ApiService {
         @Field("status") status: String
     ) : Call<PatchOrderResponse>
 
+    @GET("seller/product/{id}")
+    suspend fun getSellerDetailProduct(
+        @Header("access_token")token:String,
+        @Path("id")id : Int
+    ) : GetSellerProductItem
 
+    @PUT("seller/product/{id}")
+    @Multipart
+    fun updateProduct(
+        @Header("access_token")token:String,
+        @Path("id")id : Int,
+        @Part  ("name") name : RequestBody,
+        @Part  ("description") description : RequestBody,
+        @Part  ("base_price") base_price : RequestBody,
+        @Part  ("category_ids") category_ids: RequestBody,
+        @Part  ("location") location: RequestBody
+    ) : Call<UpdateProductResponse>
+
+//    @PUT("seller/product/{id}")
+//    suspend fun updateProduct(
+//        @Header("access_token")token:String,
+//        @Path("id")id : Int,
+//        @Body product : UpdateProductBody
+//
+//    ) : Call<GetSellerProductItem>
+
+    @DELETE("seller/product/{id}")
+    suspend fun deleteProduct(
+        @Header("access_token")token:String,
+        @Path("id")id : Int
+    ) : GetSellerProductItem
 }
