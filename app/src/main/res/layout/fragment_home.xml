@@ -10,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                     android:drawablePadding="10dp"
                     android:drawableTint="@color/cardview_dark_background"
                     android:hint="Cari di Second Chance"
+                    android:fontFamily="@font/poppins"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp" />
 
@@ -109,7 +111,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="25dp"
-                        android:text="Yuk Telusuri Kategori" />
+                        android:text="Yuk Telusuri Kategori"
+                        android:fontFamily="@font/poppins"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_list_category"
@@ -133,5 +136,7 @@
         </RelativeLayout>
 
     </ScrollView>
+
+
 
 </RelativeLayout>

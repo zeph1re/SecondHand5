@@ -51,6 +51,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/field_product_name"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="60dp">
 
