@@ -138,4 +138,11 @@ interface ApiService {
         @Header("access_token")token:String,
         @Path("id")id : Int
     ) : GetSellerProductItem
+
+    @GET("seller/order/{id}")
+    suspend fun getDetailOrder(
+        @Header("access_token") token : String,
+        @Path("id")id : Int
+    ) : GetSellerOrderItem
+
 }
