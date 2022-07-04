@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_myListProduct_to_detailPenawar"
             app:destination="@id/detailPenawar" />
+        <action
+            android:id="@+id/action_myListProduct_to_sellerProductInterest"
+            app:destination="@id/sellerProductInterest" />
     </fragment>
     <fragment
         android:id="@+id/productDetail"

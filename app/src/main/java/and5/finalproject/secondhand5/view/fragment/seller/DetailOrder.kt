@@ -12,6 +12,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail_order.*
 import kotlin.properties.Delegates
@@ -100,6 +101,8 @@ class DetailOrder : Fragment() {
         userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
             viewModelProduct.patchSellerOrder(it, id, "accepted")
         }
+        findNavController().navigate(R.id.myListProduct)
+
     }
 
     fun declineOrder(id:Int){
@@ -107,6 +110,8 @@ class DetailOrder : Fragment() {
         userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
             viewModelProduct.patchSellerOrder(it, id, "declined")
         }
+        findNavController().navigate(R.id.myListProduct)
+
     }
 
 
