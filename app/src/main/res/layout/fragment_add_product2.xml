@@ -32,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Lengkapi Detail Produk"
+                android:text="Add your product"
                 android:textColor="@color/blue_700"
                 android:textSize="20sp">
 
@@ -44,11 +44,13 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Nama Produk"
+                android:text="Product Name"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                app:helperTextTextColor="@color/red"
+                android:id="@+id/field_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/field_product_name"
@@ -62,7 +64,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/rectangleedittext"
                     android:fontFamily="@font/poppins_light"
-                    android:hint="Nama Produk"
+                    android:hint="Name"
                     android:textSize="16sp" />
 
 
@@ -74,7 +76,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Harga Produk"
+                android:text="Product Price"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -89,12 +91,13 @@
                 app:helperTextTextColor="@color/red">
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/add_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/rectangleedittext"
-                    android:hint="Rp 0,00"
+                    android:hint="Example : 50000"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +108,7 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Kategori"
+                android:text="Category"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -113,11 +116,17 @@
                 android:id="@+id/text_field_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
+                app:helperTextTextColor="@color/red"
                 android:layout_height="wrap_content"
+
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="60dp">
 
                 <MultiAutoCompleteTextView
+
+                    android:focusable="false"
+                    android:inputType="none"
+
                     android:id="@+id/dropdown_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,8 +140,8 @@
 
             <ImageView
                 android:id="@+id/reset_category"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="60dp"
@@ -143,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Deskripsi"
+                android:text="Description"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -164,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/rectangleedittext"
-                    android:hint="Produk ini dapat membantu mencari anggota yang hilang"
+                    android:hint="This product can find your missing member"
                     android:fontFamily="@font/poppins"
                     android:textSize="16sp">
 
@@ -192,14 +201,6 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/poppins"
-                        android:text="Foto Produk"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp" />
 
                     <ImageView
                         android:id="@+id/add_product_image"
@@ -216,7 +217,7 @@
                     android:id="@+id/warning_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-140dp"
+                    android:layout_marginLeft="-120dp"
                     android:layout_marginTop="100dp"
                     android:layout_toRightOf="@+id/image_parent"
                     android:text="Please add the image!"

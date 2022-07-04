@@ -16,13 +16,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class Home : Fragment() {
 
     lateinit var productAdapter: ProductAdapter
-    lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +63,9 @@ class Home : Fragment() {
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
+
                 rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(),  LinearLayoutManager.HORIZONTAL, false)
+                    GridLayoutManager(requireActivity(),  2, RecyclerView.VERTICAL, false)
 
 //                rv_list_item.layoutManager =
 //                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
