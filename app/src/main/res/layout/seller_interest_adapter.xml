@@ -9,7 +9,7 @@
         android:id="@+id/product_order_card"
         android:layout_width="match_parent"
         android:layout_marginBottom="5dp"
-        android:layout_height="130dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
 
@@ -73,7 +73,7 @@
             <TextView
                 android:id="@+id/bid_price"
                 android:layout_width="280dp"
-                android:layout_height="55dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/base_price"
                 android:layout_toRightOf="@id/gambar"
                 android:text="Di tawar Rp 200.000"
@@ -82,7 +82,17 @@
 
             </TextView>
 
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bid_price"
+                android:layout_toRightOf="@id/gambar"
+                android:text="status"
+                android:textColor="@color/black"
+                android:textSize="18sp">
 
+            </TextView>
 
         </RelativeLayout>
 

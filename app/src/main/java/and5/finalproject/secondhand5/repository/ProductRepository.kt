@@ -51,6 +51,13 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
 //Seller
 
+    suspend fun getDetailOrder(
+        access_token : String,
+        id: Int
+    ): GetSellerOrderItem {
+        return productApi.getDetailOrder(access_token, id)
+    }
+
     suspend fun sellerDeleteProduct(
         access_token : String,
         id: Int,
@@ -123,6 +130,8 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
     suspend fun getAllCategory(): List<Category>{
         return productApi.getAllCategory()
     }
+
+
     suspend fun getSellerCategory(): List<GetSellerCategoryItem> {
         return productApi.getSellerCategory()
     }

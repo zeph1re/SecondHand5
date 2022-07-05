@@ -19,6 +19,7 @@ import android.widget.MultiAutoCompleteTextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.custom_seller_detail_product.*
@@ -157,6 +158,7 @@ class SellerProduct : Fragment() {
                         viewModelProduct.deleteProduct(it, id)
                     }
                     ADBuilder.dismiss()
+                    findNavController().navigate(R.id.myListProduct)
                 })
 
                 .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
@@ -220,6 +222,7 @@ class SellerProduct : Fragment() {
 
             }
             ADBuilder.dismiss()
+            findNavController().navigate(R.id.myListProduct)
 
 
         }

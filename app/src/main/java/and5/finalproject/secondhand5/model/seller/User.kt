@@ -12,6 +12,8 @@ data class User(
     val email: String,
     @SerializedName("full_name")
     val fullName: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("phone_number")
     val phoneNumber: String
 )

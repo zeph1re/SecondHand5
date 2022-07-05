@@ -7,7 +7,7 @@
     app:strokeColor="@color/blue_100"
     app:strokeWidth="2dp"
     android:layout_width="wrap_content"
-    android:layout_height="200dp">
+    android:layout_height="240dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -15,17 +15,17 @@
 
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:padding="15dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <ImageView
-                android:layout_gravity="center"
                 android:id="@+id/product_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ei" />
 
@@ -53,12 +53,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/product_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 
