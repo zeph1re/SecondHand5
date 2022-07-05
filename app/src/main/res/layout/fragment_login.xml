@@ -27,6 +27,7 @@
             android:text="Login"
             android:textStyle="bold"
             android:textSize="35sp"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="70dp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
