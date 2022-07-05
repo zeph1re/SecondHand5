@@ -41,6 +41,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     var detailOrderLiveData = MutableLiveData<GetSellerOrderItem>()
     var sellerOrder : LiveData<List<GetSellerOrderItem>> = sellerOrderLiveData
     var detailOrder : LiveData<GetSellerOrderItem> = detailOrderLiveData
+    var sellerSoldOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
+    var sellerSoldOrder : LiveData<List<GetSellerOrderItem>> = sellerSoldOrderLiveData
 
 
     var responseCodePatchSellerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
@@ -159,7 +161,12 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-
+    fun getSellerSuccesfulOrder(token:String){
+        viewModelScope.launch{
+            val dataSellerSoldOrder = productRepository.getSellerSuccesfulOrder(token)
+            sellerSoldOrderLiveData.value = dataSellerSoldOrder
+        }
+    }
 
 
 }

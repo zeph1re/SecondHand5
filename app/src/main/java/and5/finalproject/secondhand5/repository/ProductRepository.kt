@@ -127,6 +127,10 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getSellerOrder(token, "pending")
     }
 
+    suspend fun getSellerSuccesfulOrder(token:String) : List<GetSellerOrderItem> {
+        return productApi.getSellerSuccesfulOrder(token, "accepted")
+    }
+
     suspend fun getAllCategory(): List<Category>{
         return productApi.getAllCategory()
     }
