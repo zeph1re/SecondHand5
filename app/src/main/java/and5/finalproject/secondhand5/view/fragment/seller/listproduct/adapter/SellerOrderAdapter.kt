@@ -33,8 +33,8 @@ class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
                 holder.itemView.status.text = "Status ${sellerOrder!![position].product.status.toString()}"
 
 
-                if(sellerOrder!![position].transactionDate != null ){
-                    holder.itemView.bid_date.text = sellerOrder!![position].transactionDate.toString()
+                if(sellerOrder!![position].createdAt != null ){
+                    holder.itemView.bid_date.text = sellerOrder!![position].createdAt.toString()
                 }else{
                     holder.itemView.bid_date.text = "tanggal null"
 
