@@ -6,23 +6,36 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="Product Name"
+            android:textSize="18sp"
+            android:textColor="@color/dark_grey"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/field_name"
-        app:helperTextTextColor="@color/red"
-        android:layout_marginVertical="5dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/field_name"
+            app:helperTextTextColor="@color/red"
+            android:layout_marginVertical="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            app:boxStrokeWidth="0dp"
+            android:layout_marginHorizontal="40dp"
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <EditText
+            android:hint="Name"
             android:id="@+id/input_product_name"
-            android:hint="Product Name"
             android:background="@drawable/custom_edittext"
             android:drawableStart="@drawable/ic_person"
             android:drawableTint="@color/cardview_dark_background"
@@ -32,31 +45,20 @@
             android:layout_height="70dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/field_description"
-            app:helperTextTextColor="@color/red"
-            android:layout_marginVertical="5dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
+        <TextView
+            android:text="Product Price"
+            android:textSize="18sp"
+            android:textColor="@color/dark_grey"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginLeft="40dp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/input_product_description"
-                android:hint="Product Description"
-                android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_person"
-                android:drawableTint="@color/cardview_dark_background"
-                android:drawablePadding="10dp"
-                android:paddingStart="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent">
+        </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/field_price"
+            android:layout_marginHorizontal="40dp"
             app:helperTextTextColor="@color/red"
             android:layout_marginVertical="5dp"
             android:layout_gravity="center_horizontal"
@@ -67,8 +69,8 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:hint="Example : 50000"
                 android:id="@+id/input_product_base_price"
-                android:hint="Product Price"
                 android:background="@drawable/custom_edittext"
                 android:drawableStart="@drawable/ic_person"
                 android:drawableTint="@color/cardview_dark_background"
@@ -81,10 +83,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Category"
+            android:textStyle="bold"
             android:textColor="@color/dark_grey"
             android:textSize="18sp" />
 
@@ -94,68 +97,109 @@
             android:layout_width="match_parent"
             app:helperTextTextColor="@color/red"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="60dp">
+            android:layout_marginHorizontal="40dp">
 
             <MultiAutoCompleteTextView
-
                 android:focusable="false"
                 android:inputType="none"
-
                 android:id="@+id/dropdown_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangleedittext"
                 android:singleLine="false"
+                android:layout_marginBottom="20dp"
                 android:textSize="16dp">
-
             </MultiAutoCompleteTextView>
 
         </com.google.android.material.textfield.TextInputLayout>
 
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/field_location"-->
+<!--            app:helperTextTextColor="@color/red"-->
+<!--            android:layout_marginVertical="5dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            app:boxStrokeWidth="0dp"-->
+<!--            app:boxStrokeWidthFocused="0dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/input_product_location"-->
+<!--                android:hint="Product Location"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableStart="@drawable/ic_person"-->
+<!--                android:drawableTint="@color/cardview_dark_background"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                android:paddingStart="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="70dp"/>-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="Product Description"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/field_location"
+            android:id="@+id/field_description"
             app:helperTextTextColor="@color/red"
             android:layout_marginVertical="5dp"
             android:layout_gravity="center_horizontal"
             android:background="@android:color/transparent"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            android:layout_marginHorizontal="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_product_location"
-                android:hint="Product Location"
+                android:hint="Description"
+                android:id="@+id/input_product_description"
                 android:background="@drawable/custom_edittext"
                 android:drawableStart="@drawable/ic_person"
                 android:drawableTint="@color/cardview_dark_background"
                 android:drawablePadding="10dp"
+
                 android:paddingStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"/>
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:gravity="center"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btn_update_product"
-                android:text="update"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btn_delete_product"
                 android:text="delete"
-                android:layout_margin="5dp"
+                android:backgroundTint="@color/blue_300"
+
+                android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_update_product"
+                android:text="update"
+                android:backgroundTint="@color/blue_300"
+                android:layout_marginLeft="20dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
 
         </LinearLayout>
 

@@ -65,7 +65,7 @@ class Home : Fragment() {
             if (it != null) {
 
                 rv_list_item.layoutManager =
-                    GridLayoutManager(requireActivity(),  2, RecyclerView.VERTICAL, false)
+                    LinearLayoutManager(requireActivity(),   RecyclerView.HORIZONTAL, false)
 
 //                rv_list_item.layoutManager =
 //                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)

@@ -11,6 +11,7 @@ import and5.finalproject.secondhand5.model.seller.UpdateProductBody
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.SellerProductAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.Log
@@ -19,6 +20,7 @@ import android.widget.MultiAutoCompleteTextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.custom_seller_detail_product.*
@@ -65,7 +67,7 @@ class SellerProduct : Fragment() {
         myListProductAdapter= SellerProductAdapter{
             initDetailProductData(it.id)
         }
-        var style = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        var style = LinearLayoutManager(requireContext(),  LinearLayoutManager.VERTICAL, false)
         myListProduct_recyclerview.adapter = myListProductAdapter
         myListProduct_recyclerview.layoutManager = style
 
@@ -90,10 +92,11 @@ class SellerProduct : Fragment() {
 
     fun initDetailProductData(id:Int){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
-            if(it!=null){
-                viewModelProduct.getSellerDetailProduct(it, id)
-                viewModelProduct.detailSellerProduct.observe(viewLifecycleOwner,{
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){token->
+            if(token!=null){
+                viewModelProduct.getSellerDetailProduct(token, id)
+                viewModelProduct.detailSellerProduct.observe(viewLifecycleOwner) {
                     productname = it.name
                     productdescription = it.desc
                     productprice = it.basePrice
@@ -101,9 +104,15 @@ class SellerProduct : Fragment() {
 
 //                    Log.d("testes a", it.name)
 
-                    detailProduct(id, productname, productdescription, productprice, productlocation)
+                    detailProduct(
+                        id,
+                        productname,
+                        productdescription,
+                        productprice,
+                        productlocation
+                    )
 
-                })
+                }
             }
         }
 
@@ -113,10 +122,10 @@ class SellerProduct : Fragment() {
 
         val customDetailProductDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_detail_product, null, false)
 
-        customDetailProductDialog.input_product_name.hint = productname.toString()
-        customDetailProductDialog.input_product_description.hint = productdescription.toString()
-        customDetailProductDialog.input_product_location.hint = productlocation.toString()
-        customDetailProductDialog.input_product_base_price.hint = productprice.toString()
+        customDetailProductDialog.input_product_name.setText(productname.toString())
+        customDetailProductDialog.input_product_description.setText(productdescription.toString())
+//        customDetailProductDialog.input_product_location.hint = productlocation.toString()
+        customDetailProductDialog.input_product_base_price.setText(productprice.toString())
 
         customDetailProductDialog.dropdown_category?.hint = "Select Category"
         getCategory()
@@ -144,20 +153,27 @@ class SellerProduct : Fragment() {
 
             dialogBuilder.setMessage("Hapus Produk?")
                 .setCancelable(false)
-                .setPositiveButton("Ya", {dialogInterface: DialogInterface, i: Int ->
-                    userManager.userToken.asLiveData().observe(viewLifecycleOwner){
-                        if(it!=null){
-                            viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner, {
-                                if(it == "201"){
-                                    Toast.makeText(requireContext(), "berhasil delete", Toast.LENGTH_SHORT).show()
+                .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
+                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+                        if (it != null) {
+                            viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
+                                if (it == "201") {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "berhasil delete",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                            })
+                            }
 
                         }
                         viewModelProduct.deleteProduct(it, id)
+                        ADBuilder.dismiss()
+                        findNavController().navigate(R.id.myListProduct)
+
                     }
-                    ADBuilder.dismiss()
-                })
+
+                }
 
                 .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
                     ADBuilder.dismiss()
@@ -175,47 +191,70 @@ class SellerProduct : Fragment() {
 
 
             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-            userManager.userToken.asLiveData().observe(viewLifecycleOwner){
-                if(it!=null){
+            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){token->
+                if(it!=null) {
 
-                    var newName : String
-                    var newDesc : String
-                    var newLocation : String
-                    var newPrice : Int
+                    var newName: String
+                    var newDesc: String
+                    var newLocation: String
+                    var newPrice: Int
 
-                    if(customDetailProductDialog.input_product_name.text.isNotEmpty()){
+                    if (customDetailProductDialog.input_product_name.text.isNotEmpty()) {
                         newName = customDetailProductDialog.input_product_name.text.toString()
-                    }else{
+                    } else {
                         newName = name
                     }
 
-                    if (customDetailProductDialog.input_product_description.text.isNotEmpty()){
-                        newDesc = customDetailProductDialog.input_product_description.text.toString()
-                    }else{
+                    if (customDetailProductDialog.input_product_description.text.isNotEmpty()) {
+                        newDesc =
+                            customDetailProductDialog.input_product_description.text.toString()
+                    } else {
                         newDesc = description
                     }
+//
+//                    if (customDetailProductDialog.input_product_location.text.isNotEmpty()){
+//                        newLocation = customDetailProductDialog.input_product_location.text.toString()
+//                    }else{
+//                        newLocation = location
+//                    }
 
-                    if (customDetailProductDialog.input_product_location.text.isNotEmpty()){
-                        newLocation = customDetailProductDialog.input_product_location.text.toString()
-                    }else{
-                        newLocation = location
-                    }
-
-                    if (customDetailProductDialog.input_product_base_price.text.isNotEmpty()){
-                        newPrice =  customDetailProductDialog.input_product_base_price.text.toString().toInt()
-                    }else{
+                    if (customDetailProductDialog.input_product_base_price.text.isNotEmpty()) {
+                        newPrice =
+                            customDetailProductDialog.input_product_base_price.text.toString()
+                                .toInt()
+                    } else {
                         newPrice = price
                     }
 
 
-                    viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner, {
-                        if(it == "201"){
-                            Toast.makeText(requireContext(), "berhasil update", Toast.LENGTH_SHORT).show()
+                    val userViewModel =
+                        ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                    userViewModel.getUserData.observe(viewLifecycleOwner) {user->
 
+
+                        viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
+                            if (it == "201") {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "berhasil update",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }
                         }
-                    })
-                    updateProductBody = UpdateProductBody(newPrice, newDesc, newLocation, newName)
-                    viewModelProduct.updateSellerProduct(it, id, newName, newDesc, newPrice, postCategory, newLocation)
+
+                        updateProductBody = UpdateProductBody(newPrice, newDesc, user.city, newName)
+                        viewModelProduct.updateSellerProduct(
+                            token,
+                            id,
+                            newName,
+                            newDesc,
+                            newPrice,
+                            postCategory,
+                            user.city
+                        )
+                    }
                 }
 
             }
