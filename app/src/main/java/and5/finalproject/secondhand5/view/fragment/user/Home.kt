@@ -73,6 +73,7 @@ class Home : Fragment() {
 
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
+                productAdapter.setHasStableIds(true)
 
             }
         }
