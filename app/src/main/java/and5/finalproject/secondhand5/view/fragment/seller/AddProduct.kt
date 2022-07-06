@@ -74,6 +74,7 @@ class AddProduct : Fragment() {
         userManager = UserManager(requireActivity())
         imageCheck = ""
 
+
         view?.dropdown_category?.hint = "Select Category"
         getCategory()
         arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)

@@ -8,6 +8,7 @@
     tools:context=".view.fragment.buyer.ProductDetail">
 
     <ScrollView
+        android:layout_marginBottom="80dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -182,17 +183,19 @@
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_margin="15dp"
-        android:layout_alignParentBottom="true"
         android:id="@+id/buy_btn"
-        android:text="Saya Tertarik dan Ingin Nego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="#3A5BA0"
-        android:textColor="#DBDFFD"
+        android:text="Saya Tertarik dan Ingin Nego"
         android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textColor="#DBDFFD" />
 
 
 

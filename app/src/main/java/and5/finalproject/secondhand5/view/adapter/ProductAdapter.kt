@@ -37,13 +37,13 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
         if(productData!![position].name != null){
             holder.itemView.product_name.text = "${productData!![position].name.toString()}"
         }else{
-            holder.itemView.product_category.text = "null"
+            holder.itemView.product_name.text = "null"
         }
 
         if(productData!![position].basePrice != null){
             holder.itemView.product_price.text = "Rp ${productData!![position].basePrice.toString()}"
         }else{
-            holder.itemView.product_category.text = "null"
+            holder.itemView.product_price.text = "null"
         }
 
 
@@ -51,14 +51,14 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
         if(productData!![position].id != null){
             holder.itemView.product_id.text = "${productData!![position].id.toString()}"
         }else{
-            holder.itemView.product_category.text = "null"
+            holder.itemView.product_id.text = "null"
         }
 
-        for(i in productData!!.indices){
-            for(j in productData!![i].categories.indices){
-                holder.itemView.product_category.text = "${productData!![i].categories[j].name.toString()}"
+            for(j in productData!![position].categories.indices){
+                holder.itemView.product_category.text = "${productData!![position].categories[j].name.toString()}"
             }
-        }
+
+
 
         if(productData!![position].imageUrl != null){
             this.let {

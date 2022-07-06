@@ -15,6 +15,7 @@ import android.content.DialogInterface
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_seller_interest.*
 import kotlin.properties.Delegates
@@ -40,7 +41,11 @@ class SellerProductInterest : Fragment() {
         userManager = UserManager(requireActivity())
 
         sellerOrderAdapter = SellerOrderAdapter{
-            sellerResponse(it.id)
+            //tes
+//            sellerResponse(it.id)
+            val data = Bundle()
+            data.putInt("order_id", it.id)
+            view.findNavController().navigate(R.id.action_myListProduct_to_detailPenawar, data)
         }
 
         var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

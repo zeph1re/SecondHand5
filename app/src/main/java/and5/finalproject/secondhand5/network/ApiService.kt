@@ -120,6 +120,12 @@ interface ApiService {
         @Query("status") status : String
     ) : List<GetSellerOrderItem>
 
+    @GET("seller/order")
+    suspend fun getSellerSuccesfulOrder(
+        @Header("access_token") token : String,
+        @Query("status") status : String
+    ) : List<GetSellerOrderItem>
+
     @PATCH("seller/order/{id}")
     @FormUrlEncoded
     fun responseSellerOrder(
@@ -159,4 +165,11 @@ interface ApiService {
         @Header("access_token")token:String,
         @Path("id")id : Int
     ) : GetSellerProductItem
+
+    @GET("seller/order/{id}")
+    suspend fun getDetailOrder(
+        @Header("access_token") token : String,
+        @Path("id")id : Int
+    ) : GetSellerOrderItem
+
 }

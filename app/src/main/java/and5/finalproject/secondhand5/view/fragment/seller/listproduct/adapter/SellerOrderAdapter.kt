@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.seller_interest_adapter.view.*
 
 class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerView.Adapter<SellerOrderAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view)
+
     var sellerOrder : List<GetSellerOrderItem>? = null
 
     fun setListProduct(ordered  : List<GetSellerOrderItem>){
@@ -25,15 +26,23 @@ class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
-            Glide.with(holder.itemView.context).load(sellerOrder!![position].product.imageUrl).into(holder.itemView.gambar)
-            holder.itemView.product_name.text = "${sellerOrder!![position].product.name}"
-            holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice.toString()}"
-            holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price.toString()}"
-            holder.itemView.bid_date.text = sellerOrder!![position].createdAt
+                Glide.with(holder.itemView.context).load(sellerOrder!![position].product.imageUrl).into(holder.itemView.gambar)
+                holder.itemView.product_name.text = "${sellerOrder!![position].product.name}"
+                holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice.toString()}"
+                holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price.toString()}"
+                holder.itemView.status.text = "Status ${sellerOrder!![position].product.status.toString()}"
 
-            holder.itemView.product_order_card.setOnClickListener {
-                onclick(sellerOrder!![position])
-            }
+
+                if(sellerOrder!![position].createdAt != null ){
+                    holder.itemView.bid_date.text = sellerOrder!![position].createdAt.toString()
+                }else{
+                    holder.itemView.bid_date.text = "tanggal null"
+
+                }
+
+                holder.itemView.product_order_card.setOnClickListener {
+                    onclick(sellerOrder!![position])
+                }
 
 
     }

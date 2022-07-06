@@ -19,22 +19,31 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(private var productRepository : ProductRepository) : ViewModel(){
 
+    //buyer
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
-    var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
+    val detailProduct : LiveData<GetProductItem> = detailProductLivedata
+    val product : LiveData<List<GetProductItem>> = productLivedata
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
+
+
+    //seller
+    var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
     var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
     var sellerCategory = MutableLiveData<List<GetSellerCategoryItem>>()
     private var categoryLivedata = MutableLiveData<List<Category>>()
     val category : LiveData<List<Category>> = categoryLivedata
-    val product : LiveData<List<GetProductItem>> = productLivedata
-    val detailProduct : LiveData<GetProductItem> = detailProductLivedata
+
+
     val sellerProduct : LiveData<List<GetSellerProductItem>> = sellerProductLiveData
 
-
-    //seller
     var sellerOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
+    var detailOrderLiveData = MutableLiveData<GetSellerOrderItem>()
     var sellerOrder : LiveData<List<GetSellerOrderItem>> = sellerOrderLiveData
+    var detailOrder : LiveData<GetSellerOrderItem> = detailOrderLiveData
+    var sellerSoldOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
+    var sellerSoldOrder : LiveData<List<GetSellerOrderItem>> = sellerSoldOrderLiveData
+
 
     var responseCodePatchSellerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
     var responseCodeDeleteProduct : SingeLiveEvent<String> = SingeLiveEvent ()
@@ -78,6 +87,14 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     }
 
     //  Seller
+
+    fun getDetailOrder(access_token: String,id:Int){
+        viewModelScope.launch {
+            val detailorder = productRepository.getDetailOrder(access_token, id)
+            detailOrderLiveData.value = detailorder
+        }
+    }
+
     fun getSellerDetailProduct(access_token:String, id: Int){
         viewModelScope.launch {
             val detailproduct = productRepository.getSellerDetailProduct(access_token, id)
@@ -144,7 +161,12 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-
+    fun getSellerSuccesfulOrder(token:String){
+        viewModelScope.launch{
+            val dataSellerSoldOrder = productRepository.getSellerSuccesfulOrder(token)
+            sellerSoldOrderLiveData.value = dataSellerSoldOrder
+        }
+    }
 
 
 }

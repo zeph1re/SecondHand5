@@ -55,9 +55,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:id="@+id/notification_created_at"
-            android:text="tanggal"/>
+            android:text="tanggal"
+            android:layout_toStartOf="@id/read_or_not"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/read_or_not"
+            android:src="@drawable/ic_read"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:visibility="visible"/>
 
     </RelativeLayout>
 

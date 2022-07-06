@@ -18,6 +18,8 @@ data class Product(
     val name: String,
     @SerializedName("status")
     val status: String,
+    @SerializedName("User")
+    val user: User,
     @SerializedName("user_id")
     val userId: Int
 )

@@ -65,7 +65,7 @@ class Home : Fragment() {
             if (it != null) {
 
                 rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(),   RecyclerView.HORIZONTAL, false)
+                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
 
 //                rv_list_item.layoutManager =
 //                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
@@ -73,6 +73,7 @@ class Home : Fragment() {
 
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
+                productAdapter.setHasStableIds(true)
 
             }
         }

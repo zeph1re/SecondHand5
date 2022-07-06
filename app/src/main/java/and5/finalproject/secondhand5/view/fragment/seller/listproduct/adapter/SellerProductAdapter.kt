@@ -28,8 +28,14 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(holder.itemView.context).load(sellerProduct!![position].imageUrl).into(holder.itemView.product_image)
         holder.itemView.product_name.text = sellerProduct!![position].name
-        holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice}"
-//        holder.itemView.seller_product_category.text = sellerProduct!![position].categories.toString()
+        holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice.toString()}"
+
+        for(j in sellerProduct!![position].categories.indices) {
+                holder.itemView.seller_product_category.text = sellerProduct!![position].categories[j].name.toString()
+        }
+
+
+
         holder.itemView.productSellerCard.setOnClickListener {
             onclick(sellerProduct!![position])
         }
