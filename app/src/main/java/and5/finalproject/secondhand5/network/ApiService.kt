@@ -57,12 +57,13 @@ interface ApiService {
     ) : List<GetNotificationItem>
 
     @PUT ("/auth/change-password")
-    suspend fun updatePassword(
+    @FormUrlEncoded
+    suspend fun updatePasswordUser(
         @Header("access_token") token : String,
         @Field ("current_password") current : String,
         @Field ("new_password") new : String,
         @Field ("confirm_password") confirm :String
-    ) : UpdatePasswordBody
+    ) : Call<UpdatePasswordBody>
 
 
     // BUYER

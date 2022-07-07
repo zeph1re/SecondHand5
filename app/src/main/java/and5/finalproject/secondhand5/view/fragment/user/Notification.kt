@@ -50,7 +50,6 @@ class Notification : Fragment() {
         viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
             viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
-
                     rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
                     rv_notification.adapter = notificationAdapter
 

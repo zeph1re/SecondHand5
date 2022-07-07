@@ -26,9 +26,10 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
     var getUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
     var updateUserData :  SingeLiveEvent<String>  = SingeLiveEvent ()
+
+    var responseCodeUpdatePassword : SingeLiveEvent<String> = SingeLiveEvent()
     var userToken : MutableLiveData<String> = MutableLiveData()
 
-    var updatePasswordData : MutableLiveData<UpdatePasswordBody> = MutableLiveData()
     fun registerUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
         viewModelScope.launch {
             userRepo.regisUser( full_name, email, password, phone_number, address, city, registerLiveData )
@@ -65,8 +66,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
 
     fun updatePasswordData(token: String, current: String, new:String, confirm : String){
         viewModelScope.launch {
-            val updatePassworduser = userRepo.changePasswordUser(token,current,new, confirm)
-            updatePasswordData.value = updatePassworduser
+            userRepo.changePasswordUser(token,current,new, confirm, responseCodeUpdatePassword )
         }
     }
 
