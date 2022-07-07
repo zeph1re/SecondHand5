@@ -4,6 +4,9 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
+
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,12 +57,43 @@ class UserRepository @Inject constructor(private val service: ApiService){
         return service.getUserItem(token)
     }
 
-    suspend fun updateUser(token:String, user : UpdateUserBody): GetAllUser{
-        return service.updateUser(token, user)
+    fun updateUser(token:String, fullName : RequestBody, email : RequestBody, password: RequestBody, number: RequestBody, address : RequestBody, image :  MultipartBody.Part, city: RequestBody, code : MutableLiveData<String> ) {
+        val apiClient : Call<GetAllUser> = service.updateUser(token, fullName, email, password, number, address, image, city)
+        apiClient.enqueue(object : Callback<GetAllUser> {
+            override fun onResponse(
+                call: Call<GetAllUser>,
+                response: Response<GetAllUser>
+            ) {
+                code.postValue(response.code().toString())
+            }
+
+            override fun onFailure(call: Call<GetAllUser>, t: Throwable) {
+                code.postValue(null)
+            }
+        })
     }
 
-    suspend fun changePasswordUser(token: String, current: String, new: String, confirm: String): UpdatePasswordBody {
-        return service.updatePassword(token,current,new, confirm)
+    suspend fun changePasswordUser(
+        token: String,
+        current: String,
+        new: String,
+        confirm: String,
+        responseCode : MutableLiveData<String>)
+    {
+        val apiClient : Call<UpdatePasswordBody> = service.updatePasswordUser(token,current,new, confirm)
+        apiClient.enqueue( object : Callback<UpdatePasswordBody>{
+            override fun onResponse(
+                call: Call<UpdatePasswordBody>,
+                response: Response<UpdatePasswordBody>
+            ) {
+                responseCode.postValue(response.code().toString())
+            }
+            override fun onFailure(call: Call<UpdatePasswordBody>, t: Throwable) {
+                responseCode.postValue(null)
+            }
+
+        })
+
     }
 
 }

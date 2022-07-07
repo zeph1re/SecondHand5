@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
+import kotlinx.android.synthetic.main.home_product_adapter.view.product_id
+import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
+import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
+import kotlinx.android.synthetic.main.seller_product_adapter.view.*
 import kotlin.math.log
 
 class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
     private var productData : List<GetProductItem>? = null
-
+    var categoryName = mutableListOf<String>()
     fun setProductList(productList: List<GetProductItem>){
         this.productData = productList
     }
@@ -55,7 +59,12 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
         }
 
             for(j in productData!![position].categories.indices){
-                holder.itemView.product_category.text = "${productData!![position].categories[j].name.toString()}"
+                productData!![position].categories.forEach {
+                    categoryName.add(it.name)
+                }
+                val listToString = categoryName.toString()
+                val getCategory = listToString.replace("[","").replace("]", "")
+                holder.itemView.product_category.text = getCategory
             }
 
 

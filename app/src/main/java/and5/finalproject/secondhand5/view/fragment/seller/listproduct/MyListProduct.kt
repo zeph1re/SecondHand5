@@ -12,8 +12,12 @@ import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_my_list_product.*
+import kotlinx.android.synthetic.main.fragment_my_list_product.view.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
 class MyListProduct : Fragment() {
@@ -41,6 +45,9 @@ class MyListProduct : Fragment() {
         viewModel.userToken(requireActivity()).observe(viewLifecycleOwner){
             detailUser(it)
         }
+        edit_seller.setOnClickListener {
+            findNavController().navigate(R.id.profile)
+        }
     }
 
     private fun detailUser(token:String) {
@@ -51,6 +58,7 @@ class MyListProduct : Fragment() {
             Log.d("cityyyy", it.city)
             seller_name.setText(it.fullName)
             seller_address.setText(it.city)
+            Glide.with(requireActivity()).load( it.imageUrl).into(view!!.seller_image)
         }
     }
 

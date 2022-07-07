@@ -25,15 +25,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.postDelayed
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -54,12 +51,13 @@ class AddProduct : Fragment() {
     lateinit var productName : String
     lateinit var productPrice : String
     lateinit var productDesc  : String
-    lateinit var imageCheck : String
     lateinit var arrayAdapter: ArrayAdapter<String>
-    var typeCheck : String? = null
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
     var post by Delegates.notNull<Boolean>()
+    lateinit var sizeCheck: String
+    var typeCheck : String? = null
+    lateinit var imageCheck : String
 
 
     override fun onCreateView(
@@ -92,22 +90,33 @@ class AddProduct : Fragment() {
             Log.d("asdd", selectedID.toString())
         }
 
+        view.btn_backtohome.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
             warning_image.text = ""
+
             it?.let {
+
                 getContent(it)
             }
-            if (typeCheck !=null){
+            if (typeCheck !=null && sizeCheck=="<1mb"){
                 view.add_product_image.setImageURI(it)
             }
 
+            if (sizeCheck==">1mb"){
+                imageCheck = "false"
+                view.warning_image.visibility = View.VISIBLE
+                view.warning_image.text = "Image cannot be bigger than 1MB"
+            }
             if (typeCheck == null){
                 imageCheck = "false"
                 view.warning_image.visibility = View.VISIBLE
-
                 view.warning_image.text = "File format not supported"
             }
         }
+
 
         view.add_product_image.setOnClickListener {
             if (askForPermissions()) {
@@ -137,7 +146,17 @@ class AddProduct : Fragment() {
             }
 
         }
+        view.preview_btn.setOnClickListener {
+            productName = view.add_product_name.text.toString()
+            productPrice = view.add_product_price.text.toString()
+            productDesc = view.add_product_desc.text.toString()
+            check()
 
+            if (productName.isNotEmpty() && productPrice.isNotEmpty() && productDesc.isNotEmpty()
+                && text_field_category.isNotEmpty() && imageCheck == "true") {
+                view.findNavController().navigate(R.id.productPreview)
+            }
+        }
 
         view.add_btn.setOnClickListener {
             productName = view.add_product_name.text.toString()
@@ -185,7 +204,7 @@ class AddProduct : Fragment() {
                                 token,
                                 productName,
                                 productDesc,
-                                productPrice.toInt(),
+                                productPrice,
                                 postCategory,
                                 loc.city,
                                 image
@@ -272,7 +291,7 @@ class AddProduct : Fragment() {
         token: String,
         name: String,
         desc: String,
-        price: Int,
+        price: String,
         category: String,
         location: String,
         image: MultipartBody.Part
@@ -282,6 +301,7 @@ class AddProduct : Fragment() {
     }
 
     fun getContent(it : Uri){
+
         val contentResolver = requireActivity().contentResolver
         val type = contentResolver.getType(it)
         val getType = type.toString()
@@ -304,13 +324,25 @@ class AddProduct : Fragment() {
         val inputStream = contentResolver.openInputStream(it)
         tempFile.outputStream().use {
             inputStream?.copyTo(it)
+
         }
+
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
+        val getImageSize = requestBody.contentLength().toDouble()
+        val convertToMB = getImageSize/1000000
+        if (convertToMB > 1 ){
+            sizeCheck = ">1mb"
+        }else{
+            sizeCheck = "<1mb"
+        }
+        Log.d("imagesize", convertToMB.toString())
         image  =    MultipartBody.Part.createFormData("image", postCustomName, requestBody)
         imageCheck = "true"
         Log.d("cekk", imageCheck)
 
     }
+
+
 
 
 
