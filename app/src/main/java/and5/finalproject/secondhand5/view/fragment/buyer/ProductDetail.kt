@@ -141,7 +141,6 @@ class ProductDetail : Fragment() {
                                     else{
                                         Toast.makeText(requireContext(), "\t\n" +
                                                 "No Internet Connection", Toast.LENGTH_SHORT).show()
-
                                     }
                                 })
 

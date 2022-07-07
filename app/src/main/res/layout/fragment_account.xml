@@ -6,29 +6,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.user.Account">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Akun Saya"
+        android:layout_gravity="center"
+        android:text="Account"
         android:textSize="25sp"
         android:fontFamily="@font/poppins_extrabold"
         android:textColor="@color/blue_300"
         android:layout_margin="30dp"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:id="@+id/account_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        app:cardCornerRadius="15dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/acc_image"
+        android:layout_marginTop="20dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/pp"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
 
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:src="@drawable/account_image" />
-
-    </androidx.cardview.widget.CardView>
 
 
 
@@ -59,8 +63,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ubah Akun"
-                android:textSize="17sp"
+                android:text="Edit Profile"
+                android:textSize="19sp"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_gravity="center"
                 android:textColor="@color/blue_300"/>
@@ -95,10 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Pengaturan"
+                android:text="Settings"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/blue_300"
-                android:textSize="17sp" />
+                android:textSize="19sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -129,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Keluar"
+                android:text="Logout"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/blue_300"
                 android:textSize="17sp" />
@@ -139,6 +143,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/version_txt"
         android:text="Version 1.0.0"
         android:textSize="13sp"
@@ -146,6 +151,6 @@
         android:layout_below="@id/logout_card"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
-
+    </LinearLayout>
 
 </RelativeLayout>

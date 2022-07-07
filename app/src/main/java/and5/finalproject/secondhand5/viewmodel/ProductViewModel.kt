@@ -141,7 +141,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun addSellerProduct(token: String, name: String, desc: String, price: Int, category: String, location: String, image:  MultipartBody.Part){
+    fun addSellerProduct(token: String, name: String, desc: String, price: String, category: String, location: String, image:  MultipartBody.Part){
         viewModelScope.launch  {
             val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
             val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)

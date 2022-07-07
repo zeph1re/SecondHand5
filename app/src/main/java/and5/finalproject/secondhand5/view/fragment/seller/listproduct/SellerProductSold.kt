@@ -18,7 +18,7 @@ import kotlin.properties.Delegates
 
 
 class SellerProductSold : Fragment() {
-
+//
     lateinit var sellerOrderSuccessfulAdapter : SellerSoldAdapter
     lateinit var userManager: UserManager
     var orderId by Delegates.notNull<Int>()

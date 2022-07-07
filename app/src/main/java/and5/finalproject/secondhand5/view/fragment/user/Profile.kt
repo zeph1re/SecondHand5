@@ -1,13 +1,7 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
@@ -16,30 +10,33 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.RawValue
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.custom_zoom_photo_profile_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_add_product2.*
-import kotlinx.android.synthetic.main.fragment_add_product2.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import org.json.JSONObject
 import java.io.File
+
 
 class Profile : Fragment() {
 
@@ -50,9 +47,18 @@ class Profile : Fragment() {
     lateinit var sizeCheck: String
     var typeCheck : String? = null
     lateinit var imageCheck : String
-    lateinit var image : MultipartBody.Part
+    var image : MultipartBody.Part? = null
     private var customToast : CustomToast = CustomToast()
     lateinit var text: String
+    lateinit var getProfileImage : String
+    lateinit var zoomType : String
+    lateinit var localZoom : Uri
+    lateinit var sendNoImage : String
+    lateinit var updateNama : String
+    lateinit var updateKota : String
+    lateinit var updateAlamat : String
+    lateinit var updateNomor: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +68,11 @@ class Profile : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         userManager = UserManager(requireActivity())
         imageCheck=""
+        zoomType = "online"
+
+        sendNoImage = "true"
+
+
         view.btn_back_profile.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -71,20 +82,56 @@ class Profile : Fragment() {
             Log.d("aaaaatoken", it)
             getUserData(it)
             token = it
-
         }
 
         val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
 
             it?.let {
                 getContent(it)
+
             }
             if (typeCheck !=null && sizeCheck=="<1mb"){
                 view.profile_image.setImageURI(it)
+                sendNoImage = "false"
+                zoomType = "local"
+                localZoom = it
+            }else{
+                zoomType = "online"
             }
         }
 
         view.profile_image.setOnClickListener {
+            val zoomPhoto = LayoutInflater.from(requireContext()).inflate(R.layout.custom_zoom_photo_profile_dialog, null, false)
+            val ADBuilder = android.app.AlertDialog.Builder(requireContext())
+                .setView(zoomPhoto)
+                .create()
+            ADBuilder.show()
+            zoomPhoto.delete_profile_pic.setOnClickListener {
+                profile_image.setImageResource(R.drawable.pp)
+                zoomPhoto.zoom_pp.setImageResource(R.drawable.pp)
+                getProfileImage = ""
+                localZoom = "".toUri()
+                zoomType = "blank"
+                sendNoImage = "true"
+
+            }
+
+            if (zoomType == "local"){
+                Glide.with(requireActivity()).load(localZoom).into(zoomPhoto.zoom_pp)
+            }else if (zoomType == "online"){
+                if (getProfileImage == "blank"){
+                    zoomPhoto.zoom_pp.setImageResource(R.drawable.pp)
+                }else{
+                    Glide.with(requireActivity()).load(getProfileImage).into(zoomPhoto.zoom_pp)
+                }
+
+
+            }else{
+                zoomPhoto.zoom_pp.setImageResource(R.drawable.pp)
+            }
+
+
+
 
         }
 
@@ -96,14 +143,24 @@ class Profile : Fragment() {
 
 
         view.btnsimpan.setOnClickListener {
-            val updateNama = update_nama.text.toString()
-            val updateKota = update_kota.text.toString()
-            val updateAlamat = update_alamat.text.toString()
-            val updateNomor = update_nomor.text.toString()
-
+            updateNama = update_nama.text.toString()
+            updateKota = update_kota.text.toString()
+            updateAlamat = update_alamat.text.toString()
+            updateNomor = update_nomor.text.toString()
+            check()
             val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+            if (sendNoImage == "true"){
+                val attachmentEmpty = RequestBody.create("text/plain".toMediaTypeOrNull(), "")
+                image  =    MultipartBody.Part.createFormData("image", "", attachmentEmpty)
+                Log.d("tesblank", image.toString())
+            }
+                if (updateNama.isNotEmpty() && updateKota.isNotEmpty() && updateAlamat.isNotEmpty() && updateNomor.isNotEmpty()) {
+                    viewModel.updateUserData(
+                        token, updateNama, email, password, updateNomor, updateAlamat,
+                        image!!, updateKota
+                    )
+                }
 
-            viewModel.updateUserData(token, updateNama, email, password, updateNomor.toInt(), updateAlamat, image, updateKota)
             responseUpdate()
 //            view.findNavController().navigate(R.id.account)
         }
@@ -118,10 +175,26 @@ class Profile : Fragment() {
         viewModel.getUserData(token)
         viewModel.getUserData.observe(viewLifecycleOwner) {
                 Log.d("namaaaa", it.fullName)
+
                 update_nama.setText(it.fullName)
                 update_kota.setText(it.city)
                 update_alamat.setText(it.address)
-                update_nomor.setText(it.phoneNumber.toString())
+                val phone = it.phoneNumber
+                update_nomor.setText("+$phone")
+                if (it.imageUrl != null){
+                    Glide.with(requireActivity()).load( it.imageUrl).into(view!!.profile_image)
+                }else{
+                    profile_image.setImageResource(R.drawable.pp)
+                }
+
+                val getImage = it.imageUrl
+                if (it.imageUrl!=null){
+                    getProfileImage = it.imageUrl.toString()
+                }else{
+                    getProfileImage = "blank"
+                }
+
+                image  =   MultipartBody.Part.createFormData("image", getImage.toString())
                 email = it.email
                 password = it.password
 
@@ -132,7 +205,7 @@ class Profile : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         viewModel.updateUserData.observe(viewLifecycleOwner){ code->
             Log.d("codex", code)
-            if (code == "201"){
+            if (code == "200"){
                 Handler(Looper.getMainLooper()).postDelayed({
                     text = "Profile Updated"
                     customToast.successPostToast(requireActivity(), text)
@@ -199,6 +272,7 @@ class Profile : Fragment() {
             sizeCheck = "<1mb"
         }
         Log.d("imagesize", convertToMB.toString())
+
         image  =    MultipartBody.Part.createFormData("image", postCustomName, requestBody)
         imageCheck = "true"
         Log.d("cekk", imageCheck)
@@ -250,6 +324,39 @@ class Profile : Fragment() {
                 })
             .setNegativeButton("Cancel",null)
             .show()
+    }
+
+    fun check(){
+        if (updateNama.isEmpty()){
+            field_name.helperText = "Required"
+            update_nama.error = "Name cannot be empty"
+        } else{
+            field_name.helperText  = ""
+        }
+
+        if (updateKota.isEmpty()){
+            field_city.helperText = "Required"
+            update_kota.error = "City cannot be empty"
+        } else {
+            field_city.helperText = ""
+        }
+
+        if (updateAlamat.isEmpty()){
+            field_address.helperText = "Required"
+            update_alamat.error = "Address cannot be empty"
+        } else {
+            field_address.helperText  = ""
+        }
+
+        if (updateNomor.isEmpty()){
+            field_nomor.helperText = "Required"
+            update_nomor.error = "Phone number cannot be empty"
+        } else {
+            field_nomor.helperText = ""
+        }
+
+
+
     }
 
 }

@@ -29,7 +29,7 @@
     <TextView
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:text="Lengkapi Info Akun"
+        android:text="Edit Profile"
         android:textSize="25sp"
         android:layout_marginBottom="30dp"
         android:textColor="@color/black"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+
             android:id="@+id/profile_image"
             android:layout_marginTop="20dp"
             android:layout_width="130dp"
@@ -66,7 +66,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+
             android:id="@+id/addpp"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="45dp"
@@ -84,7 +84,7 @@
     <TextView
         android:layout_marginTop="30dp"
         android:layout_marginLeft="60dp"
-        android:text="Nama"
+        android:text="Name"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -92,20 +92,22 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
-
+        android:id="@+id/field_name"
+        app:helperTextTextColor="@color/red"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_height="wrap_content">
 
         <EditText
             android:textSize="20sp"
-            android:hint="Masukkan Nama"
+            android:hint="Enter your name"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/update_nama"
             android:background="@drawable/rectangleedittext"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             android:layout_width="match_parent"
             android:layout_height="60dp">
         </EditText>
@@ -116,28 +118,30 @@
     <TextView
         android:layout_marginTop="20dp"
         android:layout_marginLeft="60dp"
-        android:text="Kota"
+        android:text="City"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
     <com.google.android.material.textfield.TextInputLayout
-
+        android:id="@+id/field_city"
+        app:helperTextTextColor="@color/red"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_height="wrap_content">
 
         <EditText
             android:drawableRight="@drawable/ic_dropdown"
             android:textSize="20sp"
-            android:hint="Masukkan Kota"
+            android:hint="Enter your city"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/update_kota"
             android:background="@drawable/rectangleedittext"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             android:layout_width="match_parent"
             android:layout_height="60dp">
         </EditText>
@@ -146,7 +150,7 @@
     <TextView
         android:layout_marginTop="20dp"
         android:layout_marginLeft="60dp"
-        android:text="Alamat"
+        android:text="Address"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -155,7 +159,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_gravity="center_horizontal"
-        android:id="@+id/inputdate"
+        android:id="@+id/field_address"
+        app:helperTextTextColor="@color/red"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -163,11 +170,10 @@
 
 
             android:textSize="20sp"
-            android:hint="Contoh : Jalan Kaliraya 2"
+            android:hint="Example : Kaliraya 2 Street"
             android:layout_marginTop="10dp"
             android:id="@+id/update_alamat"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             android:background="@drawable/rectangleedittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -178,27 +184,29 @@
     <TextView
         android:layout_marginTop="20dp"
         android:layout_marginLeft="60dp"
-        android:text="No Handphone"
+        android:text="Phone Number"
         android:textSize="25sp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
     <com.google.android.material.textfield.TextInputLayout
-
+        android:id="@+id/field_nomor"
         android:layout_gravity="center_horizontal"
-
+        android:layout_marginLeft="60dp"
+        app:helperTextTextColor="@color/red"
+        android:layout_marginRight="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
             android:textSize="20sp"
-            android:hint="Contoh : +6282104564123"
+            android:hint="Example : +6282104564123"
             android:layout_marginTop="10dp"
+            android:inputType="phone"
             android:layout_gravity="center_horizontal"
             android:id="@+id/update_nomor"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             android:background="@drawable/rectangleedittext"
             android:layout_width="match_parent"
             android:layout_height="60dp">

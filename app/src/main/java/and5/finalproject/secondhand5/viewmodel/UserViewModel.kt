@@ -48,7 +48,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         }
     }
 
-    fun updateUserData(token:String, fullName : String, email : String, password: String, number: Int, address : String, image :  MultipartBody.Part, city: String ){
+    fun updateUserData(token:String, fullName: String, email: String, password: String, number: String, address: String, image: MultipartBody.Part, city: String ){
         viewModelScope.launch  {
             val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fullName)
             val partEmail= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)

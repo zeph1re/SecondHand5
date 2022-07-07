@@ -69,6 +69,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:inputType="number"
                 android:hint="Example : 50000"
                 android:id="@+id/input_product_base_price"
                 android:background="@drawable/custom_edittext"
@@ -107,13 +108,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangleedittext"
-                android:singleLine="false"
-                android:layout_marginBottom="20dp"
+
+                android:layout_marginBottom="10dp"
                 android:textSize="16dp">
             </MultiAutoCompleteTextView>
 
+
+
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/reset_category_detail"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/trash" />
 <!--        <com.google.android.material.textfield.TextInputLayout-->
 <!--            android:id="@+id/field_location"-->
 <!--            app:helperTextTextColor="@color/red"-->

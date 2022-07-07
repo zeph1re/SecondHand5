@@ -7,11 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
+import and5.finalproject.secondhand5.viewmodel.UserViewModel
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_account.*
+import kotlinx.android.synthetic.main.fragment_account.view.*
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 
 
 class Account : Fragment() {
@@ -44,12 +53,30 @@ class Account : Fragment() {
             GlobalScope.launch {
                 userManager.deleteDataUser()
             }
+        }
 
+        val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
+            getUserData(it)
         }
 
 
 
 
 
+    }
+    fun getUserData(token:String){
+        val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        viewModel.getUserData(token)
+        viewModel.getUserData.observe(viewLifecycleOwner) {
+            if (it.imageUrl != null){
+                Glide.with(requireActivity()).load( it.imageUrl).into(view!!.acc_image)
+            }else{
+                acc_image.setImageResource(R.drawable.pp)
+            }
+
+
+
+        }
     }
 }

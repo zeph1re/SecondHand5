@@ -73,7 +73,7 @@ class Home : Fragment() {
 
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
-                productAdapter.setHasStableIds(true)
+//                productAdapter.setHasStableIds(true)
 
             }
         }
@@ -90,7 +90,6 @@ class Home : Fragment() {
                 rv_list_category.layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
                 rv_list_category.adapter = categoriesAdapter
-
                 categoriesAdapter.setProductList(it)
                 categoriesAdapter.notifyDataSetChanged()
 
