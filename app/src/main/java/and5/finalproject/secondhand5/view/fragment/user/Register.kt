@@ -114,7 +114,7 @@ class Register : Fragment () {
                 if (it == "201"){
                     toast = "Registration Succes"
                     Handler(Looper.getMainLooper()).postDelayed({
-                        customToast.successToast(requireContext(), toast)
+                        customToast.successToast(requireActivity(), toast)
                         view?.findNavController()
                             ?.navigate(R.id.action_register_to_login)
                     },2000)
@@ -123,19 +123,19 @@ class Register : Fragment () {
                 } else if (it == "400"){
                     toast = "Email Already Exist"
                     Handler(Looper.getMainLooper()).postDelayed({
-                        customToast.failureToast(requireContext(), toast)
+                        customToast.failureToast(requireActivity(), toast)
                     },2000)
 
                 } else if (it == "500"){
                     toast = "Internal Service Error"
                     Handler(Looper.getMainLooper()).postDelayed({
-                        customToast.failureToast(requireContext(), toast)
+                        customToast.failureToast(requireActivity(), toast)
                     },2000)
 
                 } else {
                     toast = "No Internet Connection"
                     Handler(Looper.getMainLooper()).postDelayed({
-                        customToast.failureToast(requireContext(), toast)
+                        customToast.failureToast(requireActivity(), toast)
                     },2000)
                 }
             }
