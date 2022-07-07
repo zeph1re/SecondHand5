@@ -125,10 +125,14 @@
         android:id="@+id/detailPenawar"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailOrder"
         android:label="fragment_detail_penawar"
-        tools:layout="@layout/fragment_detail_order" />
+        tools:layout="@layout/fragment_detail_order" >
+        <action
+            android:id="@+id/action_detailPenawar_to_statusOrder"
+            app:destination="@id/statusOrder" />
+    </fragment>
     <fragment
         android:id="@+id/notification"
-        android:name="and5.finalproject.secondhand5.view.fragment.seller.Notification"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Notification"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" >
         <action
@@ -163,4 +167,9 @@
             android:id="@+id/action_userNotLogin_to_account"
             app:destination="@id/account" />
     </fragment>
+    <fragment
+        android:id="@+id/statusOrder"
+        android:name="and5.finalproject.secondhand5.view.fragment.seller.StatusOrder"
+        android:label="fragment_status_order"
+        tools:layout="@layout/fragment_status_order" />
 </navigation>

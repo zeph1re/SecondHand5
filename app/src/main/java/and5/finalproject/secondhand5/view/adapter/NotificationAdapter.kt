@@ -29,7 +29,7 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolde
         val notif = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_notification, parent, false)
 
-        return NotificationAdapter.ViewHolder(notif)
+        return ViewHolder(notif)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
