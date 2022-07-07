@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.*
 import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.model.seller.Category
@@ -187,6 +188,10 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
             }
         })
 
+    }
+
+    suspend fun getSellerBanner() : List<GetBannerItem>{
+        return productApi.getAllBanner()
     }
 
 

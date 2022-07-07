@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
@@ -52,6 +53,7 @@ class Home : Fragment() {
 //            Log.d("testes categories", it.categories.toString())
             view.findNavController().navigate(R.id.action_home_to_productDetail, data)
         }
+        initBanner()
         initCategory()
         initProduct()
     }
@@ -96,5 +98,21 @@ class Home : Fragment() {
             }
         }
         viewmodelproduct.getSellerCategory()
+    }
+
+    fun initBanner() {
+        val bannerAdapter = BannerAdapter()
+
+        val viewmodelbanner = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewmodelbanner.sellerBanner.observe(viewLifecycleOwner) {
+            if (it != null) {
+                banner_rv.layoutManager =
+                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+                banner_rv.adapter = bannerAdapter
+                bannerAdapter.setBannerList(it)
+                bannerAdapter.notifyDataSetChanged()
+            }
+        }
+        viewmodelbanner.getSellerBanner()
     }
 }
