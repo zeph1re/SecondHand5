@@ -64,11 +64,11 @@ class Home : Fragment() {
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
 
-                rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
-
 //                rv_list_item.layoutManager =
-//                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
+//                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+
+                rv_list_item.layoutManager =
+                    GridLayoutManager(requireActivity(), 3, GridLayoutManager.HORIZONTAL, false)
                 rv_list_item.adapter = productAdapter
 
                 productAdapter.setProductList(it)
