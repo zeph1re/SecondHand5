@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.auth.GetAllUser
+import and5.finalproject.secondhand5.model.auth.UpdatePasswordBody
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
 import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.repository.UserRepository
@@ -27,6 +28,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var updateUserData :  SingeLiveEvent<String>  = SingeLiveEvent ()
     var userToken : MutableLiveData<String> = MutableLiveData()
 
+    var updatePasswordData : MutableLiveData<UpdatePasswordBody> = MutableLiveData()
     fun registerUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
         viewModelScope.launch {
             userRepo.regisUser( full_name, email, password, phone_number, address, city, registerLiveData )
@@ -58,6 +60,13 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
             val partCity = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), city)
 
             userRepo.updateUser(token, partName, partEmail, partPassword, partNumber, partAddress, image, partCity, updateUserData )
+        }
+    }
+
+    fun updatePasswordData(token: String, current: String, new:String, confirm : String){
+        viewModelScope.launch {
+            val updatePassworduser = userRepo.changePasswordUser(token,current,new, confirm)
+            updatePasswordData.value = updatePassworduser
         }
     }
 

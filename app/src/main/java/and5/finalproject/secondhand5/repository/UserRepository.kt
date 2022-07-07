@@ -1,11 +1,7 @@
 package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.auth.GetAllUser
-import and5.finalproject.secondhand5.model.auth.LoginResponse
-import and5.finalproject.secondhand5.model.auth.RegisterResponse
-import and5.finalproject.secondhand5.model.auth.UpdateUserBody
-import and5.finalproject.secondhand5.model.seller.PostResponse
+import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
 import okhttp3.MultipartBody
@@ -75,6 +71,11 @@ class UserRepository @Inject constructor(private val service: ApiService){
             }
         })
     }
+
+    suspend fun changePasswordUser(token: String, current: String, new: String, confirm: String): UpdatePasswordBody {
+        return service.updatePassword(token,current,new, confirm)
+    }
+
 }
 
 

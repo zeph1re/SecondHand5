@@ -43,7 +43,8 @@ class SellerSoldAdapter (var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
 
         holder.itemView.product_order_card.setOnClickListener {
             onclick(soldOrder!![position])
-        }    }
+        }
+    }
 
     override fun getItemCount(): Int {
         if (soldOrder == null){
