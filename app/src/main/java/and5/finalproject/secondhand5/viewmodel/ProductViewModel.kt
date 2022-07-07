@@ -32,6 +32,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     private var buyerlOrderLivedata = MutableLiveData<List<GetBuyerOrderItem>>()
     val buyerOrder : LiveData<List<GetBuyerOrderItem>> = buyerlOrderLivedata
 
+    var responseCodeUpdateBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
+
+
     //seller
     var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
     var sellerProductLiveData = MutableLiveData<List<GetSellerProductItem>>()
@@ -64,6 +67,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
 
     //  Buyer
+
+    fun updateBuyerOrder(access_token:String, id: Int, bid_price: Int){
+        viewModelScope.launch {
+            productRepository.updateBuyerOrder(access_token, id, bid_price, responseCodeUpdateBuyerOrder)
+        }
+    }
+
     fun getAllProduct(){
         viewModelScope.launch {
             val dataproduct = productRepository.getAllProduct()

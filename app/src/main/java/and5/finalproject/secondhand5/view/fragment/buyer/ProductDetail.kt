@@ -35,6 +35,8 @@ class ProductDetail : Fragment() {
     lateinit var productDescription : String
     lateinit var sellerLocation : String
 
+    var orderId = 0
+
     lateinit var dataOrder : List<GetBuyerOrderItem>
 
     override fun onCreateView(
@@ -118,17 +120,35 @@ class ProductDetail : Fragment() {
         viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
 //            Log.d("testes 3 id ", id.toString())
 
+            var flag = 0
             for(i in dataOrder.indices){
-                if(it.id == dataOrder[i].productId){
-                    buy_btn.setClickable(false);
-                    buy_btn.setText("Menunggu Respon Penjual")
-                }else{
-                    buy_btn.setText("Saya Tertarik dan Ingin Nego")
-                    bidProduct()
+                if(it.id == dataOrder[i].productId && dataOrder[i].status != "declined"){
+                    flag = 0
+                    break
+                }else if(it.id == dataOrder[i].productId && dataOrder[i].status == "declined"){
+                    orderId = dataOrder[i].id
+                    flag = 1
+                    break
+                }
+                else{
+                    flag = 2
                 }
                 Log.d("it id ", it.id.toString())
                 Log.d("dataOrder id ", dataOrder[i].productId.toString())
 
+            }
+            Log.d("testes id ", orderId.toString())
+
+            if(flag == 0){
+                buy_btn.setClickable(false);
+                buy_btn.setText("Menunggu Respon Penjual")
+            }else if(flag == 1){
+                Log.d("testes id ", "massssssss")
+                reBidProduct()
+            }else{
+                Log.d("testes id ", "siiiiiiiiiiiiii")
+                buy_btn.setText("Saya Tertarik dan Ingin Nego")
+                bidProduct()
             }
 
             product_name.setText(it.name)
@@ -218,6 +238,76 @@ class ProductDetail : Fragment() {
 
 
         }
+
     }
+
+
+    fun reBidProduct(){
+        buy_btn.setOnClickListener{
+            val customOrderDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_buyer_offer_price, null, false)
+
+            customOrderDialog.product_name.setText(productName.toString())
+            customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
+            Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
+
+            val ADBuilder = AlertDialog.Builder(requireContext())
+                .setView(customOrderDialog)
+                .create()
+
+            customOrderDialog.btn_submit_offer_price.setOnClickListener {
+                if (customOrderDialog.input_offer_price.text.isNotEmpty()){
+                    var offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
+
+                    if(offerPrice > productPrice ){
+                        Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+                            if(it!=null){
+                                Log.d("testes token", it)
+                                viewModelProduct.responseCodeUpdateBuyerOrder.observe(viewLifecycleOwner,{
+//                                    Log.d("tes response ", it.toString())
+                                    if(it == "201"){
+                                        Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "400"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "you has order for this product", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "403"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "You are not login/access_token is wrong", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else if(it == "500"){
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "\t\n" +
+                                                "Internal Service Error", Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    else{
+                                        Toast.makeText(requireContext(), "\t\n" +
+                                                "No Internet Connection", Toast.LENGTH_SHORT).show()
+
+                                    }
+                                })
+
+                                viewModelProduct.updateBuyerOrder(it, orderId, offerPrice)
+
+                            }
+
+                        }
+
+                    }
+                    ADBuilder.dismiss()
+                }
+            }
+            ADBuilder.show()
+
+
+        }
+
+    }
+
 
 }

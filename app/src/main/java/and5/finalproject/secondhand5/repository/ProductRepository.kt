@@ -1,11 +1,9 @@
 package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
-import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrder
-import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.buyerproduct.*
 import and5.finalproject.secondhand5.model.seller.*
+import and5.finalproject.secondhand5.model.seller.Category
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
 import okhttp3.MultipartBody
@@ -35,6 +33,28 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getBuyerDetailOrder(access_token : String, id:Int): GetBuyerOrderItem {
         return productApi.getBuyerDetailOrder(access_token, id)
+    }
+
+    fun updateBuyerOrder(
+        access_token : String,
+        id : Int,
+        bid_price: Int,
+        liveCode: MutableLiveData<String>
+    ){
+        val apiClient : Call<UpdateBuyerOrderResponse> = productApi.updateBuyerOrder(access_token, id, bid_price)
+        apiClient.enqueue(object :Callback<UpdateBuyerOrderResponse>{
+            override fun onResponse(
+                call: Call<UpdateBuyerOrderResponse>,
+                response: Response<UpdateBuyerOrderResponse>
+            ) {
+                liveCode.postValue(response.code().toString())
+            }
+
+            override fun onFailure(call: Call<UpdateBuyerOrderResponse>, t: Throwable) {
+                liveCode.postValue(null)
+            }
+
+        })
     }
 
 
