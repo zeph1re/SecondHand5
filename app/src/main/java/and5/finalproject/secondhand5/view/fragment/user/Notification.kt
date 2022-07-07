@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
 import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
@@ -17,30 +18,31 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_notification.*
+import kotlinx.android.synthetic.main.notification_adapter.*
 
 class Notification : Fragment() {
 
     lateinit var userManager: UserManager
+    lateinit var getNotification : GetNotificationItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        userManager = UserManager(requireActivity())
-        return if (userManager.userToken.toString() != "") {
-            inflater.inflate(R.layout.fragment_notification, container, false)
-        } else {
-            inflater.inflate(R.layout.fragment_user_not_login, container, false)
-        }
+
+        return inflater.inflate(R.layout.fragment_user_not_login, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             initNotification()
+            readOrNot()
     }
 
     private fun initNotification() {
+        userManager = UserManager(requireActivity())
         val notificationAdapter = NotificationAdapter()
 
         val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
@@ -58,7 +60,15 @@ class Notification : Fragment() {
             }
             viewmodel.getNotification(it)
         }
-
-
     }
+
+    private fun readOrNot(){
+        if(getNotification.read){
+            read_or_not.visibility = View.GONE
+        } else {
+            read_or_not.visibility = View.VISIBLE
+        }
+    }
+
+
 }
