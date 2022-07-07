@@ -97,10 +97,19 @@ class DetailOrder : Fragment() {
     }
 
     fun acceptOrder(id:Int){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
-            viewModelProduct.patchSellerOrder(it, id, "accepted")
-        }
+//        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+//        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+//            viewModelProduct.patchSellerOrder(it, id, "accepted")
+//        }
+
+        val customWaDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_whastapp, null, false)
+
+        val ADBuilder = AlertDialog.Builder(requireContext())
+            .setView(customWaDialog)
+            .create()
+
+        ADBuilder.show()
+
         findNavController().navigate(R.id.myListProduct)
 
     }

@@ -1,33 +1,29 @@
 package and5.finalproject.secondhand5.model.buyerproduct
 
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
-@Parcelize
-data class AddBuyerOrderResponse(
+data class GetBuyerOrderItem(
     @SerializedName("base_price")
-    val basePrice: Int,
+    val basePrice: String,
     @SerializedName("buyer_id")
     val buyerId: Int,
-    @SerializedName("createdAt")
-    val createdAt: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("image_product")
-    val imageProduct: String,
+    val imageProduct: Any,
     @SerializedName("price")
     val price: Int,
+    @SerializedName("Product")
+    val product: Product,
     @SerializedName("product_id")
     val productId: Int,
     @SerializedName("product_name")
     val productName: String,
     @SerializedName("status")
     val status: String,
-    @SerializedName("transcaction_date")
-    val transcactionDate: @RawValue Any,
-    @SerializedName("updatedAt")
-    val updatedAt: String
-) : Parcelable
+    @SerializedName("transaction_date")
+    val transactionDate: Any,
+    @SerializedName("User")
+    val user: UserX
+)

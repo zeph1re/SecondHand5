@@ -1,10 +1,10 @@
 package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.auth.*
-import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.buyerproduct.*
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.model.seller.*
+import and5.finalproject.secondhand5.model.seller.Category
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -67,6 +67,27 @@ interface ApiService {
     suspend fun getDetailProduct(
         @Path("id")id : Int
     ) : GetProductItem
+
+    @GET("buyer/order/{id}")
+    suspend fun getBuyerDetailOrder(
+        @Header("access_token") token: String,
+        @Path("id")id : Int
+    ) : GetBuyerOrderItem
+
+    @GET("buyer/order/")
+    suspend fun getBuyerOrder(
+        @Header("access_token") token: String
+    ) : List<GetBuyerOrderItem>
+
+
+    @PUT("buyer/order/{id}")
+    @FormUrlEncoded
+    fun updateBuyerOrder(
+        @Header("access_token")token:String,
+        @Path("id")id : Int,
+        @Field("bid_price") bid_price: Int
+
+    ) : Call<UpdateBuyerOrderResponse>
 
     @POST ("buyer/order")
     @FormUrlEncoded
@@ -154,7 +175,7 @@ interface ApiService {
     ) : GetSellerProductItem
 
     @GET("seller/order/{id}")
-    suspend fun getDetailOrder(
+    suspend fun getSellserDetailOrder(
         @Header("access_token") token : String,
         @Path("id")id : Int
     ) : GetSellerOrderItem
