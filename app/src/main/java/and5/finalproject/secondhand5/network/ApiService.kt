@@ -58,7 +58,7 @@ interface ApiService {
 
     @PUT ("/auth/change-password")
     @FormUrlEncoded
-    suspend fun updatePasswordUser(
+    fun updatePasswordUser(
         @Header("access_token") token : String,
         @Field ("current_password") current : String,
         @Field ("new_password") new : String,
