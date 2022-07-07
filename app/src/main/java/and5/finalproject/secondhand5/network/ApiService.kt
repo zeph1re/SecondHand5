@@ -48,6 +48,14 @@ interface ApiService {
         @Header("access_token") token: String
     ) : List<GetNotificationItem>
 
+    @PUT ("/auth/change-password")
+    suspend fun updatePassword(
+        @Header("access_token") token : String,
+        @Field ("current_password") current : String,
+        @Field ("new_password") new : String,
+        @Field ("confirm_password") confirm :String
+    ) : UpdatePasswordBody
+
 
     // BUYER
     @GET("buyer/product")
