@@ -1,17 +1,15 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.auth.GetAllUser
+import and5.finalproject.secondhand5.model.auth.UpdatePasswordBody
 import and5.finalproject.secondhand5.model.auth.UpdateUserBody
-import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.repository.UserRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Call
 import javax.inject.Inject
 
 
@@ -22,6 +20,7 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
     var loginLiveData : SingeLiveEvent<String>  = SingeLiveEvent ()
     var getUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
     var updateUserData : MutableLiveData<GetAllUser>  = MutableLiveData()
+    var updatePasswordData : MutableLiveData<UpdatePasswordBody> = MutableLiveData()
     var userToken : MutableLiveData<String> = MutableLiveData()
 
     fun registerUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String){
@@ -49,6 +48,13 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
         viewModelScope.launch  {
             val updateUser = userRepo.updateUser(token, user)
             updateUserData.value  = updateUser
+        }
+    }
+
+    fun updatePasswordData(token: String, current: String, new:String, confirm : String){
+        viewModelScope.launch {
+            val updatePassworduser = userRepo.changePasswordUser(token,current,new, confirm)
+            updatePasswordData.value = updatePassworduser
         }
     }
 

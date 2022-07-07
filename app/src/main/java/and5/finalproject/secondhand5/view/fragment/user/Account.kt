@@ -7,8 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import androidx.navigation.NavOptions
+import and5.finalproject.secondhand5.model.auth.UpdatePasswordBody
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
+import and5.finalproject.secondhand5.viewmodel.UserViewModel
+import android.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.custom_layout_change_password.*
+import kotlinx.android.synthetic.main.custom_layout_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,14 +28,13 @@ class Account : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        userManager = UserManager(requireActivity())
         return inflater.inflate(R.layout.fragment_account, container, false)
         }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userManager = UserManager(requireActivity())
 
         ubah_akun_card.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_account_to_profile)
@@ -47,9 +52,29 @@ class Account : Fragment() {
 
         }
 
+        ubah_password_card.setOnClickListener {
+            val customChangePass = LayoutInflater.from(requireContext()).inflate(R.layout.custom_layout_change_password, null, false)
+            val customDialog = AlertDialog.Builder(requireContext())
+            customDialog.setView(customChangePass)
+            customDialog.create()
 
+            customChangePass.confirm_button.setOnClickListener {
+                val currentPass = current_password.text.toString()
+                val newPass = new_password.text.toString()
+                val confirmPass = confirm_password.text.toString()
 
+                val viewmodel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                viewmodel.userToken(requireActivity()).observe(viewLifecycleOwner){
+                    updatePasswordData(it, currentPass, newPass, confirmPass)
+                }
 
+            }
+        }
 
+    }
+
+    fun updatePasswordData(token: String, current: String, new: String, confirmPass: String){
+        val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        viewModel.updatePasswordData(token,current, new, confirmPass)
     }
 }
