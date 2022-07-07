@@ -42,7 +42,7 @@ class Notification : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initNotification()
         Handler(Looper.getMainLooper()).postDelayed({
-            readOrNot()
+//            readOrNot()
         },1000)
 
     }
