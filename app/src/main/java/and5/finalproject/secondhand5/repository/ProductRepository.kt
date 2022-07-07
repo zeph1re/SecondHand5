@@ -2,6 +2,8 @@ package and5.finalproject.secondhand5.repository
 
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrder
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.network.ApiService
@@ -27,6 +29,15 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getDetailProduct(id)
     }
 
+    suspend fun getBuyerOrder(access_token : String): List<GetBuyerOrderItem>{
+        return productApi.getBuyerOrder(access_token)
+    }
+
+    suspend fun getBuyerDetailOrder(access_token : String, id:Int): GetBuyerOrderItem {
+        return productApi.getBuyerDetailOrder(access_token, id)
+    }
+
+
     fun addBuyerOrder(
         access_token : String,
         id: Int,
@@ -51,11 +62,11 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
 //Seller
 
-    suspend fun getDetailOrder(
+    suspend fun getSellerDetailOrder(
         access_token : String,
         id: Int
     ): GetSellerOrderItem {
-        return productApi.getDetailOrder(access_token, id)
+        return productApi.getSellserDetailOrder(access_token, id)
     }
 
     suspend fun sellerDeleteProduct(

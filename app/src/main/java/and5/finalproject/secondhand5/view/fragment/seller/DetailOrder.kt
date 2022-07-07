@@ -97,10 +97,10 @@ class DetailOrder : Fragment() {
     }
 
     fun acceptOrder(id:Int){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
-            viewModelProduct.patchSellerOrder(it, id, "accepted")
-        }
+//        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+//        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+//            viewModelProduct.patchSellerOrder(it, id, "accepted")
+//        }
         findNavController().navigate(R.id.myListProduct)
 
     }

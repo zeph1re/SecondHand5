@@ -1,5 +1,6 @@
 package and5.finalproject.secondhand5.viewmodel
 
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.repository.ProductRepository
@@ -10,7 +11,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,6 +26,11 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     val product : LiveData<List<GetProductItem>> = productLivedata
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
 
+    private var buyerDetailOrderLivedata = MutableLiveData<GetBuyerOrderItem>()
+    val buyerDetailOrder : LiveData<GetBuyerOrderItem> = buyerDetailOrderLivedata
+
+    private var buyerlOrderLivedata = MutableLiveData<List<GetBuyerOrderItem>>()
+    val buyerOrder : LiveData<List<GetBuyerOrderItem>> = buyerlOrderLivedata
 
     //seller
     var responseCodeAddProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
@@ -66,10 +71,24 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun getDetailProduct(id:Int){
+    fun getAllBuyerOrder(access_token : String){
+        viewModelScope.launch {
+            val databuyerorder = productRepository.getBuyerOrder(access_token)
+            buyerlOrderLivedata.value = databuyerorder
+        }
+    }
+
+    fun getBuyerDetailProduct(id:Int){
         viewModelScope.launch {
             val detailproduct = productRepository.getDetailProduct(id)
             detailProductLivedata.value = detailproduct
+        }
+    }
+
+    fun getBuyerDetailOrder(access_token : String, id:Int){
+        viewModelScope.launch {
+            val buyerdetailOrder = productRepository.getBuyerDetailOrder(access_token, id)
+            buyerDetailOrderLivedata.value = buyerdetailOrder
         }
     }
 
@@ -90,7 +109,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     fun getDetailOrder(access_token: String,id:Int){
         viewModelScope.launch {
-            val detailorder = productRepository.getDetailOrder(access_token, id)
+            val detailorder = productRepository.getSellerDetailOrder(access_token, id)
             detailOrderLiveData.value = detailorder
         }
     }

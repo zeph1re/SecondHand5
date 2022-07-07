@@ -2,9 +2,12 @@ package and5.finalproject.secondhand5.view.fragment.buyer
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +16,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
@@ -29,6 +34,8 @@ class ProductDetail : Fragment() {
     var productId by Delegates.notNull<Int>()
     lateinit var productDescription : String
     lateinit var sellerLocation : String
+
+    lateinit var dataOrder : List<GetBuyerOrderItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,17 +59,77 @@ class ProductDetail : Fragment() {
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
 
-        init()
+        Handler(Looper.getMainLooper()).postDelayed({
+            init()
+        },1000)
+        getOrderData()
+
+    }
+
+
+
+    fun getOrderData(){
+
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+            if(it!=null){
+                viewModelProduct.buyerOrder.observe(viewLifecycleOwner,{
+                    if(it!=null){
+                        dataOrder = it
+//                        Log.d("testes 1 IT ", it.toString())
+                    }
+
+                })
+
+                viewModelProduct.getAllBuyerOrder(it)
+
+            }
+        }
+    }
+
+    //artifak peninggalan
+    fun checkOrder(){
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+            if(it!=null){
+                viewModelProduct.getBuyerDetailOrder(it, productId)
+
+                viewModelProduct.detailOrder.observe(viewLifecycleOwner,{
+                    if (it.status!="pending"){
+                        buy_btn.setClickable(false);
+                        buy_btn.setText("Menunggu Respon Penjual")
+                    }else{
+                        buy_btn.setText("Saya Tertarik dan Ingin Nego")
+                        bidProduct()
+                    }
+                    Log.d("testes 1 statuds ", it.status.toString())
+
+                })
+            }
+        }
 
     }
 
     fun init(){
 //        Log.d("testes 2 id ", id.toString())
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.getDetailProduct(productId)
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewModelProduct.getBuyerDetailProduct(productId)
 
-        viewmodelproduct.detailProduct.observe(viewLifecycleOwner,{
+        viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
 //            Log.d("testes 3 id ", id.toString())
+
+            for(i in dataOrder.indices){
+                if(it.id == dataOrder[i].productId){
+                    buy_btn.setClickable(false);
+                    buy_btn.setText("Menunggu Respon Penjual")
+                }else{
+                    buy_btn.setText("Saya Tertarik dan Ingin Nego")
+                    bidProduct()
+                }
+                Log.d("it id ", it.id.toString())
+                Log.d("dataOrder id ", dataOrder[i].productId.toString())
+
+            }
 
             product_name.setText(it.name)
             product_price.setText("Rp ${it.basePrice.toString()}")
@@ -81,14 +148,6 @@ class ProductDetail : Fragment() {
 
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
 
-
-            if (it.status!="available"){
-                buy_btn.setClickable(false);
-                buy_btn.setText("Barang sudah terjual")
-            }else{
-                buy_btn.setText("Saya Tertarik dan Ingin Nego")
-                bidProduct()
-            }
 
         })
 

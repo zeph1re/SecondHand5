@@ -2,6 +2,8 @@ package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrder
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.model.seller.*
@@ -59,6 +61,17 @@ interface ApiService {
     suspend fun getDetailProduct(
         @Path("id")id : Int
     ) : GetProductItem
+
+    @GET("buyer/order/{id}")
+    suspend fun getBuyerDetailOrder(
+        @Header("access_token") token: String,
+        @Path("id")id : Int
+    ) : GetBuyerOrderItem
+
+    @GET("buyer/order/")
+    suspend fun getBuyerOrder(
+        @Header("access_token") token: String
+    ) : List<GetBuyerOrderItem>
 
     @POST ("buyer/order")
     @FormUrlEncoded
@@ -146,7 +159,7 @@ interface ApiService {
     ) : GetSellerProductItem
 
     @GET("seller/order/{id}")
-    suspend fun getDetailOrder(
+    suspend fun getSellserDetailOrder(
         @Header("access_token") token : String,
         @Path("id")id : Int
     ) : GetSellerOrderItem
