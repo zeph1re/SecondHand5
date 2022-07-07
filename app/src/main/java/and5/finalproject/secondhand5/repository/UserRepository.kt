@@ -31,7 +31,12 @@ class UserRepository @Inject constructor(private val service: ApiService){
         )
     }
 
-    fun loginUser(email : String, password: String, liveToken: MutableLiveData<String>,  liveCode: MutableLiveData<String>) {
+    fun loginUser(
+        email : String,
+        password: String,
+        liveToken: MutableLiveData<String>,
+        liveCode: MutableLiveData<String>)
+    {
         val apiClient : Call<LoginResponse> = service.loginUser(email, password)
         apiClient.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
@@ -58,8 +63,29 @@ class UserRepository @Inject constructor(private val service: ApiService){
         return service.updateUser(token, user)
     }
 
-    suspend fun changePasswordUser(token: String, current: String, new: String, confirm: String): UpdatePasswordBody {
-        return service.updatePassword(token,current,new, confirm)
+    suspend fun changePasswordUser(
+        token: String,
+        current: String,
+        new: String,
+        confirm: String,
+        responseCode : MutableLiveData<String>)
+    {
+        val apiClient : Call<UpdatePasswordBody> = service.updatePasswordUser(token,current,new, confirm)
+        apiClient.enqueue( object : Callback<UpdatePasswordBody>{
+            override fun onResponse(
+                call: Call<UpdatePasswordBody>,
+                response: Response<UpdatePasswordBody>
+            ) {
+                responseCode.postValue(response.code().toString())
+            }
+            override fun onFailure(call: Call<UpdatePasswordBody>, t: Throwable) {
+                responseCode.postValue(null)
+            }
+
+        })
+
     }
 
 }
+
+
