@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/image_banner"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:src="@drawable/ic_launcher_foreground" />
 
 </RelativeLayout>

@@ -102,28 +102,6 @@ class ProductDetail : Fragment() {
         }
     }
 
-    //artifak peninggalan
-    fun checkOrder(){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
-            if(it!=null){
-                viewModelProduct.getBuyerDetailOrder(it, productId)
-
-                viewModelProduct.detailOrder.observe(viewLifecycleOwner,{
-                    if (it.status!="pending"){
-                        buy_btn.setClickable(false);
-                        buy_btn.setText("Menunggu Respon Penjual")
-                    }else{
-                        buy_btn.setText("Saya Tertarik dan Ingin Nego")
-                        bidProduct()
-                    }
-                    Log.d("testes 1 statuds ", it.status.toString())
-
-                })
-            }
-        }
-
-    }
 
     fun initNoLogin(){
 //        Log.d("testes 2 id ", id.toString())
@@ -271,7 +249,11 @@ class ProductDetail : Fragment() {
                                             requireContext(),
                                             "Harga Tawarmu Berhasil dikirim ke penjual",
                                             Toast.LENGTH_SHORT
+
                                         ).show()
+                                        buy_btn.setClickable(false);
+                                        buy_btn.setText("Menunggu Respon Penjual")
+
                                     } else if (it == "400") {
                                         Toast.makeText(
                                             requireContext(),
@@ -348,6 +330,8 @@ class ProductDetail : Fragment() {
 //                                    Log.d("tes response ", it.toString())
                                     if(it == "201"){
                                         Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
+                                        buy_btn.setClickable(false);
+                                        buy_btn.setText("Menunggu Respon Penjual")
                                     }
                                     else if(it == "400"){
                                         Toast.makeText(requireContext(), "\t\n" +
