@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.auth.*
+import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.*
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.model.seller.*
@@ -64,6 +65,9 @@ interface ApiService {
         @Field ("new_password") new : String,
         @Field ("confirm_password") confirm :String
     ) : Call<UpdatePasswordBody>
+
+    @GET ("seller/banner")
+    suspend fun getAllBanner() : List<GetBannerItem>
 
 
     // BUYER

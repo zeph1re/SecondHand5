@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.seller_product_adapter.view.*
 
 class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : RecyclerView.Adapter<SellerProductAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view)
-     var categoryName = mutableListOf<String>()
+     var categorySellerUpdate = mutableListOf<String>()
     var sellerProduct : List<GetSellerProductItem>? = null
     fun setListProduct(product  : List<GetSellerProductItem>){
         this.sellerProduct= product
@@ -31,11 +31,11 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
         holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice.toString()}"
 
         for(j in sellerProduct!![position].categories.indices) {
-
+            categorySellerUpdate.clear()
             sellerProduct!![position].categories.forEach {
-               categoryName.add(it.name)
+               categorySellerUpdate.add(it.name)
             }
-            val listToString = categoryName.toString()
+            val listToString = categorySellerUpdate.toString()
             val getCategory = listToString.replace("[","").replace("]", "")
             holder.itemView.seller_product_category.text = getCategory
         }
@@ -44,6 +44,7 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
 
         holder.itemView.productSellerCard.setOnClickListener {
             onclick(sellerProduct!![position])
+
         }
     }
 

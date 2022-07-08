@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/custom_button.xml" value="0.1" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.13" />
-        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/adapter_pilih_kategory.xml" value="0.2265625" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_buyer_offer_notification.xml" value="0.16312056737588654" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_buyer_offer_price.xml" value="0.33" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_seller_detail_product.xml" value="0.32916666666666666" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.30932971014492755" />
+=======
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_layout_change_password.xml" value="0.2265625" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_seller_detail_product.xml" value="0.32916666666666666" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_seller_order_status.xml" value="0.321875" />
@@ -16,13 +22,22 @@
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.25" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.30932971014492755" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_detail_order.xml" value="0.12208713272543059" />
+>>>>>>> 0219318085c416d3851d23a99171762d9a5f92c4
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_detail_penawar.xml" value="0.3029891304347826" />
+=======
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/custom_seller_status.xml" value="0.3260416666666667" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.30932971014492755" />
+>>>>>>> 56de0570e2677b2079d9492490dec2f72b58d3d8
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.16160081053698075" />
-        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.3302083333333333" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.1838768115942029" />
-        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_notification.xml" value="0.3098958333333333" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.16160081053698075" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_product_preview.xml" value="0.30932971014492755" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.3302083333333333" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_seller_product.xml" value="0.17481884057971014" />
+=======
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.2265625" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.3302083333333333" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_seller_interest.xml" value="0.2265625" />
@@ -39,45 +54,84 @@
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.2265625" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_sold_adapter.xml" value="0.2265625" />
         <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/success_toast.xml" value="0.2265625" />
+>>>>>>> 0219318085c416d3851d23a99171762d9a5f92c4
+=======
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_seller_interest.xml" value="0.24818840579710144" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/fragment_seller_product.xml" value="0.24818840579710144" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/home_categories_adapter.xml" value="0.26811594202898553" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/home_product_adapter.xml" value="0.26811594202898553" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.22" />
+        <entry key="..\:/Android Project/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/drawable/shadow_card.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.13722826086956522" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/adapter_pilih_kategory.xml" value="0.13722826086956522" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_buyer_offer_notification.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_seller_detail_product.xml" value="0.209375" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_seller_status.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_seller_whastapp.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/custom_zoom_photo_profile_dialog.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/error_toast.xml" value="0.209375" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_notification.xml" value="0.209375" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.209375" />
+>>>>>>> 56de0570e2677b2079d9492490dec2f72b58d3d8
         <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_seller_product.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_seller_product_sold.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/fragment_user_not_login.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/home_categories_adapter.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/home_product_adapter.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/notification_adapter.xml" value="0.41695501730103807" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.209375" />
+        <entry key="..\:/AndroidProject/SecondHand5/app/src/main/res/layout/success_toast.xml" value="0.1" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview.xml" value="0.296" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/custom_rounded_textview_2.xml" value="0.1935" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_edit.xml" value="0.1015" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_list_bulleted.xml" value="0.1755" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_logout.xml" value="0.1935" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_rupiah.xml" value="0.1935" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/drawable/ic_settings.xml" value="0.1935" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/font/font.xml" value="0.22564102564102564" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/activity_main.xml" value="0.184375" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/adapter_pilih_kategory.xml" value="0.2" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/component_example.xml" value="0.3614583333333333" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_buyer_offer_notification.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_buyer_offer_price.xml" value="0.3625" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_layout_change_password.xml" value="0.33" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_seller_status.xml" value="0.27314814814814814" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_seller_whastapp.xml" value="0.25" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/error_toast.xml" value="0.2" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.33" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.17033603707995365" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_blank.xml" value="0.2" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/custom_seller_whastapp.xml" value="0.3625" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_account.xml" value="0.1" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_add_product2.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_card_buyer_offer.xml" value="0.3625" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_change_password_dialog.xml" value="0.2" />
+=======
+>>>>>>> 0219318085c416d3851d23a99171762d9a5f92c4
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_order.xml" value="0.25" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_penawar.xml" value="0.33" />
+=======
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_penawar.xml" value="0.3484375" />
+>>>>>>> 56de0570e2677b2079d9492490dec2f72b58d3d8
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_detail_tambah_produk.xml" value="0.3625" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_home.xml" value="0.18541666666666667" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_login.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_my_list_product.xml" value="0.3625" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_notification.xml" value="0.2" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_product_detail.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_product_preview.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_profile.xml" value="0.18541666666666667" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+<<<<<<< HEAD
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/fragment_user_not_login.xml" value="0.2" />
+<<<<<<< HEAD
+        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/home_banner_adapter.xml" value="0.2" />
+=======
+>>>>>>> 0219318085c416d3851d23a99171762d9a5f92c4
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/notification_adapter.xml" value="0.33" />
+=======
+>>>>>>> 56de0570e2677b2079d9492490dec2f72b58d3d8
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_interest_adapter.xml" value="0.3614583333333333" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_notification_offer_adapter.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_product_adapter.xml" value="0.3625" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/seller_sold_adapter.xml" value="0.3625" />
-        <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/layout/success_toast.xml" value="0.2" />
         <entry key="..\:/Kuliah/Semester 6/SecondHand5/app/src/main/res/menu/bottom_navigation.xml" value="0.18541666666666667" />
       </map>
     </option>

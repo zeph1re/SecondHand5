@@ -18,7 +18,7 @@ import kotlin.math.log
 class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
     private var productData : List<GetProductItem>? = null
-    var categoryName = mutableListOf<String>()
+    var categoryProduct = mutableListOf<String>()
     fun setProductList(productList: List<GetProductItem>){
         this.productData = productList
     }
@@ -57,12 +57,14 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
         }else{
             holder.itemView.product_id.text = "null"
         }
-
+             categoryProduct.clear()
             for(j in productData!![position].categories.indices){
                 productData!![position].categories.forEach {
-                    categoryName.add(it.name)
+
+                    categoryProduct.add(it.name)
                 }
-                val listToString = categoryName.toString()
+                val listToString = categoryProduct.toString()
+                Log.d("category", listToString)
                 val getCategory = listToString.replace("[","").replace("]", "")
                 holder.itemView.product_category.text = getCategory
             }

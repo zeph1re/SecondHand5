@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.model.notification
 
 
+import and5.finalproject.secondhand5.model.buyerproduct.Category
 import com.google.gson.annotations.SerializedName
 
 data class GetNotificationItem(
@@ -27,5 +28,7 @@ data class GetNotificationItem(
     @SerializedName("transaction_date")
     val transactionDate: String,
     @SerializedName("updated_at")
-    val updatedAt: String
+    val updatedAt: String,
+    @SerializedName("Product")
+    val Product: Product
 )
