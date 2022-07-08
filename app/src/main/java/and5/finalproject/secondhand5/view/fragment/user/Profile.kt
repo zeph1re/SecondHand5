@@ -156,7 +156,7 @@ class Profile : Fragment() {
             }
                 if (updateNama.isNotEmpty() && updateKota.isNotEmpty() && updateAlamat.isNotEmpty() && updateNomor.isNotEmpty()) {
                     viewModel.updateUserData(
-                        token, updateNama, email, password, updateNomor, updateAlamat,
+                        token, updateNama, email, "", updateNomor, updateAlamat,
                         image!!, updateKota
                     )
                 }
@@ -196,7 +196,9 @@ class Profile : Fragment() {
 
                 image  =   MultipartBody.Part.createFormData("image", getImage.toString())
                 email = it.email
+
                 password = it.password
+                Log.d ("pass", password)
 
         }
     }
