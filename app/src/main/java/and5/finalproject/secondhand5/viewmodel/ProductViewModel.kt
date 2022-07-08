@@ -1,5 +1,6 @@
 package and5.finalproject.secondhand5.viewmodel
 
+import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.seller.*
@@ -62,6 +63,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     var detailSellerProductLivedata = MutableLiveData<GetSellerProductItem>()
     var detailSellerProduct : LiveData<GetSellerProductItem> = detailSellerProductLivedata
+
+    var sellerBannerLivedata = MutableLiveData<List<GetBannerItem>>()
+    var sellerBanner : LiveData<List<GetBannerItem>> = sellerBannerLivedata
 
     var userToken : MutableLiveData<String> = MutableLiveData()
 
@@ -194,6 +198,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         viewModelScope.launch{
             val dataSellerSoldOrder = productRepository.getSellerSuccesfulOrder(token)
             sellerSoldOrderLiveData.value = dataSellerSoldOrder
+        }
+    }
+
+    fun getSellerBanner() {
+        viewModelScope.launch {
+            val dataSellerBanner = productRepository.getSellerBanner()
+            sellerBannerLivedata.value = dataSellerBanner
         }
     }
 
