@@ -73,7 +73,8 @@ interface ApiService {
     // BUYER
     @GET("buyer/product")
     suspend fun getAllProduct(
-        @Query("status") status : String
+        @Query("status") status : String,
+        @Query("search") search : String
     ) : List<GetProductItem>
 
     @GET("buyer/product/{id}/")

@@ -25,6 +25,7 @@ class Home : Fragment() {
 
     lateinit var productAdapter: ProductAdapter
     lateinit var bannerAdapter: BannerAdapter
+    var searchQuery = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +57,14 @@ class Home : Fragment() {
         }
         initBanner()
         initCategory()
+
         initProduct()
+
+        et_primary_search.setOnClickListener {
+            searchQuery = et_primary_search.text.toString()
+            initProduct()
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -80,7 +88,7 @@ class Home : Fragment() {
 
             }
         }
-        viewmodelproduct.getAllProduct()
+        viewmodelproduct.getAllProduct(searchQuery)
     }
 
     @SuppressLint("NotifyDataSetChanged")

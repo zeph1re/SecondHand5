@@ -20,8 +20,8 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
 
     //Buyer
-    suspend fun getAllProduct(): List<GetProductItem>{
-        return productApi.getAllProduct("available")
+    suspend fun getAllProduct(searchQuery : String): List<GetProductItem>{
+        return productApi.getAllProduct("available", searchQuery)
     }
 
     suspend fun getDetailProduct(id:Int): GetProductItem {

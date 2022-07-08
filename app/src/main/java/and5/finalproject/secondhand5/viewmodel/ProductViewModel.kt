@@ -78,9 +78,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
-    fun getAllProduct(){
+    fun getAllProduct(searchQuery : String){
         viewModelScope.launch {
-            val dataproduct = productRepository.getAllProduct()
+            val dataproduct = productRepository.getAllProduct(searchQuery)
             productLivedata.value = dataproduct
         }
     }
