@@ -12,6 +12,8 @@ import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -25,6 +27,7 @@ class Notification : Fragment() {
 
     lateinit var userManager: UserManager
     lateinit var getNotification: GetNotificationItem
+    lateinit var notificationAdapter : NotificationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +41,15 @@ class Notification : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNotification()
-        readOrNot()
+        Handler(Looper.getMainLooper()).postDelayed({
+//            readOrNot()
+        },1000)
+
     }
 
     private fun initNotification() {
         userManager = UserManager(requireActivity())
-        val notificationAdapter = NotificationAdapter()
+        notificationAdapter = NotificationAdapter()
 
         val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)

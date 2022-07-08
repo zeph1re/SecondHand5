@@ -5,11 +5,13 @@
     android:layout_height="wrap_content"
     app:strokeWidth="2dp"
     app:strokeColor="@color/blue_100"
+    android:layout_margin="15dp"
     app:cardCornerRadius="30dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <LinearLayout
+
         android:layout_margin="15dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/buyer_image"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_marginStart="30dp"
@@ -80,10 +83,10 @@
                         android:id="@+id/buyer_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nama Pembeli"
-                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins_bold"
                         android:singleLine="true"
-                        android:fontFamily="@font/poppins_bold"/>
+                        android:text="Nama Pembeli"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/buyer_address_city"
@@ -119,6 +122,7 @@
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/product_image"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:src="@drawable/ei"
@@ -150,7 +154,7 @@
                         android:layout_marginBottom="10dp"/>
 
                     <TextView
-                        android:id="@+id/product_offered_price"
+                        android:id="@+id/product_bid_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp 200.000"

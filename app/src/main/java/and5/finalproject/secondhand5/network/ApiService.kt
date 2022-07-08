@@ -66,7 +66,7 @@ interface ApiService {
         @Field ("confirm_password") confirm :String
     ) : Call<UpdatePasswordBody>
 
-    @GET ("/seller/banner")
+    @GET ("seller/banner")
     suspend fun getAllBanner() : List<GetBannerItem>
 
 

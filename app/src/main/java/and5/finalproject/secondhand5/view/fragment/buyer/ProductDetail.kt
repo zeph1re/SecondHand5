@@ -3,6 +3,7 @@ package and5.finalproject.secondhand5.view.fragment.buyer
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
 import android.os.Bundle
@@ -61,10 +62,17 @@ class ProductDetail : Fragment() {
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            init()
-        },1000)
-        getOrderData()
+        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+            if (token!= ""){
+                getOrderData()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    init()
+                },1000)
+            }else{
+                initNoLogin()
+            }
+        }
 
     }
 
@@ -111,6 +119,43 @@ class ProductDetail : Fragment() {
         }
 
     }
+
+    fun initNoLogin(){
+//        Log.d("testes 2 id ", id.toString())
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewModelProduct.getBuyerDetailProduct(productId)
+
+        viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
+//            Log.d("testes 3 id ", id.toString())
+            var flag = 0
+
+            if(flag == 0){
+                buy_btn.setClickable(false);
+                buy_btn.setText("Login Untuk Order")
+            }
+
+            product_name.setText(it.name)
+            product_price.setText("Rp ${it.basePrice.toString()}")
+            product_category.setText("${it.categories[0].name}")
+
+            seller_name.setText("${it.user.fullName}")
+            seller_address.setText("${it.user.city}")
+            Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+            product_description.setText("${it.description}")
+
+            productName = it.name
+            productPrice = it.basePrice
+            productImage = it.imageUrl
+            productDescription = it.description
+            sellerLocation = it.location
+
+            Glide.with(requireContext()).load(it.imageUrl).into(product_image)
+
+
+        })
+
+    }
+
 
     fun init(){
 //        Log.d("testes 2 id ", id.toString())

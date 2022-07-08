@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class Home : Fragment() {
 
     lateinit var productAdapter: ProductAdapter
+    lateinit var bannerAdapter: BannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,11 +67,11 @@ class Home : Fragment() {
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
 
-                rv_list_item.layoutManager =
-                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
-
 //                rv_list_item.layoutManager =
-//                    GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
+//                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+
+                rv_list_item.layoutManager =
+                    GridLayoutManager(requireActivity(), 3, GridLayoutManager.HORIZONTAL, false)
                 rv_list_item.adapter = productAdapter
 
                 productAdapter.setProductList(it)
@@ -101,13 +102,13 @@ class Home : Fragment() {
     }
 
     fun initBanner() {
-        val bannerAdapter = BannerAdapter()
+        bannerAdapter = BannerAdapter()
 
         val viewmodelbanner = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelbanner.sellerBanner.observe(viewLifecycleOwner) {
             if (it != null) {
                 banner_rv.layoutManager =
-                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
                 banner_rv.adapter = bannerAdapter
                 bannerAdapter.setBannerList(it)
                 bannerAdapter.notifyDataSetChanged()
