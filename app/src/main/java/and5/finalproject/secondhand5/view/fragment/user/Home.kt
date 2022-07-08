@@ -26,6 +26,7 @@ class Home : Fragment() {
     lateinit var productAdapter: ProductAdapter
     lateinit var bannerAdapter: BannerAdapter
     var searchQuery = ""
+    var idQuery = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,16 +56,52 @@ class Home : Fragment() {
 //            Log.d("testes categories", it.categories.toString())
             view.findNavController().navigate(R.id.action_home_to_productDetail, data)
         }
+
         initBanner()
         initCategory()
 
-        initProduct()
+        if (idQuery == 0){
+            initProduct()
+            searchFilter()
+        }else {
+            categoryFilter()
+        }
 
+    }
+
+    fun categoryFilter(){
+        initProductbyCategories()
+    }
+
+    fun searchFilter(){
         et_primary_search.setOnClickListener {
             searchQuery = et_primary_search.text.toString()
             initProduct()
         }
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun initProductbyCategories(){
+        val productAdapter = productAdapter
+
+        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        viewmodelproduct.product.observe(viewLifecycleOwner) {
+            if (it != null) {
+
+//                rv_list_item.layoutManager =
+//                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+
+                rv_list_item.layoutManager =
+                    GridLayoutManager(requireActivity(), 3, GridLayoutManager.HORIZONTAL, false)
+                rv_list_item.adapter = productAdapter
+
+                productAdapter.setProductList(it)
+                productAdapter.notifyDataSetChanged()
+//                productAdapter.setHasStableIds(true)
+
+            }
+        }
+        viewmodelproduct.getProductbyCategories(idQuery, searchQuery)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -93,7 +130,10 @@ class Home : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun initCategory(){
-        val categoriesAdapter = CategoriesAdapter()
+        val categoriesAdapter = CategoriesAdapter(){
+            idQuery = it.id
+            categoryFilter()
+        }
 
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.sellerCategory.observe(viewLifecycleOwner) {

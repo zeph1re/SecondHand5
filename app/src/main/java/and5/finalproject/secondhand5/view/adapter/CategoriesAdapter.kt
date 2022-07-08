@@ -1,7 +1,6 @@
 package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.model.seller.Category
 import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_categories_adapter.view.*
 
-class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoriesAdapter(private var onClick : (GetSellerCategoryItem)->Unit) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     private var category : List<GetSellerCategoryItem>? = null
 
@@ -30,6 +29,10 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.home_category.text = "${category!![position].name.toString()}"
+
+        holder.itemView.categoryCard.setOnClickListener {
+            onClick(category!![position])
+        }
 
     }
 

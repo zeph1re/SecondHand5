@@ -85,6 +85,13 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
+    fun getProductbyCategories(category_id: Int, searchQuery : String){
+        viewModelScope.launch {
+            val dataproduct = productRepository.getProductbyCategories(category_id, searchQuery)
+            productLivedata.value = dataproduct
+        }
+    }
+
     fun getAllBuyerOrder(access_token : String){
         viewModelScope.launch {
             val databuyerorder = productRepository.getBuyerOrder(access_token)
