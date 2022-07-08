@@ -24,6 +24,10 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
         return productApi.getAllProduct("available", searchQuery)
     }
 
+    suspend fun getProductbyCategories(category_id: Int, searchQuery : String): List<GetProductItem>{
+        return productApi.getProductbyCategories("available", category_id, searchQuery)
+    }
+
     suspend fun getDetailProduct(id:Int): GetProductItem {
         return productApi.getDetailProduct(id)
     }
