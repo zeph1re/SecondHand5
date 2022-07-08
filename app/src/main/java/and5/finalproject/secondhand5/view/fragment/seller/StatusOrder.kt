@@ -6,13 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
 import android.os.Handler
 import android.os.Looper
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.custom_seller_order_status.*
+import kotlinx.android.synthetic.main.custom_seller_order_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
@@ -34,6 +43,12 @@ class StatusOrder : Fragment() {
     lateinit var buyerAddress :String
     lateinit var buyerImage :String
 
+    lateinit var userManager: UserManager
+
+    var radioGroup: RadioGroup? = null
+    lateinit var radioButton: RadioButton
+    private lateinit var button: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +67,7 @@ class StatusOrder : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             dialogWA()
+            statusDialog()
 
             buyer_name.text = buyerName
             buyer_address_city.text = buyerAddress
@@ -62,6 +78,45 @@ class StatusOrder : Fragment() {
         },1000)
 
 
+    }
+
+    fun acceptOrder(id:Int){
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+            viewModelProduct.patchSellerOrder(it, id, "accepted")
+        }
+
+//        val data = Bundle()
+//        data.putInt("order_id", orderId)
+//
+        findNavController().navigate(R.id.myListProduct)
+
+    }
+
+    fun declineOrder(id:Int){
+        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+            viewModelProduct.patchSellerOrder(it, id, "declined")
+        }
+        findNavController().navigate(R.id.myListProduct)
+
+    }
+
+    fun statusDialog(){
+        btn_status.setOnClickListener {
+            val customStatus = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_order_status, null, false)
+
+            customStatus.btn_submit.setOnClickListener {
+
+            }
+
+            val ADBuilder = AlertDialog.Builder(requireContext())
+                .setView(customStatus)
+                .create()
+
+            ADBuilder.show()
+
+        }
     }
 
     fun dialogWA(){

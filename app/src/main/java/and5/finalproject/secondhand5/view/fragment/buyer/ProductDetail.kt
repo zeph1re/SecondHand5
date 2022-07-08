@@ -17,8 +17,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
@@ -62,7 +60,7 @@ class ProductDetail : Fragment() {
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
 
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
                 getOrderData()
@@ -165,7 +163,7 @@ class ProductDetail : Fragment() {
         viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
 //            Log.d("testes 3 id ", id.toString())
 
-            var flag = 0
+            var flag = 3
             for(i in dataOrder.indices){
                 if(it.id == dataOrder[i].productId && dataOrder[i].status != "declined"){
                     flag = 0
@@ -250,7 +248,7 @@ class ProductDetail : Fragment() {
                                     }
                                     else if(it == "400"){
                                         Toast.makeText(requireContext(), "\t\n" +
-                                                "you has order for this product", Toast.LENGTH_SHORT).show()
+                                                "already order or this product reach limit order", Toast.LENGTH_SHORT).show()
                                     }
                                     else if(it == "403"){
                                         Toast.makeText(requireContext(), "\t\n" +
