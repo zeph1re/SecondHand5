@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
@@ -35,6 +36,7 @@ class ProductDetail : Fragment() {
     var productId by Delegates.notNull<Int>()
     lateinit var productDescription : String
     lateinit var sellerLocation : String
+    var getDetailCategory = mutableSetOf<String>()
 
     var orderId = 0
 
@@ -46,11 +48,14 @@ class ProductDetail : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_detail, container, false)
+        val view =  inflater.inflate(R.layout.fragment_product_detail, container, false)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
@@ -125,18 +130,26 @@ class ProductDetail : Fragment() {
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.getBuyerDetailProduct(productId)
 
-        viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
+        viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
 //            Log.d("testes 3 id ", id.toString())
             var flag = 0
 
-            if(flag == 0){
+            if (flag == 0) {
                 buy_btn.setClickable(false);
                 buy_btn.setText("Login Untuk Order")
             }
 
             product_name.setText(it.name)
             product_price.setText("Rp ${it.basePrice.toString()}")
-            product_category.setText("${it.categories[0].name}")
+            it.categories.forEach {
+
+               getDetailCategory.add(it.name)
+                val listToString = getDetailCategory.toString()
+                Log.d("detailCategory", listToString)
+                val getCategory = listToString.replace("[", "").replace("]","")
+                product_category.text = getCategory
+            }
+
 
             seller_name.setText("${it.user.fullName}")
             seller_address.setText("${it.user.city}")
@@ -152,7 +165,7 @@ class ProductDetail : Fragment() {
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
 
 
-        })
+        }
 
     }
 
@@ -162,20 +175,19 @@ class ProductDetail : Fragment() {
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.getBuyerDetailProduct(productId)
 
-        viewModelProduct.detailProduct.observe(viewLifecycleOwner,{
+        viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
 //            Log.d("testes 3 id ", id.toString())
 
-            var flag = 0
-            for(i in dataOrder.indices){
-                if(it.id == dataOrder[i].productId && dataOrder[i].status != "declined"){
+            var flag = 2
+            for (i in dataOrder.indices) {
+                if (it.id == dataOrder[i].productId && dataOrder[i].status != "declined") {
                     flag = 0
                     break
-                }else if(it.id == dataOrder[i].productId && dataOrder[i].status == "declined"){
+                } else if (it.id == dataOrder[i].productId && dataOrder[i].status == "declined") {
                     orderId = dataOrder[i].id
                     flag = 1
                     break
-                }
-                else{
+                } else {
                     flag = 2
                 }
                 Log.d("it id ", it.id.toString())
@@ -184,13 +196,13 @@ class ProductDetail : Fragment() {
             }
             Log.d("testes id ", orderId.toString())
 
-            if(flag == 0){
+            if (flag == 0) {
                 buy_btn.setClickable(false);
                 buy_btn.setText("Menunggu Respon Penjual")
-            }else if(flag == 1){
+            } else if (flag == 1) {
                 Log.d("testes id ", "massssssss")
                 reBidProduct()
-            }else{
+            } else {
                 Log.d("testes id ", "siiiiiiiiiiiiii")
                 buy_btn.setText("Saya Tertarik dan Ingin Nego")
                 bidProduct()
@@ -198,7 +210,15 @@ class ProductDetail : Fragment() {
 
             product_name.setText(it.name)
             product_price.setText("Rp ${it.basePrice.toString()}")
-            product_category.setText("${it.categories[0].name}")
+            getDetailCategory.clear()
+            it.categories.forEach {
+
+                getDetailCategory.add(it.name)
+                val listToString = getDetailCategory.toString()
+                Log.d("detailCategory", listToString)
+                val getCategory = listToString.replace("[", "").replace("]","")
+                product_category.text = getCategory
+            }
 
             seller_name.setText("${it.user.fullName}")
             seller_address.setText("${it.user.city}")
@@ -214,7 +234,7 @@ class ProductDetail : Fragment() {
             Glide.with(requireContext()).load(it.imageUrl).into(product_image)
 
 
-        })
+        }
 
     }
 
@@ -230,7 +250,7 @@ class ProductDetail : Fragment() {
             val ADBuilder = AlertDialog.Builder(requireContext())
                 .setView(customOrderDialog)
                 .create()
-
+            ADBuilder.show()
             customOrderDialog.btn_submit_offer_price.setOnClickListener {
                 if (customOrderDialog.input_offer_price.text.isNotEmpty()){
                     var offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
@@ -240,33 +260,45 @@ class ProductDetail : Fragment() {
                     }
                     else{
                         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-                        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+                        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
                             if(it!=null){
                                 Log.d("testes token", it)
-                                viewModelProduct.responseCodeAddBuyerOrder.observe(viewLifecycleOwner,{
+                                viewModelProduct.responseCodeAddBuyerOrder.observe(viewLifecycleOwner) {
 //                                    Log.d("tes response ", it.toString())
-                                    if(it == "201"){
-                                        Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
+                                    if (it == "201") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Harga Tawarmu Berhasil dikirim ke penjual",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else if (it == "400") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "\t\n" +
+                                                    "you has order for this product",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else if (it == "403") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "\t\n" +
+                                                    "You are not login/access_token is wrong",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else if (it == "500") {
+                                        Toast.makeText(
+                                            requireContext(), "\t\n" +
+                                                    "\t\n" +
+                                                    "Internal Service Error", Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(), "\t\n" +
+                                                    "No Internet Connection", Toast.LENGTH_SHORT
+                                        ).show()
                                     }
-                                    else if(it == "400"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "you has order for this product", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else if(it == "403"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "You are not login/access_token is wrong", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else if(it == "500"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "\t\n" +
-                                                "Internal Service Error", Toast.LENGTH_SHORT).show()
-                                    }
-
-                                    else{
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "No Internet Connection", Toast.LENGTH_SHORT).show()
-                                    }
-                                })
+                                }
 
                                 viewModelProduct.postBuyerOrder(it, productId, offerPrice)
 
@@ -276,9 +308,11 @@ class ProductDetail : Fragment() {
 
                     }
                     ADBuilder.dismiss()
+
+
                 }
             }
-            ADBuilder.show()
+
 
 
         }
@@ -344,6 +378,7 @@ class ProductDetail : Fragment() {
 
                     }
                     ADBuilder.dismiss()
+
                 }
             }
             ADBuilder.show()
@@ -352,6 +387,9 @@ class ProductDetail : Fragment() {
         }
 
     }
+
+
+
 
 
 }

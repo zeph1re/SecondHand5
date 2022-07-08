@@ -2,6 +2,7 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
+import and5.finalproject.secondhand5.model.notification.Product
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.notification_adapter.view.*
 class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
     private var notification : List<GetNotificationItem>? = null
-
+    var getProductBasePrice = mutableListOf<String>()
     fun setNotificationList(notificationList: List<GetNotificationItem>){
         this.notification = notificationList
     }
@@ -35,11 +36,14 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolde
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         Log.d("notif", notification!![position].imageUrl)
-        holder.itemView.notification_product_name.text = "${notification!![position].productId.toString()}"
-        holder.itemView.notification_created_at.text = "${notification!![position].transactionDate.toString()}"
-        holder.itemView.notifiation_product_price.text = "Rp. ${notification!![position].bidPrice.toString()}"
-        holder.itemView.notification_product_offer.text = "${notification!![position].bidPrice.toString()}"
-        holder.itemView.notification_info.text = "${notification!![position].bidPrice.toString()}"
+        holder.itemView.notification_product_name.text = "Product Name : ${notification!![position].Product.name}"
+        holder.itemView.notification_created_at.text = "Date : ${notification!![position].transactionDate.toString()}"
+        holder.itemView.notifiation_product_price.text = "Base Price : Rp ${notification!![position].Product.basePrice.toString()}"
+
+        val offer = "Product Offer"
+
+        holder.itemView.notification_product_offer.text = "Bid  : Rp ${notification!![position].bidPrice.toString()}"
+        holder.itemView.notification_info.text = offer
 
         if(notification!![position].imageUrl != null){
             this.let {
