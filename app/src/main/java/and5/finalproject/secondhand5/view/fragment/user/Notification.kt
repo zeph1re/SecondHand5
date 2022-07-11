@@ -11,14 +11,10 @@ import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
-import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_notification.*
@@ -62,7 +58,9 @@ class Notification : Fragment() {
 
     private fun initNotification() {
         userManager = UserManager(requireActivity())
-        notificationAdapter = NotificationAdapter()
+        notificationAdapter = NotificationAdapter(){
+            readStatus(it.id)
+        }
 
         val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
@@ -90,5 +88,18 @@ class Notification : Fragment() {
         }
     }
 
+    fun readStatus(idNotif : Int){
+
+        val viewModelNotification = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+
+        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+
+            if(token != ""){
+                viewModelNotification.patchNotification(token, idNotif)
+            }
+
+        }
+    }
 
 }
