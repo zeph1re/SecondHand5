@@ -143,7 +143,6 @@ class Home : Fragment() {
                 rv_list_category.adapter = categoriesAdapter
                 categoriesAdapter.setProductList(it)
                 categoriesAdapter.notifyDataSetChanged()
-
             }
         }
         viewmodelproduct.getSellerCategory()
