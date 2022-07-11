@@ -22,9 +22,11 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     //buyer
     private var productLivedata = MutableLiveData<List<GetProductItem>>()
+    val product : LiveData<List<GetProductItem>> = productLivedata
+
     private var detailProductLivedata = MutableLiveData<GetProductItem>()
     val detailProduct : LiveData<GetProductItem> = detailProductLivedata
-    val product : LiveData<List<GetProductItem>> = productLivedata
+
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
 
     private var buyerDetailOrderLivedata = MutableLiveData<GetBuyerOrderItem>()

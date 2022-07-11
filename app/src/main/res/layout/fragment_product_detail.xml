@@ -8,36 +8,36 @@
     tools:context=".view.fragment.buyer.ProductDetail">
 
     <ScrollView
-        android:layout_marginBottom="80dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/btn_back_detail_product"
-                android:layout_margin="25dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_margin="25dp"
                 android:src="@drawable/ic_back" />
 
             <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:cardCornerRadius="100dp"
                 app:strokeColor="@color/blue_300"
-                app:strokeWidth="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:id="@+id/product_image"
-                    android:layout_gravity="center"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
-                    android:src="@drawable/ei"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ei" />
             </com.google.android.material.card.MaterialCardView>
 
             <RelativeLayout
@@ -47,12 +47,12 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_one"
-                    android:layout_marginVertical="15dp"
-                    app:strokeColor="@color/blue_300"
-                    app:strokeWidth="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="40dp">
+                    android:layout_marginVertical="15dp"
+                    app:cardCornerRadius="40dp"
+                    app:strokeColor="@color/blue_300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,24 +64,24 @@
                             android:id="@+id/product_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/blue_700"
                             android:text="Jam Tangan Casio"
+                            android:textColor="@color/blue_700"
                             android:textSize="28sp" />
 
                         <TextView
                             android:id="@+id/product_category"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Aksesoris"
+                            android:textColor="@color/black"
                             android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/product_price"
-                            android:textColor="@color/blue_700"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp 250.000"
+                            android:textColor="@color/blue_700"
                             android:textSize="22sp" />
 
                     </LinearLayout>
@@ -91,13 +91,13 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_two"
-                    app:strokeColor="@color/blue_300"
-                    app:strokeWidth="2dp"
-                    android:layout_marginVertical="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card_one"
-                    app:cardCornerRadius="40dp">
+                    android:layout_marginVertical="15dp"
+                    app:cardCornerRadius="40dp"
+                    app:strokeColor="@color/blue_300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,18 +119,18 @@
 
                             <TextView
                                 android:id="@+id/seller_name"
-                                android:textColor="@color/blue_700"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nama Penjual"
+                                android:textColor="@color/blue_700"
                                 android:textSize="24sp" />
 
                             <TextView
                                 android:id="@+id/seller_address"
-                                android:textColor="@color/black"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Kota"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
 
@@ -142,13 +142,13 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_three"
-                    app:strokeColor="@color/blue_300"
-                    app:strokeWidth="2dp"
-                    android:layout_marginVertical="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/card_two"
-                    app:cardCornerRadius="40dp">
+                    android:layout_marginVertical="15dp"
+                    app:cardCornerRadius="40dp"
+                    app:strokeColor="@color/blue_300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -159,16 +159,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
                             android:text="Deskripsi"
+                            android:textColor="@color/black"
                             android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/product_description"
-                            android:textColor="@color/blue_300"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                            android:textColor="@color/blue_300"
                             android:textSize="16sp" />
 
 

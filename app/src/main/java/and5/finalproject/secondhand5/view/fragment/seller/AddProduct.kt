@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
@@ -65,7 +66,12 @@ class AddProduct : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
+            if (it == "" || it == null){
+                Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_userNotLogin)
+            }
+        }
 
         val view = inflater.inflate(R.layout.fragment_add_product2, container, false)
         userManager = UserManager(requireActivity())
@@ -314,7 +320,7 @@ class AddProduct : Fragment() {
         }else {
             typeCheck = null
         }
-        val outputDir = context!!.cacheDir // context being the Activity pointer
+        val outputDir = requireContext().cacheDir // context being the Activity pointer
         val tempFile = File.createTempFile("temp-", typeCheck, outputDir)
         var customName = tempFile.name.toString()
         val regex = Regex("[0-9]")
