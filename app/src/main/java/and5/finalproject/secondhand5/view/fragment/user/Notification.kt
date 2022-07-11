@@ -17,6 +17,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -29,6 +30,8 @@ class Notification : Fragment() {
     lateinit var getNotification: GetNotificationItem
     lateinit var notificationAdapter : NotificationAdapter
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +43,17 @@ class Notification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initNotification()
+
+        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+            if (token!= ""||token==null){
+                initNotification()
+            }else{
+                view.findNavController().navigate(R.id.action_notification_to_userNotLogin)
+            }
+        }
+
+
         Handler(Looper.getMainLooper()).postDelayed({
 //            readOrNot()
         },1000)

@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_addProduct_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_addProduct_to_userNotLogin"
+            app:destination="@id/userNotLogin" />
     </fragment>
     <fragment
         android:id="@+id/myListProduct"
@@ -115,6 +118,9 @@
         <action
             android:id="@+id/action_myListProduct_to_sellerProductInterest"
             app:destination="@id/sellerProductInterest" />
+        <action
+            android:id="@+id/action_myListProduct_to_userNotLogin"
+            app:destination="@id/userNotLogin" />
     </fragment>
     <fragment
         android:id="@+id/productDetail"
@@ -138,6 +144,9 @@
         <action
             android:id="@+id/action_notification_to_myListProduct"
             app:destination="@id/myListProduct" />
+        <action
+            android:id="@+id/action_notification_to_userNotLogin"
+            app:destination="@id/userNotLogin" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductInterest"
@@ -164,8 +173,11 @@
         android:label="fragment_user_not_login"
         tools:layout="@layout/fragment_user_not_login" >
         <action
-            android:id="@+id/action_userNotLogin_to_account"
-            app:destination="@id/account" />
+            android:id="@+id/action_userNotLogin_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_userNotLogin_to_home"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/statusOrder"

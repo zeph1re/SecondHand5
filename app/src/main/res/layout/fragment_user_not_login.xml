@@ -5,17 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.UserNotLogin">
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/ic_back" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You don't have required previlege to access this feature"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
         android:layout_above="@id/login_button"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:text="You don't have required privilege to access this feature"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="200dp"

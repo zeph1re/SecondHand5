@@ -35,6 +35,7 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
         Log.d("notif", notification!![position].imageUrl)
         holder.itemView.notification_product_name.text = "Product Name : ${notification!![position].Product.name}"
         holder.itemView.notification_created_at.text = "Date : ${notification!![position].transactionDate.toString()}"

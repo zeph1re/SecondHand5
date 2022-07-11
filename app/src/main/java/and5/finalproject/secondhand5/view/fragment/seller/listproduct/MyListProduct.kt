@@ -10,8 +10,11 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.ViewPagerAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
@@ -40,14 +43,27 @@ class MyListProduct : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initLayout()
-        val viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        viewModel.userToken(requireActivity()).observe(viewLifecycleOwner){
-            detailUser(it)
+        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+            if (token!= ""||token==null){
+                initLayout()
+                val viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                viewModel.userToken(requireActivity()).observe(viewLifecycleOwner){
+                    detailUser(it)
+                }
+                edit_seller.setOnClickListener {
+                    findNavController().navigate(R.id.profile)
+                }
+            }else{
+                view.findNavController().navigate(R.id.action_myListProduct_to_userNotLogin)
+            }
         }
-        edit_seller.setOnClickListener {
-            findNavController().navigate(R.id.profile)
-        }
+
+
+
+
+
+
     }
 
     private fun detailUser(token:String) {
@@ -58,7 +74,7 @@ class MyListProduct : Fragment() {
             Log.d("cityyyy", it.city)
             seller_name.setText(it.fullName)
             seller_address.setText(it.city)
-            Glide.with(requireActivity()).load( it.imageUrl).into(view!!.seller_image)
+            Glide.with(requireActivity()).load( it.imageUrl).into(requireView().seller_image)
         }
     }
 
