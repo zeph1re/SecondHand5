@@ -147,6 +147,9 @@
         <action
             android:id="@+id/action_notification_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_notification_self"
+            app:destination="@id/notification" />
     </fragment>
     <fragment
         android:id="@+id/sellerProductInterest"

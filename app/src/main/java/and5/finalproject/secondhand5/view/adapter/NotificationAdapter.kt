@@ -2,19 +2,14 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
-import and5.finalproject.secondhand5.model.notification.Product
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.home_product_adapter.view.*
-import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
-import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
 import kotlinx.android.synthetic.main.notification_adapter.view.*
 
-class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
+class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
     private var notification : List<GetNotificationItem>? = null
     var getProductBasePrice = mutableListOf<String>()
@@ -35,21 +30,88 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.ViewHolde
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        holder.itemView.cardNotification.setOnClickListener {
+            onClick(notification!![position])
+        }
 
-        Log.d("notif", notification!![position].imageUrl)
-        holder.itemView.notification_product_name.text = "Product Name : ${notification!![position].Product.name}"
-        holder.itemView.notification_created_at.text = "Date : ${notification!![position].transactionDate.toString()}"
-        holder.itemView.notifiation_product_price.text = "Base Price : Rp ${notification!![position].Product.basePrice.toString()}"
+        if(notification!![position].status == "bid" && notification!![position].notificationType == "seller" ){
 
-        val offer = "Product Offer"
+            holder.itemView.cardview_product_offer.visibility = View.VISIBLE
 
-        holder.itemView.notification_product_offer.text = "Bid  : Rp ${notification!![position].bidPrice.toString()}"
-        holder.itemView.notification_info.text = offer
+            holder.itemView.notification_product_name.text = "${notification!![position].product.name}"
+            holder.itemView.notification_created_at.text = "${notification!![position].transactionDate.toString()}"
+            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].product.basePrice.toString()}"
 
-        if(notification!![position].imageUrl != null){
-            this.let {
-                Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image)
+            holder.itemView.notification_product_offer.text = "Ditawar Rp ${notification!![position].bidPrice.toString()}"
+
+            if(notification!![position].read == true){
+                holder.itemView.read_or_not.visibility = View.GONE
             }
+
+            if(notification!![position].imageUrl != null){
+                this.let {
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image)
+                }
+            }
+
+        }
+
+        else if(notification!![position].notificationType == "seller" && notification!![position].status == "create"){
+
+            holder.itemView.cardview_product_add.visibility = View.VISIBLE
+
+            if(notification!![position].imageUrl != null){
+                this.let {
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_add)
+                }
+            }
+            holder.itemView.notification_created_at_product_add.text = notification!![position].createdAt
+            holder.itemView.notification_product_name_product_add.text = "${notification!![position].productName}"
+            holder.itemView.notifiation_product_price_product_add.text = "Seharga Rp ${notification!![position].basePrice.toString()} "
+
+            if(notification!![position].read == true){
+                holder.itemView.read_or_not_product_add.visibility = View.GONE
+            }
+        }
+
+        else if(notification!![position].notificationType == "buyer" && notification!![position].status == "accepted"){
+            holder.itemView.cardview_order_response.visibility = View.VISIBLE
+
+            if(notification!![position].read == true){
+                holder.itemView.read_or_not_order_response.visibility = View.GONE
+            }
+
+            holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate.toString()}"
+            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} diterima oleh ${notification!![position].productName}"
+
+            holder.itemView.notification_product_name_order_response.text = "${notification!![position].productName.toString()}"
+
+            if(notification!![position].imageUrl != null){
+                this.let {
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_order_response)
+                }
+            }
+
+        }
+
+        else if(notification!![position].notificationType == "buyer" && notification!![position].status == "declined"){
+            holder.itemView.cardview_order_response.visibility = View.VISIBLE
+
+            if(notification!![position].read == true){
+                holder.itemView.read_or_not_order_response.visibility = View.GONE
+            }
+
+            holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate.toString()}"
+            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} ditolak oleh ${notification!![position].productName}"
+            holder.itemView.notification_product_name_order_response.text = "${notification!![position].productName.toString()}"
+
+
+            if(notification!![position].imageUrl != null){
+                this.let {
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_order_response)
+                }
+            }
+
         }
 
 

@@ -4,6 +4,7 @@ import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.*
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
+import and5.finalproject.secondhand5.model.notification.PatchNotificationResponse
 import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.model.seller.Category
 import okhttp3.MultipartBody
@@ -54,8 +55,10 @@ interface ApiService {
 
     @GET ("/notification")
     suspend fun getNotification(
-        @Header("access_token") token: String
+        @Header("access_token") token: String,
+        @Query("notification_type") notification_type : String
     ) : List<GetNotificationItem>
+
 
     @PUT ("/auth/change-password")
     @FormUrlEncoded
@@ -178,6 +181,7 @@ interface ApiService {
         @Field("status") status: String
     ) : Call<PatchOrderResponse>
 
+
     @GET("seller/product/{id}")
     suspend fun getSellerDetailProduct(
         @Header("access_token")token:String,
@@ -215,5 +219,13 @@ interface ApiService {
         @Header("access_token") token : String,
         @Path("id")id : Int
     ) : GetSellerOrderItem
+
+    @PATCH ("/notification/{id}")
+    fun patchNotification(
+        @Header("access_token") token: String,
+        @Path("id")id : Int,
+    ) : Call<PatchNotificationResponse>
+
+
 
 }
