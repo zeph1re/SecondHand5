@@ -34,7 +34,7 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
             onClick(notification!![position])
         }
 
-        if(notification!![position].status == "bid"){
+        if(notification!![position].status == "bid" && notification!![position].notificationType == "seller" ){
 
             holder.itemView.cardview_product_offer.visibility = View.VISIBLE
 
@@ -70,26 +70,49 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
             holder.itemView.notifiation_product_price_product_add.text = "Seharga Rp ${notification!![position].basePrice.toString()} "
 
             if(notification!![position].read == true){
-                holder.itemView.read_or_not.visibility = View.GONE
+                holder.itemView.read_or_not_product_add.visibility = View.GONE
             }
         }
 
-        else{
-            holder.itemView.cardview_product_delete.visibility = View.VISIBLE
+        else if(notification!![position].notificationType == "buyer" && notification!![position].status == "accepted"){
+            holder.itemView.cardview_order_response.visibility = View.VISIBLE
 
             if(notification!![position].read == true){
-                holder.itemView.read_or_not.visibility = View.GONE
+                holder.itemView.read_or_not_order_response.visibility = View.GONE
             }
+
+            holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate.toString()}"
+            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} diterima oleh ${notification!![position].productName}"
+
+            holder.itemView.notification_product_name_order_response.text = "${notification!![position].productName.toString()}"
 
             if(notification!![position].imageUrl != null){
                 this.let {
-                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_delete)
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_order_response)
                 }
             }
 
         }
 
+        else if(notification!![position].notificationType == "buyer" && notification!![position].status == "declined"){
+            holder.itemView.cardview_order_response.visibility = View.VISIBLE
 
+            if(notification!![position].read == true){
+                holder.itemView.read_or_not_order_response.visibility = View.GONE
+            }
+
+            holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate.toString()}"
+            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} ditolak oleh ${notification!![position].productName}"
+            holder.itemView.notification_product_name_order_response.text = "${notification!![position].productName.toString()}"
+
+
+            if(notification!![position].imageUrl != null){
+                this.let {
+                    Glide.with(holder.itemView.context).load(notification!![position].imageUrl).into(holder.itemView.notification_image_product_order_response)
+                }
+            }
+
+        }
 
 
     }

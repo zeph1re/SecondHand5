@@ -34,7 +34,7 @@
                 android:src="@drawable/account_image" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_centerVertical="true"
@@ -71,25 +71,33 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/notification_created_at"
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_toStartOf="@id/read_or_not"
-                android:gravity="bottom"
-                android:text="tanggal"
-                android:textSize="12sp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/notification_created_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_toStartOf="@id/read_or_not"
+                    android:gravity="bottom"
+                    android:text="tanggal"
+                    android:textSize="12sp" />
 
-            <ImageView
-                android:id="@+id/read_or_not"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_read"
-                android:visibility="visible" />
+                <ImageView
+                    android:id="@+id/read_or_not"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_read"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 
@@ -153,25 +161,34 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/notification_created_at_product_add"
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginRight="8dp"
-                android:layout_toStartOf="@id/read_or_not_product_add"
-                android:gravity="bottom"
-                android:text="tanggal" />
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_marginEnd="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/read_or_not_product_add"
-                android:src="@drawable/ic_read"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/notification_created_at_product_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_toStartOf="@id/read_or_not_product_add"
+                    android:gravity="bottom"
+                    android:text="tanggal"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_marginEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_or_not_product_add"
+                    android:src="@drawable/ic_read"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 
@@ -224,25 +241,116 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/notification_created_at_product_delete"
-                android:textSize="12sp"
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_toStartOf="@id/read_or_not_product_delete"
-                android:gravity="bottom"
-                android:text="tanggal" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/notification_created_at_product_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_toStartOf="@id/read_or_not_product_delete"
+                    android:gravity="bottom"
+                    android:text="tanggal"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_marginEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_or_not_product_delete"
+                    android:src="@drawable/ic_read"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:backgroundTint="@android:color/transparent"
+        android:id="@+id/cardview_order_response"
+        app:strokeColor="@color/blue_100"
+        app:strokeWidth="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_marginEnd="5dp"
+                android:id="@+id/notification_image_product_order_response"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/account_image" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/read_or_not_product_delete"
-                android:src="@drawable/ic_read"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:visibility="visible"/>
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/notification_image_product_order_response">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_seller_answer_order_response"
+                    android:text="Penawaran diterima/ditolak"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_product_name_order_response"
+                    android:text="Jam Tangan Casio"
+                    android:textSize="15sp"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/notification_created_at_order_response"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:gravity="bottom"
+                    android:text="tanggal"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_marginEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_or_not_order_response"
+                    android:src="@drawable/ic_read"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 

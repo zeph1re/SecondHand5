@@ -43,6 +43,7 @@ class Notification : Fragment() {
         val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
+
                 initNotification()
             }else{
                 view.findNavController().navigate(R.id.action_notification_to_userNotLogin)
@@ -57,6 +58,32 @@ class Notification : Fragment() {
     }
 
     private fun initNotification() {
+        userManager = UserManager(requireActivity())
+        notificationAdapter = NotificationAdapter(){
+            readStatus(it.id)
+            view?.findNavController()?.navigate(R.id.notification)
+        }
+
+        val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
+            viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    it.sortedBy { it.createdAt }
+                    rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
+                    rv_notification.adapter = notificationAdapter
+
+                    notificationAdapter.setNotificationList(it)
+                    notificationAdapter.notifyDataSetChanged()
+
+                }
+            }
+            viewmodel.getNotification(it, "")
+        }
+
+    }
+
+    private fun initBuyerNotification() {
         userManager = UserManager(requireActivity())
         notificationAdapter = NotificationAdapter(){
             readStatus(it.id)
@@ -75,10 +102,39 @@ class Notification : Fragment() {
 
                 }
             }
-            viewmodel.getNotification(it)
+            viewmodel.getNotification(it, "buyer")
         }
 
     }
+
+
+    private fun initSellerNotification() {
+        userManager = UserManager(requireActivity())
+        notificationAdapter = NotificationAdapter(){
+            readStatus(it.id)
+            view?.findNavController()?.navigate(R.id.notification)
+
+        }
+
+        val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
+            viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
+                    rv_notification.adapter = notificationAdapter
+
+                    notificationAdapter.setNotificationList(it)
+                    notificationAdapter.notifyDataSetChanged()
+
+                }
+            }
+            viewmodel.getNotification(it, "seller")
+        }
+
+    }
+
+
 
     private fun readOrNot() {
         if (getNotification.read) {
@@ -100,6 +156,7 @@ class Notification : Fragment() {
             }
 
         }
+
     }
 
 }

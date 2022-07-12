@@ -20,9 +20,9 @@ class NotificationViewModel @Inject constructor(private var notifRepo : Notifica
     var responseCodePatchNotification : SingeLiveEvent<String> = SingeLiveEvent ()
 
 
-    fun getNotification(token: String){
+    fun getNotification(token: String, notification_type : String){
         viewModelScope.launch{
-            val dataNotification = notifRepo.getNotification(token)
+            val dataNotification = notifRepo.getNotification(token, notification_type)
             notificationLiveData.value = dataNotification
         }
     }

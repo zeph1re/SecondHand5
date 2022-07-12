@@ -55,10 +55,9 @@ interface ApiService {
 
     @GET ("/notification")
     suspend fun getNotification(
-        @Header("access_token") token: String
+        @Header("access_token") token: String,
+        @Query("notification_type") notification_type : String
     ) : List<GetNotificationItem>
-
-
 
 
     @PUT ("/auth/change-password")

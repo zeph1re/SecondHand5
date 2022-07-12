@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 class NotificationRepository @Inject constructor( val service : ApiService) {
 
-    suspend fun getNotification(token : String): List<GetNotificationItem> {
-        return service.getNotification(token)
+    suspend fun getNotification(token : String, notification_type : String): List<GetNotificationItem> {
+        return service.getNotification(token, notification_type)
     }
 
     fun patchSellerNotification(
