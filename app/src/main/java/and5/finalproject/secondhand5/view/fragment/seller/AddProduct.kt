@@ -11,9 +11,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,17 +19,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.MultiAutoCompleteTextView
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
+import kotlinx.android.synthetic.main.home_product_adapter.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -45,13 +54,15 @@ class AddProduct : Fragment() {
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
-    lateinit var postCategory : String
+
     var categoryID = mutableListOf<Int>()
     var categoryName = mutableListOf<String>()
     lateinit var image : MultipartBody.Part
     lateinit var productName : String
     lateinit var productPrice : String
     lateinit var productDesc  : String
+    lateinit var postCategory : String
+
     lateinit var arrayAdapter: ArrayAdapter<String>
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
@@ -59,7 +70,19 @@ class AddProduct : Fragment() {
     lateinit var sizeCheck: String
     var typeCheck : String? = null
     lateinit var imageCheck : String
+    lateinit var imageParsing : String
 
+    @Parcelize
+    data class productPreview(
+        val productName : String,
+        val productPrice : String,
+        val  productDesc  : String,
+        val imageParsing : String,
+        val selectedID: MutableList<Int> = mutableListOf(),
+        val selectedName: MutableList<String?> = mutableListOf(),
+        @SerializedName("image")
+        val image : @RawValue Any? = null
+    ):Parcelable
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,9 +115,26 @@ class AddProduct : Fragment() {
             categoryID.remove(categoryID[position])
             val getID = selectedID.toString()
             postCategory = getID.replace("[","").replace("]", "")
+
+
+
             Log.d("cateeee", postCategory)
             Log.d("asdd", selectedID.toString())
         }
+
+        userManager.postImage.asLiveData().observe(viewLifecycleOwner){
+            if (it!=""){
+                view.add_product_image.setImageURI(it.toUri())
+                imageCheck = "true"
+                Log.d("aaax", it.toString())
+            }
+
+        }
+
+
+
+
+
 
         view.btn_backtohome.setOnClickListener {
             activity?.onBackPressed()
@@ -109,6 +149,10 @@ class AddProduct : Fragment() {
             }
             if (typeCheck !=null && sizeCheck=="<1mb"){
                 view.add_product_image.setImageURI(it)
+                imageParsing = it.toString()
+                GlobalScope.launch {
+                    userManager.savePostImageCache(imageParsing)
+                }
             }
 
             if (sizeCheck==">1mb"){
@@ -130,6 +174,7 @@ class AddProduct : Fragment() {
             }
 
         }
+
 
         view.reset_category.setOnClickListener {
             view.dropdown_category.setText("")
@@ -156,11 +201,17 @@ class AddProduct : Fragment() {
             productName = view.add_product_name.text.toString()
             productPrice = view.add_product_price.text.toString()
             productDesc = view.add_product_desc.text.toString()
+            val getCategoryName = selectedName.toString()
+            val categoryName = getCategoryName.replace("[","").replace("]", "")
+            val getCategoryID= selectedID.toString()
+            val categoryID = getCategoryID.replace("[","").replace("]", "")
             check()
 
             if (productName.isNotEmpty() && productPrice.isNotEmpty() && productDesc.isNotEmpty()
                 && text_field_category.isNotEmpty() && imageCheck == "true") {
-                view.findNavController().navigate(R.id.productPreview)
+                val bundle = Bundle()
+                bundle.putParcelable("product_preview", productPreview(productName, productPrice, productDesc, imageParsing, selectedID, selectedName, image))
+                view.findNavController().navigate(R.id.productPreview, bundle)
             }
         }
 
@@ -178,6 +229,10 @@ class AddProduct : Fragment() {
                 }, 1500)
                 post = true
                 observe()
+                GlobalScope.launch {
+                    userManager.deletePostImageCache()
+                    userManager.savePostImageCache("")
+                }
 
             }
         }
@@ -400,7 +455,11 @@ class AddProduct : Fragment() {
             .show()
     }
 
+
+
 }
+
+
 
 
 

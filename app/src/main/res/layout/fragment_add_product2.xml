@@ -117,7 +117,6 @@
                 android:layout_width="match_parent"
                 app:helperTextTextColor="@color/red"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="60dp">
 
@@ -125,7 +124,6 @@
 
                     android:focusable="false"
                     android:inputType="none"
-
                     android:id="@+id/dropdown_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
