@@ -5,6 +5,8 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,17 +20,15 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.custom_seller_order_status.*
 import kotlinx.android.synthetic.main.custom_seller_order_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
-import kotlinx.android.synthetic.main.fragment_add_product2.view.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
+import java.net.URLEncoder
 import kotlin.properties.Delegates
 
 
@@ -42,8 +42,10 @@ class StatusOrder : Fragment() {
     var bidPrice by Delegates.notNull<Int>()
 
     lateinit var buyerName :String
+    lateinit var buyerCity :String
     lateinit var buyerAddress :String
     lateinit var buyerImage :String
+    lateinit var buyerPhoneNumber :String
 
     lateinit var userManager: UserManager
 
@@ -71,9 +73,10 @@ class StatusOrder : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             dialogWA()
             statusDialog()
+            callWA()
 
             buyer_name.text = buyerName
-            buyer_address_city.text = buyerAddress
+            buyer_address_city.text = buyerCity
             product_name.text = productName
             product_price.text = "Rp ${productPrice.toString()}"
             bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
@@ -110,6 +113,15 @@ class StatusOrder : Fragment() {
             viewModelProduct.patchSellerOrder(token, id, "declined")
             findNavController().navigate(R.id.myListProduct)
 
+        }
+
+
+    }
+
+    fun callWA() {
+
+        btn_call.setOnClickListener {
+            dialogWA()
         }
 
 
@@ -160,10 +172,23 @@ class StatusOrder : Fragment() {
         Glide.with(requireContext()).load(productImage).into(customWaDialog.product_image)
         customWaDialog.product_bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
         customWaDialog.product_price.text = "Rp ${productPrice.toString()}"
-
-
-        customWaDialog.buyer_address_city.text = buyerAddress
+        customWaDialog.buyer_phone_number.text = "WA : $buyerPhoneNumber"
+        customWaDialog.buyer_address_city.text = buyerCity
         customWaDialog.buyer_name.text = buyerName
+
+        customWaDialog.btn_call_whatsapp.setOnClickListener {
+            if(buyerPhoneNumber!=null){
+//                var phoneNumber = "62"
+                var message = "Selamat! Barang ${productName} berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan ${buyerAddress}"
+                val url = "https://api.whatsapp.com/send?phone=$buyerPhoneNumber"+"&text=" + URLEncoder.encode(message, "UTF-8")
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }else{
+
+            }
+
+        }
 
         val ADBuilder = AlertDialog.Builder(requireContext())
             .setView(customWaDialog)
@@ -187,10 +212,10 @@ class StatusOrder : Fragment() {
                     productPrice = it.product.basePrice
                     bidPrice = it.price
 
-                    buyerAddress = it.user.address
+                    buyerCity = it.user.city
                     buyerName = it.user.fullName
-
-
+                    buyerPhoneNumber = it.user.phoneNumber
+                    buyerAddress = it.user.address
 
                 })
             }else{
