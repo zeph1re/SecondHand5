@@ -24,7 +24,15 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_seller_order_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
+import kotlinx.android.synthetic.main.fragment_detail_order.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
+import kotlinx.android.synthetic.main.fragment_status_order.bid_price
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_address_city
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_image
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_name
+import kotlinx.android.synthetic.main.fragment_status_order.product_image
+import kotlinx.android.synthetic.main.fragment_status_order.product_name
+import kotlinx.android.synthetic.main.fragment_status_order.product_price
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
@@ -77,6 +85,8 @@ class StatusOrder : Fragment() {
 
             buyer_name.text = buyerName
             buyer_address_city.text = buyerCity
+            Glide.with(requireContext()).load(buyerImage).into(buyer_image)
+
             product_name.text = productName
             product_price.text = "Rp ${productPrice.toString()}"
             bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
@@ -175,6 +185,8 @@ class StatusOrder : Fragment() {
         customWaDialog.buyer_phone_number.text = "WA : $buyerPhoneNumber"
         customWaDialog.buyer_address_city.text = buyerCity
         customWaDialog.buyer_name.text = buyerName
+        Glide.with(requireContext()).load(buyerImage).into(customWaDialog.buyer_image)
+
 
         customWaDialog.btn_call_whatsapp.setOnClickListener {
             if(buyerPhoneNumber!=null){
@@ -216,6 +228,7 @@ class StatusOrder : Fragment() {
                     buyerName = it.user.fullName
                     buyerPhoneNumber = it.user.phoneNumber
                     buyerAddress = it.user.address
+                    buyerImage = it.user.imageURL
 
                 })
             }else{

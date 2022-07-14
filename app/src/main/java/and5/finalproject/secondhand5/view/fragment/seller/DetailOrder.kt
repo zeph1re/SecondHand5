@@ -131,6 +131,7 @@ class DetailOrder : Fragment() {
 
                 product_name.text = it.product.name
                 Glide.with(requireContext()).load(it.product.imageUrl).into(product_image)
+
                 bid_price.text = "Ditawar Rp ${it.price}"
                 product_price.text = "Rp ${it.product.basePrice.toString()}"
 
@@ -139,6 +140,8 @@ class DetailOrder : Fragment() {
                 }
                 buyer_address_city.text = it.user.city
                 buyer_name.text = it.user.fullName
+                Glide.with(requireContext()).load(it.user.imageURL).into(buyer_image)
+
 
             })
 
