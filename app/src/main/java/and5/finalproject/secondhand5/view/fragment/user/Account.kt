@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
@@ -29,6 +30,7 @@ import okhttp3.MultipartBody
 
 class Account : Fragment() {
     lateinit var userManager: UserManager
+    var connectivity: CheckConnectivity = CheckConnectivity()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,11 +59,13 @@ class Account : Fragment() {
                 userManager.deleteDataUser()
             }
         }
-
-        val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
-            getUserData(it)
+        if (connectivity.isOnline(requireContext())) {
+            val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
+                getUserData(it)
+            }
         }
+
 
         //button click to show dialog
         ubah_password_card.setOnClickListener {

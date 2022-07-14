@@ -1,13 +1,18 @@
 package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.Room.Model.GetProductHome
+import and5.finalproject.secondhand5.Room.OfflineDB
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_id
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image

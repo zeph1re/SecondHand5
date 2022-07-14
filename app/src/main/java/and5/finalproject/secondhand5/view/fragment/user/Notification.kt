@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
@@ -27,6 +28,8 @@ class Notification : Fragment() {
     lateinit var notificationAdapter : NotificationAdapter
 
 
+    var connectivity: CheckConnectivity = CheckConnectivity()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +46,9 @@ class Notification : Fragment() {
         val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
-
-                initNotification()
+                if (connectivity.isOnline(requireContext())) {
+                    initNotification()
+                }
             }else{
                 view.findNavController().navigate(R.id.action_notification_to_userNotLogin)
             }

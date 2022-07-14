@@ -1,5 +1,7 @@
 package and5.finalproject.secondhand5.repository
 
+import and5.finalproject.secondhand5.Room.Model.GetProductHome
+import and5.finalproject.secondhand5.Room.OfflineDB
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.*
@@ -21,6 +23,7 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     //Buyer
     suspend fun getAllProduct(searchQuery : String): List<GetProductItem>{
+
         return productApi.getAllProduct("available", searchQuery)
     }
 
@@ -61,6 +64,8 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
         })
     }
+
+
 
 
     fun addBuyerOrder(
