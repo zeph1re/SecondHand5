@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -22,6 +24,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class Home : Fragment() {
+
+    var connectivity: CheckConnectivity = CheckConnectivity()
 
     lateinit var productAdapter: ProductAdapter
     lateinit var bannerAdapter: BannerAdapter
@@ -39,12 +43,16 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productAdapter = ProductAdapter {
-//            val data = bundleOf("data" to it)
-            val data = Bundle()
-            data.putInt("product_id", it.id)
 
-            Log.d("testes id", it.id.toString())
+        if (!connectivity.isOnline(requireContext())){
+//            Toast.makeText(requireContext(), "aaaaaaaaaaaaa", Toast.LENGTH_SHORT).show()
+        }else{
+            productAdapter = ProductAdapter {
+//            val data = bundleOf("data" to it)
+                val data = Bundle()
+                data.putInt("product_id", it.id)
+
+                Log.d("testes id", it.id.toString())
 //            Log.d("testes imageName", it.imageName.toString())
 //            Log.d("testes basePrice", it.basePrice.toString())
 //            Log.d("testes imageUrl", it.imageUrl.toString())
@@ -54,18 +62,22 @@ class Home : Fragment() {
 //            Log.d("testes createdAt", it.createdAt.toString())
 //            Log.d("testes updatedAt", it.updatedAt.toString())
 //            Log.d("testes categories", it.categories.toString())
-            view.findNavController().navigate(R.id.action_home_to_productDetail, data)
+                view.findNavController().navigate(R.id.action_home_to_productDetail, data)
+            }
+            initBanner()
+            initCategory()
+
+            if (idQuery == 0){
+                initProduct()
+                searchFilter()
+            }else {
+                categoryFilter()
+            }
         }
 
-        initBanner()
-        initCategory()
 
-        if (idQuery == 0){
-            initProduct()
-            searchFilter()
-        }else {
-            categoryFilter()
-        }
+
+
 
     }
 
