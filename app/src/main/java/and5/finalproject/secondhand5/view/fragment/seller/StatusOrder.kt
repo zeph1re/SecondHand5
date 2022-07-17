@@ -85,7 +85,9 @@ class StatusOrder : Fragment() {
 
             buyer_name.text = buyerName
             buyer_address_city.text = buyerCity
-            Glide.with(requireContext()).load(buyerImage).into(buyer_image)
+            if(buyerImage!="kosong"){
+                Glide.with(requireContext()).load(buyerImage).into(buyer_image)
+            }
 
             product_name.text = productName
             product_price.text = "Rp ${productPrice.toString()}"
@@ -185,11 +187,14 @@ class StatusOrder : Fragment() {
         customWaDialog.buyer_phone_number.text = "WA : $buyerPhoneNumber"
         customWaDialog.buyer_address_city.text = buyerCity
         customWaDialog.buyer_name.text = buyerName
-        Glide.with(requireContext()).load(buyerImage).into(customWaDialog.buyer_image)
+        if(buyerImage!="kosong"){
+            Glide.with(requireContext()).load(buyerImage).into(customWaDialog.buyer_image)
+
+        }
 
 
         customWaDialog.btn_call_whatsapp.setOnClickListener {
-            if(buyerPhoneNumber!=null){
+            if(buyerPhoneNumber!=null && (buyerPhoneNumber.startsWith("+62") || buyerPhoneNumber.startsWith("62"))){
 //                var phoneNumber = "62"
                 var message = "Selamat! Barang ${productName} berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan ${buyerAddress}"
                 val url = "https://api.whatsapp.com/send?phone=$buyerPhoneNumber"+"&text=" + URLEncoder.encode(message, "UTF-8")
@@ -197,7 +202,7 @@ class StatusOrder : Fragment() {
                 i.data = Uri.parse(url)
                 startActivity(i)
             }else{
-
+                Toast.makeText(requireContext(), "Nomor Tidak Terdaftar", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -228,7 +233,13 @@ class StatusOrder : Fragment() {
                     buyerName = it.user.fullName
                     buyerPhoneNumber = it.user.phoneNumber
                     buyerAddress = it.user.address
-                    buyerImage = it.user.imageURL
+                    if(it.user.imageURL!=null){
+                        buyerImage = it.user.imageURL
+
+                    }else{
+                        buyerImage = "kosong"
+                    }
+
 
                 })
             }else{

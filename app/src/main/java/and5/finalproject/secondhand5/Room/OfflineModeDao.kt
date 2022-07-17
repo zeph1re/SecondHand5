@@ -4,11 +4,12 @@ import and5.finalproject.secondhand5.Room.Model.GetProductHome
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
 interface OfflineModeDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addHomeOffline (home: GetProductHome) : Long
 
 

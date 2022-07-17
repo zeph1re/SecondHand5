@@ -47,7 +47,7 @@ class Register : Fragment () {
             inputpassword = regis_password.text.toString()
 
             check()
-            if (inputfullname.isNotEmpty() && inputemail.isNotEmpty() && inputpassword.isNotEmpty() && inputpassword.length > 5 && validateEmail(inputemail)){
+                if (inputfullname.isNotEmpty() && inputemail.isNotEmpty() && inputpassword.isNotEmpty() && inputpassword.length > 5 && validateEmail(inputemail)){
                 view.loading_register.visibility = View.VISIBLE
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading_register?.visibility = View.GONE
