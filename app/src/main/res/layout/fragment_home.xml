@@ -18,35 +18,62 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_til_primary_search"
+            <LinearLayout
+                android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp">
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/et_primary_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/cardview_dark_background"
-                    android:hint="Cari di Second Chance"
-                    android:fontFamily="@font/poppins"
-                    android:inputType="textEmailAddress"
-                    android:paddingStart="10dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_til_primary_search"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:layout_toStartOf="@id/wishlist_btn"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/et_primary_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/cardview_dark_background"
+                        android:hint="Cari di Second Chance"
+                        android:fontFamily="@font/poppins"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/wishlist_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="5dp"
+                    android:src="@drawable/favourite" />
+
+                <ImageView
+                    android:id="@+id/history_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/history" />
+
+            </LinearLayout>
+
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/et_til_primary_search"
+                android:layout_below="@+id/search_layout"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"

@@ -1,16 +1,15 @@
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.SellerOrderAdapter
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.SellerSoldAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_seller_product_sold.*

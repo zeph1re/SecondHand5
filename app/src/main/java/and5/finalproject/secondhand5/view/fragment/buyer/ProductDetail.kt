@@ -5,6 +5,7 @@ import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
@@ -17,13 +18,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
-import kotlinx.android.synthetic.main.fragment_product_detail.seller_address
 import kotlin.properties.Delegates
 
 
@@ -61,6 +58,8 @@ class ProductDetail : Fragment() {
         btn_back_detail_product.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        addProductToWishlist()
 //        product_name.setText("tes")
 //        product_price.setText("tes")
 
@@ -370,6 +369,28 @@ class ProductDetail : Fragment() {
 
         }
 
+    }
+
+    fun postProductToWishlist(
+        token : String,
+        id : Int
+    ) {
+        val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
+        viewModelWishlist.postProductToWishlist(token, id)
+
+    }
+
+    fun addProductToWishlist() {
+        add_to_wishlist.setOnClickListener {
+            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
+                viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
+                    postProductToWishlist(token, id)
+
+                }
+            }
+        }
     }
 
 

@@ -1,23 +1,22 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.util.Log
-import androidx.core.os.bundleOf
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -65,6 +64,14 @@ class Home : Fragment() {
             searchFilter()
         }else {
             categoryFilter()
+        }
+
+        wishlist_btn.setOnClickListener{
+            Navigation.findNavController(view).navigate(R.id.action_home_to_wishlist)
+        }
+
+        history_btn.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_home_to_history)
         }
 
     }
@@ -163,4 +170,6 @@ class Home : Fragment() {
         }
         viewmodelbanner.getSellerBanner()
     }
+
+
 }

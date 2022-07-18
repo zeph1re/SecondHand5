@@ -9,11 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
-import kotlinx.android.synthetic.main.home_product_adapter.view.product_id
-import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
-import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
-import kotlinx.android.synthetic.main.seller_product_adapter.view.*
-import kotlin.math.log
 
 class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 

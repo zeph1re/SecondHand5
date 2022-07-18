@@ -1,15 +1,13 @@
 package and5.finalproject.secondhand5.view.fragment
 
+import and5.finalproject.secondhand5.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.viewmodel.LoginViewModel
-import android.os.Handler
-import android.os.Looper
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 

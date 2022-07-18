@@ -3,10 +3,14 @@ package and5.finalproject.secondhand5.network
 import and5.finalproject.secondhand5.model.auth.*
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.*
+import and5.finalproject.secondhand5.model.history.GetHistoryItem
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.model.notification.PatchNotificationResponse
 import and5.finalproject.secondhand5.model.seller.*
 import and5.finalproject.secondhand5.model.seller.Category
+import and5.finalproject.secondhand5.model.wishlist.DeleteWishlistResponse
+import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
+import and5.finalproject.secondhand5.model.wishlist.PostProductToWishlist
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -123,6 +127,30 @@ interface ApiService {
         @Field("bid_price") bid_price: Int
     ) : Call<AddBuyerOrderResponse>
 
+    //Buyer - Wishlist
+    @POST ("buyer/wishlist")
+    fun postProductToWishlist(
+        @Header("access_token") token : String,
+        @Path("product_id") product_id : Int
+    ) : Call<PostProductToWishlist>
+
+    @GET ("buyer/wishlist")
+    suspend fun getWishlistProduct(
+        @Header("access_token") token : String
+    ) : List<GetWishlistProductItem>
+
+    @GET ("buyer/wishlist/{id}")
+    suspend fun getWishlistDetail(
+        @Header("access_token") token: String,
+        @Path("id")id : Int,
+    ) : GetWishlistProductItem
+
+    @DELETE ("buyer/wishlist/{id}")
+    fun deleteWishlistItem(
+        @Header("access_token") token: String,
+        @Path("id")id : Int,
+    ) : DeleteWishlistResponse
+
 
     // SELLER
     @Headers("Accept: application/json")
@@ -227,5 +255,17 @@ interface ApiService {
     ) : Call<PatchNotificationResponse>
 
 
+    // History
+
+    @GET ("history")
+    suspend fun getAllHistory (
+        @Header( "access_token") token : String
+    ) : List<GetHistoryItem>
+
+    @GET ("history/{id}")
+    suspend fun getDetailHistory (
+        @Header("access_token") token : String,
+        @Path ("id") id : Int
+    ) : GetHistoryItem
 
 }

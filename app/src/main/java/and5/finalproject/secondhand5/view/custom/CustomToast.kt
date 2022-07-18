@@ -3,20 +3,14 @@ package and5.finalproject.secondhand5.view.custom
 import and5.finalproject.secondhand5.R
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import kotlin.properties.Delegates
 
 class CustomToast {
-
-
     fun failureToast(context: Context?, msg: String?) {
             val inflater = LayoutInflater.from(context)
             val layout: View = inflater.inflate(R.layout.error_toast, null)

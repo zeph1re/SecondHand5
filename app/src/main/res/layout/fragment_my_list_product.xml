@@ -12,6 +12,7 @@
         android:id="@+id/title_fragment"
         android:text="My List Product"
         android:textSize="22sp"
+        android:fontFamily="@font/poppins_bold"
         android:layout_margin="15dp"
         />
 
@@ -22,7 +23,7 @@
         app:strokeWidth="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         android:layout_below="@id/title_fragment"
         android:layout_marginBottom="10dp">
 

@@ -1,21 +1,16 @@
 package and5.finalproject.secondhand5.viewmodel
 
 import and5.finalproject.secondhand5.model.auth.GetAllUser
-import and5.finalproject.secondhand5.model.auth.UpdatePasswordBody
-import and5.finalproject.secondhand5.model.auth.UpdateUserBody
-import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import and5.finalproject.secondhand5.repository.UserRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import javax.inject.Inject
 
 

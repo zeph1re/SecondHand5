@@ -73,6 +73,12 @@
         <action
             android:id="@+id/action_home_to_account"
             app:destination="@id/account" />
+        <action
+            android:id="@+id/action_home_to_history"
+            app:destination="@id/history" />
+        <action
+            android:id="@+id/action_home_to_wishlist"
+            app:destination="@id/wishlist" />
     </fragment>
     <fragment
         android:id="@+id/productPreview"
@@ -187,4 +193,22 @@
         android:name="and5.finalproject.secondhand5.view.fragment.seller.StatusOrder"
         android:label="fragment_status_order"
         tools:layout="@layout/fragment_status_order" />
+    <fragment
+        android:id="@+id/history"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_history_to_userNotLogin"
+            app:destination="@id/userNotLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishlist"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Wishlist"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist">
+        <action
+            android:id="@+id/action_wishlist_to_userNotLogin"
+            app:destination="@id/userNotLogin" />
+    </fragment>
 </navigation>

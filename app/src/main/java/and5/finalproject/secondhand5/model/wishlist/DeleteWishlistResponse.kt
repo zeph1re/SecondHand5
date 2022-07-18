@@ -1,9 +1,9 @@
-package and5.finalproject.secondhand5.model.auth
+package and5.finalproject.secondhand5.model.wishlist
 
 
 import com.google.gson.annotations.SerializedName
 
-data class UpdatePasswordBody(
+data class DeleteWishlistResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("name")

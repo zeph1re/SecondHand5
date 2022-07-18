@@ -1,8 +1,6 @@
 package and5.finalproject.secondhand5.model.seller
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 
 data class UpdateProductBody(

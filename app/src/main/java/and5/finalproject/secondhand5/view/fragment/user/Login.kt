@@ -2,7 +2,6 @@ package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.auth.GetAllUser
 import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
@@ -14,11 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.GlobalScope

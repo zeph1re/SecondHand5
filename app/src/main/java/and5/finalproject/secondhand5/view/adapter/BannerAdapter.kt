@@ -2,7 +2,6 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
-import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_banner_adapter.view.*
-import kotlinx.android.synthetic.main.home_categories_adapter.view.*
-import kotlinx.android.synthetic.main.notification_adapter.view.*
 
 class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
 

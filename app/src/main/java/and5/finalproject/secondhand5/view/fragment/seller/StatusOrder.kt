@@ -18,13 +18,10 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.custom_seller_order_status.*
 import kotlinx.android.synthetic.main.custom_seller_order_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
-import kotlinx.android.synthetic.main.fragment_add_product2.view.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name

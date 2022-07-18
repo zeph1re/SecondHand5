@@ -1,10 +1,5 @@
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.SellerOrderAdapter
@@ -12,7 +7,11 @@ import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.widget.Toast
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController

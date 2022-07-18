@@ -1,10 +1,5 @@
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.seller.UpdateProductBody
@@ -14,25 +9,21 @@ import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.os.Handler
-import android.os.Looper
+import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.MultiAutoCompleteTextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.custom_seller_detail_product.*
 import kotlinx.android.synthetic.main.custom_seller_detail_product.view.*
-import kotlinx.android.synthetic.main.custom_seller_detail_product.view.dropdown_category
-import kotlinx.android.synthetic.main.fragment_add_product2.view.*
 import kotlinx.android.synthetic.main.fragment_seller_product.*
-import kotlinx.android.synthetic.main.home_product_adapter.view.*
-import okhttp3.MultipartBody
-import kotlin.math.log
 import kotlin.properties.Delegates
 
 

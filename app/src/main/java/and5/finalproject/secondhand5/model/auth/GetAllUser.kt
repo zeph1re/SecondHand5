@@ -2,11 +2,11 @@ package and5.finalproject.secondhand5.model.auth
 
 
 import android.os.Parcelable
-import android.text.Editable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
-//
+
+
 @Parcelize
 data class GetAllUser(
     @SerializedName("address")
@@ -29,5 +29,4 @@ data class GetAllUser(
     val phoneNumber: Long,
     @SerializedName("updatedAt")
     val updatedAt: String
-
 ): Parcelable
