@@ -37,10 +37,9 @@ class History : Fragment() {
         val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
-
                 initHistory()
             }else{
-                view.findNavController().navigate(R.id.action_notification_to_userNotLogin)
+                view.findNavController().navigate(R.id.action_history_to_userNotLogin)
             }
         }
     }

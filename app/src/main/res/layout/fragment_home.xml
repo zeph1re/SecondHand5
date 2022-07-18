@@ -18,64 +18,56 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_til_primary_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:layout_toStartOf="@id/wishlist_btn"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_til_primary_search"
+                    <EditText
+                        android:id="@+id/et_primary_search"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@android:color/transparent"
-                        android:layout_toStartOf="@id/wishlist_btn"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp">
+                        android:layout_height="60dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/cardview_dark_background"
+                        android:hint="Cari di Second Chance"
+                        android:fontFamily="@font/poppins"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp" />
 
-                        <EditText
-                            android:id="@+id/et_primary_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginVertical="10dp"
-                            android:background="@drawable/custom_edittext"
-                            android:drawableEnd="@drawable/ic_search"
-                            android:drawablePadding="10dp"
-                            android:drawableTint="@color/cardview_dark_background"
-                            android:hint="Cari di Second Chance"
-                            android:fontFamily="@font/poppins"
-                            android:inputType="textEmailAddress"
-                            android:paddingStart="10dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/wishlist_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:src="@drawable/favourite"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/history_btn"/>
 
-                    <ImageView
-                        android:id="@+id/wishlist_btn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_toRightOf="@+id/et_primary_search"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="5dp"
-                        android:src="@drawable/favourite"
-                        tools:ignore="NotSibling" />
+                <ImageView
+                    android:id="@+id/history_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/history"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
 
-                    <ImageView
-                        android:id="@+id/history_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/history" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
+            </RelativeLayout>
 
 
 
