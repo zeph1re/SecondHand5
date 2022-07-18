@@ -135,7 +135,12 @@ class ProductDetail : Fragment() {
 
             productName = it.name
             productPrice = it.basePrice
-            productImage = it.imageUrl
+            if(it.imageUrl !=null){
+                productImage = it.imageUrl
+            }else{
+                productImage = ""
+            }
+
             productDescription = it.description
             sellerLocation = it.location
 
@@ -199,16 +204,31 @@ class ProductDetail : Fragment() {
 
             seller_name.setText("${it.user.fullName}")
             seller_address.setText("${it.user.city}")
-            Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+
+            if(it.user.imageUrl != null) {
+                Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+            }else{
+                it.user.imageUrl == ""
+            }
+
             product_description.setText("${it.description}")
 
             productName = it.name
             productPrice = it.basePrice
-            productImage = it.imageUrl
+            if(it.imageUrl != null){
+                productImage = it.imageUrl
+            }else{
+                productImage = ""
+            }
+
             productDescription = it.description
             sellerLocation = it.location
 
-            Glide.with(requireContext()).load(it.imageUrl).into(product_image)
+            if(it.imageUrl != null){
+                Glide.with(requireContext()).load(it.imageUrl).into(product_image)
+            }else{
+                it.user.imageUrl == ""
+            }
 
 
         }
@@ -222,7 +242,9 @@ class ProductDetail : Fragment() {
 
             customOrderDialog.product_name.setText(productName.toString())
             customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
-            Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
+            if(productImage != ""){
+                Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
+            }
 
             val ADBuilder = AlertDialog.Builder(requireContext())
                 .setView(customOrderDialog)
@@ -307,7 +329,10 @@ class ProductDetail : Fragment() {
 
             customOrderDialog.product_name.setText(productName.toString())
             customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
-            Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
+            if(productImage != ""){
+                Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
+
+            }
 
             val ADBuilder = AlertDialog.Builder(requireContext())
                 .setView(customOrderDialog)
