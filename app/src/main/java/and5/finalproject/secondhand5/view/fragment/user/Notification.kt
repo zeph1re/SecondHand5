@@ -54,9 +54,9 @@ class Notification : Fragment() {
         }
 
 
-        Handler(Looper.getMainLooper()).postDelayed({
-//            readOrNot()
-        },1000)
+//        Handler(Looper.getMainLooper()).postDelayed({
+////            readOrNot()
+//        },1000)
 
     }
 
