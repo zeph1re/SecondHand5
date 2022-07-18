@@ -4,6 +4,8 @@ import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment

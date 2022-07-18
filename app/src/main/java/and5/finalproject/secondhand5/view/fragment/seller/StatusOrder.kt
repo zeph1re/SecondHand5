@@ -22,17 +22,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.custom_seller_order_status.view.*
+import kotlinx.android.synthetic.main.custom_seller_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
-import kotlinx.android.synthetic.main.fragment_detail_order.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
-import kotlinx.android.synthetic.main.fragment_status_order.bid_price
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_address_city
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_image
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_name
-import kotlinx.android.synthetic.main.fragment_status_order.product_image
-import kotlinx.android.synthetic.main.fragment_status_order.product_name
-import kotlinx.android.synthetic.main.fragment_status_order.product_price
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
@@ -141,10 +133,9 @@ class StatusOrder : Fragment() {
 
     fun statusDialog(){
         btn_status.setOnClickListener {
-            val customStatus = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_order_status, null, false)
+            val customStatus = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_status, null, false)
 
             submit = customStatus.btn_submit
-            listRadio = customStatus.radio_group
             acceptRadio = customStatus.radio_btn_gas
             declineRadio =  customStatus.radio_btn_cancel
 
@@ -196,7 +187,7 @@ class StatusOrder : Fragment() {
         customWaDialog.btn_call_whatsapp.setOnClickListener {
             if(buyerPhoneNumber!=null && (buyerPhoneNumber.startsWith("+62") || buyerPhoneNumber.startsWith("62"))){
 //                var phoneNumber = "62"
-                var message = "Selamat! Barang ${productName} berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan ${buyerAddress}"
+                val message = "Selamat! Barang ${productName} berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan ${buyerAddress}"
                 val url = "https://api.whatsapp.com/send?phone=$buyerPhoneNumber"+"&text=" + URLEncoder.encode(message, "UTF-8")
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
