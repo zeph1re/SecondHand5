@@ -2,11 +2,14 @@ package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.notification.GetNotificationItem
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.notification_adapter.view.*
 
 class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
@@ -38,9 +41,9 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
 
             holder.itemView.cardview_product_offer.visibility = View.VISIBLE
 
-            holder.itemView.notification_product_name.text = "${notification!![position].product.name}"
+            holder.itemView.notification_product_name.text = "${notification!![position].productName}"
             holder.itemView.notification_created_at.text = "${notification!![position].transactionDate.toString()}"
-            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].product.basePrice.toString()}"
+            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].basePrice.toString()}"
 
             holder.itemView.notification_product_offer.text = "Ditawar Rp ${notification!![position].bidPrice.toString()}"
 

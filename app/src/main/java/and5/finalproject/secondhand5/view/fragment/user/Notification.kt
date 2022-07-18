@@ -25,7 +25,7 @@ class Notification : Fragment() {
     lateinit var userManager: UserManager
     lateinit var getNotification: GetNotificationItem
     lateinit var notificationAdapter : NotificationAdapter
-
+    lateinit var Read : String
 
     var connectivity: CheckConnectivity = CheckConnectivity()
 
@@ -41,7 +41,7 @@ class Notification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Read = "true"
         val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
@@ -63,8 +63,14 @@ class Notification : Fragment() {
     private fun initNotification() {
         userManager = UserManager(requireActivity())
         notificationAdapter = NotificationAdapter(){
-            readStatus(it.id)
+            if (Read == "true"){
+                    readStatus(it.id)
+                Read = "false"
+            }
+
+            Handler(Looper.getMainLooper()).postDelayed({
             view?.findNavController()?.navigate(R.id.notification)
+            },300)
         }
 
         val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
