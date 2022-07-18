@@ -386,7 +386,7 @@ class ProductDetail : Fragment() {
             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
                 viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
-                    postProductToWishlist(token, id)
+                    postProductToWishlist(token, productId)
 
                 }
             }

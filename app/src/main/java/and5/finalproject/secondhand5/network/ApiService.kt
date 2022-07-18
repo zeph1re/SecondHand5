@@ -128,10 +128,11 @@ interface ApiService {
     ) : Call<AddBuyerOrderResponse>
 
     //Buyer - Wishlist
+    @FormUrlEncoded
     @POST ("buyer/wishlist")
     fun postProductToWishlist(
         @Header("access_token") token : String,
-        @Path("product_id") product_id : Int
+        @Field("product_id") product_id : Int
     ) : Call<PostProductToWishlist>
 
     @GET ("buyer/wishlist")
