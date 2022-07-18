@@ -1,31 +1,49 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.Room.Adapter.AdapterHome
+import and5.finalproject.secondhand5.Room.Model.GetProductHome
+import and5.finalproject.secondhand5.Room.OfflineDB
+import and5.finalproject.secondhand5.Room.OfflineModeDao
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
+import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.annotation.SuppressLint
-import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class Home : Fragment() {
 
+    var connectivity: CheckConnectivity = CheckConnectivity()
+
     lateinit var productAdapter: ProductAdapter
+    lateinit var offlineHomeAdapter: AdapterHome
     lateinit var bannerAdapter: BannerAdapter
     var searchQuery = ""
     var idQuery = 0
+    var db: OfflineDB? = null
+    lateinit var offlineCategory: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +56,16 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productAdapter = ProductAdapter {
-//            val data = bundleOf("data" to it)
-            val data = Bundle()
-            data.putInt("product_id", it.id)
 
-            Log.d("testes id", it.id.toString())
+        db =OfflineDB.getInstance(requireContext())
+
+        if (connectivity.isOnline(requireContext())){
+            productAdapter = ProductAdapter {
+//            val data = bundleOf("data" to it)
+                val data = Bundle()
+                data.putInt("product_id", it.id)
+
+                Log.d("testes id", it.id.toString())
 //            Log.d("testes imageName", it.imageName.toString())
 //            Log.d("testes basePrice", it.basePrice.toString())
 //            Log.d("testes imageUrl", it.imageUrl.toString())
@@ -53,25 +75,40 @@ class Home : Fragment() {
 //            Log.d("testes createdAt", it.createdAt.toString())
 //            Log.d("testes updatedAt", it.updatedAt.toString())
 //            Log.d("testes categories", it.categories.toString())
-            view.findNavController().navigate(R.id.action_home_to_productDetail, data)
-        }
+                view.findNavController().navigate(R.id.action_home_to_productDetail, data)
+            }
+            initBanner()
+            initCategory()
 
-        initBanner()
-        initCategory()
+            if (idQuery == 0){
+                initProduct()
+                searchFilter()
+            }else {
+                categoryFilter()
+            }
 
-        if (idQuery == 0){
-            initProduct()
-            searchFilter()
-        }else {
-            categoryFilter()
-        }
+            clear_category.setOnClickListener {
+                initProduct()
+            }
 
-        wishlist_btn.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_home_to_wishlist)
-        }
+        }else{
+            GlobalScope.launch {
+                val listdata = db?.offlineDao()?.getDataOfflineProductHome()
 
-        history_btn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_home_to_history)
+                requireActivity().runOnUiThread {
+                    listdata.let {
+                        if (listdata?.size == 0) {
+
+                        }
+                        offlineHomeAdapter= AdapterHome(it!!)
+                        Log.d("xccc123", it.toString())
+                        rv_list_item.adapter =  offlineHomeAdapter
+                        rv_list_item.layoutManager =
+                            GridLayoutManager(requireActivity(), 3, GridLayoutManager.HORIZONTAL, false)
+                    }
+                }
+            }
+
         }
 
     }
@@ -94,6 +131,7 @@ class Home : Fragment() {
         val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
+
 
 //                rv_list_item.layoutManager =
 //                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
@@ -119,8 +157,34 @@ class Home : Fragment() {
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
 
+                it.forEach {
+                    it.categories.forEach {
+                        offlineCategory = it.name
+                    }
+                    GlobalScope.launch {
+                        db?.offlineDao()?.clearData()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            GlobalScope.launch {
+                            db?.offlineDao()?.addHomeOffline(GetProductHome(it.basePrice, offlineCategory, it.createdAt, it.description, it.id, it.imageName, it.imageUrl, it.location, it.name, it.status, it.updatedAt))
+                        } },5000)
+
+                    }
+
+                    val a = it.categories
+                    Log.d("qwe123", a.toString())
+                    it.categories.forEach {
+                        it.name
+                    }
+
+
+                }
+
 //                rv_list_item.layoutManager =
 //                    LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+
+
+
+
 
                 rv_list_item.layoutManager =
                     GridLayoutManager(requireActivity(), 3, GridLayoutManager.HORIZONTAL, false)
@@ -170,6 +234,4 @@ class Home : Fragment() {
         }
         viewmodelbanner.getSellerBanner()
     }
-
-
 }

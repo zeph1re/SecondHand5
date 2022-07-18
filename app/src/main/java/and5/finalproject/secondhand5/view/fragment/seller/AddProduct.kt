@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.custom.CustomToast
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
@@ -49,7 +50,7 @@ import kotlin.properties.Delegates
 
 
 class AddProduct : Fragment() {
-
+    var connectivity: CheckConnectivity = CheckConnectivity()
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
@@ -101,7 +102,10 @@ class AddProduct : Fragment() {
 
 
         view?.dropdown_category?.hint = "Select Category"
-        getCategory()
+
+        if (connectivity.isOnline(requireContext())) {
+            getCategory()
+        }
         arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
         view?.dropdown_category?.setAdapter(arrayAdapter)
         view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())

@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -154,10 +155,15 @@ class Profile : Fragment() {
                 Log.d("tesblank", image.toString())
             }
                 if (updateNama.isNotEmpty() && updateKota.isNotEmpty() && updateAlamat.isNotEmpty() && updateNomor.isNotEmpty()) {
-                    viewModel.updateUserData(
-                        token, updateNama, email, "", updateNomor, updateAlamat,
-                        image!!, updateKota
-                    )
+                    if (updateNomor.startsWith("+62") || updateNomor.startsWith("62")){
+                        viewModel.updateUserData(
+                            token, updateNama, email, "", updateNomor, updateAlamat,
+                            image!!, updateKota
+                        )
+                    }else{
+                        Toast.makeText(requireContext(), "Nomor Harus Dari +62 (Indonesia)", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
 
             responseUpdate()

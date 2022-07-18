@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 
 class Account : Fragment() {
     lateinit var userManager: UserManager
+    var connectivity: CheckConnectivity = CheckConnectivity()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,11 +54,13 @@ class Account : Fragment() {
                 userManager.deleteDataUser()
             }
         }
-
-        val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
-            getUserData(it)
+        if (connectivity.isOnline(requireContext())) {
+            val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
+                getUserData(it)
+            }
         }
+
 
         //button click to show dialog
         ubah_password_card.setOnClickListener {

@@ -32,6 +32,7 @@ class SplashScreen : Fragment() {
                 },3000)
 
 
+
         return view
 
     }

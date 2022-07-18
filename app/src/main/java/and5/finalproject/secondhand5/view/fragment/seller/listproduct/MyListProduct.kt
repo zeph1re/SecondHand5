@@ -1,6 +1,7 @@
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.view.fragment.seller.listproduct.adapter.ViewPagerAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_my_list_product.view.*
 
 
 class MyListProduct : Fragment() {
-
+    var connectivity: CheckConnectivity = CheckConnectivity()
     lateinit var userManager: UserManager
 
     override fun onCreateView(
@@ -39,20 +40,23 @@ class MyListProduct : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
-            if (token!= ""||token==null){
-                initLayout()
-                val viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-                viewModel.userToken(requireActivity()).observe(viewLifecycleOwner){
-                    detailUser(it)
+        if (connectivity.isOnline(requireContext())) {
+            val loginViewModel =
+                ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
+                if (token != "" || token == null) {
+                    initLayout()
+                    val viewModel =
+                        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                    viewModel.userToken(requireActivity()).observe(viewLifecycleOwner) {
+                        detailUser(it)
+                    }
+                    edit_seller.setOnClickListener {
+                        findNavController().navigate(R.id.profile)
+                    }
+                } else {
+                    view.findNavController().navigate(R.id.action_myListProduct_to_userNotLogin)
                 }
-                edit_seller.setOnClickListener {
-                    findNavController().navigate(R.id.profile)
-                }
-            }else{
-                view.findNavController().navigate(R.id.action_myListProduct_to_userNotLogin)
             }
         }
 

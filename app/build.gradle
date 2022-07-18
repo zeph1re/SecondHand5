@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 
+
 }
 
 android {
@@ -84,6 +85,12 @@ dependencies {
 
 
     implementation 'androidx.appcompat:appcompat:1.4.2'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
+
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
 
 
 }
