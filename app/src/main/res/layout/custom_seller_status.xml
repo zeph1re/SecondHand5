@@ -22,8 +22,8 @@
             android:fontFamily="@font/poppins_bold"
             android:layout_margin="10dp"/>
 
-        <CheckBox
-            android:id="@+id/checkbox_sold"
+        <RadioButton
+            android:id="@+id/radio_btn_gas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
@@ -39,12 +39,12 @@
             android:fontFamily="@font/poppins_light"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_below="@id/checkbox_sold"/>
+            android:layout_below="@id/radio_btn_gas"/>
 
-        <CheckBox
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkbox_failed"
+            android:id="@+id/radio_btn_cancel"
             android:text="Batalkan Transaksi"
             android:fontFamily="@font/poppins"
             android:layout_below="@id/tv_sold"/>
@@ -58,7 +58,18 @@
             android:fontFamily="@font/poppins_light"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_below="@id/checkbox_failed"/>
+            android:layout_below="@id/radio_btn_cancel"/>
+
+        <Button
+            android:text="Submit"
+            android:id="@+id/btn_submit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tv_failed"
+            android:backgroundTint="@color/blue_300"
+            android:textAllCaps="false"
+            android:layout_marginEnd="20dp"/>
     </RelativeLayout>
 
 

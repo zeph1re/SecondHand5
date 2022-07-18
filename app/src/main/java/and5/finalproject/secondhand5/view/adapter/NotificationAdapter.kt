@@ -38,9 +38,9 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
 
             holder.itemView.cardview_product_offer.visibility = View.VISIBLE
 
-            holder.itemView.notification_product_name.text = "${notification!![position].product.name}"
+            holder.itemView.notification_product_name.text = "${notification!![position].productName}"
             holder.itemView.notification_created_at.text = "${notification!![position].transactionDate.toString()}"
-            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].product.basePrice.toString()}"
+            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].basePrice.toString()}"
 
             holder.itemView.notification_product_offer.text = "Ditawar Rp ${notification!![position].bidPrice.toString()}"
 
