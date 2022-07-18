@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_til_primary_search"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@android:color/transparent"
@@ -54,19 +54,20 @@
                     android:id="@+id/wishlist_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="5dp"
-                    android:src="@drawable/favourite" />
+                    android:src="@drawable/favourite"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/history_btn"/>
 
                 <ImageView
                     android:id="@+id/history_btn"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/history" />
+                    android:src="@drawable/history"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
 
-            </LinearLayout>
-
+            </RelativeLayout>
 
 
 
