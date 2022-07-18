@@ -23,6 +23,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -109,6 +110,14 @@ class Home : Fragment() {
                 }
             }
 
+        }
+
+        wishlist_btn.setOnClickListener{
+            Navigation.findNavController(view).navigate(R.id.action_home_to_wishlist)
+        }
+
+        history_btn.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_home_to_history)
         }
 
     }
