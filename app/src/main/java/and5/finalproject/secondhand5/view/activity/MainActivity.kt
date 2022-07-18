@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             //check fragment name is "home" or not
 
