@@ -25,26 +25,41 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(holder.itemView.context).load(sellerProduct!![position].imageUrl).into(holder.itemView.product_image)
-        holder.itemView.product_name.text = sellerProduct!![position].name
-        holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice.toString()}"
 
-        for(j in sellerProduct!![position].categories.indices) {
-            categorySellerUpdate.clear()
-            sellerProduct!![position].categories.forEach {
-               categorySellerUpdate.add(it.name)
+        if(sellerProduct!![position].status == "sold"){
+            holder.itemView.productSellerCard.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+
+        }else{
+            holder.itemView.layoutParams =
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    500
+                )
+
+            Glide.with(holder.itemView.context).load(sellerProduct!![position].imageUrl).into(holder.itemView.product_image)
+            holder.itemView.product_name.text = sellerProduct!![position].name
+            holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice.toString()}"
+
+            for(j in sellerProduct!![position].categories.indices) {
+                categorySellerUpdate.clear()
+                sellerProduct!![position].categories.forEach {
+                    categorySellerUpdate.add(it.name)
+                }
+                val listToString = categorySellerUpdate.toString()
+                val getCategory = listToString.replace("[","").replace("]", "")
+                holder.itemView.seller_product_category.text = getCategory
             }
-            val listToString = categorySellerUpdate.toString()
-            val getCategory = listToString.replace("[","").replace("]", "")
-            holder.itemView.seller_product_category.text = getCategory
+
+
+
+            holder.itemView.productSellerCard.setOnClickListener {
+                onclick(sellerProduct!![position])
+
+            }
         }
 
 
-
-        holder.itemView.productSellerCard.setOnClickListener {
-            onclick(sellerProduct!![position])
-
-        }
     }
 
     override fun getItemCount(): Int {
