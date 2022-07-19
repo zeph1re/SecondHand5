@@ -138,15 +138,25 @@
                         </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center"
                         android:id="@+id/clear_category"
+                        app:cardCornerRadius="35dp"
+                        app:strokeColor="@color/blue_100"
+                        app:strokeWidth="1dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="25dp"
-                        android:fontFamily="@font/poppins"
-                        android:text="Clear Category"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:maxLines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:text="Reset Category" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
 
 
