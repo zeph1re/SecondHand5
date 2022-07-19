@@ -100,6 +100,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    //Biometric
+    implementation 'androidx.biometric:biometric:1.1.0'
+
 
 
 }
