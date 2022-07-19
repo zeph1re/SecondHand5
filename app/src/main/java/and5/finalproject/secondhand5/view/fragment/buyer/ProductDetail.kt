@@ -409,10 +409,20 @@ class ProductDetail : Fragment() {
         add_to_wishlist.setOnClickListener {
             val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
-                viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
-                    postProductToWishlist(token, productId)
+            val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
 
+            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
+                viewModelProduct.detailProduct.observe(viewLifecycleOwner) { productDetail ->
+                    viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner){
+                        for (i in it.indices){
+                            if  (productId == productDetail.id) {
+                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
+                            } else {
+                                postProductToWishlist(token, productDetail.id)
+                                Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
         }
