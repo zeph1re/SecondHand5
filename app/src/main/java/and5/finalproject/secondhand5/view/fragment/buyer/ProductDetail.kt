@@ -3,6 +3,8 @@ package and5.finalproject.secondhand5.view.fragment.buyer
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
+import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
@@ -18,9 +20,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
+import kotlinx.android.synthetic.main.fragment_wishlist.*
+import kotlin.math.log
 import kotlin.properties.Delegates
 
 
@@ -38,6 +43,8 @@ class ProductDetail : Fragment() {
     var orderId = 0
 
     lateinit var dataOrder : List<GetBuyerOrderItem>
+    lateinit var dataWishlist : List<GetWishlistProductItem>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +66,6 @@ class ProductDetail : Fragment() {
             activity?.onBackPressed()
         }
 
-        addProductToWishlist()
 //        product_name.setText("tes")
 //        product_price.setText("tes")
 
@@ -70,6 +76,9 @@ class ProductDetail : Fragment() {
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
                 getOrderData()
+                getWishlistData()
+                addProductToWishlist()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     init()
                 },1000)
@@ -84,8 +93,9 @@ class ProductDetail : Fragment() {
 
     fun getOrderData(){
 
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
             if(it!=null){
                 viewModelProduct.buyerOrder.observe(viewLifecycleOwner,{
                     if(it!=null){
@@ -98,6 +108,27 @@ class ProductDetail : Fragment() {
                 viewModelProduct.getAllBuyerOrder(it)
 
             }
+        }
+    }
+
+    fun getWishlistData() {
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelWishlist =
+            ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
+
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
+            if (it != null) {
+                viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner, {
+                    if (it != null) {
+                        dataWishlist = it
+//                        Log.d("testes", dataWishlist[0].id.toString())
+                    }
+                })
+
+                viewModelWishlist.getAllWishlistProduct(it)
+
+            }
+
         }
     }
 
@@ -409,21 +440,49 @@ class ProductDetail : Fragment() {
         add_to_wishlist.setOnClickListener {
             val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-            val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
 
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
-                viewModelProduct.detailProduct.observe(viewLifecycleOwner) { productDetail ->
-                    viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner){
-                        for (i in it.indices){
-                            if  (productId == productDetail.id) {
-                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
-                            } else {
-                                postProductToWishlist(token, productDetail.id)
-                                Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+                if(token != null){
+                    viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
+
+                        if(dataWishlist.size > 0){
+
+                            var flagWishlist = 2
+                            for (i in dataWishlist.indices){
+                                if(it.id == dataWishlist[i].productId) {
+                                    flagWishlist = 0
+                                    Log.d("testes wish 1", flagWishlist.toString())
+                                }else {
+                                    flagWishlist = 1
+                                    Log.d("testes wish 2", flagWishlist.toString())
+
+                                    break
+                                }
+                                Log.d("testes wish for", flagWishlist.toString())
+
                             }
+
+                            Log.d("testes wish", flagWishlist.toString())
+
+                            if(flagWishlist==1){
+                                postProductToWishlist(token, it.id)
+                                Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+                            }else if(flagWishlist==0){
+                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+
+                            }
+                        }else{
+                            Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+                            postProductToWishlist(token, it.id)
                         }
+
                     }
+
                 }
+
+
             }
         }
     }

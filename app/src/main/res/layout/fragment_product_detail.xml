@@ -31,12 +31,11 @@
                     android:src="@drawable/ic_back" />
 
                 <ImageView
+                    android:id="@+id/add_to_wishlist"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:id="@+id/add_to_wishlist"
-                    android:src="@drawable/favourite"
                     android:layout_alignParentEnd="true"
-                    />
+                    android:src="@drawable/favourite" />
             </RelativeLayout>
 
 
