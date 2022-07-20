@@ -43,7 +43,7 @@ class UserManager (context: Context) {
     }
 
 
-    val userToken : kotlinx.coroutines.flow.Flow<String> = userDataStore.data.map {
+    val userToken : Flow<String> = userDataStore.data.map {
         it [TOKEN] ?: ""
     }
 

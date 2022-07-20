@@ -33,10 +33,10 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        if(banner == null){
-            return 0
+        return if(banner == null){
+            0
         }else{
-            return banner!!.size
+            banner!!.size
         }
     }
 }
