@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.seller_interest_adapter.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SellerSoldAdapter (var onclick : (GetSellerOrderItem)-> Unit) : RecyclerView.Adapter<SellerSoldAdapter.ViewHolder>(){
 
@@ -35,7 +37,10 @@ class SellerSoldAdapter (var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
 
 
         if(soldOrder!![position].transactionDate != null ){
-            holder.itemView.bid_date.text = soldOrder!![position].transactionDate.toString()
+            val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+            val date = formatter.parse(soldOrder!![position].transactionDate.toString())
+
+            holder.itemView.bid_date.text = date.toString()
         }else{
             holder.itemView.bid_date.text = "tanggal null"
 

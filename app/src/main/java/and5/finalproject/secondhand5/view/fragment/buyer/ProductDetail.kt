@@ -449,14 +449,17 @@ class ProductDetail : Fragment() {
 
                             var flagWishlist = 2
                             for (i in dataWishlist.indices){
-                                if(it.id == dataWishlist[i].productId) {
+                                Log.d("testes loop ke", i.toString())
+                                Log.d("testes id api", it.id.toString())
+                                Log.d("testes id data", dataWishlist[i].product.id.toString())
+
+                                if(it.id == dataWishlist[i].product.id) {
                                     flagWishlist = 0
                                     Log.d("testes wish 1", flagWishlist.toString())
+                                    break
                                 }else {
                                     flagWishlist = 1
                                     Log.d("testes wish 2", flagWishlist.toString())
-
-                                    break
                                 }
                                 Log.d("testes wish for", flagWishlist.toString())
 
@@ -467,6 +470,7 @@ class ProductDetail : Fragment() {
                             if(flagWishlist==1){
                                 postProductToWishlist(token, it.id)
                                 Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+                                getWishlistData()
                             }else if(flagWishlist==0){
                                 Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
                             }else{

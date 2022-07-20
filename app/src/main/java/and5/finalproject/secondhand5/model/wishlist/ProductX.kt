@@ -4,6 +4,8 @@ package and5.finalproject.secondhand5.model.wishlist
 import com.google.gson.annotations.SerializedName
 
 data class ProductX(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("base_price")
     val basePrice: Int,
     @SerializedName("created_at")

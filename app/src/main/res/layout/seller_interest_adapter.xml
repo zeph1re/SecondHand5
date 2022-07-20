@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="15dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        app:cardCornerRadius="5dp"
+        app:strokeColor="@color/blue_100"
+        app:strokeWidth="1dp"
         android:id="@+id/product_order_card"
         android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/bid_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:text="19 agustus 2022"
+                android:textColor="@color/black"
+                android:textSize="12sp"></TextView>
+
             <ImageView
 
-                android:layout_margin="20dp"
-                android:src="@drawable/ei"
                 android:id="@+id/gambar"
                 android:layout_width="60dp"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ei">
 
             </ImageView>
 
@@ -35,16 +51,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"></TextView>
 
-            <TextView
-                android:id="@+id/bid_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:text="19 agustus 2022"
-                android:textColor="@color/black"
-                android:textSize="12sp"></TextView>
+
 
             <TextView
                 android:id="@+id/product_name"
@@ -96,6 +103,6 @@
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
