@@ -78,11 +78,11 @@ class Notification : Fragment() {
         viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
             viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    it.sortedBy { it.updatedAt }
+                    val sorted = it.sortedByDescending { it.createdAt }
                     rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
                     rv_notification.adapter = notificationAdapter
 
-                    notificationAdapter.setNotificationList(it)
+                    notificationAdapter.setNotificationList(sorted)
 
                     val recyclerViewState = rv_notification.layoutManager?.onSaveInstanceState()
                     notificationAdapter.notifyDataSetChanged()

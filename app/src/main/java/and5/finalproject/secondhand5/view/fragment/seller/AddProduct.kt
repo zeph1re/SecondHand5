@@ -106,6 +106,7 @@ class AddProduct : Fragment() {
         if (connectivity.isOnline(requireContext())) {
             getCategory()
         }
+        categoryName
         arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
         view?.dropdown_category?.setAdapter(arrayAdapter)
         view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
@@ -247,7 +248,8 @@ class AddProduct : Fragment() {
     fun getCategory(){
         val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
-            it.forEach {
+            val sorted = it.sortedBy { it.name }
+            sorted.forEach {
                 categoryName.add(it.name)
                 categoryID.add(it.id)
             }

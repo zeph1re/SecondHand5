@@ -89,7 +89,9 @@ class SellerProduct : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModel.getSellerProduct(token)
         viewModel.sellerProductLiveData.observe(viewLifecycleOwner){
+
             if(it != null){
+
                 myListProductAdapter.setListProduct(it)
                 myListProductAdapter.notifyDataSetChanged()
 
@@ -149,18 +151,6 @@ class SellerProduct : Fragment() {
 
                     customDetailProductDialog.dropdown_category.setText(getCategory)
 
-
-
-//                    Log.d("testes a", it.name)
-
-
-//                        detailProduct(
-//                            id,
-//                            productname,
-//                            productdescription,
-//                            productprice,
-//                            productlocation
-//                        )
 
                         customDetailProductDialog.dropdown_category?.hint = "Select Category"
 
@@ -265,12 +255,7 @@ class SellerProduct : Fragment() {
                                         newDesc =
                                             customDetailProductDialog.input_product_description.text.toString()
                                     }
-//
-//                    if (customDetailProductDialog.input_product_location.text.isNotEmpty()){
-//                        newLocation = customDetailProductDialog.input_product_location.text.toString()
-//                    }else{
-//                        newLocation = location
-//                    }
+
 
                                     if (customDetailProductDialog.input_product_base_price.text.isNotEmpty()) {
                                         newPrice =
@@ -346,7 +331,8 @@ class SellerProduct : Fragment() {
         viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
             categoryName.clear()
              categoryID.clear()
-            it.forEach {
+            val sorted = it.sortedBy { it.name }
+            sorted.forEach {
                 categoryName.add(it.name)
                 categoryID.add(it.id)
 

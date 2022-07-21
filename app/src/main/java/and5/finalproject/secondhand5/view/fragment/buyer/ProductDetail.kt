@@ -66,8 +66,6 @@ class ProductDetail : Fragment() {
             activity?.onBackPressed()
         }
 
-//        product_name.setText("tes")
-//        product_price.setText("tes")
 
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
