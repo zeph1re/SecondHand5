@@ -210,5 +210,11 @@
         <action
             android:id="@+id/action_wishlist_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_wishlist_to_productDetail"
+            app:destination="@id/productDetail" />
+        <action
+            android:id="@+id/action_wishlist_to_productDetail2"
+            app:destination="@id/productDetail" />
     </fragment>
 </navigation>

@@ -24,11 +24,23 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_seller_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
+import kotlinx.android.synthetic.main.fragment_detail_order.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
+import kotlinx.android.synthetic.main.fragment_status_order.bid_price
+import kotlinx.android.synthetic.main.fragment_status_order.btn_back
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_address_city
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_image
+import kotlinx.android.synthetic.main.fragment_status_order.buyer_name
+import kotlinx.android.synthetic.main.fragment_status_order.order_date
+import kotlinx.android.synthetic.main.fragment_status_order.product_image
+import kotlinx.android.synthetic.main.fragment_status_order.product_name
+import kotlinx.android.synthetic.main.fragment_status_order.product_price
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
 import java.net.URLEncoder
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.properties.Delegates
 
 
@@ -53,6 +65,7 @@ class StatusOrder : Fragment() {
     private var listRadio: RadioGroup? = null
     private var acceptRadio: RadioButton? = null
     private var declineRadio: RadioButton? = null
+    lateinit var orderDate : String
 
 
     override fun onCreateView(
@@ -65,6 +78,12 @@ class StatusOrder : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btn_back.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        btn_edit.visibility = View.GONE
 
         orderId = requireArguments().getInt("order_id")
 
@@ -85,6 +104,10 @@ class StatusOrder : Fragment() {
             product_price.text = "Rp ${productPrice.toString()}"
             bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
             Glide.with(requireContext()).load(productImage).into(product_image)
+
+            val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+            val date = formatter.parse(orderDate)
+            order_date.setText(date.toString())
         },500)
 
 
@@ -219,6 +242,7 @@ class StatusOrder : Fragment() {
                     productImage = it.product.imageUrl
                     productPrice = it.product.basePrice
                     bidPrice = it.price
+                    orderDate = it.createdAt
 
                     buyerCity = it.user.city
                     buyerName = it.user.fullName

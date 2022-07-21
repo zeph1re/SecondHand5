@@ -102,11 +102,19 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     }
 
     fun getBuyerDetailProduct(id:Int){
+
         viewModelScope.launch {
             val detailproduct = productRepository.getDetailProduct(id)
             detailProductLivedata.value = detailproduct
         }
     }
+
+//    fun clearBuyerDetailProductLiveData(){
+//        viewModelScope.launch {
+//            detailProductLivedata.postValue(null)
+//        }
+//    }
+
 
     fun getBuyerDetailOrder(access_token : String, id:Int){
         viewModelScope.launch {

@@ -5,7 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.user.Wishlist">
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_back" />
+
+
     <TextView
+        android:layout_below="@id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wishlist_tv"

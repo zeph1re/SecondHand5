@@ -89,9 +89,7 @@ class SellerProduct : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
         viewModel.getSellerProduct(token)
         viewModel.sellerProductLiveData.observe(viewLifecycleOwner){
-
             if(it != null){
-
                 myListProductAdapter.setListProduct(it)
                 myListProductAdapter.notifyDataSetChanged()
 
