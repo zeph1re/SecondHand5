@@ -57,7 +57,8 @@
                 android:id="@+id/loginemail"
                 android:background="@drawable/rectangleedittext"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:fontFamily="@font/poppins">
             </EditText>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,8 +81,8 @@
 
             <EditText
                 android:hint="Password"
+                android:fontFamily="@font/poppins"
                 android:layout_marginTop="10dp"
-
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/loginpassword"
@@ -102,6 +103,7 @@
             android:text="Login"
             android:background="@drawable/rounded_button"
             android:textColor="@color/white"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/blue_300"
             android:layout_gravity="center_horizontal"
@@ -115,12 +117,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-
                 android:id="@+id/daftar"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_marginTop="20dp"
                 android:text="Dont have an account?"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -131,11 +132,11 @@
                 android:layout_toRightOf="@id/daftar"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/daftar2"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_marginTop="20dp"
                 android:text="Register here"
                 android:textColor="@color/purple_200"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
@@ -174,12 +175,12 @@
                 android:src="@drawable/loading_progress"/>
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Please Wait.."
                 android:background="#00000000"
                 android:textSize="20sp"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/purple_200">
 
             </TextView>
