@@ -238,10 +238,10 @@ interface ApiService {
 //    ) : Call<GetSellerProductItem>
 
     @DELETE("seller/product/{id}")
-    suspend fun deleteProduct(
+    fun deleteProduct(
         @Header("access_token")token:String,
         @Path("id")id : Int
-    ) : GetSellerProductItem
+    ) : Call<GetSellerProductItem>
 
     @GET("seller/order/{id}")
     suspend fun getSellserDetailOrder(

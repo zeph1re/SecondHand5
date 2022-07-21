@@ -165,6 +165,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
         }
     }
 
+
+
     fun deleteProduct(access_token:String, id: Int){
         viewModelScope.launch {
             productRepository.sellerDeleteProduct(access_token, id, responseCodeDeleteProduct)
