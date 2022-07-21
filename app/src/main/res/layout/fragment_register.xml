@@ -6,111 +6,115 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.user.Register">
 
+    <ImageView
+        android:id="@+id/btn_back_register"
+        android:src="@drawable/ic_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_back_register"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Register"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <LinearLayout
-        android:padding="20dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/btn_back_register"
-            android:src="@drawable/ic_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
-
-        <TextView
-            android:layout_marginVertical="70dp"
-            android:layout_below="@id/btn_back"
-            android:text="Register"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_name"
-                app:helperTextTextColor="@color/red"
-                android:layout_marginVertical="5dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
+                app:helperTextTextColor="@color/red"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/regis_nama_lengkap"
                     android:hint="Full Name"
-                    android:background="@drawable/custom_edittext"
+                    android:layout_marginHorizontal="60dp"
+                    android:textSize="15sp"
+                    android:background="@drawable/rectangleedittext"
+                    android:fontFamily="@font/poppins"
                     android:drawableStart="@drawable/ic_person"
                     android:drawableTint="@color/cardview_dark_background"
                     android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
+                    android:maxLines="1"
                     android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"/>
+                    android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_email"
                 android:layout_gravity="center_horizontal"
-                app:boxStrokeWidth="0dp"
                 app:helperTextTextColor="@color/red"
-                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/regis_email"
                     android:hint="Email (Ex: johndee@gmail.com)"
-                    android:layout_marginVertical="5dp"
-                    android:background="@drawable/custom_edittext"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginHorizontal="60dp"
+                    android:background="@drawable/rectangleedittext"
                     android:drawableStart="@drawable/ic_email"
                     android:drawableTint="@color/cardview_dark_background"
                     android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
+                    android:maxLines="1"
                     android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"/>
+                    android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_pass"
                 android:layout_gravity="center_horizontal"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
                 app:helperTextTextColor="@color/red"
-                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/regis_password"
                     android:hint="Password"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins"
                     app:passwordToggleEnabled="true"
-                    android:layout_marginVertical="5dp"
-                    android:background="@drawable/custom_edittext"
+                    android:layout_marginHorizontal="60dp"
+                    android:background="@drawable/rectangleedittext"
                     android:drawableStart="@drawable/ic_keypassword"
-                    android:drawableTint="@color/cardview_dark_background"
                     android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
+                    android:maxLines="1"
                     android:inputType="textPassword|textNoSuggestions"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"/>
+                    android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btndaftar"
                 android:text="Register"
-                android:textAllCaps="false"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/custom_button"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="60dp"
                 android:backgroundTint="#3A5BA0"
                 android:textColor="#DBDFFD"
                 android:layout_width="match_parent"
@@ -119,8 +123,7 @@
 
         <LinearLayout
             android:gravity="center"
-            android:layout_margin="25dp"
-
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -128,7 +131,8 @@
             <TextView
                 android:text="Already have an account?"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -138,7 +142,8 @@
                 android:text="Login"
                 android:textStyle="bold"
                 android:textColor="@color/purple_200"
-                android:textSize="16sp"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

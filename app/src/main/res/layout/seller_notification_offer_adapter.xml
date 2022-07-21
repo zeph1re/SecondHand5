@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:padding="15dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -19,15 +19,18 @@
 
         <LinearLayout
             android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/product_image">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Penawaran Produk"
-                android:textSize="12sp" />
+                android:textSize="11sp"
+                android:fontFamily="@font/poppins"/>
 
 
             <TextView
@@ -35,27 +38,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Raiden Shogun"
-                android:textSize="18sp" />
+                android:textSize="15sp"
+                android:textColor="@color/blue_300"
+                android:fontFamily="@font/poppins_medium"/>
 
             <TextView
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp 250.000"
-                android:textSize="18sp" />
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins"/>
 
             <TextView
                 android:id="@+id/product_offered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ditawar Rp 200.000"
-                android:textSize="18sp" />
+                android:textSize="15sp"
+                android:textColor="@color/blue_300"
+                android:fontFamily="@font/poppins_medium" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
 
             <TextView
                 android:id="@+id/offered_date"
@@ -65,7 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20 Apr, 14:04"
-                android:textSize="14sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"/>
 
             <ImageView
                 android:id="@+id/offered_status"
@@ -78,7 +88,7 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
     
 
 </androidx.cardview.widget.CardView>
