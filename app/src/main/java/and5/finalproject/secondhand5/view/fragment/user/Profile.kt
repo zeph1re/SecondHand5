@@ -268,8 +268,7 @@ class Profile : Fragment() {
         }
     }
 
-
-
+    
     fun getContent(it : Uri){
 
         val contentResolver = requireActivity().contentResolver
