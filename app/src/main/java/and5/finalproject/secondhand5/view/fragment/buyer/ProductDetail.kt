@@ -273,7 +273,7 @@ class ProductDetail : Fragment() {
                 }
 
 
-            },200)
+            },100)
 
         }
 
@@ -397,7 +397,7 @@ class ProductDetail : Fragment() {
                                 Log.d("testes token", it)
                                 viewModelProduct.responseCodeUpdateBuyerOrder.observe(viewLifecycleOwner,{
 //                                    Log.d("tes response ", it.toString())
-                                    if(it == "201"){
+                                    if(it == "201" || it == "200"){
                                         Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
                                         buy_btn.setClickable(false);
                                         buy_btn.setText("Menunggu Respon Penjual")
@@ -415,7 +415,6 @@ class ProductDetail : Fragment() {
                                                 "\t\n" +
                                                 "Internal Service Error", Toast.LENGTH_SHORT).show()
                                     }
-
                                     else{
                                         Toast.makeText(requireContext(), "\t\n" +
                                                 "No Internet Connection", Toast.LENGTH_SHORT).show()

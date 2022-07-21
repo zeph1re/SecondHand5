@@ -39,6 +39,12 @@ class SellerProductInterest : Fragment() {
 
         userManager = UserManager(requireActivity())
 
+
+        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
+            getOrder(it)
+        }
+
         sellerOrderAdapter = SellerOrderAdapter{
             //tes
 //            sellerResponse(it.id)
@@ -46,15 +52,9 @@ class SellerProductInterest : Fragment() {
             data.putInt("order_id", it.id)
             view.findNavController().navigate(R.id.action_myListProduct_to_detailPenawar, data)
         }
-
         var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_seller_order.adapter = sellerOrderAdapter
         rv_seller_order.layoutManager = layoutManager
-
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
-            getOrder(it)
-        }
     }
 
     fun getOrder(token:String){

@@ -195,24 +195,61 @@ class SellerProduct : Fragment() {
                             val dialogBuilder = AlertDialog.Builder(requireActivity())
                             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
 
+
                             dialogBuilder.setMessage("Hapus Produk?")
                                 .setCancelable(false)
                                 .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                     userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+                                        var flagDelete = false
                                         if (it != null) {
                                             viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
-                                                if (it == "201") {
+                                                if (it == "201" || it == "200") {
                                                     Toast.makeText(
                                                         requireContext(),
                                                         "berhasil delete",
                                                         Toast.LENGTH_SHORT
                                                     ).show()
+                                                    flagDelete = true
+                                                }else if(it == "400"){
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Gagal Menghapus, Product Sedang Ada Yang Order",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }else{
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Internal Service Error",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
                                                 }
+                                                Log.d("testes flag 1", flagDelete.toString())
+
                                             }
 
+//                                            Log.d("testes flag 2", flagDelete.toString())
+//                                            if(flagDelete == true){
+//                                                Toast.makeText(
+//                                                    requireContext(),
+//                                                    "berhasil delete",
+//                                                    Toast.LENGTH_SHORT
+//                                                ).show()
+//                                                viewModelProduct.deleteProduct(it, id)
+//                                                ADBuilder.dismiss()
+//                                            }else{
+//                                                Toast.makeText(
+//                                                    requireContext(),
+//                                                    "Gagal Menghapus, Product Sedang Ada Yang Order",
+//                                                    Toast.LENGTH_SHORT
+//                                                ).show()
+//                                                ADBuilder.dismiss()
+//                                            }
+
+                                            viewModelProduct.deleteProduct(it, id)
+                                            ADBuilder.dismiss()
+
                                         }
-                                        viewModelProduct.deleteProduct(it, id)
-                                        ADBuilder.dismiss()
+
 
                                         findNavController().navigate(R.id.myListProduct)
 
@@ -236,8 +273,6 @@ class SellerProduct : Fragment() {
                         customDetailProductDialog.btn_update_product.setOnClickListener {
                             val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
                             val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-
-
 
 
                             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){token->

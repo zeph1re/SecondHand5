@@ -30,29 +30,34 @@ class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
-        Glide.with(holder.itemView.context).load(sellerOrder!![position].product.imageUrl).into(holder.itemView.gambar)
-        holder.itemView.product_name.text = "${sellerOrder!![position].product.name}"
-        holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice.toString()}"
-        holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price.toString()}"
-        holder.itemView.status.text = "Status ${sellerOrder!![position].product.status.toString()}"
-
-
-        if(sellerOrder!![position].createdAt != null ){
-            val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-            val date = formatter.parse(sellerOrder!![position].createdAt.toString())
-
-            holder.itemView.bid_date.text = date.toString()
-            Log.d("testes tgl",  date.toString())
-            Log.d("testes tgl",  sellerOrder!![position].createdAt.toString())
-
+        if(sellerOrder!![position].product.status == "sold"){
+            holder.itemView.product_order_card.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
         }else{
-            holder.itemView.bid_date.text = "tanggal null"
 
-        }
+            Glide.with(holder.itemView.context).load(sellerOrder!![position].product.imageUrl).into(holder.itemView.gambar)
+            holder.itemView.product_name.text = "${sellerOrder!![position].product.name}"
+            holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice.toString()}"
+            holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price.toString()}"
+            holder.itemView.status.text = "Status ${sellerOrder!![position].product.status.toString()}"
 
-        holder.itemView.product_order_card.setOnClickListener {
-            onclick(sellerOrder!![position])
+
+            if(sellerOrder!![position].createdAt != null ){
+                val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+                val date = formatter.parse(sellerOrder!![position].createdAt.toString())
+
+                holder.itemView.bid_date.text = date.toString()
+                Log.d("testes tgl",  date.toString())
+                Log.d("testes tgl",  sellerOrder!![position].createdAt.toString())
+
+            }else{
+                holder.itemView.bid_date.text = "tanggal null"
+
+            }
+
+            holder.itemView.product_order_card.setOnClickListener {
+                onclick(sellerOrder!![position])
+            }
         }
 
 

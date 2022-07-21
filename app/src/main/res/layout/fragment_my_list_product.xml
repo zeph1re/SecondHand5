@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/seller_profile"
                 android:orientation="vertical"
@@ -63,19 +63,22 @@
                     android:text="Kota"
                     android:fontFamily="@font/poppins"/>
 
+                <Button
+                    android:layout_gravity="right"
+                    android:id="@+id/edit_seller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="Edit"
+                    android:textColor="@color/blue_300"
+                    android:textSize="13sp" />
+
             </LinearLayout>
 
 
-            <Button
-                android:id="@+id/edit_seller"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:backgroundTint="@android:color/transparent"
-                android:text="Edit"
-                android:textColor="@color/blue_300"
-                android:textSize="13sp" />
+
 
         </RelativeLayout>
 
