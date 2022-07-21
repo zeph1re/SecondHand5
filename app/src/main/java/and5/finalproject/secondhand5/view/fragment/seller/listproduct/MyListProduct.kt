@@ -61,10 +61,6 @@ class MyListProduct : Fragment() {
         }
 
 
-
-
-
-
     }
 
     private fun detailUser(token:String) {

@@ -2,10 +2,13 @@ package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
+import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +18,8 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail_order.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.properties.Delegates
 
 
@@ -35,6 +40,9 @@ class DetailOrder : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        btn_back.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         userManager = UserManager(requireActivity())
 
@@ -128,15 +136,24 @@ class DetailOrder : Fragment() {
 
             viewmodelproduct.detailOrder.observe(viewLifecycleOwner,{
 
+
+
                 product_name.text = it.product.name
                 Glide.with(requireContext()).load(it.product.imageUrl).into(product_image)
 
                 bid_price.text = "Ditawar Rp ${it.price}"
                 product_price.text = "Rp ${it.product.basePrice.toString()}"
 
-                if(it.transactionDate != null){
-                    order_date.text = it.transactionDate.toString()
+                if(it.createdAt != null){
+                    val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+                    val date = formatter.parse(it.createdAt.toString())
+                    if (date != null) {
+                        order_date.text = date.toString()
+                    }
                 }
+
+                Log.d("testes tgl", it.createdAt.toString())
+
                 buyer_address_city.text = it.user.city
                 buyer_name.text = it.user.fullName
                 Glide.with(requireContext()).load(it.user.imageURL).into(buyer_image)
@@ -146,5 +163,7 @@ class DetailOrder : Fragment() {
 
         }
     }
+
+
 
 }

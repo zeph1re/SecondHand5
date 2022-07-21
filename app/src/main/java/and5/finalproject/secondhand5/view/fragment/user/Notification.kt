@@ -96,66 +96,6 @@ class Notification : Fragment() {
 
     }
 
-    private fun initBuyerNotification() {
-        userManager = UserManager(requireActivity())
-        notificationAdapter = NotificationAdapter(){
-            readStatus(it.id)
-        }
-
-        val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
-            viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
-                    rv_notification.adapter = notificationAdapter
-
-                    notificationAdapter.setNotificationList(it)
-                    notificationAdapter.notifyDataSetChanged()
-
-                }
-            }
-            viewmodel.getNotification(it, "buyer")
-        }
-
-    }
-
-
-    private fun initSellerNotification() {
-        userManager = UserManager(requireActivity())
-        notificationAdapter = NotificationAdapter(){
-            readStatus(it.id)
-            view?.findNavController()?.navigate(R.id.notification)
-
-        }
-
-        val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
-            viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
-                    rv_notification.adapter = notificationAdapter
-
-                    notificationAdapter.setNotificationList(it)
-                    notificationAdapter.notifyDataSetChanged()
-
-                }
-            }
-            viewmodel.getNotification(it, "seller")
-        }
-
-    }
-
-
-
-    private fun readOrNot() {
-        if (getNotification.read) {
-            read_or_not.visibility = View.GONE
-        } else {
-            read_or_not.visibility = View.VISIBLE
-        }
-    }
 
     fun readStatus(idNotif : Int){
 

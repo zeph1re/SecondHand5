@@ -67,11 +67,7 @@ class SellerProduct : Fragment() {
         preventDoubleCall = "true"
 
         myListProductAdapter= SellerProductAdapter{product->
-
-                initDetailProductData(product.id)
-
-
-
+            initDetailProductData(product.id)
         }
 
         var style = LinearLayoutManager(requireContext(),  LinearLayoutManager.VERTICAL, false)
@@ -124,12 +120,10 @@ class SellerProduct : Fragment() {
                         selectedID.add(it.id)
 
                         for (i in categoryName.indices){
-                                    val nameCategory = it.name
-                                    val idCategory = it.id
-                                    categoryName.remove(nameCategory)
-                                    categoryID.remove(idCategory)
-
-
+                            val nameCategory = it.name
+                            val idCategory = it.id
+                            categoryName.remove(nameCategory)
+                            categoryID.remove(idCategory)
 
                         }
 
@@ -148,19 +142,6 @@ class SellerProduct : Fragment() {
 
 
                     customDetailProductDialog.dropdown_category.setText(getCategory)
-
-
-
-//                    Log.d("testes a", it.name)
-
-
-//                        detailProduct(
-//                            id,
-//                            productname,
-//                            productdescription,
-//                            productprice,
-//                            productlocation
-//                        )
 
                         customDetailProductDialog.dropdown_category?.hint = "Select Category"
 
@@ -312,25 +293,12 @@ class SellerProduct : Fragment() {
 
                             }
 
-
                                 ADBuilder.dismiss()
-
-
-
 
                             findNavController().navigate(R.id.myListProduct)
 
 
-
                         }
-
-
-
-
-
-
-
-
 
 
                 }

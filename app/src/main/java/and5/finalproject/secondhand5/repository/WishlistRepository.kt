@@ -43,7 +43,7 @@ class WishlistRepository @Inject constructor( private val service : ApiService )
         return service.getWishlistDetail(token,id)
     }
 
-    fun deleteProductWishlist(
+    suspend fun deleteProductWishlist(
         token: String,
         id: Int,
         liveCode: MutableLiveData<String>

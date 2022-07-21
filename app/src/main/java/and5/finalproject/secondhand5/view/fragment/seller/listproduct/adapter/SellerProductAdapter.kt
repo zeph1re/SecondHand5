@@ -31,11 +31,7 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
             holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
 
         }else{
-            holder.itemView.layoutParams =
-                RecyclerView.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    500
-                )
+
 
             Glide.with(holder.itemView.context).load(sellerProduct!![position].imageUrl).into(holder.itemView.product_image)
             holder.itemView.product_name.text = sellerProduct!![position].name

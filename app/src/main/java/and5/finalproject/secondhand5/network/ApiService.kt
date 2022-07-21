@@ -147,7 +147,7 @@ interface ApiService {
     ) : GetWishlistProductItem
 
     @DELETE ("buyer/wishlist/{id}")
-    fun deleteWishlistItem(
+    suspend fun deleteWishlistItem(
         @Header("access_token") token: String,
         @Path("id")id : Int,
     ) : DeleteWishlistResponse

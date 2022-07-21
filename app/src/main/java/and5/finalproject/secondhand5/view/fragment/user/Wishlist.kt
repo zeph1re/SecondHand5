@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.fragment_status_order.*
 import kotlinx.android.synthetic.main.fragment_wishlist.*
+import kotlinx.android.synthetic.main.fragment_wishlist.btn_back
 
 
 class Wishlist : Fragment() {
@@ -30,6 +32,10 @@ class Wishlist : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        btn_back.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
@@ -40,9 +46,15 @@ class Wishlist : Fragment() {
         }
     }
 
+
+
     private fun initWishlist() {
 
         wishlistAdapter = WishlistAdapter(){
+            val data = Bundle()
+            data.putInt("product_id", it.productId)
+
+            view!!.findNavController().navigate(R.id.action_wishlist_to_productDetail, data)
 
         }
         val viewModelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
@@ -61,4 +73,6 @@ class Wishlist : Fragment() {
         }
 
     }
+
+
 }
