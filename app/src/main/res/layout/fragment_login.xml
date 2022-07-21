@@ -8,33 +8,39 @@
     android:layout_height="match_parent"
     >
 
+    <ImageView
+        android:id="@+id/btn_back_login"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_back" />
+
+
+    <TextView
+        android:id="@+id/p"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_back_login">
+
+    </TextView>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
 
-        <ImageView
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/btn_back_login"
-            android:src="@drawable/ic_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
 
-        <TextView
-            android:id="@+id/p"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="60dp"
-            android:text="Login"
-            android:textStyle="bold"
-            android:textSize="35sp"
-            android:fontFamily="@font/poppins_medium"
-            android:layout_marginBottom="70dp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-        </TextView>
+
 
 
 
@@ -51,7 +57,7 @@
 
             <EditText
                 android:hint="Email"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/loginemail"
@@ -83,7 +89,7 @@
                 android:hint="Password"
                 android:fontFamily="@font/poppins"
                 android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/loginpassword"
                 android:inputType="textPassword"
@@ -97,8 +103,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginHorizontal="60dp"
             android:id="@+id/btnlogin"
             android:text="Login"
             android:background="@drawable/rounded_button"

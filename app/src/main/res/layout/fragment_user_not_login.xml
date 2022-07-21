@@ -25,16 +25,15 @@
         android:text="You don't have required privilege to access this feature"
         android:textAlignment="center"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins"/>
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:id="@+id/login_button"
         android:text="Login here"
-        android:textSize="17sp"
+        android:textSize="13sp"
         android:backgroundTint="@color/blue_300"
-        android:textAllCaps="false"
         android:layout_centerInParent="true"/>
 
 

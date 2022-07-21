@@ -83,7 +83,6 @@ class StatusOrder : Fragment() {
             activity?.onBackPressed()
         }
 
-        btn_edit.visibility = View.GONE
 
         orderId = requireArguments().getInt("order_id")
 

@@ -17,21 +17,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
                 android:text="19 agustus 2022"
                 android:textColor="@color/black"
-                android:textSize="12sp"></TextView>
+                android:textSize="11sp"
+                android:fontFamily="@font/poppins"/>
 
             <ImageView
-
                 android:id="@+id/gambar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="20dp"
                 android:src="@drawable/ei">
 
             </ImageView>
@@ -40,11 +36,12 @@
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_toRightOf="@id/gambar"
                 android:text="Penawaran Produk"
                 android:textColor="@color/black"
-                android:textSize="16sp"></TextView>
+                android:textSize="11sp"
+                android:fontFamily="@font/poppins"/>
 
 
 
@@ -55,8 +52,10 @@
                 android:layout_below="@id/text1"
                 android:layout_toRightOf="@id/gambar"
                 android:text="Jam Tangan Casio"
-                android:textColor="@color/black"
-                android:textSize="18sp">
+                android:maxLines="1"
+                android:textColor="@color/blue_300"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_medium">
 
             </TextView>
 
@@ -68,7 +67,8 @@
                 android:layout_toRightOf="@id/gambar"
                 android:text="Rp 250.000"
                 android:textColor="@color/black"
-                android:textSize="18sp">
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins">
 
             </TextView>
 
@@ -77,10 +77,11 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/base_price"
-                android:layout_toRightOf="@id/gambar"
+                android:layout_toEndOf="@id/gambar"
                 android:text="Di tawar Rp 200.000"
-                android:textColor="@color/black"
-                android:textSize="18sp">
+                android:textColor="@color/blue_300"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_medium">
 
             </TextView>
 
@@ -89,10 +90,12 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/bid_price"
-                android:layout_toRightOf="@id/gambar"
+                android:layout_toEndOf="@id/gambar"
                 android:text="status"
-                android:textColor="@color/black"
-                android:textSize="18sp">
+                android:textColor="@color/dark_grey"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginBottom="10dp">
 
             </TextView>
 

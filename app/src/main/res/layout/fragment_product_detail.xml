@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:padding="25dp">
 
                         <TextView
                             android:id="@+id/product_name"
@@ -83,7 +83,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="Jam Tangan Casio"
                             android:textColor="@color/blue_300"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/product_category"
@@ -92,7 +92,7 @@
                             android:fontFamily="@font/poppins"
                             android:text="Aksesoris"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/product_price"
@@ -101,7 +101,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:text="Rp 250.000"
                             android:textColor="@color/blue_700"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
@@ -122,7 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:padding="15dp">
 
                         <ImageView
                             android:id="@+id/seller_image"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardNotification"
     android:backgroundTint="@android:color/transparent"
     android:layout_margin="10dp"
@@ -26,10 +27,7 @@
                 android:id="@+id/notification_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/account_image" />
 
@@ -46,28 +44,34 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_info"
                     android:text="Penawaran Produk"
-                    android:textSize="15sp"/>
+                    android:textSize="11sp"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_product_name"
                     android:text="Jam Tangan Casio"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins_medium"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notifiation_product_price"
                     android:text="harga produk"
-                    android:textSize="15sp"/>
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_product_offer"
                     android:text="penawaran harga"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins_medium"/>
 
             </LinearLayout>
 
@@ -84,7 +88,9 @@
                     android:layout_toStartOf="@id/read_or_not"
                     android:gravity="bottom"
                     android:text="tanggal"
-                    android:textSize="12sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_light"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:id="@+id/read_or_not"
@@ -110,11 +116,10 @@
         app:strokeColor="@color/blue_100"
         app:strokeWidth="2dp"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_margin="20dp"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -122,8 +127,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:id="@+id/notification_image_product_add"
-                android:src="@drawable/account_image"
-                android:layout_margin="20dp"/>
+                android:src="@drawable/account_image"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -133,29 +137,31 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/notification_image_product_add">
 
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:id="@+id/notification_product_name_product_add"
                     android:text="Jam Tangan Casio"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins_medium"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_info_product_add"
                     android:text="Produk Berhasil ditambahkan"
-                    android:textSize="15sp"/>
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notifiation_product_price_product_add"
                     android:text="harga produk"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins"/>
 
 
 
@@ -171,11 +177,12 @@
                     android:id="@+id/notification_created_at_product_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_toStartOf="@id/read_or_not_product_add"
+                    android:layout_marginEnd="8dp"
                     android:gravity="bottom"
                     android:text="tanggal"
-                    android:textSize="12sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_light"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:layout_marginEnd="5dp"
@@ -183,7 +190,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/read_or_not_product_add"
                     android:src="@drawable/ic_read"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
                     android:visibility="visible"/>
             </LinearLayout>
@@ -201,7 +207,7 @@
         app:strokeColor="@color/blue_100"
         app:strokeWidth="2dp"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_margin="20dp"
@@ -212,8 +218,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:id="@+id/notification_image_product_delete"
-                android:src="@drawable/account_image"
-                android:layout_margin="20dp"/>
+                android:src="@drawable/account_image" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -228,14 +233,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_info_product_delete"
                     android:text="Produk Berhasil dihapus"
-                    android:textSize="15sp"/>
+                    android:textSize="11sp"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_product_name_product_delete"
                     android:text="Jam Tangan Casio"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins_medium"/>
 
 
 
@@ -251,11 +259,12 @@
                     android:id="@+id/notification_created_at_product_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_toStartOf="@id/read_or_not_product_delete"
+                    android:layout_marginEnd="8dp"
                     android:gravity="bottom"
                     android:text="tanggal"
-                    android:textSize="12sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_light"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:layout_marginEnd="5dp"
@@ -281,7 +290,7 @@
         app:strokeColor="@color/blue_100"
         app:strokeWidth="2dp"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_margin="20dp"
@@ -292,10 +301,6 @@
                 android:id="@+id/notification_image_product_order_response"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
                 android:src="@drawable/account_image" />
 
             <LinearLayout
@@ -311,14 +316,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_seller_answer_order_response"
                     android:text="Penawaran diterima/ditolak"
-                    android:textSize="15sp"/>
+                    android:textSize="11sp"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_product_name_order_response"
                     android:text="Jam Tangan Casio"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"
+                    android:textColor="@color/blue_300"
+                    android:fontFamily="@font/poppins_medium"/>
 
 
 
@@ -337,7 +345,9 @@
                     android:layout_marginRight="8dp"
                     android:gravity="bottom"
                     android:text="tanggal"
-                    android:textSize="12sp" />
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_light"
+                    tools:ignore="SmallSp" />
 
                 <ImageView
                     android:layout_marginEnd="5dp"

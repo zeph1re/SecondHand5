@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -24,50 +24,50 @@
                     android:src="@drawable/jam">
                 </ImageView>
 
-                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="-80dp"
                     android:layout_marginHorizontal="10dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="15dp"
-                    card_view:cardElevation="20dp">
+                    card_view:cardElevation="5dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
                         <TextView
                             android:id="@+id/preview_product_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Nama"
-                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Jam Tangan Casio"
                             android:textColor="@color/blue_300"
-                            android:fontFamily="@font/poppins_bold">
+                            android:textSize="18sp">
                         </TextView>
 
                         <TextView
                             android:id="@+id/preview_product_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="Kategori"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/poppins">
+                            android:fontFamily="@font/poppins"
+                            android:text="Aksesoris"
+                            android:textColor="@color/black"
+                            android:textSize="12sp">
                         </TextView>
 
                         <TextView
                             android:id="@+id/preview_product_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Harga"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/poppins_medium">
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Rp 250.000"
+                            android:textColor="@color/blue_700"
+                            android:textSize="16sp">
 
                         </TextView>
 
@@ -78,70 +78,67 @@
 
                 <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="15dp"
-                    card_view:cardElevation="30dp">
+                    card_view:cardElevation="5dp">
 
-                    <RelativeLayout
-                        android:layout_marginTop="10dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="15dp">
 
                         <ImageView
-                            android:layout_marginTop="10dp"
                             android:id="@+id/preview_seller_image"
-                            android:layout_width="60dp"
-                            android:layout_height="70dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:src="@drawable/ei">
-
                         </ImageView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
 
                         <TextView
                             android:id="@+id/preview_seller_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="17dp"
-                            android:layout_toRightOf="@+id/preview_seller_image"
                             android:text="Nama Penjual"
-                            android:textSize="18sp" />
+                            android:textColor="@color/blue_700"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/preview_seller_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/preview_seller_name"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/preview_seller_image"
                             android:text="Kota"
-                            android:textSize="18sp">
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/poppins_medium">
 
                         </TextView>
+                    </LinearLayout>
 
-                    </RelativeLayout>
+
+
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="15dp"
-                    card_view:cardElevation="30dp">
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    card_view:cardElevation="5dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -152,7 +149,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:text="Description"
-                            android:textSize="20sp">
+                            android:textSize="16sp"
+                            android:textColor="@color/blue_300"
+                            android:fontFamily="@font/poppins_bold">
 
                         </TextView>
 
@@ -161,33 +160,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_margin="10dp"
-                            android:text="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\na"
-                            android:textSize="18sp">
-
+                            android:text="deskripsi"
+                            android:textSize="13sp">
                         </TextView>
                     </LinearLayout>
-                    </ScrollView>
                 </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/btn_post_preview"
+            android:text="Post"
+            android:fontFamily="@font/poppins_medium"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue_300"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatButton>
 
     </RelativeLayout>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
 
-        android:layout_marginBottom="20dp"
-        android:id="@+id/btn_post_preview"
-        android:text="Post"
-        android:background="@drawable/rounded_button"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/blue_300"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </androidx.appcompat.widget.AppCompatButton>
 
     <RelativeLayout
         android:id="@+id/postPreview_loading"
