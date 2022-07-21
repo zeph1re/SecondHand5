@@ -128,23 +128,25 @@
         android:id="@+id/field_city"
         app:helperTextTextColor="@color/red"
         android:layout_gravity="center_horizontal"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:drawableRight="@drawable/ic_dropdown"
+        <AutoCompleteTextView
             android:textSize="20sp"
-            android:hint="Enter your city"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/update_kota"
             android:background="@drawable/rectangleedittext"
+            android:focusable="false"
+            android:singleLine="true"
 
             android:layout_width="match_parent"
             android:layout_height="60dp">
-        </EditText>
+        </AutoCompleteTextView>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
