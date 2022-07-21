@@ -14,10 +14,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.MultiAutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -28,6 +31,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_zoom_photo_profile_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_add_product2.view.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -100,7 +105,23 @@ class Profile : Fragment() {
             }
         }
 
+
+
+
+        val city =  resources.getStringArray(R.array.city)
+        val sortedAlphabet = city.sorted()
+
+        view?.update_kota?.setInputType(InputType.TYPE_NULL)
+
+        val arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_city, sortedAlphabet)
+        view?.update_kota?.setAdapter(arrayAdapter)
+        view?. update_kota?.setOnItemClickListener { _, view, position, l ->
+            val selectedValue: String? = arrayAdapter.getItem(position)
+            view?.update_kota?.setText(selectedValue, false)
+        }
+
         view.profile_image.setOnClickListener {
+            view?.update_kota?.setText("")
             val zoomPhoto = LayoutInflater.from(requireContext()).inflate(R.layout.custom_zoom_photo_profile_dialog, null, false)
             val ADBuilder = android.app.AlertDialog.Builder(requireContext())
                 .setView(zoomPhoto)
@@ -182,7 +203,13 @@ class Profile : Fragment() {
                 Log.d("namaaaa", it.fullName)
 
                 update_nama.setText(it.fullName)
-                update_kota.setText(it.city)
+                update_kota.setText(it.city, false)
+
+
+
+
+
+
                 update_alamat.setText(it.address)
                 val phone = it.phoneNumber
                 update_nomor.setText("+$phone")

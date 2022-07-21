@@ -2,4 +2,100 @@
     <string name="app_name">SecondHand5</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="daftar"><u>Daftar</u></string>
+    <string-array name = "city">
+        <item>Banda Aceh</item>
+        <item>Langsa</item>
+        <item>Lhokseumawe</item>
+        <item>Sabang</item>
+        <item>Subulussalam</item>
+        <item>Denpasar</item>
+        <item>Pangkal Pinang</item>
+        <item>Cilegon</item>
+        <item>Serang</item>
+        <item>Tangerang Selatan</item>
+        <item>Tangerang</item>
+        <item>Bengkulu</item>
+        <item>Yogyakarta</item>
+        <item>Gorontalo</item>
+        <item>Kota Administrasi Jakarta Barat</item>
+        <item>Kota Administrasi Jakarta Pusat</item>
+        <item>Kota Administrasi Jakarta Selatan</item>
+        <item>Kota Administrasi Jakarta Timur</item>
+        <item>Kota Administrasi Jakarta Utara</item>
+        <item>Sungai Penuh</item>
+        <item>Jambi</item>
+        <item>Bandung</item>
+        <item>Bekasi</item>
+        <item>Bogor</item>
+        <item>Cimahi</item>
+        <item>Cirebon</item>
+        <item>Depok</item>
+        <item>Sukabumi</item>
+        <item>Tasikmalaya</item>
+        <item>Banjar</item>
+        <item>Magelang</item>
+        <item>Pekalongan</item>
+        <item>Salatiga</item>
+        <item>Semarang</item>
+        <item>Surakarta</item>
+        <item>Tegal</item>
+        <item>Batu</item>
+        <item>Blitar</item>
+        <item>Kediri</item>
+        <item>Madiun</item>
+        <item>Malang</item>
+        <item>Mojokerto</item>
+        <item>Pasuruan</item>
+        <item>Probolinggo</item>
+        <item>Surabaya</item>
+        <item>Pontianak</item>
+        <item>Singkawang</item>
+        <item>Banjarbaru</item>
+        <item>Banjarmasin</item>
+        <item>Palangkaraya</item>
+        <item>Balikpapan</item>
+        <item>Bontang</item>
+        <item>Samarinda</item>
+        <item>Tarakan</item>
+        <item>Batam</item>
+        <item>Tanjungpinang</item>
+        <item>Bandar Lampung</item>
+        <item>Metro</item>
+        <item>Ternate</item>
+        <item>Tidoro Kepulauan</item>
+        <item>Ambon</item>
+        <item>Tual</item>
+        <item>Bima</item>
+        <item>Mataram</item>
+        <item>Kupang</item>
+        <item>Sorong</item>
+        <item>Jayapura</item>
+        <item>Dumai</item>
+        <item>Pekanbaru</item>
+        <item>Makassar</item>
+        <item>Palopo</item>
+        <item>Parepare</item>
+        <item>Palu</item>
+        <item>Baubau</item>
+        <item>Kendari</item>
+        <item>Bitung</item>
+        <item>Kotamobagu</item>
+        <item>Manado</item>
+        <item>Tomohon</item>
+        <item>Bukittinggi</item>
+        <item>Padang</item>
+        <item>Padang Panjang</item>
+        <item>Pariaman</item>
+        <item>Payakumbuh</item>
+        <item>Sawahlunto</item>
+        <item>Solok</item>
+        <item>Binjai</item>
+        <item>Gunungsitoli</item>
+        <item>Medan</item>
+        <item>Padang Sidempuan</item>
+        <item>Pematangsiantar</item>
+        <item>Sibolga</item>
+        <item>Tanjungbalai</item>
+        <item>Tebing Tinggi</item>
+    </string-array>
 </resources>
