@@ -22,43 +22,52 @@
             android:fontFamily="@font/poppins_bold"
             android:layout_margin="10dp"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_gas"
+        <RadioGroup
+            android:layout_below="@id/tv_title"
+            android:id="@+id/status_radio_group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:text="Berhasil Terjual"
-            android:fontFamily="@font/poppins"/>
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radio_btn_gas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:fontFamily="@font/poppins"
+                android:text="Berhasil Terjual" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@id/tv_sold"
-            android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_light"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_below="@id/radio_btn_gas"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/tv_sold"
+                android:text="Kamu telah sepakat menjual produk ini kepada pembeli"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_below="@id/radio_btn_gas"/>
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_btn_cancel"
-            android:text="Batalkan Transaksi"
-            android:fontFamily="@font/poppins"
-            android:layout_below="@id/tv_sold"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_btn_cancel"
+                android:text="Batalkan Transaksi"
+                android:fontFamily="@font/poppins"
+                android:layout_below="@id/tv_sold"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@id/tv_failed"
-            android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_light"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_below="@id/radio_btn_cancel"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/tv_failed"
+                android:text="Kamu membatalkan transaksi produk ini dengan pembeli"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_below="@id/radio_btn_cancel"/>
+
+        </RadioGroup>
+
+
 
         <Button
             android:text="Submit"
@@ -66,7 +75,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/tv_failed"
+            android:layout_below="@id/status_radio_group"
             android:backgroundTint="@color/blue_300"
             android:textAllCaps="false"
             android:layout_marginEnd="20dp"/>

@@ -11,12 +11,13 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.seller_interest_adapter.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.Duration.Companion.days
 
 // atau Seller Product Interest adapter
 class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerView.Adapter<SellerOrderAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view)
 
-    private var sellerOrder : List<GetSellerOrderItem>? = null
+    var sellerOrder : List<GetSellerOrderItem>? = null
 
     fun setListProduct(ordered  : List<GetSellerOrderItem>){
         this.sellerOrder = ordered
@@ -29,21 +30,25 @@ class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        if(sellerOrder!![position].product.status == "sold"){
+            holder.itemView.product_order_card.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+        }else{
 
         Glide.with(holder.itemView.context).load(sellerOrder!![position].product.imageUrl).into(holder.itemView.gambar)
-        holder.itemView.product_name.text = sellerOrder!![position].product.name
-        holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice}"
-        holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price}"
-        holder.itemView.status.text = "Status ${sellerOrder!![position].product.status}"
+        holder.itemView.product_name.text = "${sellerOrder!![position].product.name}"
+        holder.itemView.base_price.text = "Rp ${sellerOrder!![position].product.basePrice.toString()}"
+        holder.itemView.bid_price.text = "Ditawar Rp ${sellerOrder!![position].price.toString()}"
+        holder.itemView.status.text = "Status ${sellerOrder!![position].product.status.toString()}"
 
 
         if(sellerOrder!![position].createdAt != null ){
             val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-            val date = formatter.parse(sellerOrder!![position].createdAt)
+            val date = formatter.parse(sellerOrder!![position].createdAt.toString())
 
             holder.itemView.bid_date.text = date.toString()
             Log.d("testes tgl",  date.toString())
-            Log.d("testes tgl", sellerOrder!![position].createdAt)
+            Log.d("testes tgl",  sellerOrder!![position].createdAt.toString())
 
         }else{
             holder.itemView.bid_date.text = "tanggal null"
@@ -58,10 +63,10 @@ class SellerOrderAdapter(var onclick : (GetSellerOrderItem)-> Unit) : RecyclerVi
     }
 
     override fun getItemCount(): Int {
-        return if (sellerOrder == null){
-            0
+        if (sellerOrder == null){
+            return 0
         }else{
-            sellerOrder!!.size
+            return sellerOrder!!.size
         }
     }
 }

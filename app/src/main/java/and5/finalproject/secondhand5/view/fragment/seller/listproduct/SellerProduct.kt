@@ -1,5 +1,3 @@
-@file:Suppress("LocalVariableName", "LocalVariableName")
-
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
 import and5.finalproject.secondhand5.R
@@ -199,13 +197,26 @@ class SellerProduct : Fragment() {
                             dialogBuilder.setMessage("Hapus Produk?")
                                 .setCancelable(false)
                                 .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
-                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) { it ->
+                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
                                         if (it != null) {
                                             viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
                                                 if (it == "201") {
                                                     Toast.makeText(
                                                         requireContext(),
                                                         "berhasil delete",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                    flagDelete = true
+                                                }else if(it == "400"){
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Gagal Menghapus, Product Sedang Ada Yang Order",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }else{
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Internal Service Error",
                                                         Toast.LENGTH_SHORT
                                                     ).show()
                                                 }
@@ -235,8 +246,8 @@ class SellerProduct : Fragment() {
                         }
 
                         customDetailProductDialog.btn_update_product.setOnClickListener {
-                            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
-                            val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+                            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
 
 
 
