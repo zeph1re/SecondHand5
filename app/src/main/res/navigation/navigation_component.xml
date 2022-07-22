@@ -139,6 +139,9 @@
         <action
             android:id="@+id/action_productDetail_to_profile"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_productDetail_to_login"
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/detailPenawar"
