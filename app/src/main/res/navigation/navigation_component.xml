@@ -135,7 +135,11 @@
         android:id="@+id/productDetail"
         android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetail_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
     <fragment
         android:id="@+id/detailPenawar"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailOrder"
