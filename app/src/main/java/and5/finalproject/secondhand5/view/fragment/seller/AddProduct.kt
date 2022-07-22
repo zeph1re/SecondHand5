@@ -1,4 +1,6 @@
-@file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+@file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf"
+)
 
 package and5.finalproject.secondhand5.view.fragment.seller
 
