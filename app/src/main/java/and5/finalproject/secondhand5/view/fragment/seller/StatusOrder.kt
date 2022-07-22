@@ -87,6 +87,8 @@ class StatusOrder : Fragment() {
             buyer_address_city.text = buyerCity
             if(buyerImage!="kosong"){
                 Glide.with(requireContext()).load(buyerImage).into(buyer_image)
+            }else{
+                buyerImage = ""
             }
 
             product_name.text = productName
@@ -192,9 +194,10 @@ class StatusOrder : Fragment() {
         customWaDialog.buyer_phone_number.text = "WA : $buyerPhoneNumber"
         customWaDialog.buyer_address_city.text = buyerCity
         customWaDialog.buyer_name.text = buyerName
+
+
         if(buyerImage!="kosong"){
             Glide.with(requireContext()).load(buyerImage).into(customWaDialog.buyer_image)
-
         }
 
 
@@ -239,7 +242,11 @@ class StatusOrder : Fragment() {
                     buyerName = it.user.fullName
                     buyerPhoneNumber = it.user.phoneNumber
                     buyerAddress = it.user.address
-                    buyerImage = it.user.imageURL
+                    if(it.user.imageURL != null ){
+                        buyerImage = it.user.imageURL
+                    }else{
+                        buyerImage = "kosong"
+                    }
 
 
                 }
