@@ -112,4 +112,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="masukkan_harga_tawarmu">Masukkan Harga Tawarmu</string>
+    <string name="harga_tawaranmu_akan_diketahui_penual_jika_penjual_cocok_kamu_akan_segera_dihubungi_penjual">Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan segera dihubungi penjual.</string>
+    <string name="kirim">Kirim</string>
 </resources>

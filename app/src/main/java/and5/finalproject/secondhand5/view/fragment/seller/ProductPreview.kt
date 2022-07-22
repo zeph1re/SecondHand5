@@ -1,4 +1,5 @@
-@file:Suppress("KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+@file:Suppress(
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
     "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
     "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
     "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
@@ -36,15 +37,14 @@ import kotlin.properties.Delegates
 
 class ProductPreview : Fragment() {
 
-    private lateinit var categoryName : String
-    lateinit var image : MultipartBody.Part
+    private lateinit var categoryName: String
+    lateinit var image: MultipartBody.Part
 
-    private lateinit var postCategory : String
+    private lateinit var postCategory: String
     lateinit var userManager: UserManager
-    private var customToast : CustomToast = CustomToast()
+    private var customToast: CustomToast = CustomToast()
     var post by Delegates.notNull<Boolean>()
-    lateinit var text : String
-
+    lateinit var text: String
 
 
     override fun onCreateView(
@@ -62,16 +62,16 @@ class ProductPreview : Fragment() {
         post = true
         userManager = UserManager(requireActivity())
         val getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
-        val getCategoryID= getProduct?.selectedID.toString()
-        val categoryID = getCategoryID.replace("[","").replace("]", "")
+        val getCategoryID = getProduct?.selectedID.toString()
+        val categoryID = getCategoryID.replace("[", "").replace("]", "")
         postCategory = categoryID
 
-        categoryName = if (getProduct?.selectedName?.size!! <2){
+        categoryName = if (getProduct?.selectedName?.size!! < 2) {
             val getCategoryName = getProduct.selectedName.toString()
-            getCategoryName.replace("[","").replace("]", "").replace(",", "")
-        }else{
+            getCategoryName.replace("[", "").replace("]", "").replace(",", "")
+        } else {
             val getCategoryName = getProduct.selectedName.toString()
-            getCategoryName.replace("[","").replace("]", "")
+            getCategoryName.replace("[", "").replace("]", "")
         }
         preview_product_name.text = "Name : ${getProduct.productName}"
         preview_product_category.text = "Category : $categoryName"
@@ -80,7 +80,7 @@ class ProductPreview : Fragment() {
         preview_image.setImageURI(getProduct.imageParsing.toUri())
 
         val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
             detailUser(it)
         }
 
@@ -101,27 +101,28 @@ class ProductPreview : Fragment() {
 
     }
 
-    private fun detailUser(token:String) {
+    private fun detailUser(token: String) {
         val viewModelUser = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         viewModelUser.getUserData(token)
-        viewModelUser.getUserData.observe(viewLifecycleOwner){
+        viewModelUser.getUserData.observe(viewLifecycleOwner) {
             Log.d("namaaaa", it.fullName)
             Log.d("cityyyy", it.city)
             preview_seller_name.text = it.fullName
             preview_seller_city.text = it.city
-            Glide.with(requireActivity()).load( it.imageUrl).into(requireView().preview_seller_image)
+            Glide.with(requireActivity()).load(it.imageUrl).into(requireView().preview_seller_image)
         }
     }
 
-    fun observe(){
+    fun observe() {
         val getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
         val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
-            if (token!= ""){
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
+            if (token != "") {
                 val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
                 userViewModel.getUserData(token)
-                userViewModel.getUserData.observe(viewLifecycleOwner) {  loc ->
-                    val productViewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                userViewModel.getUserData.observe(viewLifecycleOwner) { loc ->
+                    val productViewModel =
+                        ViewModelProvider(requireActivity())[ProductViewModel::class.java]
                     if (post) {
                         postProduct(
                             token,
@@ -138,33 +139,34 @@ class ProductPreview : Fragment() {
 
 
 
-                    productViewModel.responseCodeAddProduct.observe(viewLifecycleOwner){ code->
+                    productViewModel.responseCodeAddProduct.observe(viewLifecycleOwner) { code ->
                         Log.d("codex", code)
-                        if (code == "201"){
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                text = "Success"
-                                customToast.successPostToast(requireActivity(), text)
-                                view?.findNavController()?.navigate(R.id.myListProduct)
-                            },2000)
-
-
-                        }else if ( code == "400"){
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                text = "Cant Post, Max 5 Product"
-                                customToast.failurePostToast(requireActivity(), text)
-                            },2000)
-                        }else if ( code == "403"){
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                text = "You Are Not Login or Access Token is Wrong"
-                                customToast.failurePostToast(requireActivity(), text)
-                            },2000)
-
-                        }else if ( code == "500"){
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                text = "Internal Service Error"
-                                customToast.failurePostToast(requireActivity(), text)
-                            },2000)
-
+                        when (code) {
+                            "201" -> {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Success"
+                                    customToast.successPostToast(requireActivity(), text)
+                                    view?.findNavController()?.navigate(R.id.myListProduct)
+                                }, 2000)
+                            }
+                            "400" -> {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Cant Post, Max 5 Product"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                }, 2000)
+                            }
+                            "403" -> {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "You Are Not Login or Access Token is Wrong"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                }, 2000)
+                            }
+                            "500" -> {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    text = "Internal Service Error"
+                                    customToast.failurePostToast(requireActivity(), text)
+                                }, 2000)
+                            }
                         }
                     }
                 }
@@ -180,11 +182,10 @@ class ProductPreview : Fragment() {
         category: String,
         location: String,
         image: MultipartBody.Part
-    ){
+    ) {
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
-        viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
+        viewModelProduct.addSellerProduct(token, name, desc, price, category, location, image)
     }
-
 
 
 }
