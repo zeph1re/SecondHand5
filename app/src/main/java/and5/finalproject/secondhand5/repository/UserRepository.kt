@@ -1,10 +1,11 @@
 package and5.finalproject.secondhand5.repository
 
-import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.auth.*
+import and5.finalproject.secondhand5.model.auth.GetAllUser
+import and5.finalproject.secondhand5.model.auth.LoginResponse
+import and5.finalproject.secondhand5.model.auth.RegisterResponse
+import and5.finalproject.secondhand5.model.auth.UpdatePasswordBody
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
-
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -13,8 +14,6 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val service: ApiService){
-
-    private lateinit var userManager: UserManager
 
     fun regisUser(full_name: String, email : String, password: String, phone_number : Int, address: String, city:String, liveData: MutableLiveData<String>) {
         val apiClient: Call<RegisterResponse> = service.registerUser(full_name, email, password, phone_number, address, city)
@@ -73,7 +72,7 @@ class UserRepository @Inject constructor(private val service: ApiService){
         })
     }
 
-    suspend fun changePasswordUser(
+    fun changePasswordUser(
         token: String,
         current: String,
         new: String,

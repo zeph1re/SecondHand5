@@ -1,31 +1,24 @@
 package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.Room.Model.GetProductHome
-import and5.finalproject.secondhand5.Room.OfflineDB
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
 
 class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
     private var productData : List<GetProductItem>? = null
-    var categoryProduct = mutableListOf<String>()
+    private var categoryProduct = mutableListOf<String>()
     fun setProductList(productList: List<GetProductItem>){
         this.productData = productList
     }
 
-    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val uiProduct = LayoutInflater.from(parent.context)
@@ -39,13 +32,13 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
 
 
         if(productData!![position].name != null){
-            holder.itemView.product_name.text = "${productData!![position].name.toString()}"
+            holder.itemView.product_name.text = productData!![position].name
         }else{
             holder.itemView.product_name.text = "null"
         }
 
         if(productData!![position].basePrice != null){
-            holder.itemView.product_price.text = "Rp ${productData!![position].basePrice.toString()}"
+            holder.itemView.product_price.text = "Rp ${productData!![position].basePrice}"
         }else{
             holder.itemView.product_price.text = "null"
         }
@@ -53,7 +46,7 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
 
 
         if(productData!![position].id != null){
-            holder.itemView.product_id.text = "${productData!![position].id.toString()}"
+            holder.itemView.product_id.text = "${productData!![position].id}"
         }else{
             holder.itemView.product_id.text = "null"
         }
@@ -83,10 +76,10 @@ class ProductAdapter (private var onClick : (GetProductItem)->Unit) : RecyclerVi
     }
 
     override fun getItemCount(): Int {
-        if(productData == null){
-            return 0
+        return if(productData == null){
+            0
         }else{
-            return productData!!.size
+            productData!!.size
         }
     }
 

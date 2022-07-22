@@ -1,14 +1,11 @@
 package and5.finalproject.secondhand5.Room.Model
 
-import and5.finalproject.secondhand5.model.buyerproduct.Category
-import and5.finalproject.secondhand5.model.buyerproduct.User
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+
 @Entity
 @Parcelize
 data class GetProductHome (

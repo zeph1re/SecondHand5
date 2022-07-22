@@ -1,12 +1,12 @@
 package and5.finalproject.secondhand5.repository
 
-import and5.finalproject.secondhand5.Room.Model.GetProductHome
-import and5.finalproject.secondhand5.Room.OfflineDB
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
-import and5.finalproject.secondhand5.model.buyerproduct.*
+import and5.finalproject.secondhand5.model.buyerproduct.AddBuyerOrderResponse
+import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
+import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
+import and5.finalproject.secondhand5.model.buyerproduct.UpdateBuyerOrderResponse
 import and5.finalproject.secondhand5.model.seller.*
-import and5.finalproject.secondhand5.model.seller.Category
 import and5.finalproject.secondhand5.network.ApiService
 import androidx.lifecycle.MutableLiveData
 import okhttp3.MultipartBody
@@ -37,10 +37,6 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getBuyerOrder(access_token : String): List<GetBuyerOrderItem>{
         return productApi.getBuyerOrder(access_token)
-    }
-
-    suspend fun getBuyerDetailOrder(access_token : String, id:Int): GetBuyerOrderItem {
-        return productApi.getBuyerDetailOrder(access_token, id)
     }
 
     fun updateBuyerOrder(
@@ -170,10 +166,6 @@ class ProductRepository @Inject constructor(private val productApi : ApiService)
 
     suspend fun getSellerSuccesfulOrder(token:String) : List<GetSellerOrderItem> {
         return productApi.getSellerSuccesfulOrder(token, "accepted")
-    }
-
-    suspend fun getAllCategory(): List<Category>{
-        return productApi.getAllCategory()
     }
 
 

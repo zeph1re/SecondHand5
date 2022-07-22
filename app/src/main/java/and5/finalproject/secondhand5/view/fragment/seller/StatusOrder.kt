@@ -1,3 +1,5 @@
+@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
@@ -16,7 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,17 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_seller_status.view.*
 import kotlinx.android.synthetic.main.custom_seller_whastapp.view.*
-import kotlinx.android.synthetic.main.fragment_detail_order.*
 import kotlinx.android.synthetic.main.fragment_status_order.*
-import kotlinx.android.synthetic.main.fragment_status_order.bid_price
-import kotlinx.android.synthetic.main.fragment_status_order.btn_back
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_address_city
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_image
-import kotlinx.android.synthetic.main.fragment_status_order.buyer_name
-import kotlinx.android.synthetic.main.fragment_status_order.order_date
-import kotlinx.android.synthetic.main.fragment_status_order.product_image
-import kotlinx.android.synthetic.main.fragment_status_order.product_name
-import kotlinx.android.synthetic.main.fragment_status_order.product_price
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_image
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_name
 import kotlinx.android.synthetic.main.home_product_adapter.view.product_price
@@ -46,26 +37,25 @@ import kotlin.properties.Delegates
 
 class StatusOrder : Fragment() {
 
-    var orderId by Delegates.notNull<Int>()
+    private var orderId by Delegates.notNull<Int>()
 
     lateinit var productName :String
-    lateinit var productImage :String
-    var productPrice by Delegates.notNull<Int>()
-    var bidPrice by Delegates.notNull<Int>()
+    private lateinit var productImage :String
+    private var productPrice by Delegates.notNull<Int>()
+    private var bidPrice by Delegates.notNull<Int>()
 
-    lateinit var buyerName :String
-    lateinit var buyerCity :String
-    lateinit var buyerAddress :String
-    lateinit var buyerImage :String
-    lateinit var buyerPhoneNumber :String
+    private lateinit var buyerName :String
+    private lateinit var buyerCity :String
+    private lateinit var buyerAddress :String
+    private lateinit var buyerImage :String
+    private lateinit var buyerPhoneNumber :String
 
     lateinit var userManager: UserManager
 
     private var submit: Button? = null
-    private var listRadio: RadioGroup? = null
     private var acceptRadio: RadioButton? = null
     private var declineRadio: RadioButton? = null
-    lateinit var orderDate : String
+    private lateinit var orderDate : String
 
 
     override fun onCreateView(
@@ -100,13 +90,15 @@ class StatusOrder : Fragment() {
             }
 
             product_name.text = productName
-            product_price.text = "Rp ${productPrice.toString()}"
-            bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
+            product_price.text = "Rp $productPrice"
+            bid_price.text = "Ditawar Rp $bidPrice"
             Glide.with(requireContext()).load(productImage).into(product_image)
 
             val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
             val date = formatter.parse(orderDate)
-            order_date.setText(date.toString())
+            if (date != null) {
+                order_date.text = date.toString()
+            }
         },500)
 
 
@@ -114,14 +106,14 @@ class StatusOrder : Fragment() {
 
 
 
-    fun acceptOrder(id:Int){
+    private fun acceptOrder(id:Int){
 
 //        val data = Bundle()
 //        data.putInt("order_id", orderId)
 
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             viewModelProduct.patchSellerOrder(token, id, "accepted")
             findNavController().navigate(R.id.myListProduct)
@@ -131,10 +123,10 @@ class StatusOrder : Fragment() {
 
     }
 
-    fun declineOrder(id:Int){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+    private fun declineOrder(id:Int){
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             viewModelProduct.patchSellerOrder(token, id, "declined")
             findNavController().navigate(R.id.myListProduct)
@@ -144,7 +136,7 @@ class StatusOrder : Fragment() {
 
     }
 
-    fun callWA() {
+    private fun callWA() {
 
         btn_call.setOnClickListener {
             dialogWA()
@@ -153,7 +145,7 @@ class StatusOrder : Fragment() {
 
     }
 
-    fun statusDialog(){
+    private fun statusDialog(){
         btn_status.setOnClickListener {
             val customStatus = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_status, null, false)
 
@@ -161,7 +153,7 @@ class StatusOrder : Fragment() {
             acceptRadio = customStatus.radio_btn_gas
             declineRadio =  customStatus.radio_btn_cancel
 
-            val ADBuilder = AlertDialog.Builder(requireContext())
+            val aDBuilder = AlertDialog.Builder(requireContext())
                 .setView(customStatus)
                 .create()
 
@@ -170,33 +162,33 @@ class StatusOrder : Fragment() {
                 if(acceptRadio!!.isChecked){
                     Log.d("testes", "aseppppppp")
                     acceptOrder(orderId)
-                    ADBuilder.dismiss()
+                    aDBuilder.dismiss()
                 }else if(declineRadio!!.isChecked){
                     Log.d("testes", "deklinnnnnn")
                     declineOrder(orderId)
-                    ADBuilder.dismiss()
+                    aDBuilder.dismiss()
                 }else{
                     Toast.makeText(requireContext(), "Mohon Pilih Satu", Toast.LENGTH_SHORT).show()
 
                 }
-                ADBuilder.dismiss()
+                aDBuilder.dismiss()
 
             }
 
 
 
-            ADBuilder.show()
+            aDBuilder.show()
 
         }
     }
 
-    fun dialogWA(){
+    private fun dialogWA(){
         val customWaDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_whastapp, null, false)
 
         customWaDialog.product_name.text = productName
         Glide.with(requireContext()).load(productImage).into(customWaDialog.product_image)
-        customWaDialog.product_bid_price.text = "Ditawar Rp ${bidPrice.toString()}"
-        customWaDialog.product_price.text = "Rp ${productPrice.toString()}"
+        customWaDialog.product_bid_price.text = "Ditawar Rp $bidPrice"
+        customWaDialog.product_price.text = "Rp $productPrice"
         customWaDialog.buyer_phone_number.text = "WA : $buyerPhoneNumber"
         customWaDialog.buyer_address_city.text = buyerCity
         customWaDialog.buyer_name.text = buyerName
@@ -207,9 +199,9 @@ class StatusOrder : Fragment() {
 
 
         customWaDialog.btn_call_whatsapp.setOnClickListener {
-            if(buyerPhoneNumber!=null && (buyerPhoneNumber.startsWith("+62") || buyerPhoneNumber.startsWith("62"))){
+            if(buyerPhoneNumber.startsWith("+62") || buyerPhoneNumber.startsWith("62")){
 //                var phoneNumber = "62"
-                val message = "Selamat! Barang ${productName} berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan ${buyerAddress}"
+                val message = "Selamat! Barang $productName berhasil ditawar menjadi ${productPrice}. Apakah kamu ingin melanjutkan pembelian ini? Konfirmasi alamat pemesanan $buyerAddress"
                 val url = "https://api.whatsapp.com/send?phone=$buyerPhoneNumber"+"&text=" + URLEncoder.encode(message, "UTF-8")
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
@@ -220,22 +212,22 @@ class StatusOrder : Fragment() {
 
         }
 
-        val ADBuilder = AlertDialog.Builder(requireContext())
+        val aDBuilder = AlertDialog.Builder(requireContext())
             .setView(customWaDialog)
             .create()
 
-        ADBuilder.show()
+        aDBuilder.show()
     }
 
-    fun orderValueInit(id:Int){
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+    private fun orderValueInit(id:Int){
+        val viewmodelproduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
-        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
                 viewmodelproduct.getDetailOrder(token, id)
 
-                viewmodelproduct.detailOrder.observe(viewLifecycleOwner,{
+                viewmodelproduct.detailOrder.observe(viewLifecycleOwner) {
 
                     productName = it.product.name
                     productImage = it.product.imageUrl
@@ -247,15 +239,10 @@ class StatusOrder : Fragment() {
                     buyerName = it.user.fullName
                     buyerPhoneNumber = it.user.phoneNumber
                     buyerAddress = it.user.address
-                    if(it.user.imageURL!=null){
-                        buyerImage = it.user.imageURL
-
-                    }else{
-                        buyerImage = "kosong"
-                    }
+                    buyerImage = it.user.imageURL
 
 
-                })
+                }
             }else{
 
             }

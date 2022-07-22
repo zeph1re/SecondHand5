@@ -3,7 +3,10 @@ package and5.finalproject.secondhand5.viewmodel
 import and5.finalproject.secondhand5.model.banner.GetBannerItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
-import and5.finalproject.secondhand5.model.seller.*
+import and5.finalproject.secondhand5.model.seller.Category
+import and5.finalproject.secondhand5.model.seller.GetSellerCategoryItem
+import and5.finalproject.secondhand5.model.seller.GetSellerOrderItem
+import and5.finalproject.secondhand5.model.seller.GetSellerProductItem
 import and5.finalproject.secondhand5.repository.ProductRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
 import androidx.lifecycle.LiveData
@@ -14,7 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,9 +31,6 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     val detailProduct : LiveData<GetProductItem> = detailProductLivedata
 
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
-
-    private var buyerDetailOrderLivedata = MutableLiveData<GetBuyerOrderItem>()
-    val buyerDetailOrder : LiveData<GetBuyerOrderItem> = buyerDetailOrderLivedata
 
     private var buyerlOrderLivedata = MutableLiveData<List<GetBuyerOrderItem>>()
     val buyerOrder : LiveData<List<GetBuyerOrderItem>> = buyerlOrderLivedata
@@ -46,27 +46,21 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     val category : LiveData<List<Category>> = categoryLivedata
 
 
-    val sellerProduct : LiveData<List<GetSellerProductItem>> = sellerProductLiveData
-
     var sellerOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
-    var detailOrderLiveData = MutableLiveData<GetSellerOrderItem>()
-    var sellerOrder : LiveData<List<GetSellerOrderItem>> = sellerOrderLiveData
+    private var detailOrderLiveData = MutableLiveData<GetSellerOrderItem>()
     var detailOrder : LiveData<GetSellerOrderItem> = detailOrderLiveData
     var sellerSoldOrderLiveData = MutableLiveData<List<GetSellerOrderItem>>()
-    var sellerSoldOrder : LiveData<List<GetSellerOrderItem>> = sellerSoldOrderLiveData
 
 
-    var responseCodePatchSellerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
+    private var responseCodePatchSellerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
     var responseCodeDeleteProduct : SingeLiveEvent<String> = SingeLiveEvent ()
 
-    var updateProductLiveData = MutableLiveData<List<GetProductItem>>()
-    var sellerUpdateProduct : LiveData<List<GetProductItem>> = updateProductLiveData
-    var responseCodeUpdateProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
+    private var responseCodeUpdateProduct : SingeLiveEvent<String>  = SingeLiveEvent ()
 
-    var detailSellerProductLivedata = MutableLiveData<GetSellerProductItem>()
+    private var detailSellerProductLivedata = MutableLiveData<GetSellerProductItem>()
     var detailSellerProduct : LiveData<GetSellerProductItem> = detailSellerProductLivedata
 
-    var sellerBannerLivedata = MutableLiveData<List<GetBannerItem>>()
+    private var sellerBannerLivedata = MutableLiveData<List<GetBannerItem>>()
     var sellerBanner : LiveData<List<GetBannerItem>> = sellerBannerLivedata
 
     var userToken : MutableLiveData<String> = MutableLiveData()
@@ -116,23 +110,9 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 //    }
 
 
-    fun getBuyerDetailOrder(access_token : String, id:Int){
-        viewModelScope.launch {
-            val buyerdetailOrder = productRepository.getBuyerDetailOrder(access_token, id)
-            buyerDetailOrderLivedata.value = buyerdetailOrder
-        }
-    }
-
     fun postBuyerOrder(access_token:String, id: Int, bid_price:Int){
         viewModelScope.launch {
             val postProduct = productRepository.addBuyerOrder(access_token, id, bid_price, responseCodeAddBuyerOrder)
-        }
-    }
-
-    fun getAllCategory(){
-        viewModelScope.launch {
-            val datacategory = productRepository.getAllCategory()
-            categoryLivedata.value = datacategory
         }
     }
 
@@ -155,11 +135,11 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     fun updateSellerProduct(access_token:String, id: Int,  name: String, desc: String, price: Int, category: String, location: String){
         viewModelScope.launch {
 
-            val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
-            val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
-            val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
-            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), category)
-            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), location)
+            val partName = name.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partDesc= desc.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partHarga= price.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partCategory = category.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partLocation = location.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
             productRepository.updateSellerProduct(access_token, id, partName, partDesc, partHarga, partCategory, partLocation, responseCodeUpdateProduct)
         }
@@ -193,11 +173,11 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
     fun addSellerProduct(token: String, name: String, desc: String, price: String, category: String, location: String, image:  MultipartBody.Part){
         viewModelScope.launch  {
-            val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), name)
-            val partDesc= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), desc)
-            val partHarga= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), price.toString())
-            val partCategory = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), category)
-            val partLocation = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), location)
+            val partName = name.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partDesc= desc.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partHarga= price.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partCategory = category.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partLocation = location.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
             productRepository.addProduct(token, partName, partDesc, partHarga, partCategory, partLocation, image, responseCodeAddProduct)
 

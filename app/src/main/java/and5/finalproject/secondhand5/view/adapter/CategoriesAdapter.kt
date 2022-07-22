@@ -1,3 +1,9 @@
+@file:Suppress("LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment",
+    "LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment",
+    "LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment",
+    "LiftReturnOrAssignment"
+)
+
 package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
@@ -16,9 +22,7 @@ class CategoriesAdapter(private var onClick : (GetSellerCategoryItem)->Unit) : R
         this.category = categoryList
     }
 
-    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val ui = LayoutInflater.from(parent.context)
@@ -28,7 +32,7 @@ class CategoriesAdapter(private var onClick : (GetSellerCategoryItem)->Unit) : R
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.home_category.text = "${category!![position].name.toString()}"
+        holder.itemView.home_category.text = category!![position].name
 
         holder.itemView.categoryCard.setOnClickListener {
             onClick(category!![position])

@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.seller_product_adapter.view.*
 
 class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : RecyclerView.Adapter<SellerProductAdapter.ViewHolder>() {
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view)
-     var categorySellerUpdate = mutableListOf<String>()
-    var sellerProduct : List<GetSellerProductItem>? = null
+     private var categorySellerUpdate = mutableListOf<String>()
+    private var sellerProduct : List<GetSellerProductItem>? = null
     fun setListProduct(product  : List<GetSellerProductItem>){
         this.sellerProduct= product
     }
@@ -35,7 +35,7 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
 
             Glide.with(holder.itemView.context).load(sellerProduct!![position].imageUrl).into(holder.itemView.product_image)
             holder.itemView.product_name.text = sellerProduct!![position].name
-            holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice.toString()}"
+            holder.itemView.seller_product_price.text = "Rp ${sellerProduct!![position].basePrice}"
 
             for(j in sellerProduct!![position].categories.indices) {
                 categorySellerUpdate.clear()
@@ -59,10 +59,10 @@ class SellerProductAdapter(var onclick : (GetSellerProductItem)-> Unit) : Recycl
     }
 
     override fun getItemCount(): Int {
-        if (sellerProduct== null){
-            return 0
+        return if (sellerProduct== null){
+            0
         }else{
-            return sellerProduct!!.size
+            sellerProduct!!.size
         }
     }
 }

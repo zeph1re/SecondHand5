@@ -1,3 +1,7 @@
+@file:Suppress("CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+)
+
 package and5.finalproject.secondhand5.view.fragment.user
 
 import android.os.Bundle
@@ -23,7 +27,7 @@ class Register : Fragment () {
     private lateinit var inputemail: String
     private lateinit var inputpassword: String
     private lateinit var inputfullname:String
-    lateinit var toast: String
+    private lateinit var toast: String
     private var customToast : CustomToast = CustomToast()
 
 
@@ -60,7 +64,7 @@ class Register : Fragment () {
         return view
     }
 
-    fun check(){
+    private fun check(){
         if (inputfullname.isEmpty()){
             field_name.helperText = "Required"
             regis_nama_lengkap.error = "Name cannot be empty"
@@ -94,10 +98,10 @@ class Register : Fragment () {
 
     }
 
-    fun validateEmail(email: String): Boolean {
+    private fun validateEmail(email: String): Boolean {
         val match = Pattern.compile(
-            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                    "\\@" +
+            "[a-zA-Z0-9+._%\\-]{1,256}" +
+                    "@" +
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
                     "(" +
                     "\\." +
@@ -107,8 +111,8 @@ class Register : Fragment () {
         return match.matcher(email).matches()
     }
 
-    fun registerUser(full_name: String, email: String, password: String, phone_number: Int, address: String, city:String){
-        val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+    private fun registerUser(full_name: String, email: String, password: String, phone_number: Int, address: String, city:String){
+        val viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
             viewModel.registerLiveData.observe(requireActivity()) {
                 Log.d("abc", it)
                 if (it == "201"){

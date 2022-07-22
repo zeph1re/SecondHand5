@@ -10,11 +10,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_product_adapter.view.*
 
 
-class AdapterHome (var listdata: List<GetProductHome>): RecyclerView.Adapter<AdapterHome.ViewHolder>(){
+class AdapterHome (private var listdata: List<GetProductHome>): RecyclerView.Adapter<AdapterHome.ViewHolder>(){
 
-    class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewitem = LayoutInflater.from(parent.context)

@@ -10,9 +10,4 @@ class HistoryRepository @Inject constructor( private val service : ApiService){
         return service.getAllHistory(token)
     }
 
-    suspend fun getDetailHistory (token : String, id :Int) : GetHistoryItem {
-        return service.getDetailHistory(token,id)
-
-    }
-
 }

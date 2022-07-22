@@ -1,3 +1,5 @@
+@file:Suppress("LocalVariableName", "LocalVariableName")
+
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
 import and5.finalproject.secondhand5.R
@@ -28,27 +30,27 @@ import kotlin.properties.Delegates
 
 
 class SellerProduct : Fragment() {
-    lateinit var myListProductAdapter: SellerProductAdapter
+    private lateinit var myListProductAdapter: SellerProductAdapter
     lateinit var userManager: UserManager
-    lateinit var updateProductBody: UpdateProductBody
+    private lateinit var updateProductBody: UpdateProductBody
     lateinit var productname:String
-    lateinit var productdescription:String
-    var productprice by Delegates.notNull<Int>()
-    lateinit var productlocation:String
-    lateinit var arrayAdapter: ArrayAdapter<String>
-    var categoryID = mutableListOf<Int>()
-    var categoryName = mutableListOf<String>()
-    var getName = mutableListOf<String>()
+    private lateinit var productdescription:String
+    private var productprice by Delegates.notNull<Int>()
+    private lateinit var productlocation:String
+    private lateinit var arrayAdapter: ArrayAdapter<String>
+    private var categoryID = mutableListOf<Int>()
+    private var categoryName = mutableListOf<String>()
+    private var getName = mutableListOf<String>()
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
-    lateinit var postCategory : String
-    lateinit var productCategory :String
-    lateinit var preventDoubleCall : String
+    private lateinit var postCategory : String
+    private lateinit var productCategory :String
+    private lateinit var preventDoubleCall : String
 
-    lateinit var newName: String
-    lateinit var newDesc: String
+    private lateinit var newName: String
+    private lateinit var newDesc: String
 
-    var newPrice: Int = 0
+    private var newPrice: Int = 0
 
 
     override fun onCreateView(
@@ -56,9 +58,8 @@ class SellerProduct : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.fragment_seller_product, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_seller_product, container, false)
     }
 //
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,19 +75,19 @@ class SellerProduct : Fragment() {
 
         }
 
-        var style = LinearLayoutManager(requireContext(),  LinearLayoutManager.VERTICAL, false)
+        val style = LinearLayoutManager(requireContext(),  LinearLayoutManager.VERTICAL, false)
         myListProduct_recyclerview.adapter = myListProductAdapter
         myListProduct_recyclerview.layoutManager = style
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
             getProduct(it)
         }
 
     }
 
-    fun getProduct(token:String){
-        val viewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+    private fun getProduct(token:String){
+        val viewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModel.getSellerProduct(token)
         viewModel.sellerProductLiveData.observe(viewLifecycleOwner){
             if(it != null){
@@ -97,19 +98,19 @@ class SellerProduct : Fragment() {
         }
     }
 
-    fun initDetailProductData(id:Int){
+    private fun initDetailProductData(id:Int){
         preventDoubleCall = "true"
         val customDetailProductDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_detail_product, null, false)
         getCategory()
-        var ADBuilder = AlertDialog.Builder(requireContext())
+        val ADBuilder = AlertDialog.Builder(requireContext())
             .setView(customDetailProductDialog)
             .create()
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){token->
             if(token!=null){
                 viewModelProduct.getSellerDetailProduct(token, id)
-                viewModelProduct.detailSellerProduct.observe(viewLifecycleOwner) {
+                viewModelProduct.detailSellerProduct.observe(viewLifecycleOwner) { it ->
                     productname = it.name
                     productdescription = it.desc
                     productprice = it.basePrice
@@ -143,7 +144,7 @@ class SellerProduct : Fragment() {
 
 
                     customDetailProductDialog.input_product_name.setText(it.name)
-                    customDetailProductDialog.input_product_description.setText(it.desc.toString())
+                    customDetailProductDialog.input_product_description.setText(it.desc)
                     customDetailProductDialog.input_product_base_price.setText(it.basePrice.toString())
 
 
@@ -193,12 +194,12 @@ class SellerProduct : Fragment() {
                         }
                         customDetailProductDialog.btn_delete_product.setOnClickListener {
                             val dialogBuilder = AlertDialog.Builder(requireActivity())
-                            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
                             dialogBuilder.setMessage("Hapus Produk?")
                                 .setCancelable(false)
                                 .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
-                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) { it ->
                                         if (it != null) {
                                             viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
                                                 if (it == "201") {
@@ -221,9 +222,9 @@ class SellerProduct : Fragment() {
 
                                 }
 
-                                .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+                                .setNegativeButton("Tidak") { dialogInterface: DialogInterface, i: Int ->
                                     ADBuilder.dismiss()
-                                })
+                                }
                             // create dialog box
                             val alert = dialogBuilder.create()
                             // set title for alert dialog box
@@ -234,8 +235,8 @@ class SellerProduct : Fragment() {
                         }
 
                         customDetailProductDialog.btn_update_product.setOnClickListener {
-                            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-                            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                            val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
 
 
@@ -263,7 +264,7 @@ class SellerProduct : Fragment() {
 
 
                                     val userViewModel =
-                                        ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                                        ViewModelProvider(requireActivity())[UserViewModel::class.java]
                                     userViewModel.getUserData.observe(viewLifecycleOwner) {user->
 
 
@@ -324,9 +325,9 @@ class SellerProduct : Fragment() {
     }
 
 
-    fun getCategory(){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
+    private fun getCategory(){
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) { it ->
             categoryName.clear()
              categoryID.clear()
             val sorted = it.sortedBy { it.name }

@@ -43,7 +43,7 @@ class UserNotLogin : Fragment() {
             object : OnBackPressedCallback(true)
             {
                 override fun handleOnBackPressed() {
-                    val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                    val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
                     viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
                         if (it == "" || it == null){
                             Navigation.findNavController(requireView()).navigate(R.id.action_userNotLogin_to_home)

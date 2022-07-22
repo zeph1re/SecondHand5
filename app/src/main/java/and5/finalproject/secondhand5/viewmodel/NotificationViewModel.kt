@@ -17,7 +17,7 @@ class NotificationViewModel @Inject constructor(private var notifRepo : Notifica
 
     var userToken : MutableLiveData<String> = MutableLiveData()
 
-    var responseCodePatchNotification : SingeLiveEvent<String> = SingeLiveEvent ()
+    private var responseCodePatchNotification : SingeLiveEvent<String> = SingeLiveEvent ()
 
 
     fun getNotification(token: String, notification_type : String){

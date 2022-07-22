@@ -13,14 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_seller_product_sold.*
-import kotlin.properties.Delegates
 
 
 class SellerProductSold : Fragment() {
 //
-    lateinit var sellerOrderSuccessfulAdapter : SellerSoldAdapter
+    private lateinit var sellerOrderSuccessfulAdapter : SellerSoldAdapter
     lateinit var userManager: UserManager
-    var orderId by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,18 +39,18 @@ class SellerProductSold : Fragment() {
 //            view.findNavController().navigate(R.id.action_myListProduct_to_detailPenawar, data)
         }
 
-        var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_seller_success_order.adapter = sellerOrderSuccessfulAdapter
         rv_seller_success_order.layoutManager = layoutManager
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
             getSuccessOrder(it)
         }
     }
 
-    fun getSuccessOrder(token:String){
-        val viewModel = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+    private fun getSuccessOrder(token:String){
+        val viewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModel.getSellerSuccesfulOrder(token)
         viewModel.sellerSoldOrderLiveData.observe(viewLifecycleOwner){
             if(it != null){

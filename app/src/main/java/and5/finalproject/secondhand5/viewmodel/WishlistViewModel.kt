@@ -1,6 +1,5 @@
 package and5.finalproject.secondhand5.viewmodel
 
-import and5.finalproject.secondhand5.model.wishlist.GetWishlistProduct
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import and5.finalproject.secondhand5.repository.WishlistRepository
 import and5.finalproject.secondhand5.singleliveevent.SingeLiveEvent
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WishlistViewModel @Inject constructor(val repo : WishlistRepository) : ViewModel() {
+class WishlistViewModel @Inject constructor(private val repo : WishlistRepository) : ViewModel() {
 
     //Get All Wishlist Product
 
@@ -30,16 +29,6 @@ class WishlistViewModel @Inject constructor(val repo : WishlistRepository) : Vie
 
     //Detail Wishlist Product
 
-    private var detailWishlistLiveData = MutableLiveData<GetWishlistProductItem>()
-    val detailProductWishlist : LiveData<GetWishlistProductItem> = detailWishlistLiveData
-
-
-    fun getDetailWishlistProduct(access_token: String, id : Int){
-        viewModelScope.launch {
-            val detailWishlistProduct = repo.getDetailProductWishlist(access_token,id)
-            detailWishlistLiveData.value = detailWishlistProduct
-        }
-    }
 
     //Post Product to Wishlist Product
 

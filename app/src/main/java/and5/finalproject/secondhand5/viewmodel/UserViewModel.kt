@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 
@@ -48,12 +48,13 @@ class UserViewModel @Inject constructor (private val userRepo : UserRepository):
 
     fun updateUserData(token:String, fullName: String, email: String, password: String, number: String, address: String, image: MultipartBody.Part, city: String ){
         viewModelScope.launch  {
-            val partName = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fullName)
-            val partEmail= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), email)
-            val partPassword= RequestBody.create("multipart/form-data".toMediaTypeOrNull(), password)
-            val partNumber = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), number.toString())
-            val partAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), address)
-            val partCity = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), city)
+            val partName = fullName.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partEmail= email.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partPassword= password.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partNumber =
+                number.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partAddress = address.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val partCity = city.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
             userRepo.updateUser(token, partName, partEmail, partPassword, partNumber, partAddress, image, partCity, updateUserData )
         }

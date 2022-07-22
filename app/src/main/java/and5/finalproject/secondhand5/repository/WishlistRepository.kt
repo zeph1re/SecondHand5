@@ -1,8 +1,6 @@
 package and5.finalproject.secondhand5.repository
 
-import and5.finalproject.secondhand5.model.auth.RegisterResponse
 import and5.finalproject.secondhand5.model.wishlist.DeleteWishlistResponse
-import and5.finalproject.secondhand5.model.wishlist.GetWishlistProduct
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import and5.finalproject.secondhand5.model.wishlist.PostProductToWishlist
 import and5.finalproject.secondhand5.network.ApiService
@@ -37,10 +35,6 @@ class WishlistRepository @Inject constructor( private val service : ApiService )
 
     suspend fun getAllProductWishlist(token:String) : List<GetWishlistProductItem> {
         return service.getWishlistProduct(token)
-    }
-
-    suspend fun getDetailProductWishlist(token: String, id: Int) : GetWishlistProductItem {
-        return service.getWishlistDetail(token,id)
     }
 
     suspend fun deleteProductWishlist(

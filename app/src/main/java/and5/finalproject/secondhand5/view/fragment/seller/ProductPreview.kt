@@ -1,3 +1,10 @@
+@file:Suppress("KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation"
+)
+
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
@@ -20,6 +27,7 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_product_preview.*
 import kotlinx.android.synthetic.main.fragment_product_preview.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -28,10 +36,10 @@ import kotlin.properties.Delegates
 
 class ProductPreview : Fragment() {
 
-    lateinit var categoryName : String
+    private lateinit var categoryName : String
     lateinit var image : MultipartBody.Part
 
-    lateinit var postCategory : String
+    private lateinit var postCategory : String
     lateinit var userManager: UserManager
     private var customToast : CustomToast = CustomToast()
     var post by Delegates.notNull<Boolean>()
@@ -48,29 +56,30 @@ class ProductPreview : Fragment() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         post = true
         userManager = UserManager(requireActivity())
-        var getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
+        val getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
         val getCategoryID= getProduct?.selectedID.toString()
         val categoryID = getCategoryID.replace("[","").replace("]", "")
         postCategory = categoryID
 
-        if (getProduct?.selectedName?.size!! <2){
-            val getCategoryName = getProduct?.selectedName.toString()
-            categoryName = getCategoryName.replace("[","").replace("]", "").replace(",", "")
+        categoryName = if (getProduct?.selectedName?.size!! <2){
+            val getCategoryName = getProduct.selectedName.toString()
+            getCategoryName.replace("[","").replace("]", "").replace(",", "")
         }else{
-            val getCategoryName = getProduct?.selectedName.toString()
-            categoryName = getCategoryName.replace("[","").replace("]", "")
+            val getCategoryName = getProduct.selectedName.toString()
+            getCategoryName.replace("[","").replace("]", "")
         }
-        preview_product_name.text = "Name : ${getProduct?.productName}"
+        preview_product_name.text = "Name : ${getProduct.productName}"
         preview_product_category.text = "Category : $categoryName"
-        preview_product_price.text = "Price : ${getProduct?.productPrice}"
-        preview_product_description.text =getProduct?.productDesc
-        preview_image.setImageURI(getProduct!!.imageParsing.toUri())
+        preview_product_price.text = "Price : ${getProduct.productPrice}"
+        preview_product_description.text = getProduct.productDesc
+        preview_image.setImageURI(getProduct.imageParsing.toUri())
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
             detailUser(it)
         }
@@ -93,35 +102,35 @@ class ProductPreview : Fragment() {
     }
 
     private fun detailUser(token:String) {
-        val viewModelUser = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        val viewModelUser = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         viewModelUser.getUserData(token)
         viewModelUser.getUserData.observe(viewLifecycleOwner){
             Log.d("namaaaa", it.fullName)
             Log.d("cityyyy", it.city)
-            preview_seller_name.setText(it.fullName)
-            preview_seller_city.setText(it.city)
+            preview_seller_name.text = it.fullName
+            preview_seller_city.text = it.city
             Glide.with(requireActivity()).load( it.imageUrl).into(requireView().preview_seller_image)
         }
     }
 
     fun observe(){
-        var getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val getProduct = arguments?.getParcelable<AddProduct.productPreview>("product_preview")
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
-                val userViewModel =ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
                 userViewModel.getUserData(token)
                 userViewModel.getUserData.observe(viewLifecycleOwner) {  loc ->
-                    val productViewModel =ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                    val productViewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
                     if (post) {
                         postProduct(
                             token,
                             getProduct?.productName!!,
-                            getProduct!!.productDesc,
-                            getProduct!!.productPrice,
+                            getProduct.productDesc,
+                            getProduct.productPrice,
                             postCategory,
                             loc.city,
-                            getProduct!!.image as MultipartBody.Part
+                            getProduct.image as MultipartBody.Part
                         )
                         post = false
                     }
@@ -163,7 +172,7 @@ class ProductPreview : Fragment() {
         }
     }
 
-    fun postProduct(
+    private fun postProduct(
         token: String,
         name: String,
         desc: String,
@@ -172,7 +181,7 @@ class ProductPreview : Fragment() {
         location: String,
         image: MultipartBody.Part
     ){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
     }
 

@@ -12,14 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.fragment_status_order.*
 import kotlinx.android.synthetic.main.fragment_wishlist.*
-import kotlinx.android.synthetic.main.fragment_wishlist.btn_back
 
 
 class Wishlist : Fragment() {
 
-    lateinit var wishlistAdapter : WishlistAdapter
+    private lateinit var wishlistAdapter : WishlistAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +34,9 @@ class Wishlist : Fragment() {
             activity?.onBackPressed()
         }
 
-        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
-            if (token!= ""||token==null){
+            if (token!= ""){
                 initWishlist()
             }else{
                 view.findNavController().navigate(R.id.action_wishlist_to_userNotLogin)
@@ -50,16 +48,16 @@ class Wishlist : Fragment() {
 
     private fun initWishlist() {
 
-        wishlistAdapter = WishlistAdapter(){
+        wishlistAdapter = WishlistAdapter {
             val data = Bundle()
             data.putInt("product_id", it.productId)
 
             view!!.findNavController().navigate(R.id.action_wishlist_to_productDetail, data)
 
         }
-        val viewModelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
-        viewModelUser.userToken(requireActivity()).observe(viewLifecycleOwner){
+        val viewModelUser = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
+        viewModelUser.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
             viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
                 if (it != null) {
                     wishlist_rv.layoutManager =
@@ -69,7 +67,7 @@ class Wishlist : Fragment() {
                     wishlistAdapter.notifyDataSetChanged()
                 }
             }
-            viewModelWishlist.getAllWishlistProduct(it)
+            viewModelWishlist.getAllWishlistProduct(token)
         }
 
     }

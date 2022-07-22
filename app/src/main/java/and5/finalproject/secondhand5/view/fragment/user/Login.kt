@@ -1,3 +1,7 @@
+@file:Suppress("CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+)
+
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
@@ -12,22 +16,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executor
 
 
 class Login : Fragment() {
 
-    lateinit var inputLoginEmail: String
-    lateinit var inputLoginPassword: String
+    private lateinit var inputLoginEmail: String
+    private lateinit var inputLoginPassword: String
     lateinit var text: String
-    private var customToast : CustomToast = CustomToast()
-    lateinit var userManager : UserManager
+    private var customToast: CustomToast = CustomToast()
+    lateinit var userManager: UserManager
+
+    private lateinit var executor : Executor
+    private lateinit var biometricPromt : BiometricPrompt
+    private lateinit var promtInfo : BiometricPrompt.PromptInfo
 
 
     override fun onCreateView(
@@ -41,45 +54,45 @@ class Login : Fragment() {
             activity?.onBackPressed()
         }
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
-            if (it != ""){
-                    parent_login.visibility = View.GONE
-                    view.findNavController().navigate(
-                        R.id.action_login_to_account)
+            if (it != "") {
+                parent_login.visibility = View.GONE
+                view.findNavController().navigate(
+                    R.id.action_login_to_account
+                )
             }
         }
 
-
-        view.btnlogin.setOnClickListener{
+        view.btnlogin.setOnClickListener {
             inputLoginEmail = view.loginemail.text.toString()
             inputLoginPassword = view.loginpassword.text.toString()
 
             check()
-            if (inputLoginEmail.isNotEmpty() && inputLoginPassword.isNotEmpty() ){
+            if (inputLoginEmail.isNotEmpty() && inputLoginPassword.isNotEmpty()) {
 
                 view.loading.visibility = View.VISIBLE
 
                 loginUser(inputLoginEmail, inputLoginPassword)
+                biometricAuth()
             }
         }
 
-        view.daftar2.setOnClickListener{
+        view.daftar2.setOnClickListener {
             view.findNavController().navigate(R.id.action_login_to_register)
         }
         return view
     }
 
-    fun check(){
-
-        if (inputLoginEmail.isEmpty()){
+    private fun check() {
+        if (inputLoginEmail.isEmpty()) {
             field_login_email.helperText = "Required"
             loginemail.error = "Email cannot be empty"
-        } else{
+        } else {
             field_login_email.helperText = ""
         }
 
-        if (inputLoginPassword.isEmpty()){
+        if (inputLoginPassword.isEmpty()) {
             field_login_password.helperText = "Required"
             loginpassword.error = "Password cannot be empty"
         } else {
@@ -87,12 +100,13 @@ class Login : Fragment() {
         }
     }
 
-    fun loginUser(email : String, password: String){
-        val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+    @OptIn(DelicateCoroutinesApi::class)
+    fun loginUser(email: String, password: String) {
+        val viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
 
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
             Log.d("abc", it)
-            if (it == "201"){
+            if (it == "201") {
 
                 viewModel.userToken.observe(viewLifecycleOwner) { token ->
                     Log.d("userToken", token)
@@ -107,24 +121,24 @@ class Login : Fragment() {
                     customToast.successToast(requireContext(), text)
                     view?.findNavController()
                         ?.navigate(R.id.action_login_to_account)
-                },2000)
+                }, 2000)
 
 
-            } else if (it == "401"){
+            } else if (it == "401") {
                 text = "Email or Password are Wrong"
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
-                },2000)
+                }, 2000)
 
-            } else if (it == "500"){
+            } else if (it == "500") {
                 text = "Internal Service Error"
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
-                },2000)
+                }, 2000)
 
             } else {
                 text = "No Internet Connection"
@@ -132,13 +146,41 @@ class Login : Fragment() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading?.visibility = View.GONE
                     customToast.failureToast(requireContext(), text)
-                },2000)
-
+                }, 2000)
             }
         }
         viewModel.loginUser(email, password)
     }
 
+    private fun biometricAuth() {
+        executor = ContextCompat.getMainExecutor(requireContext())
+
+        biometricPromt = BiometricPrompt(requireActivity(), executor, object:BiometricPrompt.AuthenticationCallback(){
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                Toast.makeText(requireContext(), "Error $errString" , Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(requireContext(), "Auth Failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        //Setup Alert Dialog
+        promtInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric Authentication")
+            .setSubtitle("Use Fingerprint to Open this App")
+            .setNegativeButtonText("Cancel")
+            .build()
+
+        biometricPromt.authenticate(promtInfo)
+    }
 
 
 }
