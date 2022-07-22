@@ -1,7 +1,6 @@
 package and5.finalproject.secondhand5.Room
 
 import and5.finalproject.secondhand5.Room.Model.GetProductHome
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -23,9 +22,6 @@ abstract class OfflineDB : RoomDatabase() {
             return INSTANCE
         }
 
-        fun destroyInstance(){
-            INSTANCE = null
-        }
     }
 
 }

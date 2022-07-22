@@ -1,50 +1,47 @@
+@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+
 package and5.finalproject.secondhand5.view.fragment.user
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.Room.Adapter.AdapterHome
 import and5.finalproject.secondhand5.Room.Model.GetProductHome
 import and5.finalproject.secondhand5.Room.OfflineDB
-import and5.finalproject.secondhand5.Room.OfflineModeDao
 import and5.finalproject.secondhand5.connectivity.CheckConnectivity
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.CategoriesAdapter
 import and5.finalproject.secondhand5.view.adapter.ProductAdapter
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
-import androidx.core.os.bundleOf
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
 class Home : Fragment() {
 
-    var connectivity: CheckConnectivity = CheckConnectivity()
+    private var connectivity: CheckConnectivity = CheckConnectivity()
 
-    lateinit var productAdapter: ProductAdapter
-    lateinit var offlineHomeAdapter: AdapterHome
-    lateinit var bannerAdapter: BannerAdapter
-    var searchQuery = ""
-    var idQuery = 0
-    var db: OfflineDB? = null
-    lateinit var offlineCategory: String
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var offlineHomeAdapter: AdapterHome
+    private lateinit var bannerAdapter: BannerAdapter
+    private var searchQuery = ""
+    private var idQuery = 0
+    private var db: OfflineDB? = null
+    private lateinit var offlineCategory: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +52,7 @@ class Home : Fragment() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -122,11 +120,11 @@ class Home : Fragment() {
 
     }
 
-    fun categoryFilter(){
+    private fun categoryFilter(){
         initProductbyCategories()
     }
 
-    fun searchFilter(){
+    private fun searchFilter(){
         et_primary_search.setOnClickListener {
             searchQuery = et_primary_search.text.toString()
             initProduct()
@@ -137,7 +135,7 @@ class Home : Fragment() {
     fun initProductbyCategories(){
         val productAdapter = productAdapter
 
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewmodelproduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewmodelproduct.product.observe(viewLifecycleOwner) {
             if (it != null) {
 
@@ -158,15 +156,16 @@ class Home : Fragment() {
         viewmodelproduct.getProductbyCategories(idQuery, searchQuery)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("NotifyDataSetChanged")
     fun initProduct(){
         val productAdapter = productAdapter
 
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewmodelproduct.product.observe(viewLifecycleOwner) {
+        val viewmodelproduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        viewmodelproduct.product.observe(viewLifecycleOwner) { it ->
             if (it != null) {
 
-                it.forEach {
+                it.forEach { it ->
                     it.categories.forEach {
                         offlineCategory = it.name
                     }
@@ -210,12 +209,12 @@ class Home : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun initCategory(){
-        val categoriesAdapter = CategoriesAdapter(){
+        val categoriesAdapter = CategoriesAdapter {
             idQuery = it.id
             categoryFilter()
         }
 
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewmodelproduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewmodelproduct.sellerCategory.observe(viewLifecycleOwner) {
             if (it != null) {
                 rv_list_category.layoutManager =
@@ -228,10 +227,10 @@ class Home : Fragment() {
         viewmodelproduct.getSellerCategory()
     }
 
-    fun initBanner() {
+    private fun initBanner() {
         bannerAdapter = BannerAdapter()
 
-        val viewmodelbanner = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewmodelbanner = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewmodelbanner.sellerBanner.observe(viewLifecycleOwner) {
             if (it != null) {
                 banner_rv.layoutManager =

@@ -2,9 +2,7 @@ package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
-import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -25,7 +23,7 @@ import kotlin.properties.Delegates
 
 class DetailOrder : Fragment() {
 
-    var orderId by Delegates.notNull<Int>()
+    private var orderId by Delegates.notNull<Int>()
     lateinit var userManager: UserManager
 
     override fun onCreateView(
@@ -58,19 +56,19 @@ class DetailOrder : Fragment() {
         }
     }
 
-    fun acceptDialogue(id:Int){
+    private fun acceptDialogue(id:Int){
         val dialogBuilder = AlertDialog.Builder(requireActivity())
 
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         dialogBuilder.setMessage("Terima penawaran?")
             .setCancelable(false)
-            .setPositiveButton("Ya", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+            .setPositiveButton("Ya") { _: DialogInterface, _: Int ->
                 acceptOrder(id)
-            })
-            .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, id ->
+            }
+            .setNegativeButton("Tidak") { dialog, _ ->
                 dialog.cancel()
 
-            })
+            }
 
         // create dialog box
         val alert = dialogBuilder.create()
@@ -82,19 +80,19 @@ class DetailOrder : Fragment() {
 
     }
 
-    fun declineDialogue(id:Int){
+    private fun declineDialogue(id:Int){
         val dialogBuilder = AlertDialog.Builder(requireActivity())
 
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         dialogBuilder.setMessage("Tolak penawaran?")
             .setCancelable(false)
-            .setPositiveButton("Ya", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+            .setPositiveButton("Ya") { _: DialogInterface, _: Int ->
                 declineOrder(id)
-            })
-            .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, id ->
+            }
+            .setNegativeButton("Tidak") { dialog, _ ->
                 dialog.cancel()
 
-            })
+            }
 
         // create dialog box
         val alert = dialogBuilder.create()
@@ -106,7 +104,7 @@ class DetailOrder : Fragment() {
 
     }
 
-    fun acceptOrder(id:Int){
+    private fun acceptOrder(id:Int){
 //        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
 //        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
 //            viewModelProduct.patchSellerOrder(it, id, "accepted")
@@ -119,8 +117,8 @@ class DetailOrder : Fragment() {
 
     }
 
-    fun declineOrder(id:Int){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+    private fun declineOrder(id:Int){
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
             viewModelProduct.patchSellerOrder(it, id, "declined")
         }
@@ -129,37 +127,31 @@ class DetailOrder : Fragment() {
     }
 
 
-    fun orderValueInit(id:Int){
-        val viewmodelproduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
-            viewmodelproduct.getDetailOrder(it, id)
-
-            viewmodelproduct.detailOrder.observe(viewLifecycleOwner,{
-
-
-
+    private fun orderValueInit(id:Int){
+        val viewmodelproduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        userManager.userToken.asLiveData().observe(viewLifecycleOwner) { token ->
+            viewmodelproduct.getDetailOrder(token, id)
+            viewmodelproduct.detailOrder.observe(viewLifecycleOwner) {
                 product_name.text = it.product.name
                 Glide.with(requireContext()).load(it.product.imageUrl).into(product_image)
 
                 bid_price.text = "Ditawar Rp ${it.price}"
-                product_price.text = "Rp ${it.product.basePrice.toString()}"
+                product_price.text = "Rp ${it.product.basePrice}"
 
-                if(it.createdAt != null){
-                    val formatter =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-                    val date = formatter.parse(it.createdAt.toString())
-                    if (date != null) {
-                        order_date.text = date.toString()
-                    }
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+                val date = formatter.parse(it.createdAt)
+                if (date != null) {
+                    order_date.text = date.toString()
                 }
 
-                Log.d("testes tgl", it.createdAt.toString())
+                Log.d("testes tgl", it.createdAt)
 
                 buyer_address_city.text = it.user.city
                 buyer_name.text = it.user.fullName
                 Glide.with(requireContext()).load(it.user.imageURL).into(buyer_image)
 
 
-            })
+            }
 
         }
     }

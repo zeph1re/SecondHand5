@@ -1,3 +1,5 @@
+@file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+
 package and5.finalproject.secondhand5.view.fragment.seller
 
 import and5.finalproject.secondhand5.R
@@ -8,7 +10,6 @@ import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
 import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -39,6 +40,7 @@ import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 import kotlinx.android.synthetic.main.fragment_add_product2.*
 import kotlinx.android.synthetic.main.fragment_add_product2.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -50,27 +52,27 @@ import kotlin.properties.Delegates
 
 
 class AddProduct : Fragment() {
-    var connectivity: CheckConnectivity = CheckConnectivity()
+    private var connectivity: CheckConnectivity = CheckConnectivity()
     lateinit var userManager: UserManager
     private val selectedName: MutableList<String?> = mutableListOf()
     private var selectedID: MutableList<Int> = mutableListOf()
 
-    var categoryID = mutableListOf<Int>()
-    var categoryName = mutableListOf<String>()
+    private var categoryID = mutableListOf<Int>()
+    private var categoryName = mutableListOf<String>()
     lateinit var image : MultipartBody.Part
     lateinit var productName : String
-    lateinit var productPrice : String
-    lateinit var productDesc  : String
-    lateinit var postCategory : String
+    private lateinit var productPrice : String
+    private lateinit var productDesc  : String
+    private lateinit var postCategory : String
 
-    lateinit var arrayAdapter: ArrayAdapter<String>
+    private lateinit var arrayAdapter: ArrayAdapter<String>
     private var customToast : CustomToast = CustomToast()
     lateinit var text : String
     var post by Delegates.notNull<Boolean>()
-    lateinit var sizeCheck: String
-    var typeCheck : String? = null
-    lateinit var imageCheck : String
-    lateinit var imageParsing : String
+    private lateinit var sizeCheck: String
+    private var typeCheck : String? = null
+    private lateinit var imageCheck : String
+    private lateinit var imageParsing : String
 
     @Parcelize
     data class productPreview(
@@ -84,12 +86,13 @@ class AddProduct : Fragment() {
         val image : @RawValue Any? = null
     ):Parcelable
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
             if (it == "" || it == null){
                 Navigation.findNavController(requireView()).navigate(R.id.action_addProduct_to_userNotLogin)
@@ -111,7 +114,7 @@ class AddProduct : Fragment() {
         view?.dropdown_category?.setAdapter(arrayAdapter)
         view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         arrayAdapter.notifyDataSetChanged()
-        view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
+        view?.dropdown_category?.setOnItemClickListener { _, view, position, l ->
             val selectedValue: String? = arrayAdapter.getItem(position)
             selectedName.add(arrayAdapter.getItem(position))
             selectedID.add(categoryID[position])
@@ -188,7 +191,7 @@ class AddProduct : Fragment() {
             arrayAdapter = ArrayAdapter(requireActivity(), R.layout.adapter_pilih_kategory, categoryName)
             view?.dropdown_category?.setAdapter(arrayAdapter)
             view?.dropdown_category?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-            view?.dropdown_category?.setOnItemClickListener { adapterView, view, position, l ->
+            view?.dropdown_category?.setOnItemClickListener { _, view, position, l ->
                 val selectedValue: String? = arrayAdapter.getItem(position)
                 selectedName.add(arrayAdapter.getItem(position))
                 selectedID.add(categoryID[position])
@@ -206,9 +209,9 @@ class AddProduct : Fragment() {
             productPrice = view.add_product_price.text.toString()
             productDesc = view.add_product_desc.text.toString()
             val getCategoryName = selectedName.toString()
-            val categoryName = getCategoryName.replace("[","").replace("]", "")
+            getCategoryName.replace("[","").replace("]", "")
             val getCategoryID= selectedID.toString()
-            val categoryID = getCategoryID.replace("[","").replace("]", "")
+            getCategoryID.replace("[","").replace("]", "")
             check()
 
             if (productName.isNotEmpty() && productPrice.isNotEmpty() && productDesc.isNotEmpty()
@@ -245,9 +248,9 @@ class AddProduct : Fragment() {
 
     }
 
-    fun getCategory(){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) {
+    private fun getCategory(){
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        viewModelProduct.sellerCategory.observe(viewLifecycleOwner) { it ->
             val sorted = it.sortedBy { it.name }
             sorted.forEach {
                 categoryName.add(it.name)
@@ -258,13 +261,13 @@ class AddProduct : Fragment() {
     }
     fun observe(){
 
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
-                val userViewModel =ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+                val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
                     userViewModel.getUserData(token)
                     userViewModel.getUserData.observe(viewLifecycleOwner) {  loc ->
-                        val productViewModel =ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+                        val productViewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
                         if (post) {
                             postProduct(
                                 token,
@@ -315,7 +318,7 @@ class AddProduct : Fragment() {
         }
     }
 
-    fun check(){
+    private fun check(){
         if (productName.isEmpty()){
             field_product_name.helperText = "Required"
             add_product_name.error = "Product name cannot be empty"
@@ -353,7 +356,7 @@ class AddProduct : Fragment() {
 
     }
 
-    fun postProduct(
+    private fun postProduct(
         token: String,
         name: String,
         desc: String,
@@ -362,31 +365,31 @@ class AddProduct : Fragment() {
         location: String,
         image: MultipartBody.Part
     ){
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModelProduct.addSellerProduct(token, name,desc, price, category, location, image )
     }
 
-    fun getContent(it : Uri){
+    private fun getContent(it : Uri){
 
         val contentResolver = requireActivity().contentResolver
         val type = contentResolver.getType(it)
         val getType = type.toString()
-        if (getType == "image/png"){
-            typeCheck = ".png"
+        typeCheck = if (getType == "image/png"){
+            ".png"
         }else if (getType == "image/jpg"){
-            typeCheck = ".jpg"
+            ".jpg"
         }else if (getType == "image/jpeg"){
-            typeCheck = ".jpeg"
+            ".jpeg"
         }else {
-            typeCheck = null
+            null
         }
         val outputDir = requireContext().cacheDir // context being the Activity pointer
         val tempFile = File.createTempFile("temp-", typeCheck, outputDir)
-        var customName = tempFile.name.toString()
+        val customName = tempFile.name.toString()
         val regex = Regex("[0-9]")
-        var removeTempName = customName.replace("temp-", "Product Image")
-        var postCustomName = regex.replace(removeTempName, "")
-        Log.d("logdir", postCustomName.toString())
+        val removeTempName = customName.replace("temp-", "Product Image")
+        val postCustomName = regex.replace(removeTempName, "")
+        Log.d("logdir", postCustomName)
         val inputStream = contentResolver.openInputStream(it)
         tempFile.outputStream().use {
             inputStream?.copyTo(it)
@@ -396,10 +399,10 @@ class AddProduct : Fragment() {
         val requestBody: RequestBody = tempFile.asRequestBody(type?.toMediaType())
         val getImageSize = requestBody.contentLength().toDouble()
         val convertToMB = getImageSize/1000000
-        if (convertToMB > 1 ){
-            sizeCheck = ">1mb"
+        sizeCheck = if (convertToMB > 1 ){
+            ">1mb"
         }else{
-            sizeCheck = "<1mb"
+            "<1mb"
         }
         Log.d("imagesize", convertToMB.toString())
         image  =    MultipartBody.Part.createFormData("image", postCustomName, requestBody)
@@ -412,12 +415,12 @@ class AddProduct : Fragment() {
 
 
 
-    fun isPermissionsAllowed(): Boolean {
+    private fun isPermissionsAllowed(): Boolean {
         return ContextCompat.checkSelfPermission(requireContext(),
             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun askForPermissions(): Boolean {
+    private fun askForPermissions(): Boolean {
         if (!isPermissionsAllowed()) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 showPermissionDeniedDialog()
@@ -429,7 +432,8 @@ class AddProduct : Fragment() {
         return true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<String>,grantResults: IntArray) {
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             2000 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -447,15 +451,15 @@ class AddProduct : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Permission Denied")
             .setMessage("Permission is denied, Please allow permissions from App Settings.")
-            .setPositiveButton("App Settings",
-                DialogInterface.OnClickListener { dialogInterface, i ->
-                    // send to app settings if permission is denied permanently
-                    val intent = Intent()
-                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    val uri = Uri.fromParts("package", "and5.finalproject.secondhand5", null)
-                    intent.data = uri
-                    startActivity(intent)
-                })
+            .setPositiveButton("App Settings"
+            ) { _, _ ->
+                // send to app settings if permission is denied permanently
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val uri = Uri.fromParts("package", "and5.finalproject.secondhand5", null)
+                intent.data = uri
+                startActivity(intent)
+            }
             .setNegativeButton("Cancel",null)
             .show()
     }

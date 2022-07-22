@@ -1,3 +1,7 @@
+@file:Suppress("CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+)
+
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
@@ -19,13 +23,14 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_layout_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_account.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
 class Account : Fragment() {
     lateinit var userManager: UserManager
-    var connectivity: CheckConnectivity = CheckConnectivity()
+    private var connectivity: CheckConnectivity = CheckConnectivity()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +42,7 @@ class Account : Fragment() {
     }
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,7 +51,7 @@ class Account : Fragment() {
         }
 
         setting_card.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_account_to_home)
+            Navigation.findNavController(view).navigate(R.id.action_account_to_settings)
         }
 
         logout_card.setOnClickListener {
@@ -55,7 +61,7 @@ class Account : Fragment() {
             }
         }
         if (connectivity.isOnline(requireContext())) {
-            val loginViewModel =  ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel .userToken(requireActivity()).observe(viewLifecycleOwner) {
                 getUserData(it)
             }
@@ -80,9 +86,9 @@ class Account : Fragment() {
                 val currentPass = mDialogView.current_password.text.toString()
                 val newPass = mDialogView.new_password.text.toString()
                 val confirmPass = mDialogView.confirm_password.text.toString()
-                val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-                val viewmodel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-                viewmodel.userToken(requireActivity()).observe(viewLifecycleOwner) {
+                val viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+                val viewmodel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+                viewmodel.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
                     viewModel.responseCodeUpdatePassword.observe(viewLifecycleOwner) {
                         Log.d("tes response ", it.toString())
                         if (it == "200") {
@@ -99,7 +105,7 @@ class Account : Fragment() {
                                     "No Internet Connection", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    viewModel.updatePasswordData(it, currentPass, newPass, confirmPass)
+                    viewModel.updatePasswordData(token, currentPass, newPass, confirmPass)
                 }
 
             }
@@ -112,8 +118,8 @@ class Account : Fragment() {
 
 
 }
-    fun getUserData(token:String){
-        val viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+    private fun getUserData(token:String){
+        val viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         viewModel.getUserData(token)
         viewModel.getUserData.observe(viewLifecycleOwner) {
             if (it.imageUrl != null){

@@ -1,27 +1,23 @@
 package and5.finalproject.secondhand5.view.fragment.user
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.view.adapter.BannerAdapter
 import and5.finalproject.secondhand5.view.adapter.HistoryAdapter
 import and5.finalproject.secondhand5.viewmodel.HistoryViewModel
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
-import and5.finalproject.secondhand5.viewmodel.ProductViewModel
-import androidx.lifecycle.ViewModel
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class History : Fragment() {
 
-    lateinit var historyAdapter : HistoryAdapter
+    private lateinit var historyAdapter : HistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +30,9 @@ class History : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
-            if (token!= ""||token==null){
+            if (token!= ""){
                 initHistory()
             }else{
                 view.findNavController().navigate(R.id.action_history_to_userNotLogin)
@@ -45,12 +41,12 @@ class History : Fragment() {
     }
 
     private fun initHistory() {
-        historyAdapter = HistoryAdapter(){}
+        historyAdapter = HistoryAdapter {}
 
-        val viewModelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        val viewModelHistory = ViewModelProvider(requireActivity()).get(HistoryViewModel::class.java)
+        val viewModelUser = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelHistory = ViewModelProvider(requireActivity())[HistoryViewModel::class.java]
 
-        viewModelUser.userToken(requireContext()).observe(viewLifecycleOwner) {
+        viewModelUser.userToken(requireContext()).observe(viewLifecycleOwner) { token ->
             viewModelHistory.allHistory.observe(viewLifecycleOwner) {
                 if (it != null) {
                     history_rv.layoutManager =
@@ -60,7 +56,7 @@ class History : Fragment() {
                     historyAdapter.notifyDataSetChanged()
                 }
             }
-            viewModelHistory.getAllHistory(it)
+            viewModelHistory.getAllHistory(token)
         }
 
 

@@ -1,9 +1,12 @@
+@file:Suppress("LocalVariableName", "UnusedEquals", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+)
+
 package and5.finalproject.secondhand5.view.fragment.buyer
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
-import and5.finalproject.secondhand5.model.buyerproduct.GetProductItem
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
@@ -22,12 +25,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
-import kotlinx.android.synthetic.main.fragment_wishlist.*
-import kotlin.math.log
 import kotlin.properties.Delegates
 
 
@@ -35,19 +35,19 @@ class ProductDetail : Fragment() {
 
     lateinit var userManager: UserManager
     lateinit var productName : String
-    var productPrice by Delegates.notNull<Int>()
-    lateinit var productImage : String
+    private var productPrice by Delegates.notNull<Int>()
+    private lateinit var productImage : String
     var productId by Delegates.notNull<Int>()
-    lateinit var productDescription : String
-    lateinit var sellerLocation : String
-    var getDetailCategory = mutableSetOf<String>()
-    lateinit var sellerName : String
+    private lateinit var productDescription : String
+    private lateinit var sellerLocation : String
+    private var getDetailCategory = mutableSetOf<String>()
+    private lateinit var sellerName : String
 
 
-    var orderId = 0
+    private var orderId = 0
 
-    lateinit var dataOrder : List<GetBuyerOrderItem>
-    lateinit var dataWishlist : List<GetWishlistProductItem>
+    private lateinit var dataOrder : List<GetBuyerOrderItem>
+    private lateinit var dataWishlist : List<GetWishlistProductItem>
 
 
     override fun onCreateView(
@@ -56,9 +56,8 @@ class ProductDetail : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_product_detail, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,7 +77,7 @@ class ProductDetail : Fragment() {
         Log.d("testes 1 id ", id.toString())
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+            val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
                     getOrderData()
@@ -96,19 +95,19 @@ class ProductDetail : Fragment() {
 
 
 
-    fun getOrderData(){
+    private fun getOrderData(){
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ it ->
             if(it!=null){
-                viewModelProduct.buyerOrder.observe(viewLifecycleOwner,{
-                    if(it!=null){
+                viewModelProduct.buyerOrder.observe(viewLifecycleOwner) {
+                    if (it != null) {
                         dataOrder = it
 //                        Log.d("testes 1 IT ", it.toString())
                     }
 
-                })
+                }
 
                 viewModelProduct.getAllBuyerOrder(it)
 
@@ -116,19 +115,19 @@ class ProductDetail : Fragment() {
         }
     }
 
-    fun getWishlistData() {
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+    private fun getWishlistData() {
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         val viewModelWishlist =
-            ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
+            ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
 
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { it ->
             if (it != null) {
-                viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner, {
+                viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
                     if (it != null) {
                         dataWishlist = it
 //                        Log.d("testes", dataWishlist[0].id.toString())
                     }
-                })
+                }
 
                 viewModelWishlist.getAllWishlistProduct(it)
 
@@ -138,22 +137,22 @@ class ProductDetail : Fragment() {
     }
 
 
-    fun initNoLogin(){
+    private fun initNoLogin(){
 //        Log.d("testes 2 id ", id.toString())
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModelProduct.getBuyerDetailProduct(productId)
 
-        viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
+        viewModelProduct.detailProduct.observe(viewLifecycleOwner) { it ->
 //            Log.d("testes 3 id ", id.toString())
-            var flag = 0
+            val flag = 0
 
             if (flag == 0) {
-                buy_btn.setClickable(false);
-                buy_btn.setText("Login Untuk Order")
+                buy_btn.isClickable = false
+                buy_btn.text = "Login Untuk Order"
             }
 
-            product_name.setText(it.name)
-            product_price.setText("Rp ${it.basePrice.toString()}")
+            product_name.text = it.name
+            product_price.text = "Rp ${it.basePrice}"
             it.categories.forEach {
 
                getDetailCategory.add(it.name)
@@ -164,18 +163,14 @@ class ProductDetail : Fragment() {
             }
 
 
-            seller_name.setText("${it.user.fullName}")
-            seller_address.setText("${it.user.city}")
+            seller_name.text = it.user.fullName
+            seller_address.text = it.user.city
             Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
-            product_description.setText("${it.description}")
+            product_description.text = it.description
 
             productName = it.name
             productPrice = it.basePrice
-            if(it.imageUrl !=null){
-                productImage = it.imageUrl
-            }else{
-                productImage = ""
-            }
+            productImage = it.imageUrl
 
             productDescription = it.description
             sellerLocation = it.location
@@ -188,9 +183,9 @@ class ProductDetail : Fragment() {
     }
 
 
-    fun getDetailProduct(){
+    private fun getDetailProduct(){
 //        Log.d("testes 2 id ", id.toString())
-        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModelProduct.getBuyerDetailProduct(productId)
 
         viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
@@ -217,25 +212,21 @@ class ProductDetail : Fragment() {
                 Log.d("testes id ", orderId.toString())
 
                 if (flag == 0) {
-                    buy_btn.setClickable(false);
-                    buy_btn.setText("Menunggu Respon Penjual")
+                    buy_btn.isClickable = false
+                    buy_btn.text = "Menunggu Respon Penjual"
                 } else if (flag == 1) {
                     Log.d("testes id ", "massssssss")
                     reBidProduct()
                 } else {
                     Log.d("testes id ", "siiiiiiiiiiiiii")
-                    buy_btn.setText("Saya Tertarik dan Ingin Nego")
+                    buy_btn.text = "Saya Tertarik dan Ingin Nego"
                     bidProduct()
                 }
 
 
                 productName = it.name
                 productPrice = it.basePrice
-                if(it.imageUrl != null){
-                    productImage = it.imageUrl
-                }else{
-                    productImage = ""
-                }
+                productImage = it.imageUrl
                 productDescription = it.description
                 sellerLocation = it.user.city
                 sellerName = it.user.fullName
@@ -243,8 +234,8 @@ class ProductDetail : Fragment() {
                 ////////////
 
 
-                product_name.setText(productName)
-                product_price.setText("Rp ${productPrice.toString()}")
+                product_name.text = productName
+                product_price.text = "Rp $productPrice"
                 getDetailCategory.clear()
                 it.categories.forEach {
 
@@ -255,15 +246,15 @@ class ProductDetail : Fragment() {
                     product_category.text = getCategory
                 }
 
-                seller_name.setText("${it.user.fullName}")
-                seller_address.setText("$sellerLocation")
+                seller_name.text = it.user.fullName
+                seller_address.text = sellerLocation
 
                 //produk image
                 if(productImage != "") {
                     Glide.with(requireContext()).load(productImage).into(product_image)
                 }
 
-                product_description.setText("${it.description}")
+                product_description.text = it.description
 
                 //seller image
                 if(it.imageUrl != null){
@@ -273,20 +264,20 @@ class ProductDetail : Fragment() {
                 }
 
 
-            },100)
+            },200)
 
         }
 
     }
 
 
-    fun bidProduct() {
+    private fun bidProduct() {
 
         buy_btn.setOnClickListener{
             val customOrderDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_buyer_offer_price, null, false)
 
-            customOrderDialog.product_name.setText(productName.toString())
-            customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
+            customOrderDialog.product_name.text = productName
+            customOrderDialog.product_price.text = "Rp. $productPrice"
             if(productImage != ""){
                 Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
             }
@@ -297,15 +288,15 @@ class ProductDetail : Fragment() {
             ADBuilder.show()
             customOrderDialog.btn_submit_offer_price.setOnClickListener {
                 if (customOrderDialog.input_offer_price.text.isNotEmpty()){
-                    var offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
+                    val offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
 
                     if(offerPrice > productPrice ){
                         Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-                        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-                        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
+                        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+                        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ it ->
                             if(it!=null){
                                 Log.d("testes token", it)
                                 viewModelProduct.responseCodeAddBuyerOrder.observe(viewLifecycleOwner) {
@@ -317,8 +308,8 @@ class ProductDetail : Fragment() {
                                             Toast.LENGTH_SHORT
 
                                         ).show()
-                                        buy_btn.setClickable(false);
-                                        buy_btn.setText("Menunggu Respon Penjual")
+                                        buy_btn.isClickable = false
+                                        buy_btn.text = "Menunggu Respon Penjual"
 
                                     } else if (it == "400") {
                                         Toast.makeText(
@@ -368,12 +359,12 @@ class ProductDetail : Fragment() {
     }
 
 
-    fun reBidProduct(){
+    private fun reBidProduct(){
         buy_btn.setOnClickListener{
             val customOrderDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_buyer_offer_price, null, false)
 
-            customOrderDialog.product_name.setText(productName.toString())
-            customOrderDialog.product_price.setText("Rp. ${productPrice.toString()}")
+            customOrderDialog.product_name.text = productName
+            customOrderDialog.product_price.text = "Rp. $productPrice"
             if(productImage != ""){
                 Glide.with(requireContext()).load(productImage).into(customOrderDialog.product_image)
 
@@ -385,42 +376,54 @@ class ProductDetail : Fragment() {
 
             customOrderDialog.btn_submit_offer_price.setOnClickListener {
                 if (customOrderDialog.input_offer_price.text.isNotEmpty()){
-                    var offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
+                    val offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
 
                     if(offerPrice > productPrice ){
                         Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-                        userManager.userToken.asLiveData().observe(viewLifecycleOwner){
+                        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                        userManager.userToken.asLiveData().observe(viewLifecycleOwner){ it ->
                             if(it!=null){
                                 Log.d("testes token", it)
-                                viewModelProduct.responseCodeUpdateBuyerOrder.observe(viewLifecycleOwner,{
+                                viewModelProduct.responseCodeUpdateBuyerOrder.observe(viewLifecycleOwner) {
 //                                    Log.d("tes response ", it.toString())
-                                    if(it == "201" || it == "200"){
-                                        Toast.makeText(requireContext(), "Harga Tawarmu Berhasil dikirim ke penjual", Toast.LENGTH_SHORT).show()
-                                        buy_btn.setClickable(false);
-                                        buy_btn.setText("Menunggu Respon Penjual")
-                                    }
-                                    else if(it == "400"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "you has order for this product", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else if(it == "403"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "You are not login/access_token is wrong", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else if(it == "500"){
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "\t\n" +
-                                                "Internal Service Error", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else{
-                                        Toast.makeText(requireContext(), "\t\n" +
-                                                "No Internet Connection", Toast.LENGTH_SHORT).show()
+                                    if (it == "201") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Harga Tawarmu Berhasil dikirim ke penjual",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        buy_btn.isClickable = false
+                                        buy_btn.text = "Menunggu Respon Penjual"
+                                    } else if (it == "400") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "\t\n" +
+                                                    "you has order for this product",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else if (it == "403") {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "\t\n" +
+                                                    "You are not login/access_token is wrong",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else if (it == "500") {
+                                        Toast.makeText(
+                                            requireContext(), "\t\n" +
+                                                    "\t\n" +
+                                                    "Internal Service Error", Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(), "\t\n" +
+                                                    "No Internet Connection", Toast.LENGTH_SHORT
+                                        ).show()
 
                                     }
-                                })
+                                }
 
                                 viewModelProduct.updateBuyerOrder(it, orderId, offerPrice)
 
@@ -440,25 +443,25 @@ class ProductDetail : Fragment() {
 
     }
 
-    fun postProductToWishlist(
+    private fun postProductToWishlist(
         token : String,
         id : Int
     ) {
-        val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
+        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
         viewModelWishlist.postProductToWishlist(token, id)
 
     }
 
-    fun addProductToWishlist() {
+    private fun addProductToWishlist() {
         add_to_wishlist.setOnClickListener {
-            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
+            val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
                 if(token != null){
                     viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
 
-                        if(dataWishlist.size > 0){
+                        if(dataWishlist.isNotEmpty()){
 
                             var flagWishlist = 2
                             var loop = 0
@@ -491,13 +494,13 @@ class ProductDetail : Fragment() {
                                 val dialogBuilder = AlertDialog.Builder(requireActivity())
                                 dialogBuilder.setMessage("Hapus Dari Wishlist?")
                                     .setCancelable(false)
-                                    .setPositiveButton("Ya", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+                                    .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                         deleteWishlist(dataWishlist[loop].id)
-                                    })
-                                    .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, id ->
+                                    }
+                                    .setNegativeButton("Tidak") { dialog, id ->
                                         dialog.cancel()
 
-                                    })
+                                    }
 
 
                                 val alert = dialogBuilder.create()
@@ -527,8 +530,8 @@ class ProductDetail : Fragment() {
 
     private fun deleteWishlist(wishlistId : Int) {
 
-        val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        val viewModelWishlist = ViewModelProvider(requireActivity()).get(WishlistViewModel::class.java)
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
             viewModelWishlist.deleteWishlistProduct(it, wishlistId)
         }

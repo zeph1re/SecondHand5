@@ -1,18 +1,18 @@
+@file:Suppress("LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment",
+    "LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment",
+    "LiftReturnOrAssignment", "LiftReturnOrAssignment", "LiftReturnOrAssignment"
+)
+
 package and5.finalproject.secondhand5.view.adapter
 
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.model.history.GetHistoryItem
-import and5.finalproject.secondhand5.model.notification.GetNotificationItem
-import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.history_adapter.view.*
-import kotlinx.android.synthetic.main.home_product_adapter.view.*
-import kotlinx.android.synthetic.main.notification_adapter.view.*
-import kotlinx.android.synthetic.main.wishlist_adapter.view.*
 
 class HistoryAdapter (private var onClick : (GetHistoryItem)->Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -21,7 +21,7 @@ class HistoryAdapter (private var onClick : (GetHistoryItem)->Unit) : RecyclerVi
         this.historyData = historyList
     }
 
-    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {}
+    class ViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val historyView = LayoutInflater.from(parent.context)

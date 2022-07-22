@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_my_list_product.view.*
 
 
 class MyListProduct : Fragment() {
-    var connectivity: CheckConnectivity = CheckConnectivity()
+    private var connectivity: CheckConnectivity = CheckConnectivity()
     lateinit var userManager: UserManager
 
     override fun onCreateView(
@@ -42,12 +42,12 @@ class MyListProduct : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (connectivity.isOnline(requireContext())) {
             val loginViewModel =
-                ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
-                if (token != "" || token == null) {
+                if (token != "") {
                     initLayout()
                     val viewModel =
-                        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                        ViewModelProvider(requireActivity())[LoginViewModel::class.java]
                     viewModel.userToken(requireActivity()).observe(viewLifecycleOwner) {
                         detailUser(it)
                     }
@@ -64,13 +64,13 @@ class MyListProduct : Fragment() {
     }
 
     private fun detailUser(token:String) {
-        val viewModelUser = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        val viewModelUser = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         viewModelUser.getUserData(token)
         viewModelUser.getUserData.observe(viewLifecycleOwner){
             Log.d("namaaaa", it.fullName)
             Log.d("cityyyy", it.city)
-            seller_name.setText(it.fullName)
-            seller_address.setText(it.city)
+            seller_name.text = it.fullName
+            seller_address.text = it.city
             Glide.with(requireActivity()).load( it.imageUrl).into(requireView().seller_image)
         }
     }

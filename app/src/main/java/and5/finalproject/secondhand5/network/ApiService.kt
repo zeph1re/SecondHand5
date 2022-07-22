@@ -1,3 +1,5 @@
+@file:Suppress("unused", "unused", "unused", "unused")
+
 package and5.finalproject.secondhand5.network
 
 import and5.finalproject.secondhand5.model.auth.*
@@ -158,19 +160,6 @@ interface ApiService {
     @Multipart
     @POST ("/seller/product")
     fun postProduct(
-        @Header("access_token") token: String,
-        @Part  ("name") name : RequestBody,
-        @Part  ("description") description : RequestBody,
-        @Part  ("base_price") base_price : RequestBody,
-        @Part  ("category_ids") category_ids: RequestBody,
-        @Part  ("location") location: RequestBody,
-        @Part image : MultipartBody.Part,
-    ) : Call<PostResponse>
-
-    @Headers("Accept: application/json")
-    @Multipart
-    @PUT ("/seller/product")
-    fun updateProduct(
         @Header("access_token") token: String,
         @Part  ("name") name : RequestBody,
         @Part  ("description") description : RequestBody,

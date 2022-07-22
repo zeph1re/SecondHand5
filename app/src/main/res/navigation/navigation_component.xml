@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_account_to_profile"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_account_to_settings"
+            app:destination="@id/settings" />
     </fragment>
     <fragment
         android:id="@+id/addProduct"
@@ -217,4 +220,8 @@
             android:id="@+id/action_wishlist_to_productDetail2"
             app:destination="@id/productDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="and5.finalproject.secondhand5.view.fragment.user.Settings"
+        android:label="Settings" />
 </navigation>

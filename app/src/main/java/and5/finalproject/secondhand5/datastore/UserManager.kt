@@ -1,7 +1,6 @@
 package and5.finalproject.secondhand5.datastore
 
 import android.content.Context
-import android.net.Uri
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.*
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +12,6 @@ class UserManager (context: Context) {
     private val postImageDataStore : DataStore<Preferences> = context.createDataStore(name = "post_image_prefs")
 
     companion object{
-        val ID = preferencesKey<String>("USER_ID")
         val TOKEN = preferencesKey<String>("USER_TOKEN")
         val POSTIMAGE = preferencesKey<String>("USER_TOKEN")
     }

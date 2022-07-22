@@ -3,7 +3,6 @@ package and5.finalproject.secondhand5.view.fragment.user
 import and5.finalproject.secondhand5.R
 import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
-import and5.finalproject.secondhand5.model.notification.GetNotificationItem
 import and5.finalproject.secondhand5.view.adapter.NotificationAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.NotificationViewModel
@@ -18,16 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_notification.*
-import kotlinx.android.synthetic.main.notification_adapter.*
 
 class Notification : Fragment() {
 
     lateinit var userManager: UserManager
-    lateinit var getNotification: GetNotificationItem
-    lateinit var notificationAdapter : NotificationAdapter
-    lateinit var Read : String
+    private lateinit var notificationAdapter : NotificationAdapter
+    private lateinit var read : String
 
-    var connectivity: CheckConnectivity = CheckConnectivity()
+    private var connectivity: CheckConnectivity = CheckConnectivity()
 
 
     override fun onCreateView(
@@ -41,8 +38,8 @@ class Notification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Read = "true"
-        val loginViewModel =ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        read = "true"
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""||token==null){
                 if (connectivity.isOnline(requireContext())) {
@@ -62,10 +59,10 @@ class Notification : Fragment() {
 
     private fun initNotification() {
         userManager = UserManager(requireActivity())
-        notificationAdapter = NotificationAdapter(){
-            if (Read == "true"){
+        notificationAdapter = NotificationAdapter {
+            if (read == "true"){
                     readStatus(it.id)
-                Read = "false"
+                read = "false"
             }
 
             Handler(Looper.getMainLooper()).postDelayed({
@@ -73,10 +70,10 @@ class Notification : Fragment() {
             },300)
         }
 
-        val viewmodel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        val viewmodelUser = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) {
-            viewmodel.notificationLiveData.observe(viewLifecycleOwner) {
+        val viewmodel = ViewModelProvider(requireActivity())[NotificationViewModel::class.java]
+        val viewmodelUser = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        viewmodelUser.userToken(requireActivity()).observe(viewLifecycleOwner) { it ->
+            viewmodel.notificationLiveData.observe(viewLifecycleOwner) { it ->
                 if (it != null) {
                     val sorted = it.sortedByDescending { it.createdAt }
                     rv_notification.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false  )
@@ -97,11 +94,11 @@ class Notification : Fragment() {
     }
 
 
-    fun readStatus(idNotif : Int){
+    private fun readStatus(idNotif : Int){
 
-        val viewModelNotification = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        val viewModelNotification = ViewModelProvider(requireActivity())[NotificationViewModel::class.java]
 
-        val loginViewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
 
             if(token != ""){
