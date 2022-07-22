@@ -1,4 +1,6 @@
-@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody",
+    "LiftReturnOrAssignment"
+)
 
 package and5.finalproject.secondhand5.view.fragment.seller
 
