@@ -1,3 +1,5 @@
+@file:Suppress("CascadeIf")
+
 package and5.finalproject.secondhand5.view.fragment.seller.listproduct
 
 import and5.finalproject.secondhand5.R
