@@ -1,4 +1,6 @@
-@file:Suppress("LocalVariableName", "UnusedEquals")
+@file:Suppress("LocalVariableName", "UnusedEquals", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+)
 
 package and5.finalproject.secondhand5.view.fragment.buyer
 

@@ -100,7 +100,7 @@ class SellerProduct : Fragment() {
         preventDoubleCall = "true"
         val customDetailProductDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_seller_detail_product, null, false)
         getCategory()
-        val ADBuilder = AlertDialog.Builder(requireContext())
+        val aDBuilder = AlertDialog.Builder(requireContext())
             .setView(customDetailProductDialog)
             .create()
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
@@ -197,7 +197,7 @@ class SellerProduct : Fragment() {
                             dialogBuilder.setMessage("Hapus Produk?")
                                 .setCancelable(false)
                                 .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
-                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) {
+                                    userManager.userToken.asLiveData().observe(viewLifecycleOwner) { it ->
                                         if (it != null) {
                                             viewModelProduct.responseCodeDeleteProduct.observe(viewLifecycleOwner) {
                                                 if (it == "201") {
@@ -206,7 +206,7 @@ class SellerProduct : Fragment() {
                                                         "berhasil delete",
                                                         Toast.LENGTH_SHORT
                                                     ).show()
-                                                    flagDelete = true
+                                                    var flagDelete = true
                                                 }else if(it == "400"){
                                                     Toast.makeText(
                                                         requireContext(),
@@ -224,7 +224,7 @@ class SellerProduct : Fragment() {
 
                                         }
                                         viewModelProduct.deleteProduct(it, id)
-                                        ADBuilder.dismiss()
+                                        aDBuilder.dismiss()
 
                                         findNavController().navigate(R.id.myListProduct)
 
@@ -234,7 +234,7 @@ class SellerProduct : Fragment() {
                                 }
 
                                 .setNegativeButton("Tidak") { dialogInterface: DialogInterface, i: Int ->
-                                    ADBuilder.dismiss()
+                                    aDBuilder.dismiss()
                                 }
                             // create dialog box
                             val alert = dialogBuilder.create()
@@ -246,8 +246,8 @@ class SellerProduct : Fragment() {
                         }
 
                         customDetailProductDialog.btn_update_product.setOnClickListener {
-                            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-                            val viewModelLogin = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+                            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                            val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
 
 
@@ -306,32 +306,13 @@ class SellerProduct : Fragment() {
                                 }
 
                             }
-
-
-                                ADBuilder.dismiss()
-
-
-
-
+                                aDBuilder.dismiss()
                             findNavController().navigate(R.id.myListProduct)
-
-
-
                         }
-
-
-
-
-
-
-
-
-
-
                 }
             }
         }
-        ADBuilder.show()
+        aDBuilder.show()
 
     }
 

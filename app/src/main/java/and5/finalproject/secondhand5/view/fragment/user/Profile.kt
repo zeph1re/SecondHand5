@@ -1,4 +1,7 @@
-@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "CascadeIf", "CascadeIf",
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "CascadeIf"
+)
 
 package and5.finalproject.secondhand5.view.fragment.user
 
