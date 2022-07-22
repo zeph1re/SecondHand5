@@ -200,7 +200,7 @@ class ProductDetail : Fragment() {
                 Log.d("testes city ", it.city.toString())
                 Log.d("testes number ", it.phoneNumber.toString())
 
-                if(it.address != "default" && it.city != "default" && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
+                if(it.address != "" && it.city != "" && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
                     viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
                         Handler(Looper.getMainLooper()).postDelayed({
                             var flag = 2
