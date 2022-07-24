@@ -1,5 +1,8 @@
 @file:Suppress("LocalVariableName", "UnusedEquals", "CascadeIf", "CascadeIf", "CascadeIf",
-    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
+    "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
+    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods"
 )
 
 package and5.finalproject.secondhand5.view.fragment.buyer
@@ -359,6 +362,7 @@ class ProductDetail : Fragment() {
             customOrderDialog.btn_submit_offer_price.setOnClickListener {
                 if (customOrderDialog.input_offer_price.text.isNotEmpty()){
                     val offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
+
 
                     if(offerPrice > productPrice ){
                         Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
