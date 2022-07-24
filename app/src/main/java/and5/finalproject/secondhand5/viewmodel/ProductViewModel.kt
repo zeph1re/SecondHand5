@@ -35,6 +35,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
 
 //    private var detailProductLivedata3Wish = SingeLiveEvent<GetProductItem>()
     val detailProduct3 : SingeLiveEvent<GetProductItem> =  SingeLiveEvent()
+    val saveIdForWishlist : SingeLiveEvent<Int> =  SingeLiveEvent()
 
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
 
@@ -109,6 +110,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
             detailProductLivedata.value = detailproduct
             detailProductLivedata2.value = detailproduct
             detailProduct3.value = detailproduct
+            saveIdForWishlist.value = detailproduct.id
         }
     }
 

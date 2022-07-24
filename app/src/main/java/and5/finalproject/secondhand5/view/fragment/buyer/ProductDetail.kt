@@ -70,12 +70,12 @@ class ProductDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favorite = "false"
-        toggleFavorite = "disable button"
+        toggleFavorite = "disable"
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_productDetail_to_home)
         }
-        
+
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
 
@@ -540,12 +540,16 @@ class ProductDetail : Fragment() {
                 break
             }
 
-            if (toggleFavorite =="false"){
+            else if (toggleFavorite =="false"){
                 getWishlistData()
                 addWishlist()
                 add_to_wishlist.setImageResource(R.drawable.love)
                 toggleFavorite = "true"
                 break
+            }
+
+            else if (toggleFavorite == "disable"){
+                toggleFavorite = "false"
             }
 
         }
@@ -583,11 +587,11 @@ class ProductDetail : Fragment() {
 
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
             if (token != null) {
-                viewModelProduct.detailProduct2.observe(viewLifecycleOwner) {
+                viewModelProduct.saveIdForWishlist.observe(viewLifecycleOwner) {
                     val viewModelWishlist =ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
 
                             if (favorite == "false"){
-                                viewModelWishlist.postProductToWishlist(token, it.id)
+                                viewModelWishlist.postProductToWishlist(token, it)
                                 favorite = "cooldown"
                             }
                 }
@@ -629,6 +633,7 @@ class ProductDetail : Fragment() {
                 dialog.cancel()
                 favorite = "true"
                 toggleFavorite = "true"
+                add_to_wishlist.setImageResource(R.drawable.love)
             }
 
         val alert = dialogBuilder.create()
