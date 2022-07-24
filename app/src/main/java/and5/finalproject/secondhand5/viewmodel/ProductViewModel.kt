@@ -33,8 +33,8 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
     private var detailProductLivedata2 = MutableLiveData<GetProductItem>()
     val detailProduct2 : LiveData<GetProductItem> = detailProductLivedata2
 
-    private var detailProductLivedata3Wish = SingeLiveEvent<GetProductItem>()
-    val detailProduct3 : LiveData<GetProductItem> = detailProductLivedata3Wish
+//    private var detailProductLivedata3Wish = SingeLiveEvent<GetProductItem>()
+    val detailProduct3 : SingeLiveEvent<GetProductItem> =  SingeLiveEvent()
 
     var responseCodeAddBuyerOrder : SingeLiveEvent<String> = SingeLiveEvent ()
 
@@ -108,7 +108,7 @@ class ProductViewModel @Inject constructor(private var productRepository : Produ
             val detailproduct = productRepository.getDetailProduct(id)
             detailProductLivedata.value = detailproduct
             detailProductLivedata2.value = detailproduct
-            detailProductLivedata3Wish.value = detailproduct
+            detailProduct3.value = detailproduct
         }
     }
 
