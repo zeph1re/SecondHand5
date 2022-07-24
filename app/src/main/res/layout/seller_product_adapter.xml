@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
             <ImageView
                 android:id="@+id/product_image"
                 android:layout_width="100dp"
@@ -20,8 +19,6 @@
                 android:layout_margin="10dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ei" />
-
-
 
 
         <LinearLayout
