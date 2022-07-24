@@ -16,7 +16,7 @@ class WishlistViewModel @Inject constructor(private val repo : WishlistRepositor
 
     //Get All Wishlist Product
 
-    private var wishlistProductLiveData = SingeLiveEvent<List<GetWishlistProductItem>>()
+    private var wishlistProductLiveData = MutableLiveData<List<GetWishlistProductItem>>()
     val wishlistProduct : LiveData<List<GetWishlistProductItem>> = wishlistProductLiveData
 
     fun getAllWishlistProduct(access_token : String)  {

@@ -95,15 +95,8 @@ class ProductDetail : Fragment() {
                         add_to_wishlist.setOnClickListener {
 
                             add_to_wishlist.setImageResource(R.drawable.love)
-                            if(favorite == "false"){
                                 favorite = "true"
-                                Log.d("favoritetes 1", favorite.toString())
 
-                            }else if(favorite == "true"){
-                                favorite = "false"
-                                Log.d("favoritetes 2 ", favorite.toString())
-
-                            }
                             addProductToWishlist()
 
                         }
@@ -590,7 +583,7 @@ class ProductDetail : Fragment() {
 
                             Log.d("testes wish", flagWishlist.toString())
 
-                            if(flagWishlist==1){
+                            if(flagWishlist==1 ){
 
                                     postProductToWishlist(token, it.id)
 
@@ -598,7 +591,7 @@ class ProductDetail : Fragment() {
                                 Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
                                 getWishlistData()
 //                                view?.findNavController()?.navigate(R.id.productDetail)
-                            }else if(flagWishlist==0 && favorite=="true"){
+                            }else if(flagWishlist==0 ){
 //                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
 
                                 val dialogBuilder = AlertDialog.Builder(requireActivity())
@@ -607,7 +600,7 @@ class ProductDetail : Fragment() {
                                     .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                         deleteWishlist(dataWishlist[loop].id)
                                         getWishlistData()
-                                        checkWishlist()
+
                                         add_to_wishlist.setImageResource(R.drawable.unlove)
 
                                     }
@@ -655,9 +648,10 @@ class ProductDetail : Fragment() {
                         for (i in dataWishlist.indices) {
                             if (it.id == dataWishlist[i].product.id) {
                                 add_to_wishlist.setImageResource(R.drawable.love)
+                                favorite = "true"
                                 break
                             }else{
-
+                                favorite = "false"
                                 add_to_wishlist.setImageResource(R.drawable.unlove)
                             }
                         }
