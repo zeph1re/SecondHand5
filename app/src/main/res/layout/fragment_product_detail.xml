@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
@@ -170,7 +171,7 @@
                     app:cardCornerRadius="20dp"
                     app:strokeColor="@color/blue_300"
                     app:strokeWidth="1dp"
-                    app:cardElevation="10dp">
+                    app:cardElevation="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -198,29 +199,28 @@
 
                     </LinearLayout>
 
-
                 </com.google.android.material.card.MaterialCardView>
 
+
+
             </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buy_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/custom_button"
+                android:backgroundTint="#3A5BA0"
+                android:text="Saya Tertarik dan Ingin Nego"
+                android:textAllCaps="false"
+                android:textColor="#DBDFFD" />
 
         </LinearLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buy_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/custom_button"
-        android:backgroundTint="#3A5BA0"
-        android:text="Saya Tertarik dan Ingin Nego"
-        android:textAllCaps="false"
-        android:textColor="#DBDFFD" />
-
-
-
-</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

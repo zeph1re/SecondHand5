@@ -9,7 +9,8 @@
         android:id="@+id/notfound_wishlist"
         android:visibility="gone"
         android:text="Belum Ada Wishlist"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -19,14 +20,14 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/ic_back" />
 
 
     <TextView
-        android:layout_below="@id/btn_back"
+        android:layout_toEndOf="@id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wishlist_tv"

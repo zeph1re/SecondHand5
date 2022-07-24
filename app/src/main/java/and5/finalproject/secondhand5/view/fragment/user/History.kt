@@ -50,7 +50,7 @@ class History : Fragment() {
             viewModelHistory.allHistory.observe(viewLifecycleOwner) {
                 if (it != null) {
                     history_rv.layoutManager =
-                        LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+                        LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
                     history_rv.adapter = historyAdapter
                     historyAdapter.setHistoryList(it)
                     historyAdapter.notifyDataSetChanged()
