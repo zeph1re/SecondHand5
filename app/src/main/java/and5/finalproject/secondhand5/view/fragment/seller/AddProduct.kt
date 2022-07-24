@@ -124,7 +124,6 @@ class AddProduct : Fragment() {
                         txt_not.visibility = View.GONE
                         go_to_profile.visibility = View.GONE
                     }else{
-
                         go_to_profile.setOnClickListener {
                             Navigation.findNavController(requireView())
                                 .navigate(R.id.action_addProduct_to_account)
