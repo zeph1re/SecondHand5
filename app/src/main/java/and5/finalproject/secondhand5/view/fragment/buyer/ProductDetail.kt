@@ -617,17 +617,17 @@ class ProductDetail : Fragment() {
     }
 
 //    fun onRefresh() {
-//        swipe_refresh_detail_layout.setOnRefreshListener {
-//            getDetailProduct()
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                GlobalScope.launch {
-//                    swipe_refresh_detail_layout.setRefreshing(false)
-//                } },1000)
-//
-//        }
-//
-//
-//    }
+////        swipe_refresh_detail_layout.setOnRefreshListener {
+////            getDetailProduct()
+////            Handler(Looper.getMainLooper()).postDelayed({
+////                GlobalScope.launch {
+////                    swipe_refresh_detail_layout.setRefreshing(false)
+////                } },1000)
+////
+////        }
+////
+////
+////    }
 
 
 
