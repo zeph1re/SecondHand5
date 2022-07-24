@@ -11,9 +11,9 @@ interface OfflineModeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addHomeOffline (home: GetProductHome) : Long
 
-
     @Query("SELECT *  FROM GetProductHome")
     fun getDataOfflineProductHome(): List<GetProductHome>
+
     @Query("DELETE FROM GetProductHome")
     fun clearData():Int
 }

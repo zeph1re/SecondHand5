@@ -49,7 +49,7 @@ class ProductDetail : Fragment() {
     private var getDetailCategory = mutableSetOf<String>()
     private lateinit var sellerName : String
     lateinit var favorite : String
-
+    lateinit var toggleFavorite : String
 
     private var orderId = 0
 
@@ -70,16 +70,11 @@ class ProductDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favorite = "false"
-
+        toggleFavorite = "disable"
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
-//            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
-//            viewModelProduct.clearBuyerDetailProductLiveData()
             view?.findNavController()?.navigate(R.id.action_productDetail_to_home)
-
         }
-
-
 
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
@@ -92,22 +87,13 @@ class ProductDetail : Fragment() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         getWishlistData()
 
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            checkWishlist()
+                        },400)
+
                         add_to_wishlist.setOnClickListener {
-
-                            add_to_wishlist.setImageResource(R.drawable.love)
-                            if(favorite == "false"){
-                                favorite = "true"
-                                Log.d("favoritetes 1", favorite.toString())
-
-                            }else if(favorite == "true"){
-                                favorite = "false"
-                                Log.d("favoritetes 2 ", favorite.toString())
-
-                            }
-                            addProductToWishlist()
-
+                                toggleButton()
                         }
-
                         getDetailProduct()
                     },500)
 
@@ -124,7 +110,6 @@ class ProductDetail : Fragment() {
         onRefresh()
 
     }
-
 
 
     private fun getOrderData(){
@@ -148,29 +133,6 @@ class ProductDetail : Fragment() {
         }
     }
 
-    private fun getWishlistData() {
-        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-        val viewModelWishlist =
-            ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
-
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { it ->
-            if (it != null) {
-                viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
-                    if (it != null) {
-                        dataWishlist = it
-                        checkWishlist()
-//                        Log.d("testes", dataWishlist[0].id.toString())
-                    }
-                }
-
-                viewModelWishlist.getAllWishlistProduct(it)
-
-            }
-
-        }
-    }
-
-
     private fun initNoLogin(){
 //        Log.d("testes 2 id ", id.toString())
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
@@ -184,6 +146,9 @@ class ProductDetail : Fragment() {
                 buy_btn.text = "Login Untuk Order"
 
                 buy_btn.setOnClickListener {
+                    view?.findNavController()?.navigate(R.id.action_productDetail_to_login)
+                }
+                add_to_wishlist.setOnClickListener {
                     view?.findNavController()?.navigate(R.id.action_productDetail_to_login)
                 }
             }
@@ -218,7 +183,6 @@ class ProductDetail : Fragment() {
         }
 
     }
-
 
     private fun getDetailProduct(){
 //        Log.d("testes 2 id ", id.toString())
@@ -370,7 +334,6 @@ class ProductDetail : Fragment() {
 
     }
 
-
     private fun bidProduct() {
 
         buy_btn.setOnClickListener{
@@ -461,7 +424,6 @@ class ProductDetail : Fragment() {
 
     }
 
-
     private fun reBidProduct(){
         buy_btn.setOnClickListener{
             val customOrderDialog = LayoutInflater.from(requireContext()).inflate(R.layout.custom_buyer_offer_price, null, false)
@@ -546,100 +508,49 @@ class ProductDetail : Fragment() {
 
     }
 
-    private fun postProductToWishlist(
-        token : String,
-        id : Int
-    ) {
-        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
-        viewModelWishlist.postProductToWishlist(token, id)
+    private fun getWishlistData() {
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelWishlist =
+            ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
 
-    }
-
-    private fun addProductToWishlist() {
-
-            val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
-
-            viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
-                if(token != null){
-                    viewModelProduct.detailProduct2.observe(viewLifecycleOwner) {
-
-                        if(dataWishlist.isNotEmpty()){
-
-                            var flagWishlist = 2
-                            var loop = 0
-                            for (i in dataWishlist.indices){
-                                Log.d("testes loop ke", i.toString())
-                                Log.d("testes id api", it.id.toString())
-                                Log.d("testes id data", dataWishlist[i].product.id.toString())
-
-                                if(it.id == dataWishlist[i].product.id) {
-                                    flagWishlist = 0
-                                    Log.d("testes id product", it.id.toString())
-                                    Log.d("testes id product di wishlist", dataWishlist[i].product.id.toString())
-
-                                    Log.d("testes wish 1", flagWishlist.toString())
-                                    break
-                                }else {
-                                    flagWishlist = 1
-                                    Log.d("testes wish 2", flagWishlist.toString())
-                                }
-                                Log.d("testes wish for", flagWishlist.toString())
-                                loop++
-                            }
-
-                            Log.d("testes wish", flagWishlist.toString())
-
-                            if(flagWishlist==1){
-
-                                    postProductToWishlist(token, it.id)
-
-
-                                Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
-                                getWishlistData()
-//                                view?.findNavController()?.navigate(R.id.productDetail)
-                            }else if(flagWishlist==0 && favorite=="true"){
-//                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
-
-                                val dialogBuilder = AlertDialog.Builder(requireActivity())
-                                dialogBuilder.setMessage("Hapus Dari Wishlist?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
-                                        deleteWishlist(dataWishlist[loop].id)
-                                        getWishlistData()
-                                        checkWishlist()
-                                        add_to_wishlist.setImageResource(R.drawable.unlove)
-
-                                    }
-                                    .setNegativeButton("Tidak") { dialog, id ->
-                                        dialog.cancel()
-
-                                    }
-
-
-                                val alert = dialogBuilder.create()
-                                alert.setTitle("Wishlist")
-                                alert.show()
-
-                            }else{
-                                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-                            }
-
-                        }else{
-                            Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
-
-                                postProductToWishlist(token, it.id)
-
-
-                            getWishlistData()
-//                            view?.findNavController()?.navigate(R.id.productDetail)
-                        }
-
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { it ->
+            if (it != null) {
+                viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        dataWishlist = it
+                        checkWishlist()
+//                        Log.d("testes", dataWishlist[0].id.toString())
                     }
-
                 }
 
+                viewModelWishlist.getAllWishlistProduct(it)
 
+            }
+
+        }
+    }
+
+    fun toggleButton(){
+        for(data in toggleFavorite){
+            val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+            if (toggleFavorite == "true"){
+                getWishlistData()
+                deleteWishlistDialog()
+                toggleFavorite = "false"
+                break
+            }
+
+            else if (toggleFavorite =="false"){
+                getWishlistData()
+                addWishlist()
+                add_to_wishlist.setImageResource(R.drawable.love)
+                toggleFavorite = "true"
+                break
+            }
+
+            else if (toggleFavorite == "disable"){
+                toggleFavorite = "false"
+            }
 
         }
     }
@@ -651,33 +562,83 @@ class ProductDetail : Fragment() {
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
             if (token != null) {
                 viewModelProduct.detailProduct3.observe(viewLifecycleOwner) {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        for (i in dataWishlist.indices) {
-                            if (it.id == dataWishlist[i].product.id) {
-                                add_to_wishlist.setImageResource(R.drawable.love)
-                                break
-                            }else{
-
-                                add_to_wishlist.setImageResource(R.drawable.unlove)
-                            }
+                    for (i in dataWishlist.indices) {
+                        if (it.id == dataWishlist[i].product.id) {
+                            add_to_wishlist.setImageResource(R.drawable.love)
+                            toggleFavorite= "true"
+                            favorite = "true"
+                            break
+                        }else{
+                            add_to_wishlist.setImageResource(R.drawable.unlove)
+                            toggleFavorite = "false"
+                            favorite = "false"
                         }
-                    }, 300)
+                    }
 
                 }
             }
         }
+
     }
 
-    private fun deleteWishlist(wishlistId : Int) {
-
+    fun addWishlist() {
         val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){
-            viewModelWishlist.deleteWishlistProduct(it, wishlistId)
-        }
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
+            if (token != null) {
+                viewModelProduct.saveIdForWishlist.observe(viewLifecycleOwner) {
+                    val viewModelWishlist =ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
+
+                            if (favorite == "false"){
+                                viewModelWishlist.postProductToWishlist(token, it)
+                                favorite = "cooldown"
+                            }
+                }
+            }
+            Toast.makeText(
+                requireContext(),
+                "Barang berhasil masuk ke wishlist",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    fun deleteWishlist() {
+        val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
+                val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+                viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
+                    if(token != null) {
+                        for (data in dataWishlist.indices){
+                            viewModelWishlist.deleteWishlistProduct(token, dataWishlist[data].id )
+                            break
+                        }
+                    }
+                }
         Toast.makeText(requireContext(), "Barang berhasil dihapus dari wishlist", Toast.LENGTH_SHORT).show()
 
+    }
+
+    fun deleteWishlistDialog(){
+        val dialogBuilder = AlertDialog.Builder(requireActivity())
+        dialogBuilder.setMessage("Hapus Dari Wishlist?")
+            .setCancelable(false)
+            .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
+                deleteWishlist()
+                favorite = "false"
+                add_to_wishlist.setImageResource(R.drawable.unlove)
+
+            }
+            .setNegativeButton("Tidak") { dialog, id ->
+                dialog.cancel()
+                favorite = "true"
+                toggleFavorite = "true"
+                add_to_wishlist.setImageResource(R.drawable.love)
+            }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle("Wishlist")
+        alert.show()
     }
 
     fun onRefresh() {
@@ -692,4 +653,108 @@ class ProductDetail : Fragment() {
 
     }
 
+
 }
+
+//private fun postProductToWishlist(
+//    token : String,
+//    id : Int
+//) {
+//    val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
+//    viewModelWishlist.postProductToWishlist(token, id)
+//
+//}
+//
+//private fun addProductToWishlist() {
+//
+//    val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+//    val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+//
+//    viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
+//        if(token != null){
+//            viewModelProduct.detailProduct2.observe(viewLifecycleOwner) {
+//
+//                if(dataWishlist.isNotEmpty()){
+//
+//                    var flagWishlist = 2
+//                    var loop = 0
+//
+//                    for (i in dataWishlist.indices){
+//                        Log.d("testes loop ke", i.toString())
+//                        Log.d("testes id api", it.id.toString())
+//                        Log.d("testes id data", dataWishlist[i].product.id.toString())
+//
+//                        if(it.id == dataWishlist[i].product.id) {
+//                            flagWishlist = 0
+//                            Log.d("flagtest", flagWishlist.toString())
+//                            Log.d("testes id product", it.id.toString())
+//                            Log.d("testes id product di wishlist", dataWishlist[i].product.id.toString())
+//
+//                            Log.d("testes wish 1", flagWishlist.toString())
+//                            break
+//                        }else {
+//                            flagWishlist = 1
+//                            Log.d("flagtest 2", flagWishlist.toString())
+//                            Log.d("testes wish 2", flagWishlist.toString())
+//                        }
+//                        Log.d("testes wish for", flagWishlist.toString())
+//                        loop++
+//                    }
+//
+//                    Log.d("testes wish", flagWishlist.toString())
+//
+//                    if(flagWishlist==1 && favorite == "false"){
+//
+//                        postProductToWishlist(token, it.id)
+//
+//
+//                        Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+//                        getWishlistData()
+////                                view?.findNavController()?.navigate(R.id.productDetail)
+//                    }else if(flagWishlist==0 ){
+////                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
+//
+//                        val dialogBuilder = AlertDialog.Builder(requireActivity())
+//                        dialogBuilder.setMessage("Hapus Dari Wishlist?")
+//                            .setCancelable(false)
+//                            .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
+////                                        deleteWishlist(dataWishlist[loop].id)
+//                                getWishlistData()
+//                                flagWishlist = 1
+//                                add_to_wishlist.setImageResource(R.drawable.unlove)
+//
+//                            }
+//                            .setNegativeButton("Tidak") { dialog, id ->
+//                                dialog.cancel()
+//
+//                            }
+//
+//
+//                        val alert = dialogBuilder.create()
+//                        alert.setTitle("Wishlist")
+//                        alert.show()
+//
+//                    }else{
+//                        Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+//                    }
+//
+//                }else{
+//                    Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
+//
+//                    postProductToWishlist(token, it.id)
+//
+//
+//                    getWishlistData()
+////                            view?.findNavController()?.navigate(R.id.productDetail)
+//                }
+//
+//            }
+//
+//
+//
+//        }
+//
+//
+//
+//    }
+//}

@@ -19,10 +19,15 @@ class WishlistViewModel @Inject constructor(private val repo : WishlistRepositor
     private var wishlistProductLiveData = SingeLiveEvent<List<GetWishlistProductItem>>()
     val wishlistProduct : LiveData<List<GetWishlistProductItem>> = wishlistProductLiveData
 
+
+
+
+
     fun getAllWishlistProduct(access_token : String)  {
         viewModelScope.launch {
             val dataWishlistProduct = repo.getAllProductWishlist(access_token)
             wishlistProductLiveData.value = dataWishlistProduct
+
         }
     }
 
