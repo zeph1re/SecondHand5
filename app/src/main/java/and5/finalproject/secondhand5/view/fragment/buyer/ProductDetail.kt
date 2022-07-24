@@ -89,18 +89,28 @@ class ProductDetail : Fragment() {
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
                     getOrderData()
-                    getWishlistData()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        getWishlistData()
 
-                    add_to_wishlist.setOnClickListener {
+                        add_to_wishlist.setOnClickListener {
 
                             add_to_wishlist.setImageResource(R.drawable.love)
-                            favorite = "true"
+                            if(favorite == "false"){
+                                favorite = "true"
+                                Log.d("favoritetes 1", favorite.toString())
+
+                            }else if(favorite == "true"){
+                                favorite = "false"
+                                Log.d("favoritetes 2 ", favorite.toString())
+
+                            }
                             addProductToWishlist()
 
+                        }
 
-                    }
+                        getDetailProduct()
+                    },500)
 
-                    getDetailProduct()
 
                 }else{
                     initNoLogin()
@@ -588,7 +598,7 @@ class ProductDetail : Fragment() {
                                 Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
                                 getWishlistData()
 //                                view?.findNavController()?.navigate(R.id.productDetail)
-                            }else if(flagWishlist==0 && favorite =="true"){
+                            }else if(flagWishlist==0 && favorite=="true"){
 //                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
 
                                 val dialogBuilder = AlertDialog.Builder(requireActivity())
@@ -647,6 +657,7 @@ class ProductDetail : Fragment() {
                                 add_to_wishlist.setImageResource(R.drawable.love)
                                 break
                             }else{
+
                                 add_to_wishlist.setImageResource(R.drawable.unlove)
                             }
                         }
