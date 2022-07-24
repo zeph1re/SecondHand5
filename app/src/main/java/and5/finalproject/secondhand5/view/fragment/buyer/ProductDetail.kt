@@ -48,6 +48,7 @@ class ProductDetail : Fragment() {
     private lateinit var sellerLocation : String
     private var getDetailCategory = mutableSetOf<String>()
     private lateinit var sellerName : String
+    lateinit var favorite : String
 
 
     private var orderId = 0
@@ -68,7 +69,7 @@ class ProductDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        favorite = "false"
 
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
@@ -87,11 +88,16 @@ class ProductDetail : Fragment() {
             val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
-
                     getOrderData()
                     getWishlistData()
+
                     add_to_wishlist.setOnClickListener {
-                        addProductToWishlist()
+
+                            add_to_wishlist.setImageResource(R.drawable.love)
+                            favorite = "true"
+                            addProductToWishlist()
+
+
                     }
 
                     getDetailProduct()
@@ -120,6 +126,7 @@ class ProductDetail : Fragment() {
                 viewModelProduct.buyerOrder.observe(viewLifecycleOwner) {
                     if (it != null) {
                         dataOrder = it
+
 //                        Log.d("testes 1 IT ", it.toString())
                     }
 
@@ -141,6 +148,7 @@ class ProductDetail : Fragment() {
                 viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
                     if (it != null) {
                         dataWishlist = it
+                        checkWishlist
 //                        Log.d("testes", dataWishlist[0].id.toString())
                     }
                 }
@@ -544,7 +552,7 @@ class ProductDetail : Fragment() {
 
             viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
                 if(token != null){
-                    viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
+                    viewModelProduct.detailProduct2.observe(viewLifecycleOwner) {
 
                         if(dataWishlist.isNotEmpty()){
 
@@ -573,11 +581,14 @@ class ProductDetail : Fragment() {
                             Log.d("testes wish", flagWishlist.toString())
 
                             if(flagWishlist==1){
-                                postProductToWishlist(token, it.id)
+
+                                    postProductToWishlist(token, it.id)
+
+
                                 Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
                                 getWishlistData()
 //                                view?.findNavController()?.navigate(R.id.productDetail)
-                            }else if(flagWishlist==0){
+                            }else if(flagWishlist==0 && favorite =="true"){
 //                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
 
                                 val dialogBuilder = AlertDialog.Builder(requireActivity())
@@ -586,6 +597,9 @@ class ProductDetail : Fragment() {
                                     .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                         deleteWishlist(dataWishlist[loop].id)
                                         getWishlistData()
+                                        checkWishlist
+                                        add_to_wishlist.setImageResource(R.drawable.unlove)
+
                                     }
                                     .setNegativeButton("Tidak") { dialog, id ->
                                         dialog.cancel()
@@ -597,17 +611,18 @@ class ProductDetail : Fragment() {
                                 alert.setTitle("Wishlist")
                                 alert.show()
 
-
                             }else{
                                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-
                             }
+
                         }else{
                             Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
-                            postProductToWishlist(token, it.id)
+
+                                postProductToWishlist(token, it.id)
+
+
                             getWishlistData()
 //                            view?.findNavController()?.navigate(R.id.productDetail)
-
                         }
 
                     }
@@ -616,6 +631,29 @@ class ProductDetail : Fragment() {
 
 
 
+        }
+    }
+
+    fun checkWishlist{
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
+            if (token != null) {
+                viewModelProduct.detailProduct3.observe(viewLifecycleOwner) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        for (i in dataWishlist.indices) {
+                            if (it.id == dataWishlist[i].product.id) {
+                                add_to_wishlist.setImageResource(R.drawable.love)
+                                break
+                            }else{
+                                add_to_wishlist.setImageResource(R.drawable.unlove)
+                            }
+                        }
+                    }, 300)
+
+                }
+            }
         }
     }
 

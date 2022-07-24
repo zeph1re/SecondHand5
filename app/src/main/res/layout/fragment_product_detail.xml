@@ -36,7 +36,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/favourite" />
+                    android:src="@drawable/unlove" />
             </RelativeLayout>
 
 

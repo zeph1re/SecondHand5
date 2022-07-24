@@ -57,10 +57,10 @@
                     android:id="@+id/wishlist_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:src="@drawable/favourite"
                     android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/history_btn"/>
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toStartOf="@id/history_btn"
+                    android:src="@drawable/love" />
 
                 <ImageView
                     android:id="@+id/history_btn"
