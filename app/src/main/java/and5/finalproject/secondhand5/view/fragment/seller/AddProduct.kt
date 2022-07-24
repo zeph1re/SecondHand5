@@ -450,7 +450,7 @@ class AddProduct : Fragment() {
                 "image/png" -> ".png"
                 "image/jpg" -> ".jpg"
                 "image/jpeg" -> ".jpeg"
-                else -> null!!
+                else -> null
 
             }
 
