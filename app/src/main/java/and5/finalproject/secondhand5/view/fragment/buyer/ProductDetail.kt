@@ -148,7 +148,7 @@ class ProductDetail : Fragment() {
                 viewModelWishlist.wishlistProduct.observe(viewLifecycleOwner) {
                     if (it != null) {
                         dataWishlist = it
-                        checkWishlist
+                        checkWishlist()
 //                        Log.d("testes", dataWishlist[0].id.toString())
                     }
                 }
@@ -597,7 +597,7 @@ class ProductDetail : Fragment() {
                                     .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                         deleteWishlist(dataWishlist[loop].id)
                                         getWishlistData()
-                                        checkWishlist
+                                        checkWishlist()
                                         add_to_wishlist.setImageResource(R.drawable.unlove)
 
                                     }
@@ -634,7 +634,7 @@ class ProductDetail : Fragment() {
         }
     }
 
-    fun checkWishlist{
+    fun checkWishlist(){
         val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
