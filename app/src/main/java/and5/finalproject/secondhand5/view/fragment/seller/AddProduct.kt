@@ -110,32 +110,36 @@ class AddProduct : Fragment() {
         userManager = UserManager(requireActivity())
         imageCheck = ""
 
-        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
-            val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
-            userViewModel.getUserData(it)
-            userViewModel.getUserData.observe(viewLifecycleOwner) {
-                if(it.address != ""
-                    && it.city != ""
-                    && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
-                    view.add_btn.isClickable = true
-                    view.preview_btn.isClickable = true
-                    txt_not.visibility = View.GONE
-                    go_to_profile.visibility = View.GONE
-                }else{
+        val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
+            if (token!= ""){
+                val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+                userViewModel.getUserData(token)
+                userViewModel.getUserData.observe(viewLifecycleOwner) {
+                    if(it.address != ""
+                        && it.city != ""
+                        && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
+                        view.add_btn.isClickable = true
+                        view.preview_btn.isClickable = true
+                        txt_not.visibility = View.GONE
+                        go_to_profile.visibility = View.GONE
+                    }else{
 
-                    go_to_profile.setOnClickListener {
-                        Navigation.findNavController(requireView())
-                            .navigate(R.id.action_addProduct_to_account)
+                        go_to_profile.setOnClickListener {
+                            Navigation.findNavController(requireView())
+                                .navigate(R.id.action_addProduct_to_account)
+                        }
+
+                        scroll_view.visibility = View.GONE
+                        txt_not.visibility = View.VISIBLE
+                        go_to_profile.visibility = View.VISIBLE
+                        view.add_btn.isClickable = false
+                        view.preview_btn.isClickable = false
+
                     }
-
-                    scroll_view.visibility = View.GONE
-                    txt_not.visibility = View.VISIBLE
-                    go_to_profile.visibility = View.VISIBLE
-                    view.add_btn.isClickable = false
-                    view.preview_btn.isClickable = false
-
                 }
             }
+
         }
 
         view?.dropdown_category?.hint = "Select Category"
