@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_addProduct_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_addProduct_to_account"
+            app:destination="@id/account" />
     </fragment>
     <fragment
         android:id="@+id/myListProduct"
@@ -130,6 +133,9 @@
         <action
             android:id="@+id/action_myListProduct_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_myListProduct_to_addProduct"
+            app:destination="@id/addProduct" />
     </fragment>
     <fragment
         android:id="@+id/productDetail"
