@@ -32,6 +32,8 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 
@@ -88,14 +90,22 @@ class ProductDetail : Fragment() {
 
                     getOrderData()
                     getWishlistData()
-                    addProductToWishlist()
+                    add_to_wishlist.setOnClickListener {
+                        addProductToWishlist()
+                    }
+
                     getDetailProduct()
 
                 }else{
                     initNoLogin()
                 }
+
+
             }
         },500)
+
+
+        onRefresh()
 
     }
 
@@ -528,7 +538,7 @@ class ProductDetail : Fragment() {
     }
 
     private fun addProductToWishlist() {
-        add_to_wishlist.setOnClickListener {
+
             val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
@@ -605,7 +615,7 @@ class ProductDetail : Fragment() {
                 }
 
 
-            }
+
         }
     }
 
@@ -621,6 +631,16 @@ class ProductDetail : Fragment() {
 
     }
 
+    fun onRefresh() {
+        swipe_refresh_detail_layout.setOnRefreshListener {
+//            getDetailProduct()
+            Handler(Looper.getMainLooper()).postDelayed({
+                GlobalScope.launch {
+                    swipe_refresh_detail_layout.setRefreshing(false)
+                } },1000)
 
+        }
+
+    }
 
 }

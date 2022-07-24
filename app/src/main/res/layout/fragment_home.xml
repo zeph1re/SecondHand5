@@ -144,6 +144,8 @@
                     </LinearLayout>
 
                     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:visibility="gone"
+
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_marginTop="15dp"
                         android:layout_gravity="center"
