@@ -7,6 +7,8 @@ import and5.finalproject.secondhand5.view.adapter.WishlistAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +42,10 @@ class Wishlist : Fragment() {
         val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
-                initWishlist()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    initWishlist()
+                },500)
+
             }else{
                 view.findNavController().navigate(R.id.action_wishlist_to_userNotLogin)
             }

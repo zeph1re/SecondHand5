@@ -5,6 +5,8 @@ import and5.finalproject.secondhand5.view.adapter.HistoryAdapter
 import and5.finalproject.secondhand5.viewmodel.HistoryViewModel
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +35,9 @@ class History : Fragment() {
         val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
             if (token!= ""){
-                initHistory()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    initHistory()
+                },500)
             }else{
                 view.findNavController().navigate(R.id.action_history_to_userNotLogin)
             }

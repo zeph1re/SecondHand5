@@ -72,7 +72,8 @@ class ProductDetail : Fragment() {
         btn_back_detail_product.setOnClickListener {
 //            val viewModelProduct = ViewModelProvider(requireActivity()).get(ProductViewModel::class.java)
 //            viewModelProduct.clearBuyerDetailProductLiveData()
-            activity?.onBackPressed()
+            view?.findNavController()?.navigate(R.id.action_productDetail_to_home)
+
         }
 
 
@@ -86,9 +87,13 @@ class ProductDetail : Fragment() {
                 if (token!= ""){
 
                     getOrderData()
-                    getWishlistData()
-                    addProductToWishlist()
                     getDetailProduct()
+                    getWishlistData()
+                    add_to_wishlist.setOnClickListener {
+                        addProductToWishlist()
+                    }
+
+
 
                 }else{
                     initNoLogin()
@@ -527,7 +532,7 @@ class ProductDetail : Fragment() {
     }
 
     private fun addProductToWishlist() {
-        add_to_wishlist.setOnClickListener {
+
             val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
@@ -561,7 +566,8 @@ class ProductDetail : Fragment() {
                             if(flagWishlist==1){
                                 postProductToWishlist(token, it.id)
                                 Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
-                                view?.findNavController()?.navigate(R.id.productDetail)
+                                getWishlistData()
+//                                view?.findNavController()?.navigate(R.id.productDetail)
                             }else if(flagWishlist==0){
 //                                Toast.makeText(requireContext(), "Barang sudah masuk ke wishlist anda", Toast.LENGTH_SHORT).show()
 
@@ -570,6 +576,7 @@ class ProductDetail : Fragment() {
                                     .setCancelable(false)
                                     .setPositiveButton("Ya") { dialogInterface: DialogInterface, i: Int ->
                                         deleteWishlist(dataWishlist[loop].id)
+                                        getWishlistData()
                                     }
                                     .setNegativeButton("Tidak") { dialog, id ->
                                         dialog.cancel()
@@ -589,7 +596,8 @@ class ProductDetail : Fragment() {
                         }else{
                             Toast.makeText(requireContext(), "Barang berhasil masuk ke wishlist", Toast.LENGTH_SHORT).show()
                             postProductToWishlist(token, it.id)
-                            view?.findNavController()?.navigate(R.id.productDetail)
+                            getWishlistData()
+//                            view?.findNavController()?.navigate(R.id.productDetail)
 
                         }
 
@@ -598,7 +606,7 @@ class ProductDetail : Fragment() {
                 }
 
 
-            }
+
         }
     }
 

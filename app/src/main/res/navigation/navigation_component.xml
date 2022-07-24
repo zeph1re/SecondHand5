@@ -148,6 +148,9 @@
         <action
             android:id="@+id/action_productDetail_to_login"
             app:destination="@id/login" />
+        <action
+            android:id="@+id/action_productDetail_to_home"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/detailPenawar"
