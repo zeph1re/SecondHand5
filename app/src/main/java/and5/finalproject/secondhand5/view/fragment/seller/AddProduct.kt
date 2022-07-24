@@ -1,5 +1,7 @@
 @file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "CascadeIf",
-    "CascadeIf", "CascadeIf", "CascadeIf"
+    "CascadeIf", "CascadeIf", "CascadeIf", "NestedLambdaShadowedImplicitParameter",
+    "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
+    "NestedLambdaShadowedImplicitParameter"
 )
 
 package and5.finalproject.secondhand5.view.fragment.seller
@@ -102,10 +104,39 @@ class AddProduct : Fragment() {
             }
         }
 
+
+
         val view = inflater.inflate(R.layout.fragment_add_product2, container, false)
         userManager = UserManager(requireActivity())
         imageCheck = ""
 
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) {
+            val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+            userViewModel.getUserData(it)
+            userViewModel.getUserData.observe(viewLifecycleOwner) {
+                if(it.address != ""
+                    && it.city != ""
+                    && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
+                    view.add_btn.isClickable = true
+                    view.preview_btn.isClickable = true
+                    txt_not.visibility = View.GONE
+                    go_to_profile.visibility = View.GONE
+                }else{
+
+                    go_to_profile.setOnClickListener {
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.action_addProduct_to_account)
+                    }
+
+                    scroll_view.visibility = View.GONE
+                    txt_not.visibility = View.VISIBLE
+                    go_to_profile.visibility = View.VISIBLE
+                    view.add_btn.isClickable = false
+                    view.preview_btn.isClickable = false
+
+                }
+            }
+        }
 
         view?.dropdown_category?.hint = "Select Category"
 
@@ -210,6 +241,9 @@ class AddProduct : Fragment() {
 
         }
         view.preview_btn.setOnClickListener {
+
+
+
             productName = view.add_product_name.text.toString()
             productPrice = view.add_product_price.text.toString()
             productDesc = view.add_product_desc.text.toString()
@@ -238,6 +272,9 @@ class AddProduct : Fragment() {
                 view.findNavController().navigate(R.id.productPreview, bundle)
             }
         }
+
+
+
 
         view.add_btn.setOnClickListener {
             productName = view.add_product_name.text.toString()
