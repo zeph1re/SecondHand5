@@ -1,5 +1,8 @@
 @file:Suppress("LocalVariableName", "UnusedEquals", "CascadeIf", "CascadeIf", "CascadeIf",
-    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf"
+    "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
+    "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
+    "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
+    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods"
 )
 
 package and5.finalproject.secondhand5.view.fragment.buyer
@@ -10,6 +13,7 @@ import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.ProductViewModel
+import and5.finalproject.secondhand5.viewmodel.UserViewModel
 import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -80,6 +84,7 @@ class ProductDetail : Fragment() {
             val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
+
                     getOrderData()
                     getWishlistData()
                     addProductToWishlist()
@@ -147,8 +152,11 @@ class ProductDetail : Fragment() {
             val flag = 0
 
             if (flag == 0) {
-                buy_btn.isClickable = false
                 buy_btn.text = "Login Untuk Order"
+
+                buy_btn.setOnClickListener {
+                    view?.findNavController()?.navigate(R.id.action_productDetail_to_login)
+                }
             }
 
             product_name.text = it.name
@@ -188,85 +196,148 @@ class ProductDetail : Fragment() {
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
         viewModelProduct.getBuyerDetailProduct(productId)
 
-        viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
-//            Log.d("testes 3 id ", id.toString())
+        val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { it ->
+            val userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+            userViewModel.getUserData(it)
+            userViewModel.getUserData.observe(viewLifecycleOwner) {
+
+                Log.d("testes address ", it.address.toString())
+                Log.d("testes city ", it.city.toString())
+                Log.d("testes number ", it.phoneNumber.toString())
+
+                if(it.address != "" && it.city != "" && (it.phoneNumber.toString().startsWith("+62") || it.phoneNumber.toString().startsWith("62"))){
+                    viewModelProduct.detailProduct.observe(viewLifecycleOwner) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            var flag = 2
+                            for (i in dataOrder.indices) {
+                                if (it.id == dataOrder[i].productId && dataOrder[i].status != "declined") {
+                                    flag = 0
+                                    break
+                                } else if (it.id == dataOrder[i].productId && dataOrder[i].status == "declined") {
+                                    orderId = dataOrder[i].id
+                                    flag = 1
+                                    break
+                                } else {
+                                    flag = 2
+                                }
+                                Log.d("it id ", it.id.toString())
+                                Log.d("dataOrder id ", dataOrder[i].productId.toString())
+
+                            }
+                            Log.d("testes id ", orderId.toString())
 
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                var flag = 2
-                for (i in dataOrder.indices) {
-                    if (it.id == dataOrder[i].productId && dataOrder[i].status != "declined") {
-                        flag = 0
-                        break
-                    } else if (it.id == dataOrder[i].productId && dataOrder[i].status == "declined") {
-                        orderId = dataOrder[i].id
-                        flag = 1
-                        break
-                    } else {
-                        flag = 2
+
+
+                            if (flag == 0) {
+                                buy_btn.isClickable = false
+                                buy_btn.text = "Menunggu Respon Penjual"
+                            } else if (flag == 1) {
+                                Log.d("testes id ", "massssssss")
+                                reBidProduct()
+                            }
+                            else {
+                                Log.d("testes id ", "siiiiiiiiiiiiii")
+                                buy_btn.text = "Saya Tertarik dan Ingin Nego"
+                                bidProduct()
+                            }
+
+
+                            productName = it.name
+                            productPrice = it.basePrice
+                            productImage = it.imageUrl
+                            productDescription = it.description
+                            sellerLocation = it.user.city
+                            sellerName = it.user.fullName
+
+                            ////////////
+
+
+                            product_name.text = productName
+                            product_price.text = "Rp $productPrice"
+                            getDetailCategory.clear()
+                            it.categories.forEach {
+
+                                getDetailCategory.add(it.name)
+                                val listToString = getDetailCategory.toString()
+                                Log.d("detailCategory", listToString)
+                                val getCategory = listToString.replace("[", "").replace("]","")
+                                product_category.text = getCategory
+                            }
+
+                            seller_name.text = it.user.fullName
+                            seller_address.text = sellerLocation
+
+                            //produk image
+                            if(productImage != "") {
+                                Glide.with(requireContext()).load(productImage).into(product_image)
+                            }
+
+                            product_description.text = it.description
+
+                            //seller image
+                            if(it.imageUrl != null){
+                                Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+                            }else{
+                                it.user.imageUrl == ""
+                            }
+
+
+                        },200)
                     }
-                    Log.d("it id ", it.id.toString())
-                    Log.d("dataOrder id ", dataOrder[i].productId.toString())
-
-                }
-                Log.d("testes id ", orderId.toString())
-
-                if (flag == 0) {
-                    buy_btn.isClickable = false
-                    buy_btn.text = "Menunggu Respon Penjual"
-                } else if (flag == 1) {
-                    Log.d("testes id ", "massssssss")
-                    reBidProduct()
-                } else {
-                    Log.d("testes id ", "siiiiiiiiiiiiii")
-                    buy_btn.text = "Saya Tertarik dan Ingin Nego"
-                    bidProduct()
-                }
-
-
-                productName = it.name
-                productPrice = it.basePrice
-                productImage = it.imageUrl
-                productDescription = it.description
-                sellerLocation = it.user.city
-                sellerName = it.user.fullName
-
-                ////////////
-
-
-                product_name.text = productName
-                product_price.text = "Rp $productPrice"
-                getDetailCategory.clear()
-                it.categories.forEach {
-
-                    getDetailCategory.add(it.name)
-                    val listToString = getDetailCategory.toString()
-                    Log.d("detailCategory", listToString)
-                    val getCategory = listToString.replace("[", "").replace("]","")
-                    product_category.text = getCategory
-                }
-
-                seller_name.text = it.user.fullName
-                seller_address.text = sellerLocation
-
-                //produk image
-                if(productImage != "") {
-                    Glide.with(requireContext()).load(productImage).into(product_image)
-                }
-
-                product_description.text = it.description
-
-                //seller image
-                if(it.imageUrl != null){
-                    Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
                 }else{
-                    it.user.imageUrl == ""
+
+                    viewModelProduct.detailProduct.observe(viewLifecycleOwner){
+                        productName = it.name
+                        productPrice = it.basePrice
+                        productImage = it.imageUrl
+                        productDescription = it.description
+                        sellerLocation = it.user.city
+                        sellerName = it.user.fullName
+
+                        ////////////
+
+
+                        product_name.text = productName
+                        product_price.text = "Rp $productPrice"
+                        getDetailCategory.clear()
+                        it.categories.forEach {
+
+                            getDetailCategory.add(it.name)
+                            val listToString = getDetailCategory.toString()
+                            Log.d("detailCategory", listToString)
+                            val getCategory = listToString.replace("[", "").replace("]","")
+                            product_category.text = getCategory
+                        }
+
+                        seller_name.text = it.user.fullName
+                        seller_address.text = sellerLocation
+
+                        //produk image
+                        if(productImage != "") {
+                            Glide.with(requireContext()).load(productImage).into(product_image)
+                        }
+
+                        product_description.text = it.description
+
+                        //seller image
+                        if(it.imageUrl != null){
+                            Glide.with(requireContext()).load(it.user.imageUrl).into(seller_image)
+                        }else{
+                            it.user.imageUrl == ""
+                        }
+                    }
+
+                    buy_btn.setOnClickListener {
+                        view?.findNavController()?.navigate(R.id.action_productDetail_to_profile)
+                    }
+                    buy_btn.text = "Mohon Lengkapi Data Profil"
                 }
-
-
-            },200)
-
+            }
         }
+
+
 
     }
 
@@ -286,9 +357,12 @@ class ProductDetail : Fragment() {
                 .setView(customOrderDialog)
                 .create()
             ADBuilder.show()
+
+
             customOrderDialog.btn_submit_offer_price.setOnClickListener {
                 if (customOrderDialog.input_offer_price.text.isNotEmpty()){
                     val offerPrice = customOrderDialog.input_offer_price.text.toString().toInt()
+
 
                     if(offerPrice > productPrice ){
                         Toast.makeText(requireContext(), "Harga Tawar tidak bisa lebih dari harga dasar", Toast.LENGTH_SHORT).show()
@@ -388,7 +462,7 @@ class ProductDetail : Fragment() {
                                 Log.d("testes token", it)
                                 viewModelProduct.responseCodeUpdateBuyerOrder.observe(viewLifecycleOwner) {
 //                                    Log.d("tes response ", it.toString())
-                                    if (it == "201") {
+                                    if (it == "201" || it == "200") {
                                         Toast.makeText(
                                             requireContext(),
                                             "Harga Tawarmu Berhasil dikirim ke penjual",

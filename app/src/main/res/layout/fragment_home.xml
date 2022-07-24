@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -95,6 +98,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+
                     android:id="@+id/ll_content_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +163,14 @@
                     </com.google.android.material.card.MaterialCardView>
 
 
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_marginTop="30dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/not_found"
+                        android:text="Produk Tidak ditemukan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_list_item"
@@ -177,4 +189,4 @@
 
 
 
-</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

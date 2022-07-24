@@ -1,4 +1,6 @@
-@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
+@file:Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "UsePropertyAccessSyntax",
+    "MemberVisibilityCanBePrivate"
+)
 
 package and5.finalproject.secondhand5.view.fragment.user
 
@@ -118,6 +120,7 @@ class Home : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_home_to_history)
         }
 
+        onRefresh()
     }
 
     private fun categoryFilter(){
@@ -154,6 +157,8 @@ class Home : Fragment() {
             }
         }
         viewmodelproduct.getProductbyCategories(idQuery, searchQuery)
+
+
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -200,7 +205,12 @@ class Home : Fragment() {
 
                 productAdapter.setProductList(it)
                 productAdapter.notifyDataSetChanged()
-//                productAdapter.setHasStableIds(true)
+
+                if(productAdapter.itemCount == 0){
+                    not_found.visibility = View.VISIBLE
+                }else{
+                    not_found.visibility = View.GONE
+                }
 
             }
         }
@@ -241,5 +251,20 @@ class Home : Fragment() {
             }
         }
         viewmodelbanner.getSellerBanner()
+    }
+
+    fun onRefresh() {
+        swipe_refresh_layout.setOnRefreshListener {
+            searchQuery = ""
+            idQuery = 0
+            initProduct()
+            Handler(Looper.getMainLooper()).postDelayed({
+                GlobalScope.launch {
+                    swipe_refresh_layout.setRefreshing(false)
+                } },1000)
+
+        }
+
+
     }
 }

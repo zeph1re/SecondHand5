@@ -6,6 +6,15 @@
     tools:context=".view.fragment.user.History">
 
     <TextView
+        android:id="@+id/notfound_history"
+        android:visibility="gone"
+        android:text="Belum Ada History"
+        android:textSize="24sp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/history_tv"

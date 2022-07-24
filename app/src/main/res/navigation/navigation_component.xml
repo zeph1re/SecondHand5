@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_addProduct_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_addProduct_to_account"
+            app:destination="@id/account" />
     </fragment>
     <fragment
         android:id="@+id/myListProduct"
@@ -130,12 +133,22 @@
         <action
             android:id="@+id/action_myListProduct_to_userNotLogin"
             app:destination="@id/userNotLogin" />
+        <action
+            android:id="@+id/action_myListProduct_to_addProduct"
+            app:destination="@id/addProduct" />
     </fragment>
     <fragment
         android:id="@+id/productDetail"
         android:name="and5.finalproject.secondhand5.view.fragment.buyer.ProductDetail"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetail_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_productDetail_to_login"
+            app:destination="@id/login" />
+    </fragment>
     <fragment
         android:id="@+id/detailPenawar"
         android:name="and5.finalproject.secondhand5.view.fragment.seller.DetailOrder"

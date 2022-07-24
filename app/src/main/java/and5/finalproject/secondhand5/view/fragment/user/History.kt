@@ -54,6 +54,13 @@ class History : Fragment() {
                     history_rv.adapter = historyAdapter
                     historyAdapter.setHistoryList(it)
                     historyAdapter.notifyDataSetChanged()
+
+                    if(historyAdapter.itemCount == 0){
+                        notfound_history.visibility = View.VISIBLE
+                    }else{
+                        notfound_history.visibility = View.GONE
+                    }
+
                 }
             }
             viewModelHistory.getAllHistory(token)

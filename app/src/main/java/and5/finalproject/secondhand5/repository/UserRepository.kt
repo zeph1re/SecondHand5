@@ -56,6 +56,7 @@ class UserRepository @Inject constructor(private val service: ApiService){
         return service.getUserItem(token)
     }
 
+
     fun updateUser(token:String, fullName : RequestBody, email : RequestBody, password: RequestBody, number: RequestBody, address : RequestBody, image :  MultipartBody.Part, city: RequestBody, code : MutableLiveData<String> ) {
         val apiClient : Call<GetAllUser> = service.updateUser(token, fullName, email, password, number, address, image, city)
         apiClient.enqueue(object : Callback<GetAllUser> {

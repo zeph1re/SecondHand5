@@ -56,7 +56,7 @@ class Register : Fragment () {
                 Handler(Looper.getMainLooper()).postDelayed({
                     view?.loading_register?.visibility = View.GONE
                 },2000)
-                registerUser(inputfullname, inputemail, inputpassword, 0, "default", "default")
+                registerUser(inputfullname, inputemail, inputpassword, 0, "", "")
             }
 
             }
