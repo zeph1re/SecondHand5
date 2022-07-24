@@ -88,10 +88,6 @@ class Home : Fragment() {
                 categoryFilter()
             }
 
-            clear_category.setOnClickListener {
-                initProduct()
-            }
-
         }else{
             GlobalScope.launch {
                 val listdata = db?.offlineDao()?.getDataOfflineProductHome()

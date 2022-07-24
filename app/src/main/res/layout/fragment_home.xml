@@ -7,7 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="60dp"
     android:background="@drawable/gradient_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.user.Home">
@@ -143,27 +142,8 @@
                         </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:visibility="gone"
 
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_marginTop="15dp"
-                        android:layout_gravity="center"
-                        android:id="@+id/clear_category"
-                        app:cardCornerRadius="35dp"
-                        app:strokeColor="@color/blue_100"
-                        app:strokeWidth="1dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:maxLines="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp"
-                            android:text="Reset Category" />
-
-                    </com.google.android.material.card.MaterialCardView>
 
 
                     <TextView
@@ -179,6 +159,7 @@
                         android:id="@+id/rv_list_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:layout_below="@id/ll_content_two" />
 
                 </LinearLayout>
