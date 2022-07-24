@@ -69,10 +69,7 @@ class SellerProduct : Fragment() {
         preventDoubleCall = "true"
 
         myListProductAdapter = SellerProductAdapter { product ->
-
             initDetailProductData(product.id)
-
-
         }
 
         val style = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -84,6 +81,10 @@ class SellerProduct : Fragment() {
             getProduct(it)
         }
 
+        cardview_plus.setOnClickListener {
+            findNavController().navigate(R.id.action_myListProduct_to_addProduct)
+        }
+
     }
 
     private fun getProduct(token: String) {
@@ -93,6 +94,12 @@ class SellerProduct : Fragment() {
             if (it != null) {
                 myListProductAdapter.setListProduct(it)
                 myListProductAdapter.notifyDataSetChanged()
+
+                if(myListProductAdapter.itemCount == 0){
+                    cardview_plus.visibility = View.VISIBLE
+                }else{
+                    cardview_plus.visibility = View.GONE
+                }
 
             }
         }

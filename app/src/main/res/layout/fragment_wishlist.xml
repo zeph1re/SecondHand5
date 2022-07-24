@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.user.Wishlist">
 
+    <TextView
+        android:id="@+id/notfound_wishlist"
+        android:visibility="gone"
+        android:text="Belum Ada Wishlist"
+        android:textSize="24sp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <ImageView
         android:id="@+id/btn_back"
         android:layout_width="25dp"

@@ -85,6 +85,12 @@ class Notification : Fragment() {
                     notificationAdapter.notifyDataSetChanged()
                     rv_notification.layoutManager?.onRestoreInstanceState(recyclerViewState)
 
+                    if(notificationAdapter.itemCount == 0){
+                        notfound_notification.visibility = View.VISIBLE
+                    }else{
+                        notfound_notification.visibility = View.GONE
+                    }
+
 
                 }
             }

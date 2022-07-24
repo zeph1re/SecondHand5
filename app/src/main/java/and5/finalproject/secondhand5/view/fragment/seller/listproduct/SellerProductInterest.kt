@@ -59,6 +59,13 @@ class SellerProductInterest : Fragment() {
             if(it != null){
                 sellerOrderAdapter.setListProduct(it)
                 sellerOrderAdapter.notifyDataSetChanged()
+
+                if(sellerOrderAdapter.itemCount == 0 ){
+                    notfound_order.visibility = View.VISIBLE
+                }else{
+                    notfound_order.visibility = View.GONE
+                }
+
             }
         }
     }

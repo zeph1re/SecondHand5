@@ -202,12 +202,12 @@
                     android:layout_marginHorizontal="15dp"
                     android:gravity="center"
                     android:background="@drawable/rounded_button"
-                    android:backgroundTint="@color/blue_100"
-                    android:padding="15dp"
                     android:text="Status"
+                    android:padding="13dp"
+
                     android:textAllCaps="true"
                     android:textSize="11sp"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/poppins_medium"/>
 
                 <TextView

@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.seller.listproduct.SellerProductSold">
 
+    <TextView
+        android:visibility="gone"
+        android:gravity="center"
+        android:id="@+id/notfound_sold"
+        android:text="Belum ada Produk Terjual"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_seller_success_order"
         android:layout_width="match_parent"

@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.seller.listproduct.SellerProduct">
+
+    <com.google.android.material.card.MaterialCardView
+        android:visibility="gone"
+        android:id="@+id/cardview_plus"
+        android:backgroundTint="@android:color/transparent"
+        app:strokeColor="@color/blue_700"
+        app:strokeWidth="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_margin="25dp"
+                android:id="@+id/plus"
+                android:src="@drawable/plus"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"/>
+
+            <TextView
+                android:text="Tambah produk Baru"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:layout_below="@+id/plus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myListProduct_recyclerview"

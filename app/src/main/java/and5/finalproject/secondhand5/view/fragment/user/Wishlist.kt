@@ -1,3 +1,5 @@
+@file:Suppress("UnusedImport")
+
 package and5.finalproject.secondhand5.view.fragment.user
 
 import and5.finalproject.secondhand5.R
@@ -5,6 +7,7 @@ import and5.finalproject.secondhand5.view.adapter.WishlistAdapter
 import and5.finalproject.secondhand5.viewmodel.LoginViewModel
 import and5.finalproject.secondhand5.viewmodel.WishlistViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,10 +68,18 @@ class Wishlist : Fragment() {
                     wishlist_rv.adapter = wishlistAdapter
                     wishlistAdapter.setWishlistProductList(it)
                     wishlistAdapter.notifyDataSetChanged()
+
+                    if(wishlistAdapter.itemCount == 0){
+                        notfound_wishlist.visibility = View.VISIBLE
+                    }else{
+                        notfound_wishlist.visibility = View.GONE
+                    }
                 }
             }
             viewModelWishlist.getAllWishlistProduct(token)
         }
+
+
 
     }
 

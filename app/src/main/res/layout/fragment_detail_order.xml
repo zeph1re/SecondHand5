@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:gravity="center"
-                    android:background="@drawable/custom_rounded_textview"
+                    android:background="@drawable/custom_rounded_textview_red"
                     android:padding="15dp"
                     android:text="Tolak"
                     android:textColor="@color/white"

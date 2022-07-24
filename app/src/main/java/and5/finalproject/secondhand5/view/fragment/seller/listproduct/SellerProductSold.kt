@@ -56,6 +56,16 @@ class SellerProductSold : Fragment() {
             if(it != null){
                 sellerOrderSuccessfulAdapter.setListProduct(it)
                 sellerOrderSuccessfulAdapter.notifyDataSetChanged()
+
+                if(sellerOrderSuccessfulAdapter.itemCount == 0){
+                    notfound_sold.visibility = View.VISIBLE
+
+                }else{
+                    notfound_sold.visibility = View.GONE
+
+                }
+
+
             }
         }
     }
