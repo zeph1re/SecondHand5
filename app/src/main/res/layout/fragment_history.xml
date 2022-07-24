@@ -9,7 +9,8 @@
         android:id="@+id/notfound_history"
         android:visibility="gone"
         android:text="Belum Ada History"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

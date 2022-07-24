@@ -31,7 +31,10 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 
@@ -50,7 +53,7 @@ class ProductDetail : Fragment() {
 
     private var orderId = 0
 
-    private lateinit var dataOrder : List<GetBuyerOrderItem>
+    lateinit var dataOrder : List<GetBuyerOrderItem>
     private lateinit var dataWishlist : List<GetWishlistProductItem>
 
 
@@ -85,7 +88,6 @@ class ProductDetail : Fragment() {
             val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
-
                     getOrderData()
                     getDetailProduct()
                     getWishlistData()
@@ -100,6 +102,8 @@ class ProductDetail : Fragment() {
                 }
             }
         },500)
+
+//        onRefresh()
 
     }
 
@@ -582,8 +586,6 @@ class ProductDetail : Fragment() {
                                         dialog.cancel()
 
                                     }
-
-
                                 val alert = dialogBuilder.create()
                                 alert.setTitle("Wishlist")
                                 alert.show()
@@ -621,6 +623,19 @@ class ProductDetail : Fragment() {
         Toast.makeText(requireContext(), "Barang berhasil dihapus dari wishlist", Toast.LENGTH_SHORT).show()
 
     }
+
+//    fun onRefresh() {
+//        swipe_refresh_detail_layout.setOnRefreshListener {
+//            getDetailProduct()
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                GlobalScope.launch {
+//                    swipe_refresh_detail_layout.setRefreshing(false)
+//                } },1000)
+//
+//        }
+//
+//
+//    }
 
 
 
