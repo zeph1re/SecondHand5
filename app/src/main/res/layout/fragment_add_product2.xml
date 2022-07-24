@@ -20,7 +20,8 @@
         android:justificationMode="none"
         android:layout_centerInParent="true"
         android:text="Mohon Lengkapi Profil Dahulu Untuk dapat Menambahkan Produk Baru"
-        android:textSize="18sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -50,7 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
             <TextView
 
@@ -246,7 +246,8 @@
                     android:layout_toRightOf="@+id/image_parent"
                     android:text="Please add the image!"
                     android:textColor="@color/red"
-                    android:textSize="22sp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_medium"
                     android:visibility="gone"/>
 
             </RelativeLayout>

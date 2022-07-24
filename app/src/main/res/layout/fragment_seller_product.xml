@@ -10,27 +10,32 @@
         android:visibility="gone"
         android:id="@+id/cardview_plus"
         android:backgroundTint="@android:color/transparent"
-        app:strokeColor="@color/blue_700"
+        app:strokeColor="@color/blue_100"
         app:strokeWidth="1dp"
-        android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="15dp">
+
             <ImageView
                 android:layout_margin="25dp"
                 android:id="@+id/plus"
                 android:src="@drawable/plus"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:text="Tambah produk Baru"
                 android:gravity="center"
-                android:textSize="24sp"
+                android:textSize="11sp"
+                android:fontFamily="@font/poppins_bold"
                 android:layout_below="@+id/plus"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
