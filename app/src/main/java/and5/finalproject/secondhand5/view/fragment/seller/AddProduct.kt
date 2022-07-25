@@ -1,7 +1,11 @@
 @file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "CascadeIf",
     "CascadeIf", "CascadeIf", "CascadeIf", "NestedLambdaShadowedImplicitParameter",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
-    "NestedLambdaShadowedImplicitParameter"
+    "NestedLambdaShadowedImplicitParameter", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate"
 )
 
 package and5.finalproject.secondhand5.view.fragment.seller

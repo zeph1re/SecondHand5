@@ -1,4 +1,4 @@
-
+package and5.finalproject.secondhand5.room
 
 import and5.finalproject.secondhand5.Room.OfflineDB
 import and5.finalproject.secondhand5.Room.OfflineModeDao
@@ -7,7 +7,6 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.TestCase
-import org.junit.Assert.*
 
 import org.junit.After
 import org.junit.Before

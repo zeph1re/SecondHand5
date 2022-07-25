@@ -43,7 +43,7 @@ class ProductPreview : Fragment() {
     private lateinit var postCategory: String
     lateinit var userManager: UserManager
     private var customToast: CustomToast = CustomToast()
-    var post by Delegates.notNull<Boolean>()
+    private var post by Delegates.notNull<Boolean>()
     lateinit var text: String
 
 

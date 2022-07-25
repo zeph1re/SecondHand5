@@ -2,13 +2,17 @@
     "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
-    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods"
+    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods",
+    "KotlinDeprecation", "UsePropertyAccessSyntax", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate"
 )
 
 package and5.finalproject.secondhand5.view.fragment.buyer
 
 import and5.finalproject.secondhand5.R
-import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
@@ -79,7 +83,7 @@ class ProductDetail : Fragment() {
         temporaryID2 = 0
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_productDetail_to_home)
+            view.findNavController()?.navigate(R.id.action_productDetail_to_home)
         }
 
         productId = arguments?.getInt("product_id") ?:
