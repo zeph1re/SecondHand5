@@ -8,6 +8,7 @@
 package and5.finalproject.secondhand5.view.fragment.buyer
 
 import and5.finalproject.secondhand5.R
+import and5.finalproject.secondhand5.connectivity.CheckConnectivity
 import and5.finalproject.secondhand5.datastore.UserManager
 import and5.finalproject.secondhand5.model.buyerproduct.GetBuyerOrderItem
 import and5.finalproject.secondhand5.model.wishlist.GetWishlistProductItem
@@ -38,6 +39,7 @@ import kotlin.properties.Delegates
 
 
 class ProductDetail : Fragment() {
+
 
     lateinit var userManager: UserManager
     lateinit var productName : String
@@ -82,7 +84,7 @@ class ProductDetail : Fragment() {
 
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
-        getWishlistData()
+
         Handler(Looper.getMainLooper()).postDelayed({
             val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
@@ -90,7 +92,7 @@ class ProductDetail : Fragment() {
                     getOrderData()
                     Handler(Looper.getMainLooper()).postDelayed({
 
-
+                        getWishlistData()
                         Handler(Looper.getMainLooper()).postDelayed({
                             checkWishlist()
                         },400)

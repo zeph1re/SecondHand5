@@ -13,26 +13,27 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/ic_back" />
 
 
     <TextView
         android:id="@+id/p"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="60dp"
-        android:text="Login"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_back_login">
+       android:layout_above="@+id/batasLogin"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold">
 
     </TextView>
 
     <LinearLayout
+        android:id="@+id/batasLogin"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
