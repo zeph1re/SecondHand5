@@ -202,7 +202,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnsimpan"
-        android:text="Simpan"
+        android:text="Save Changes"
         android:background="@drawable/rounded_button"
         android:textColor="@color/white"
         android:fontFamily="@font/poppins_medium"

@@ -32,34 +32,37 @@
             android:padding="20dp">
 
             <ImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/seller_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@drawable/ei"
                 android:textSize="24sp" />
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/seller_profile"
                 android:orientation="vertical"
+                android:layout_marginStart="20dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_toEndOf="@id/seller_image">
 
                 <TextView
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/seller_name"
                     android:text="Nama Penjual"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/poppins_medium"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/seller_address"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     android:text="Kota"
                     android:fontFamily="@font/poppins"/>
 

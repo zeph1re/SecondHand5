@@ -28,9 +28,9 @@ class WishlistAdapter(private var onClick : (GetWishlistProductItem)->Unit) : Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         if  (wishlistProduct!![position].product != null) {
-            holder.itemView.wishlist_name.text = wishlistProduct!![position].product.name
+            holder.itemView.wishlist_price.text = wishlistProduct!![position].product.name
             holder.itemView.wishlist_location.text = wishlistProduct!![position].product.location
-            holder.itemView.wishlist_price.text = "Rp${wishlistProduct!![position].product.basePrice}"
+            holder.itemView.wishlist_name.text = "Rp${wishlistProduct!![position].product.basePrice}"
         } else {
             holder.itemView.wishlist_name.text = "null"
             holder.itemView.wishlist_location.text = "null"

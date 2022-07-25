@@ -37,9 +37,9 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
 
             holder.itemView.notification_product_name.text = notification!![position].productName
             holder.itemView.notification_created_at.text = "${notification!![position].transactionDate}"
-            holder.itemView.notifiation_product_price.text = "Dari Rp ${notification!![position].basePrice}"
+            holder.itemView.notifiation_product_price.text = "From Rp ${notification!![position].basePrice}"
 
-            holder.itemView.notification_product_offer.text = "Ditawar Rp ${notification!![position].bidPrice}"
+            holder.itemView.notification_product_offer.text = "To Rp ${notification!![position].bidPrice}"
 
             if(notification!![position].read){
                 holder.itemView.read_or_not.visibility = View.GONE
@@ -64,7 +64,7 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
             }
             holder.itemView.notification_created_at_product_add.text = notification!![position].createdAt
             holder.itemView.notification_product_name_product_add.text = notification!![position].productName
-            holder.itemView.notifiation_product_price_product_add.text = "Seharga Rp ${notification!![position].basePrice} "
+            holder.itemView.notifiation_product_price_product_add.text = "Price Rp ${notification!![position].basePrice} "
 
             if(notification!![position].read){
                 holder.itemView.read_or_not_product_add.visibility = View.GONE
@@ -79,7 +79,7 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
             }
 
             holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate}"
-            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} diterima oleh ${notification!![position].productName}"
+            holder.itemView.notification_seller_answer_order_response.text = "Your bid for ${notification!![position].productName}  was accepted by ${notification!![position].sellerName} "
 
             holder.itemView.notification_product_name_order_response.text = notification!![position].productName
 
@@ -99,7 +99,7 @@ class NotificationAdapter(private var onClick : (GetNotificationItem)->Unit) : R
             }
 
             holder.itemView.notification_created_at_order_response.text = "${notification!![position].transactionDate}"
-            holder.itemView.notification_seller_answer_order_response.text = "Penawaranmu untuk ${notification!![position].sellerName} ditolak oleh ${notification!![position].productName}"
+            holder.itemView.notification_seller_answer_order_response.text = "Your bid for ${notification!![position].productName} was rejected by  ${notification!![position].sellerName}  "
             holder.itemView.notification_product_name_order_response.text = notification!![position].productName
 
 
