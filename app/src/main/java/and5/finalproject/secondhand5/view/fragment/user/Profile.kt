@@ -179,17 +179,22 @@ class Profile : Fragment() {
             }
                 if (updateNama.isNotEmpty() && updateKota.isNotEmpty() && updateAlamat.isNotEmpty() && updateNomor.isNotEmpty()) {
                     if (updateNomor.startsWith("+62") || updateNomor.startsWith("62")){
+//                        view?.post_loadingProfile?.visibility = View.VISIBLE
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            view?.post_loadingProfile?.visibility = View.GONE
+//                        }, 1500)
                         viewModel.updateUserData(
                             token, updateNama, email, "", updateNomor, updateAlamat,
                             image!!, updateKota
                         )
+                        responseUpdate()
                     }else{
                         Toast.makeText(requireContext(), "Nomor Harus Dari +62 (Indonesia)", Toast.LENGTH_SHORT).show()
                     }
 
                 }
 
-            responseUpdate()
+
 //            view.findNavController().navigate(R.id.account)
         }
 
@@ -246,25 +251,25 @@ class Profile : Fragment() {
                     text = "Profile Updated"
                     customToast.successPostToast(requireActivity(), text)
 
-                },2000)
+                },100)
 
 
             }else if ( code == "400"){
                 Handler(Looper.getMainLooper()).postDelayed({
                     text = "Email already exist"
                     customToast.failurePostToast(requireActivity(), text)
-                },2000)
+                },100)
             }else if ( code == "403"){
                 Handler(Looper.getMainLooper()).postDelayed({
                     text = "You Are Not Login or Access Token is Wrong"
                     customToast.failurePostToast(requireActivity(), text)
-                },2000)
+                },100)
 
             }else if ( code == "500"){
                 Handler(Looper.getMainLooper()).postDelayed({
                     text = "Internal Service Error"
                     customToast.failurePostToast(requireActivity(), text)
-                },2000)
+                },100)
 
             }
         }

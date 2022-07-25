@@ -1,7 +1,11 @@
 @file:Suppress("ClassName", "ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody", "CascadeIf",
     "CascadeIf", "CascadeIf", "CascadeIf", "NestedLambdaShadowedImplicitParameter",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
-    "NestedLambdaShadowedImplicitParameter"
+    "NestedLambdaShadowedImplicitParameter", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate"
 )
 
 package and5.finalproject.secondhand5.view.fragment.seller
@@ -176,11 +180,6 @@ class AddProduct : Fragment() {
 
         }
 
-
-
-
-
-
         view.btn_backtohome.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -201,11 +200,13 @@ class AddProduct : Fragment() {
             }
 
             if (sizeCheck == ">1mb") {
+                view.add_product_image.setImageResource(R.drawable.add_rectangle)
                 imageCheck = "false"
                 view.warning_image.visibility = View.VISIBLE
                 view.warning_image.text = "Image cannot be bigger than 1MB"
             }
             if (typeCheck == null) {
+                view.add_product_image.setImageResource(R.drawable.add_rectangle)
                 imageCheck = "false"
                 view.warning_image.visibility = View.VISIBLE
                 view.warning_image.text = "File format not supported"

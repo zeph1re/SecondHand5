@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_info"
-                    android:text="Penawaran Produk"
+                    android:text="Your Product is Bided"
                     android:textSize="11sp"
                     android:fontFamily="@font/poppins"/>
 
@@ -150,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/notification_info_product_add"
-                    android:text="Produk Berhasil ditambahkan"
+                    android:text="Product published successfully"
                     android:textSize="12sp"
                     android:fontFamily="@font/poppins"/>
 

@@ -57,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Add your product"
@@ -246,7 +247,7 @@
                     android:layout_toRightOf="@+id/image_parent"
                     android:text="Please add the image!"
                     android:textColor="@color/red"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:fontFamily="@font/poppins_medium"
                     android:visibility="gone"/>
 
@@ -255,6 +256,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp"
                 android:layout_marginHorizontal="30dp"
                 android:gravity="center_horizontal"
@@ -262,18 +264,19 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/preview_btn"
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/rounded_button"
                     android:backgroundTint="@color/blue_300"
-                    android:layout_marginEnd="10dp"
                     android:text="Preview"
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/white"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/add_btn"
-                    android:layout_width="130dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:background="@drawable/rounded_button"

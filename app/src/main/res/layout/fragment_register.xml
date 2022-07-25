@@ -8,19 +8,19 @@
 
     <ImageView
         android:id="@+id/btn_back_register"
-        android:src="@drawable/ic_back"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_back"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_back_register"
+        android:layout_above="@+id/batasRegister"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="60dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Register"
         android:textColor="@color/black"
@@ -28,6 +28,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/batasRegister"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

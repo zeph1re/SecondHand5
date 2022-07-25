@@ -2,7 +2,12 @@
     "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf", "CascadeIf",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
     "NestedLambdaShadowedImplicitParameter", "NestedLambdaShadowedImplicitParameter",
-    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods"
+    "RemoveRedundantCallsOfConversionMethods", "RemoveRedundantCallsOfConversionMethods",
+    "KotlinDeprecation", "UsePropertyAccessSyntax", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate",
+    "MemberVisibilityCanBePrivate"
 )
 
 package and5.finalproject.secondhand5.view.fragment.buyer
@@ -39,6 +44,7 @@ import kotlin.properties.Delegates
 
 class ProductDetail : Fragment() {
 
+
     lateinit var userManager: UserManager
     lateinit var productName : String
     private var productPrice by Delegates.notNull<Int>()
@@ -52,7 +58,8 @@ class ProductDetail : Fragment() {
     lateinit var toggleFavorite : String
 
     private var orderId = 0
-
+    var temporaryID by Delegates.notNull<Int>()
+    var temporaryID2 by Delegates.notNull<Int>()
     private lateinit var dataOrder : List<GetBuyerOrderItem>
     private lateinit var dataWishlist : List<GetWishlistProductItem>
 
@@ -70,10 +77,13 @@ class ProductDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favorite = "false"
-        toggleFavorite = "disable"
+        toggleFavorite = "false"
+        add_to_wishlist.visibility = View.GONE
+        temporaryID = 0
+        temporaryID2 = 0
         userManager = UserManager(requireActivity())
         btn_back_detail_product.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_productDetail_to_home)
+            view.findNavController()?.navigate(R.id.action_productDetail_to_home)
         }
 
         productId = arguments?.getInt("product_id") ?:
@@ -85,8 +95,8 @@ class ProductDetail : Fragment() {
                 if (token!= ""){
                     getOrderData()
                     Handler(Looper.getMainLooper()).postDelayed({
-                        getWishlistData()
 
+                        getWishlistData()
                         Handler(Looper.getMainLooper()).postDelayed({
                             checkWishlist()
                         },400)
@@ -564,11 +574,13 @@ class ProductDetail : Fragment() {
                 viewModelProduct.detailProduct3.observe(viewLifecycleOwner) {
                     for (i in dataWishlist.indices) {
                         if (it.id == dataWishlist[i].product.id) {
+                            add_to_wishlist.visibility = View.VISIBLE
                             add_to_wishlist.setImageResource(R.drawable.love)
                             toggleFavorite= "true"
                             favorite = "true"
                             break
                         }else{
+                            add_to_wishlist.visibility = View.VISIBLE
                             add_to_wishlist.setImageResource(R.drawable.unlove)
                             toggleFavorite = "false"
                             favorite = "false"
@@ -587,13 +599,19 @@ class ProductDetail : Fragment() {
 
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
             if (token != null) {
+                val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
                 viewModelProduct.saveIdForWishlist.observe(viewLifecycleOwner) {
-                    val viewModelWishlist =ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
+                      temporaryID = it
+                }
 
-                            if (favorite == "false"){
-                                viewModelWishlist.postProductToWishlist(token, it)
-                                favorite = "cooldown"
-                            }
+                if (favorite == "false"){
+                    for (data in dataWishlist.indices){
+                        if (temporaryID  != dataWishlist[data].productId && temporaryID != 0) {
+                            viewModelWishlist.postProductToWishlist(token, temporaryID )
+                            break
+                        }
+                    }
+                    favorite = "cooldown"
                 }
             }
             Toast.makeText(
@@ -609,11 +627,20 @@ class ProductDetail : Fragment() {
                 val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
                 viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
                     if(token != null) {
+                        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                        viewModelProduct.saveIdForWishlist2.observe(viewLifecycleOwner){ idProduct ->
+                            temporaryID2 = idProduct
+                        }
                         for (data in dataWishlist.indices){
-                            viewModelWishlist.deleteWishlistProduct(token, dataWishlist[data].id )
-                            break
+                            if (temporaryID2 == dataWishlist[data].productId && temporaryID2 != 0) {
+                                viewModelWishlist.deleteWishlistProduct(
+                                    token,
+                                    dataWishlist[data].id)
+                                break
+                            }
                         }
                     }
+
                 }
         Toast.makeText(requireContext(), "Barang berhasil dihapus dari wishlist", Toast.LENGTH_SHORT).show()
 
@@ -638,7 +665,10 @@ class ProductDetail : Fragment() {
 
         val alert = dialogBuilder.create()
         alert.setTitle("Wishlist")
-        alert.show()
+        if (toggleFavorite == "true"){
+            alert.show()
+        }
+
     }
 
     fun onRefresh() {

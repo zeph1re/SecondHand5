@@ -8,18 +8,18 @@
 
     <item
         android:id="@+id/notification"
-        android:title="Notifikasi"
+        android:title="Notification"
         android:icon="@drawable/ic_notifications"/>
 
     <item
 
         android:id="@+id/addProduct"
-        android:title="Jual"
+        android:title="Publish"
         android:icon="@drawable/plus"/>
 
     <item
         android:id="@+id/myListProduct"
-        android:title="Daftar Jual"
+        android:title="List Product"
         android:icon="@drawable/ic_list_bulleted"/>
 
     <item
