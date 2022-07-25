@@ -24,10 +24,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="30dp"
-        android:text="Info Penawar"
-        android:textSize="20sp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Bidder Info"
         android:textColor="@color/dark_grey"
-        android:fontFamily="@font/poppins_bold"/>
+        android:textSize="20sp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/buyer_information"
@@ -101,11 +101,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/buyer_information"
-        android:layout_margin="10dp"
-        android:text="Daftar produkmu yang ditawar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Your product is bided"
         android:textColor="@color/dark_grey"
-        android:textSize="15sp"
-        android:fontFamily="@font/poppins_medium"/>
+        android:textSize="15sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -148,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Penawaran Produk"
+                    android:text="Product Bid"
                     android:textSize="12sp" />
 
                 <TextView
@@ -207,7 +210,7 @@
                     android:gravity="center"
                     android:background="@drawable/custom_rounded_textview_red"
                     android:padding="15dp"
-                    android:text="Tolak"
+                    android:text="Decline"
                     android:textColor="@color/white"
                     android:fontFamily="@font/poppins_medium"/>
 
@@ -219,7 +222,7 @@
                     android:gravity="center"
                     android:background="@drawable/custom_rounded_textview_2"
                     android:padding="13dp"
-                    android:text="Terima"
+                    android:text="Accept"
                     android:textColor="@color/white"
                     android:fontFamily="@font/poppins_extrabold"/>
 
