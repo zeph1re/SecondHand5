@@ -78,14 +78,14 @@ class ProductDetail : Fragment() {
 
         productId = arguments?.getInt("product_id") ?:
         Log.d("testes 1 id ", id.toString())
-
+        getWishlistData()
         Handler(Looper.getMainLooper()).postDelayed({
             val loginViewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
             loginViewModel.userToken(requireActivity()).observe(viewLifecycleOwner){ token->
                 if (token!= ""){
                     getOrderData()
                     Handler(Looper.getMainLooper()).postDelayed({
-                        getWishlistData()
+
 
                         Handler(Looper.getMainLooper()).postDelayed({
                             checkWishlist()
@@ -587,11 +587,16 @@ class ProductDetail : Fragment() {
 
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
             if (token != null) {
+                val viewModelWishlist = ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
                 viewModelProduct.saveIdForWishlist.observe(viewLifecycleOwner) {
-                    val viewModelWishlist =ViewModelProvider(requireActivity())[WishlistViewModel::class.java]
 
                             if (favorite == "false"){
-                                viewModelWishlist.postProductToWishlist(token, it)
+                                for (data in dataWishlist.indices){
+                                    if (it != dataWishlist[data].productId) {
+                                        viewModelWishlist.postProductToWishlist(token, it)
+                                        break
+                                    }
+                                }
                                 favorite = "cooldown"
                             }
                 }
@@ -609,11 +614,20 @@ class ProductDetail : Fragment() {
                 val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
                 viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner){ token ->
                     if(token != null) {
+                        val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+                        viewModelProduct.saveIdForWishlist.observe(viewLifecycleOwner){ idProduct ->
                         for (data in dataWishlist.indices){
-                            viewModelWishlist.deleteWishlistProduct(token, dataWishlist[data].id )
-                            break
+                            if (idProduct == dataWishlist[data].productId) {
+                                viewModelWishlist.deleteWishlistProduct(
+                                    token,
+                                    dataWishlist[data].id)
+                                    break
+                            }
+                            }
+
                         }
                     }
+
                 }
         Toast.makeText(requireContext(), "Barang berhasil dihapus dari wishlist", Toast.LENGTH_SHORT).show()
 
