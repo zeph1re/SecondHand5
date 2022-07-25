@@ -182,7 +182,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deskripsi"
+                            android:text="Description"
                             android:textColor="@color/blue_300"
                             android:textSize="15sp"
                             android:fontFamily="@font/poppins_bold"/>
@@ -216,7 +216,7 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/custom_button"
                 android:backgroundTint="#3A5BA0"
-                android:text="Saya Tertarik dan Ingin Nego"
+                android:text="I'm Interested and Want to Negotiate"
                 android:textAllCaps="false"
                 android:textColor="#DBDFFD" />
 

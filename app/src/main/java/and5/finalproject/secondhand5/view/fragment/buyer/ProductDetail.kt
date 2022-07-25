@@ -153,7 +153,7 @@ class ProductDetail : Fragment() {
             val flag = 0
 
             if (flag == 0) {
-                buy_btn.text = "Login Untuk Order"
+                buy_btn.text = "Login For Order"
 
                 buy_btn.setOnClickListener {
                     view?.findNavController()?.navigate(R.id.action_productDetail_to_login)
