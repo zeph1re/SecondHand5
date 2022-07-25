@@ -388,12 +388,19 @@ class ProductDetail : Fragment() {
                                         buy_btn.text = "Menunggu Respon Penjual"
 
                                     } else if (it == "400") {
+//                                        Toast.makeText(
+//                                            requireContext(),
+//                                            "\t\n" +
+//                                                    "you has order for this product",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
                                         Toast.makeText(
                                             requireContext(),
                                             "\t\n" +
-                                                    "you has order for this product",
+                                                    "Produk ini sudah melebihi batas penawaran",
                                             Toast.LENGTH_SHORT
                                         ).show()
+
                                     } else if (it == "403") {
                                         Toast.makeText(
                                             requireContext(),
@@ -472,10 +479,16 @@ class ProductDetail : Fragment() {
                                         buy_btn.isClickable = false
                                         buy_btn.text = "Menunggu Respon Penjual"
                                     } else if (it == "400") {
+//                                        Toast.makeText(
+//                                            requireContext(),
+//                                            "\t\n" +
+//                                                    "you has order for this product",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
                                         Toast.makeText(
                                             requireContext(),
                                             "\t\n" +
-                                                    "you has order for this product",
+                                                    "Produk ini sudah melebihi batas penawaran",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     } else if (it == "403") {
