@@ -556,14 +556,18 @@ class ProductDetail : Fragment() {
     fun toggleButton(){
         for(data in toggleFavorite){
             val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+            //bila udh di fav in jadi didelete
             if (toggleFavorite == "true"){
+                Log.d("testeszno", "mmmmmm")
                 getWishlistData()
                 deleteWishlistDialog()
                 toggleFavorite = "false"
                 break
             }
 
+            //untuk fav in
             else if (toggleFavorite =="false"){
+                Log.d("testeszyes", "nnnnnn")
                 getWishlistData()
                 addWishlist()
                 add_to_wishlist.setImageResource(R.drawable.love)
@@ -571,9 +575,11 @@ class ProductDetail : Fragment() {
                 break
             }
 
+/*
             else if (toggleFavorite == "disable"){
                 toggleFavorite = "false"
             }
+*/
 
         }
     }
@@ -585,20 +591,34 @@ class ProductDetail : Fragment() {
         viewModelLogin.userToken(requireActivity()).observe(viewLifecycleOwner) { token ->
             if (token != null) {
                 viewModelProduct.detailProduct3.observe(viewLifecycleOwner) {
-                    for (i in dataWishlist.indices) {
-                        if (it.id == dataWishlist[i].product.id) {
-                            add_to_wishlist.visibility = View.VISIBLE
-                            add_to_wishlist.setImageResource(R.drawable.love)
-                            toggleFavorite= "true"
-                            favorite = "true"
-                            break
-                        }else{
-                            add_to_wishlist.visibility = View.VISIBLE
-                            add_to_wishlist.setImageResource(R.drawable.unlove)
-                            toggleFavorite = "false"
-                            favorite = "false"
+                    Log.d("testesz1", "aaaaa")
+
+                    if(dataWishlist.size > 0 ){
+                        for (i in dataWishlist.indices) {
+                            Log.d("testesz2", "aaaaa")
+                            if (it.id == dataWishlist[i].product.id) {
+                                add_to_wishlist.visibility = View.VISIBLE
+                                add_to_wishlist.setImageResource(R.drawable.love)
+                                toggleFavorite= "true"
+                                favorite = "true"
+                                break
+                            }else{
+                                Log.d("testesz3", "bbbbb")
+                                add_to_wishlist.visibility = View.VISIBLE
+                                add_to_wishlist.setImageResource(R.drawable.unlove)
+                                toggleFavorite = "false"
+                                favorite = "false"
+                            }
                         }
+
+                    }else{
+                        Log.d("testesz4", "cccccc")
+                        add_to_wishlist.visibility = View.VISIBLE
+                        add_to_wishlist.setImageResource(R.drawable.unlove)
+                        toggleFavorite = "false"
+                        favorite = "false"
                     }
+
 
                 }
             }
@@ -607,6 +627,8 @@ class ProductDetail : Fragment() {
     }
 
     fun addWishlist() {
+        Log.d("testeszadd", "xxxxxxxxxxx")
+        Log.d("testeszfavurit", favorite)
         val viewModelLogin = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         val viewModelProduct = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
 
@@ -618,13 +640,7 @@ class ProductDetail : Fragment() {
                 }
 
                 if (favorite == "false"){
-                    for (data in dataWishlist.indices){
-                        if (temporaryID  != dataWishlist[data].productId && temporaryID != 0) {
-                            viewModelWishlist.postProductToWishlist(token, temporaryID )
-                            break
-                        }
-                    }
-                    favorite = "cooldown"
+                    viewModelWishlist.postProductToWishlist(token, productId )
                 }
             }
             Toast.makeText(
