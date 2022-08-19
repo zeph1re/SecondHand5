@@ -256,6 +256,7 @@ class Home : Fragment() {
             initProduct()
             swipe_refresh_layout.setRefreshing(false)
 
+
 //            Handler(Looper.getMainLooper()).postDelayed({
 //
 //                GlobalScope.launch {
