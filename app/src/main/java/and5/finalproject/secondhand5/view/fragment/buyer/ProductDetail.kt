@@ -36,6 +36,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.custom_buyer_offer_price.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -703,10 +704,12 @@ class ProductDetail : Fragment() {
     fun onRefresh() {
         swipe_refresh_detail_layout.setOnRefreshListener {
 //            getDetailProduct()
-            Handler(Looper.getMainLooper()).postDelayed({
-                GlobalScope.launch {
                     swipe_refresh_detail_layout.setRefreshing(false)
-                } },1000)
+
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                GlobalScope.launch {
+//                    swipe_refresh_detail_layout.setRefreshing(false)
+//                } },1000)
 
         }
 

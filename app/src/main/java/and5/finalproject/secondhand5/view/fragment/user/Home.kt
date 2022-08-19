@@ -254,10 +254,13 @@ class Home : Fragment() {
             searchQuery = ""
             idQuery = 0
             initProduct()
-            Handler(Looper.getMainLooper()).postDelayed({
-                GlobalScope.launch {
-                    swipe_refresh_layout.setRefreshing(false)
-                } },1000)
+            swipe_refresh_layout.setRefreshing(false)
+
+//            Handler(Looper.getMainLooper()).postDelayed({
+//
+//                GlobalScope.launch {
+//                    swipe_refresh_layout.setRefreshing(false)
+//                } },1000)
 
         }
 
